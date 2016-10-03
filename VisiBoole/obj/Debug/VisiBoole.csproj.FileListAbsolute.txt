@@ -1,1 +1,10 @@
 c:\users\mjsegraves11\documents\visual studio 2015\Projects\VisiBoole\VisiBoole\bin\Debug\VisiBoole.exe.config
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe.config
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Form1.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.exe
+C:\Users\mjsegraves11\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.pdb
