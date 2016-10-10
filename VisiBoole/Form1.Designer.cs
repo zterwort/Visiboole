@@ -351,7 +351,11 @@
             this.MainGridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.MainGridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.MainGridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+<<<<<<< HEAD
             this.MainGridView.Size = new System.Drawing.Size(984, 637);
+=======
+            this.MainGridView.Size = new System.Drawing.Size(984, 737);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.MainGridView.TabIndex = 1;
             // 
             // LibraryPanel
@@ -363,7 +367,11 @@
             this.LibraryPanel.Location = new System.Drawing.Point(3, 66);
             this.LibraryPanel.Name = "LibraryPanel";
             this.MainGridView.SetRowSpan(this.LibraryPanel, 9);
+<<<<<<< HEAD
             this.LibraryPanel.Size = new System.Drawing.Size(190, 568);
+=======
+            this.LibraryPanel.Size = new System.Drawing.Size(190, 658);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.LibraryPanel.TabIndex = 0;
             // 
             // LibraryPanelGridView
@@ -387,7 +395,11 @@
             this.LibraryPanelGridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.LibraryPanelGridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.LibraryPanelGridView.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+<<<<<<< HEAD
             this.LibraryPanelGridView.Size = new System.Drawing.Size(190, 568);
+=======
+            this.LibraryPanelGridView.Size = new System.Drawing.Size(190, 658);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.LibraryPanelGridView.TabIndex = 0;
             // 
             // SourceButton
@@ -428,12 +440,20 @@
             this.horizontalTab.Controls.Add(this.tabPage1);
             this.horizontalTab.Controls.Add(this.tabPage2);
             this.horizontalTab.Dock = System.Windows.Forms.DockStyle.Fill;
+<<<<<<< HEAD
             this.horizontalTab.Location = new System.Drawing.Point(199, 66);
+=======
+            this.horizontalTab.Location = new System.Drawing.Point(199, 76);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalTab.Multiline = true;
             this.horizontalTab.Name = "horizontalTab";
             this.MainGridView.SetRowSpan(this.horizontalTab, 4);
             this.horizontalTab.SelectedIndex = 0;
+<<<<<<< HEAD
             this.horizontalTab.Size = new System.Drawing.Size(782, 246);
+=======
+            this.horizontalTab.Size = new System.Drawing.Size(782, 286);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalTab.TabIndex = 1;
             // 
             // tabPage1
@@ -442,7 +462,11 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+<<<<<<< HEAD
             this.tabPage1.Size = new System.Drawing.Size(774, 220);
+=======
+            this.tabPage1.Size = new System.Drawing.Size(774, 260);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -453,7 +477,11 @@
             this.horizontalEditTextBox1.Location = new System.Drawing.Point(3, 3);
             this.horizontalEditTextBox1.Multiline = true;
             this.horizontalEditTextBox1.Name = "horizontalEditTextBox1";
+<<<<<<< HEAD
             this.horizontalEditTextBox1.Size = new System.Drawing.Size(768, 214);
+=======
+            this.horizontalEditTextBox1.Size = new System.Drawing.Size(768, 254);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalEditTextBox1.TabIndex = 0;
             // 
             // tabPage2
@@ -480,17 +508,29 @@
             // 
             this.MainGridView.SetColumnSpan(this.horizontalRunTextBox, 8);
             this.horizontalRunTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+<<<<<<< HEAD
             this.horizontalRunTextBox.Location = new System.Drawing.Point(199, 381);
             this.horizontalRunTextBox.Multiline = true;
             this.horizontalRunTextBox.Name = "horizontalRunTextBox";
             this.MainGridView.SetRowSpan(this.horizontalRunTextBox, 4);
             this.horizontalRunTextBox.Size = new System.Drawing.Size(782, 253);
+=======
+            this.horizontalRunTextBox.Location = new System.Drawing.Point(199, 441);
+            this.horizontalRunTextBox.Multiline = true;
+            this.horizontalRunTextBox.Name = "horizontalRunTextBox";
+            this.MainGridView.SetRowSpan(this.horizontalRunTextBox, 4);
+            this.horizontalRunTextBox.Size = new System.Drawing.Size(782, 293);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalRunTextBox.TabIndex = 2;
             // 
             // horizontalRun
             // 
             this.horizontalRun.Dock = System.Windows.Forms.DockStyle.Bottom;
+<<<<<<< HEAD
             this.horizontalRun.Location = new System.Drawing.Point(885, 37);
+=======
+            this.horizontalRun.Location = new System.Drawing.Point(885, 47);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalRun.Name = "horizontalRun";
             this.horizontalRun.Size = new System.Drawing.Size(96, 23);
             this.horizontalRun.TabIndex = 3;
@@ -500,7 +540,11 @@
             // horizontalTick
             // 
             this.horizontalTick.Dock = System.Windows.Forms.DockStyle.Bottom;
+<<<<<<< HEAD
             this.horizontalTick.Location = new System.Drawing.Point(885, 352);
+=======
+            this.horizontalTick.Location = new System.Drawing.Point(885, 412);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalTick.Name = "horizontalTick";
             this.horizontalTick.Size = new System.Drawing.Size(96, 23);
             this.horizontalTick.TabIndex = 4;
@@ -510,7 +554,11 @@
             // horizontalTickCount
             // 
             this.horizontalTickCount.Dock = System.Windows.Forms.DockStyle.Bottom;
+<<<<<<< HEAD
             this.horizontalTickCount.Location = new System.Drawing.Point(787, 355);
+=======
+            this.horizontalTickCount.Location = new System.Drawing.Point(787, 415);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalTickCount.Name = "horizontalTickCount";
             this.horizontalTickCount.Size = new System.Drawing.Size(92, 20);
             this.horizontalTickCount.TabIndex = 5;
@@ -530,7 +578,11 @@
             this.toolStripButton7,
             this.toolStripButton8,
             this.toolStripButton9});
+<<<<<<< HEAD
             this.horizontalToolStrip.Location = new System.Drawing.Point(196, 353);
+=======
+            this.horizontalToolStrip.Location = new System.Drawing.Point(196, 413);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.horizontalToolStrip.Name = "horizontalToolStrip";
             this.horizontalToolStrip.Size = new System.Drawing.Size(588, 25);
             this.horizontalToolStrip.TabIndex = 6;
@@ -622,7 +674,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(984, 661);
+=======
+            this.ClientSize = new System.Drawing.Size(984, 761);
+>>>>>>> 0132ee5e334fcfea7e148e081e07554d6662c020
             this.Controls.Add(this.MainGridView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;

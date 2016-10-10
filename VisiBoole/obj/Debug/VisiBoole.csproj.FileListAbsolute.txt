@@ -20,3 +20,13 @@ C:\Users\Grim\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.Ge
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe.config
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.exe
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe.config
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.exe
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplayVerticalSplit.resources
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Form1.resources
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
