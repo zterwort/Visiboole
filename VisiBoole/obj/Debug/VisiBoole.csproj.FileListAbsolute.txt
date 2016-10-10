@@ -30,3 +30,4 @@ C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplayVertica
 C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Form1.resources
 C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
 C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zterwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.SingleViewEdit.resources
