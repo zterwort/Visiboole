@@ -63,10 +63,10 @@
             this.LibraryButton = new System.Windows.Forms.Button();
             this.horizontalTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.horizontalEditTextBox1 = new System.Windows.Forms.TextBox();
-            this.horizontalRunTextBox = new System.Windows.Forms.TextBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.horizontalEditTextBox2 = new System.Windows.Forms.TextBox();
+            this.horizontalRunTextBox = new System.Windows.Forms.TextBox();
             this.horizontalRun = new System.Windows.Forms.Button();
             this.horizontalTick = new System.Windows.Forms.Button();
             this.horizontalTickCount = new System.Windows.Forms.NumericUpDown();
@@ -446,6 +446,15 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // horizontalEditTextBox1
+            // 
+            this.horizontalEditTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.horizontalEditTextBox1.Location = new System.Drawing.Point(3, 3);
+            this.horizontalEditTextBox1.Multiline = true;
+            this.horizontalEditTextBox1.Name = "horizontalEditTextBox1";
+            this.horizontalEditTextBox1.Size = new System.Drawing.Size(688, 254);
+            this.horizontalEditTextBox1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.horizontalEditTextBox2);
@@ -457,14 +466,14 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // horizontalEditTextBox1
+            // horizontalEditTextBox2
             // 
-            this.horizontalEditTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.horizontalEditTextBox1.Location = new System.Drawing.Point(3, 3);
-            this.horizontalEditTextBox1.Multiline = true;
-            this.horizontalEditTextBox1.Name = "horizontalEditTextBox1";
-            this.horizontalEditTextBox1.Size = new System.Drawing.Size(688, 254);
-            this.horizontalEditTextBox1.TabIndex = 0;
+            this.horizontalEditTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.horizontalEditTextBox2.Location = new System.Drawing.Point(3, 3);
+            this.horizontalEditTextBox2.Multiline = true;
+            this.horizontalEditTextBox2.Name = "horizontalEditTextBox2";
+            this.horizontalEditTextBox2.Size = new System.Drawing.Size(688, 254);
+            this.horizontalEditTextBox2.TabIndex = 0;
             // 
             // horizontalRunTextBox
             // 
@@ -476,15 +485,6 @@
             this.MainGridView.SetRowSpan(this.horizontalRunTextBox, 4);
             this.horizontalRunTextBox.Size = new System.Drawing.Size(702, 293);
             this.horizontalRunTextBox.TabIndex = 2;
-            // 
-            // horizontalEditTextBox2
-            // 
-            this.horizontalEditTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.horizontalEditTextBox2.Location = new System.Drawing.Point(3, 3);
-            this.horizontalEditTextBox2.Multiline = true;
-            this.horizontalEditTextBox2.Name = "horizontalEditTextBox2";
-            this.horizontalEditTextBox2.Size = new System.Drawing.Size(688, 254);
-            this.horizontalEditTextBox2.TabIndex = 0;
             // 
             // horizontalRun
             // 
