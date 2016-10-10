@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DisplayHorizontalSplit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DisplayHorizontalSplit.Designer.cs">
+      <DependentUpon>DisplayHorizontalSplit.cs</DependentUpon>
+    </Compile>
     <Compile Include="DisplayVerticalSplit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DisplayHorizontalSplit.resx">
+      <DependentUpon>DisplayHorizontalSplit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DisplayVerticalSplit.resx">
       <DependentUpon>DisplayVerticalSplit.cs</DependentUpon>
     </EmbeddedResource>
