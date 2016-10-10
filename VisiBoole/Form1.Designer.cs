@@ -461,7 +461,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(694, 260);
+            this.tabPage2.Size = new System.Drawing.Size(774, 260);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -472,7 +472,7 @@
             this.horizontalEditTextBox2.Location = new System.Drawing.Point(3, 3);
             this.horizontalEditTextBox2.Multiline = true;
             this.horizontalEditTextBox2.Name = "horizontalEditTextBox2";
-            this.horizontalEditTextBox2.Size = new System.Drawing.Size(688, 254);
+            this.horizontalEditTextBox2.Size = new System.Drawing.Size(768, 254);
             this.horizontalEditTextBox2.TabIndex = 0;
             // 
             // horizontalRunTextBox

@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace VisiBoole
 {
-    public partial class SingleViewEdit : UserControl
+    public partial class DisplayHorizontalSplit : UserControl
     {
-        public SingleViewEdit()
+        public DisplayHorizontalSplit()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

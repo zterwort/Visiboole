@@ -1,6 +1,6 @@
 ﻿namespace VisiBoole
 {
-    partial class DisplayVerticalSplit
+    partial class DisplayHorizontalSplit
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,13 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayVerticalSplit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayHorizontalSplit));
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabEditorPage1 = new System.Windows.Forms.TabPage();
             this.tabEditorPage2 = new System.Windows.Forms.TabPage();
             this.rtfOutput = new System.Windows.Forms.RichTextBox();
-            this.btnTick = new System.Windows.Forms.Button();
-            this.updTickCount = new System.Windows.Forms.NumericUpDown();
+            this.btnRun = new System.Windows.Forms.Button();
             this.tlbIndependentVariables = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -45,10 +44,11 @@
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
-            this.btnRun = new System.Windows.Forms.Button();
+            this.btnTick = new System.Windows.Forms.Button();
+            this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.tabEditor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
             this.tlbIndependentVariables.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
             this.SuspendLayout();
             // 
             // tabEditor
@@ -58,7 +58,7 @@
             this.tabEditor.Location = new System.Drawing.Point(3, 14);
             this.tabEditor.Name = "tabEditor";
             this.tabEditor.SelectedIndex = 0;
-            this.tabEditor.Size = new System.Drawing.Size(393, 583);
+            this.tabEditor.Size = new System.Drawing.Size(796, 269);
             this.tabEditor.TabIndex = 0;
             // 
             // tabEditorPage1
@@ -66,7 +66,7 @@
             this.tabEditorPage1.Location = new System.Drawing.Point(4, 22);
             this.tabEditorPage1.Name = "tabEditorPage1";
             this.tabEditorPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditorPage1.Size = new System.Drawing.Size(385, 557);
+            this.tabEditorPage1.Size = new System.Drawing.Size(788, 243);
             this.tabEditorPage1.TabIndex = 0;
             this.tabEditorPage1.Text = "tabPage1";
             this.tabEditorPage1.UseVisualStyleBackColor = true;
@@ -76,35 +76,27 @@
             this.tabEditorPage2.Location = new System.Drawing.Point(4, 22);
             this.tabEditorPage2.Name = "tabEditorPage2";
             this.tabEditorPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEditorPage2.Size = new System.Drawing.Size(385, 557);
+            this.tabEditorPage2.Size = new System.Drawing.Size(788, 243);
             this.tabEditorPage2.TabIndex = 1;
             this.tabEditorPage2.Text = "tabPage2";
             this.tabEditorPage2.UseVisualStyleBackColor = true;
             // 
             // rtfOutput
             // 
-            this.rtfOutput.Location = new System.Drawing.Point(402, 36);
+            this.rtfOutput.Location = new System.Drawing.Point(7, 316);
             this.rtfOutput.Name = "rtfOutput";
-            this.rtfOutput.Size = new System.Drawing.Size(395, 561);
+            this.rtfOutput.Size = new System.Drawing.Size(788, 279);
             this.rtfOutput.TabIndex = 1;
             this.rtfOutput.Text = "";
             // 
-            // btnTick
+            // btnRun
             // 
-            this.btnTick.Location = new System.Drawing.Point(722, 3);
-            this.btnTick.Name = "btnTick";
-            this.btnTick.Size = new System.Drawing.Size(75, 23);
-            this.btnTick.TabIndex = 2;
-            this.btnTick.Text = "Tick";
-            this.btnTick.UseVisualStyleBackColor = true;
-            // 
-            // updTickCount
-            // 
-            this.updTickCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updTickCount.Location = new System.Drawing.Point(672, 4);
-            this.updTickCount.Name = "updTickCount";
-            this.updTickCount.Size = new System.Drawing.Size(44, 22);
-            this.updTickCount.TabIndex = 3;
+            this.btnRun.Location = new System.Drawing.Point(720, 10);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(75, 23);
+            this.btnRun.TabIndex = 2;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = true;
             // 
             // tlbIndependentVariables
             // 
@@ -119,11 +111,11 @@
             this.toolStripButton7,
             this.toolStripButton8,
             this.toolStripButton9});
-            this.tlbIndependentVariables.Location = new System.Drawing.Point(402, 4);
+            this.tlbIndependentVariables.Location = new System.Drawing.Point(417, 287);
             this.tlbIndependentVariables.Name = "tlbIndependentVariables";
-            this.tlbIndependentVariables.Size = new System.Drawing.Size(250, 25);
+            this.tlbIndependentVariables.Size = new System.Drawing.Size(219, 25);
             this.tlbIndependentVariables.TabIndex = 7;
-            this.tlbIndependentVariables.Text = "tlbIndependentVariables";
+            this.tlbIndependentVariables.Text = "horizontalToolStrip";
             // 
             // toolStripButton1
             // 
@@ -206,32 +198,40 @@
             this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton9.Text = "toolStripButton9";
             // 
-            // btnRun
+            // btnTick
             // 
-            this.btnRun.Location = new System.Drawing.Point(314, 3);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 8;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnTick.Location = new System.Drawing.Point(720, 290);
+            this.btnTick.Name = "btnTick";
+            this.btnTick.Size = new System.Drawing.Size(75, 23);
+            this.btnTick.TabIndex = 8;
+            this.btnTick.Text = "Tick";
+            this.btnTick.UseVisualStyleBackColor = true;
             // 
-            // DisplayVerticalSplit
+            // updTickCount
+            // 
+            this.updTickCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updTickCount.Location = new System.Drawing.Point(670, 290);
+            this.updTickCount.Name = "updTickCount";
+            this.updTickCount.Size = new System.Drawing.Size(44, 22);
+            this.updTickCount.TabIndex = 9;
+            // 
+            // DisplayHorizontalSplit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.btnRun);
-            this.Controls.Add(this.tlbIndependentVariables);
             this.Controls.Add(this.updTickCount);
             this.Controls.Add(this.btnTick);
+            this.Controls.Add(this.tlbIndependentVariables);
+            this.Controls.Add(this.btnRun);
             this.Controls.Add(this.rtfOutput);
             this.Controls.Add(this.tabEditor);
-            this.Name = "DisplayVerticalSplit";
-            this.Size = new System.Drawing.Size(800, 600);
+            this.Name = "DisplayHorizontalSplit";
+            this.Size = new System.Drawing.Size(798, 598);
             this.tabEditor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
             this.tlbIndependentVariables.ResumeLayout(false);
             this.tlbIndependentVariables.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,8 +243,7 @@
         private System.Windows.Forms.TabPage tabEditorPage1;
         private System.Windows.Forms.TabPage tabEditorPage2;
         private System.Windows.Forms.RichTextBox rtfOutput;
-        private System.Windows.Forms.Button btnTick;
-        private System.Windows.Forms.NumericUpDown updTickCount;
+        private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.ToolStrip tlbIndependentVariables;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
@@ -255,6 +254,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
-        private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.Button btnTick;
+        private System.Windows.Forms.NumericUpDown updTickCount;
     }
 }
