@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayVerticalSplit.cs">
+    <Compile Include="ctlDisplayHorizontalSplit.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplayVerticalSplit.Designer.cs">
-      <DependentUpon>DisplayVerticalSplit.cs</DependentUpon>
+    <Compile Include="ctlDisplayHorizontalSplit.Designer.cs">
+      <DependentUpon>ctlDisplayHorizontalSplit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ctlDisplayVerticalSplit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlDisplayVerticalSplit.Designer.cs">
+      <DependentUpon>ctlDisplayVerticalSplit.cs</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -72,8 +78,11 @@
     <Compile Include="SingleViewSolution.Designer.cs">
       <DependentUpon>SingleViewSolution.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DisplayVerticalSplit.resx">
-      <DependentUpon>DisplayVerticalSplit.cs</DependentUpon>
+    <EmbeddedResource Include="ctlDisplayHorizontalSplit.resx">
+      <DependentUpon>ctlDisplayHorizontalSplit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ctlDisplayVerticalSplit.resx">
+      <DependentUpon>ctlDisplayVerticalSplit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

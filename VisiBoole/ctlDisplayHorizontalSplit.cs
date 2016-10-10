@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace VisiBoole
 {
-    public partial class DisplayVerticalSplit : UserControl
+    public partial class ctlDisplayHorizontalSplit : UserControl
     {
-        public DisplayVerticalSplit()
+        public ctlDisplayHorizontalSplit()
         {
             InitializeComponent();
         }

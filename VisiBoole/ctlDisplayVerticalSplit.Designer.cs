@@ -1,6 +1,6 @@
 ﻿namespace VisiBoole
 {
-    partial class DisplayVerticalSplit
+    partial class ctlDisplayVerticalSplit
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayVerticalSplit));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctlDisplayVerticalSplit));
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabEditorPage1 = new System.Windows.Forms.TabPage();
             this.tabEditorPage2 = new System.Windows.Forms.TabPage();
