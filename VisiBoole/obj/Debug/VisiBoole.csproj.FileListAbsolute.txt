@@ -43,3 +43,4 @@ C:\Users\zcleary1\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Form1.resource
 C:\Users\zcleary1\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
 C:\Users\zcleary1\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.SingleViewEdit.resources
 C:\Users\zcleary1\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zcleary1\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.frmMain.resources

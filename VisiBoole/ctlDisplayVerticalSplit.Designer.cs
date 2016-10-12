@@ -121,7 +121,7 @@
             this.toolStripButton9});
             this.tlbIndependentVariables.Location = new System.Drawing.Point(402, 4);
             this.tlbIndependentVariables.Name = "tlbIndependentVariables";
-            this.tlbIndependentVariables.Size = new System.Drawing.Size(250, 25);
+            this.tlbIndependentVariables.Size = new System.Drawing.Size(219, 25);
             this.tlbIndependentVariables.TabIndex = 7;
             this.tlbIndependentVariables.Text = "tlbIndependentVariables";
             // 
@@ -215,18 +215,18 @@
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
             // 
-            // DisplayVerticalSplit
+            // ctlDisplayVerticalSplit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AutoSize = true;
             this.Controls.Add(this.btnRun);
             this.Controls.Add(this.tlbIndependentVariables);
             this.Controls.Add(this.updTickCount);
             this.Controls.Add(this.btnTick);
             this.Controls.Add(this.rtfOutput);
             this.Controls.Add(this.tabEditor);
-            this.Name = "DisplayVerticalSplit";
+            this.Name = "ctlDisplayVerticalSplit";
             this.Size = new System.Drawing.Size(800, 600);
             this.tabEditor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();

@@ -38,17 +38,17 @@ namespace VisiBoole
 
         private void standardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            LoadDisplay(new SingleViewEdit());
         }
 
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            LoadDisplay(new ctlDisplayHorizontalSplit());
         }
 
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            LoadDisplay(new ctlDisplayVerticalSplit());
         }
 
 
