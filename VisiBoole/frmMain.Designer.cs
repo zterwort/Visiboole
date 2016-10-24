@@ -61,8 +61,9 @@
             this.tabLibrary = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lvwSource = new System.Windows.Forms.ListView();
             this.lvwLibrary = new System.Windows.Forms.ListView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lboSource = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.MainGridView.SuspendLayout();
             this.tabLibrary.SuspendLayout();
@@ -105,7 +106,7 @@
             this.newToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "&New";
             // 
             // openToolStripMenuItem
@@ -114,13 +115,14 @@
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "&Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(149, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -128,19 +130,19 @@
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save &As";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -148,7 +150,7 @@
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -156,18 +158,18 @@
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             // 
             // editToolStripMenuItem
@@ -357,7 +359,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.lvwSource);
+            this.tabPage1.Controls.Add(this.lboSource);
             this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -377,15 +379,6 @@
             this.tabPage2.Text = "My Library";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lvwSource
-            // 
-            this.lvwSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvwSource.Location = new System.Drawing.Point(3, 3);
-            this.lvwSource.Name = "lvwSource";
-            this.lvwSource.Size = new System.Drawing.Size(176, 622);
-            this.lvwSource.TabIndex = 0;
-            this.lvwSource.UseCompatibleStateImageBehavior = false;
-            // 
             // lvwLibrary
             // 
             this.lvwLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -394,6 +387,20 @@
             this.lvwLibrary.Size = new System.Drawing.Size(176, 622);
             this.lvwLibrary.TabIndex = 0;
             this.lvwLibrary.UseCompatibleStateImageBehavior = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "VisiBoole (*.vbi) Files|*.vbi";
+            // 
+            // lboSource
+            // 
+            this.lboSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lboSource.FormattingEnabled = true;
+            this.lboSource.ItemHeight = 18;
+            this.lboSource.Location = new System.Drawing.Point(3, 3);
+            this.lboSource.Name = "lboSource";
+            this.lboSource.Size = new System.Drawing.Size(176, 622);
+            this.lboSource.TabIndex = 0;
             // 
             // frmMain
             // 
@@ -452,9 +459,10 @@
         private System.Windows.Forms.Panel pnlDisplay;
         private System.Windows.Forms.TabControl tabLibrary;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ListView lvwSource;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ListView lvwLibrary;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.ListBox lboSource;
     }
 }
 

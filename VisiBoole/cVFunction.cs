@@ -20,5 +20,17 @@ namespace VisiBoole
         /// The full path of this VFunction
         /// </summary>
         public String FilePath { get; set; }
+
+        public cVFunction(string pName)
+        {
+            if (!string.IsNullOrEmpty(pName)) 
+            {
+                this.Name = pName;
+            }
+            else
+            {
+                this.Name = "";
+            }
+        }
     }
 }

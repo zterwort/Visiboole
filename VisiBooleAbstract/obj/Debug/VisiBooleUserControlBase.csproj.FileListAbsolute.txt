@@ -14,3 +14,11 @@ C:\Users\zcleary1\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstrac
 C:\Users\zcleary1\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csproj.GenerateResource.Cache
 C:\Users\zcleary1\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.exe
 C:\Users\zcleary1\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.pdb
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe.config
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.pdb
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csprojResolveAssemblyReference.cache
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.Properties.Resources.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csproj.GenerateResource.Cache
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.exe
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.pdb
