@@ -58,11 +58,16 @@
             this.colorBlindModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainGridView = new System.Windows.Forms.TableLayoutPanel();
             this.pnlDisplay = new System.Windows.Forms.Panel();
-            this.pnlLibrary = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tabLibrary = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lvwSource = new System.Windows.Forms.ListView();
+            this.lvwLibrary = new System.Windows.Forms.ListView();
             this.menuStrip1.SuspendLayout();
             this.MainGridView.SuspendLayout();
-            this.pnlLibrary.SuspendLayout();
+            this.tabLibrary.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -307,7 +312,7 @@
             this.MainGridView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.MainGridView.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.MainGridView.Controls.Add(this.pnlDisplay, 2, 1);
-            this.MainGridView.Controls.Add(this.pnlLibrary, 0, 1);
+            this.MainGridView.Controls.Add(this.tabLibrary, 0, 1);
             this.MainGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainGridView.Location = new System.Drawing.Point(0, 24);
             this.MainGridView.Name = "MainGridView";
@@ -336,35 +341,59 @@
             this.pnlDisplay.Size = new System.Drawing.Size(782, 659);
             this.pnlDisplay.TabIndex = 1;
             // 
-            // pnlLibrary
+            // tabLibrary
             // 
-            this.pnlLibrary.BackColor = System.Drawing.Color.Transparent;
-            this.pnlLibrary.ColumnCount = 1;
-            this.MainGridView.SetColumnSpan(this.pnlLibrary, 2);
-            this.pnlLibrary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlLibrary.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.pnlLibrary.Controls.Add(this.tableLayoutPanel1, 0, 0);
-            this.pnlLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLibrary.Location = new System.Drawing.Point(3, 76);
-            this.pnlLibrary.Name = "pnlLibrary";
-            this.pnlLibrary.RowCount = 2;
-            this.MainGridView.SetRowSpan(this.pnlLibrary, 9);
-            this.pnlLibrary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.pnlLibrary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlLibrary.Size = new System.Drawing.Size(190, 659);
-            this.pnlLibrary.TabIndex = 2;
+            this.MainGridView.SetColumnSpan(this.tabLibrary, 2);
+            this.tabLibrary.Controls.Add(this.tabPage1);
+            this.tabLibrary.Controls.Add(this.tabPage2);
+            this.tabLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabLibrary.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabLibrary.Location = new System.Drawing.Point(3, 76);
+            this.tabLibrary.Name = "tabLibrary";
+            this.MainGridView.SetRowSpan(this.tabLibrary, 9);
+            this.tabLibrary.SelectedIndex = 0;
+            this.tabLibrary.Size = new System.Drawing.Size(190, 659);
+            this.tabLibrary.TabIndex = 2;
             // 
-            // tableLayoutPanel1
+            // tabPage1
             // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(184, 34);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tabPage1.Controls.Add(this.lvwSource);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(182, 628);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Source Code";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lvwLibrary);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(182, 628);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "My Library";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lvwSource
+            // 
+            this.lvwSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvwSource.Location = new System.Drawing.Point(3, 3);
+            this.lvwSource.Name = "lvwSource";
+            this.lvwSource.Size = new System.Drawing.Size(176, 622);
+            this.lvwSource.TabIndex = 0;
+            this.lvwSource.UseCompatibleStateImageBehavior = false;
+            // 
+            // lvwLibrary
+            // 
+            this.lvwLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvwLibrary.Location = new System.Drawing.Point(3, 3);
+            this.lvwLibrary.Name = "lvwLibrary";
+            this.lvwLibrary.Size = new System.Drawing.Size(176, 622);
+            this.lvwLibrary.TabIndex = 0;
+            this.lvwLibrary.UseCompatibleStateImageBehavior = false;
             // 
             // frmMain
             // 
@@ -382,7 +411,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.MainGridView.ResumeLayout(false);
-            this.pnlLibrary.ResumeLayout(false);
+            this.tabLibrary.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -419,8 +450,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.TableLayoutPanel MainGridView;
         private System.Windows.Forms.Panel pnlDisplay;
-        private System.Windows.Forms.TableLayoutPanel pnlLibrary;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TabControl tabLibrary;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListView lvwSource;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ListView lvwLibrary;
     }
 }
 
