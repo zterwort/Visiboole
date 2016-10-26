@@ -21,12 +21,12 @@ namespace VisiBoole
         /// </summary>
         public UserControl CurrentDisplay { get; set; }
 
-        public Dictionary<string, cVFunction> VFunctions { get; set; }
+        public Dictionary<string, cVFunction> subRoutines { get; set; }
 
         /// <summary>
-        /// Binding Source for the UserSource ListBox
+        /// Binding Source for the UserSubRoutines ListBox
         /// </summary>
-        private BindingSource _UserSourceBindingSource;
+        private BindingSource userSubRoutinesBindingSource;
 
         /// <summary>
         /// Constructs an instance of frmMain
@@ -35,28 +35,46 @@ namespace VisiBoole
         {
             InitializeComponent();
 
-            InitializeUserSource();
+            InitializeUserSubRoutines();
 
             // Load the default UserControl to display on application Startup
             LoadDisplay(new ctlDisplaySingleEditor());
         }
 
-        private void InitializeUserSource()
+        private void InitializeUserSubRoutines()
         {
             // Initialize our dictionary of VisiBoole Functions
-            VFunctions = new Dictionary<string, cVFunction>();
+            subRoutines = new Dictionary<string, cVFunction>();
 
-            cVFunction val1 = new cVFunction("val1");
-            cVFunction val2 = new cVFunction("val2");
+            if (!Directory.Exists(Path.Combine(Application.StartupPath, "UserSubRoutines")))
+            {
+                Directory.CreateDirectory(Path.Combine(Application.StartupPath, "UserSubRoutines"));
+            }
 
-            VFunctions.Add(val1.Name, val1);
-            VFunctions.Add(val2.Name, val2);
+            GetFiles(Path.Combine(Application.StartupPath, "UserSubRoutines"));
+        }
 
-            _UserSourceBindingSource = new BindingSource(VFunctions, null);
+        private void GetFiles(string path)
+        {
+            DirectoryInfo di = new DirectoryInfo(path);
+            FileInfo[] files = di.GetFiles("*.vbi");
 
+            foreach (FileInfo file in files)
+            {
+                if (!subRoutines.ContainsKey(file.Name))
+                {
+                    cVFunction value = new cVFunction(file.Name);
+                    subRoutines.Add(value.Name, value);
+                    if(path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines")))
+                    {
+                        file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines"), file.Name));
+                    }
+                }
+            }
+            userSubRoutinesBindingSource = new BindingSource(subRoutines, null);
             lboSource.DisplayMember = "Key";
             lboSource.ValueMember = "Value";
-            lboSource.DataSource = _UserSourceBindingSource;
+            lboSource.DataSource = userSubRoutinesBindingSource;
         }
 
         /// <summary>
@@ -116,15 +134,22 @@ namespace VisiBoole
                 // Check that the selected file is a valid VisiBoole file before attempting to open
                 if (string.IsNullOrEmpty(fileName) || Path.GetExtension(fileName) != ".vbi")
                 {
-                    MessageBox.Show(Path.Combine(Application.StartupPath, "UserSource"));
+                    MessageBox.Show(Path.Combine(Application.StartupPath, "UserSubRoutines"));
                     MessageBox.Show("Invalid filename. Select a valid VisiBoole file (*.vbi) extension.", "Invalid Filename", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return;
                 }
                 
-                //Copy the file to our UserSource project directory
-                File.Copy(fileName, Path.Combine(Application.StartupPath, "UserSource"));
+                //Copy the file to our UserSubRoutines project directory
+                File.Copy(fileName, Path.Combine(Application.StartupPath, "UserSubRoutines"));
+            }
+        }
 
-
+        private void importToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult response = folderBrowserDialog1.ShowDialog();
+            if (response == DialogResult.OK)
+            {
+                GetFiles(folderBrowserDialog1.SelectedPath);
             }
         }
     }

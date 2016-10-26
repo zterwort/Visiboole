@@ -60,10 +60,12 @@
             this.pnlDisplay = new System.Windows.Forms.Panel();
             this.tabLibrary = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lboSource = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lvwLibrary = new System.Windows.Forms.ListView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.lboSource = new System.Windows.Forms.ListBox();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip1.SuspendLayout();
             this.MainGridView.SuspendLayout();
             this.tabLibrary.SuspendLayout();
@@ -88,6 +90,7 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
+            this.importToolStripMenuItem,
             this.toolStripSeparator,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -368,6 +371,16 @@
             this.tabPage1.Text = "Source Code";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // lboSource
+            // 
+            this.lboSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lboSource.FormattingEnabled = true;
+            this.lboSource.ItemHeight = 18;
+            this.lboSource.Location = new System.Drawing.Point(3, 3);
+            this.lboSource.Name = "lboSource";
+            this.lboSource.Size = new System.Drawing.Size(176, 622);
+            this.lboSource.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.lvwLibrary);
@@ -392,15 +405,12 @@
             // 
             this.openFileDialog1.Filter = "VisiBoole (*.vbi) Files|*.vbi";
             // 
-            // lboSource
+            // importToolStripMenuItem
             // 
-            this.lboSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lboSource.FormattingEnabled = true;
-            this.lboSource.ItemHeight = 18;
-            this.lboSource.Location = new System.Drawing.Point(3, 3);
-            this.lboSource.Name = "lboSource";
-            this.lboSource.Size = new System.Drawing.Size(176, 622);
-            this.lboSource.TabIndex = 0;
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -463,6 +473,8 @@
         private System.Windows.Forms.ListView lvwLibrary;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ListBox lboSource;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 
