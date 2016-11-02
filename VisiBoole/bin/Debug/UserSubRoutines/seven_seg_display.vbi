@@ -1,0 +1,40 @@
+w x y z   %b{w x y z}   %h{w x y z};
+
+zero  = ~w ~x ~y ~z;
+one   = ~w ~x ~y z;
+two   = ~w ~x y ~z;
+three = ~w ~x y z;
+four  = ~w x ~y ~z;
+five  = ~w x ~y z;
+six   = ~w x y ~z;
+seven = ~w x y z;
+eight = w ~x ~y ~z;
+nine  = w ~x ~y z;
+diga  = w ~x y ~z;
+digb  = w ~x y z;
+digc  = w x ~y ~z;
+digd  = w x ~y z;
+dige  = w x y ~z;
+digf  = w x y z;
+
+a = zero + two + three + five + six + seven + eight + nine + diga + digc + dige + digf;
+b = zero + one + two + three + four + seven + eight + nine + diga + digd;
+c = zero + one + three + four + five + six + seven + eight + nine + diga + digb + digd;
+d = zero + two + three + five + six + eight + digb + digc + digd + dige;
+e = zero + two + six + eight + diga + digb + digc + digd + dige + digf;
+f = zero + four + five + six + eight + nine + diga + digb + digc + dige + digf;
+g = two + three + four + five + six + eight + nine + diga + digb + digd + dige + digf;
+
+w x y z   %b{w x y z}   %h{w x y z};
+
+      a a a a a;
+     f         b;
+     f         b;
+     f         b;
+     f         b;
+      g g g g g;
+     e         c;
+     e         c;
+     e         c;
+     e         c;
+      d d d d d; 
