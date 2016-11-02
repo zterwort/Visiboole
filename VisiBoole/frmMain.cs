@@ -152,5 +152,12 @@ namespace VisiBoole
                 GetFiles(folderBrowserDialog1.SelectedPath);
             }
         }
+
+        private void lboSource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //How to get tab and file we need?
+            //cDisplayBase display = new cDisplayBase();
+            //display.GenerateNewTab(CurrentDisplay.TabIndex, );
+        }
     }
 }

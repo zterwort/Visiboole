@@ -14,7 +14,7 @@ namespace VisiBoole
     /// <summary>
     /// The Horizontal View for the main menu display
     /// </summary>
-    public partial class ctlDisplayHorizontal : cIntermediateBase
+    public partial class ctlDisplayHorizontal : cDisplayBase
     {
         /// <summary>
         /// Constructs an instance of ctlDisplayHorizontal

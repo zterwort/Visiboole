@@ -12,5 +12,6 @@ namespace VisiBooleAbstract
     /// </summary>
     public abstract class cDisplayBase : UserControl
     {
+
     }
 }

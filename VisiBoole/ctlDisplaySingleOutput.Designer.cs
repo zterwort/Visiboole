@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctlDisplaySingleOutput));
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlOutputControls = new System.Windows.Forms.Panel();
-            this.btnTick = new System.Windows.Forms.Button();
-            this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.tlbVariables = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -40,10 +38,12 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.updTickCount = new System.Windows.Forms.NumericUpDown();
+            this.btnTick = new System.Windows.Forms.Button();
             this.pnlMain.SuspendLayout();
             this.pnlOutputControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
             this.tlbVariables.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -73,24 +73,6 @@
             this.pnlOutputControls.Size = new System.Drawing.Size(794, 30);
             this.pnlOutputControls.TabIndex = 0;
             // 
-            // btnTick
-            // 
-            this.btnTick.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnTick.Location = new System.Drawing.Point(716, 4);
-            this.btnTick.Name = "btnTick";
-            this.btnTick.Size = new System.Drawing.Size(75, 23);
-            this.btnTick.TabIndex = 0;
-            this.btnTick.Text = "Tick";
-            this.btnTick.UseVisualStyleBackColor = true;
-            // 
-            // updTickCount
-            // 
-            this.updTickCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.updTickCount.Location = new System.Drawing.Point(658, 7);
-            this.updTickCount.Name = "updTickCount";
-            this.updTickCount.Size = new System.Drawing.Size(52, 20);
-            this.updTickCount.TabIndex = 1;
-            // 
             // tlbVariables
             // 
             this.tlbVariables.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -104,7 +86,7 @@
             this.toolStripButton6});
             this.tlbVariables.Location = new System.Drawing.Point(0, 4);
             this.tlbVariables.Name = "tlbVariables";
-            this.tlbVariables.Size = new System.Drawing.Size(181, 25);
+            this.tlbVariables.Size = new System.Drawing.Size(150, 25);
             this.tlbVariables.TabIndex = 2;
             this.tlbVariables.Text = "toolStrip1";
             // 
@@ -162,6 +144,24 @@
             this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton6.Text = "toolStripButton6";
             // 
+            // updTickCount
+            // 
+            this.updTickCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.updTickCount.Location = new System.Drawing.Point(658, 7);
+            this.updTickCount.Name = "updTickCount";
+            this.updTickCount.Size = new System.Drawing.Size(52, 20);
+            this.updTickCount.TabIndex = 1;
+            // 
+            // btnTick
+            // 
+            this.btnTick.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnTick.Location = new System.Drawing.Point(716, 4);
+            this.btnTick.Name = "btnTick";
+            this.btnTick.Size = new System.Drawing.Size(75, 23);
+            this.btnTick.TabIndex = 0;
+            this.btnTick.Text = "Tick";
+            this.btnTick.UseVisualStyleBackColor = true;
+            // 
             // ctlDisplaySingleOutput
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,9 +172,9 @@
             this.pnlMain.ResumeLayout(false);
             this.pnlOutputControls.ResumeLayout(false);
             this.pnlOutputControls.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
             this.tlbVariables.ResumeLayout(false);
             this.tlbVariables.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
             this.ResumeLayout(false);
 
         }

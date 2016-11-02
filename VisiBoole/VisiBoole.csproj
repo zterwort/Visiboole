@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cIntermediateBase.cs">
+    <Compile Include="cDisplayBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ctlDisplayHorizontal.cs">

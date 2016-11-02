@@ -13,7 +13,7 @@ namespace VisiBoole
     /// <summary>
     /// The default view for the main menu display
     /// </summary>
-    public partial class ctlDisplaySingleEditor : cIntermediateBase
+    public partial class ctlDisplaySingleEditor : cDisplayBase
     {
         /// <summary>
         /// Constructs an instance of ctlDisplaySingleEditor
