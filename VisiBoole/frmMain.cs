@@ -21,7 +21,9 @@ namespace VisiBoole
         /// </summary>
         public UserControl CurrentDisplay { get; set; }
 
-        public Dictionary<string, cVFunction> subRoutines { get; set; }
+        public Dictionary<string, VFunction> subRoutines { get; set; }
+
+        DisplayBase display = new DisplayBase();
 
         /// <summary>
         /// Binding Source for the UserSubRoutines ListBox
@@ -38,13 +40,13 @@ namespace VisiBoole
             InitializeUserSubRoutines();
 
             // Load the default UserControl to display on application Startup
-            LoadDisplay(new ctlDisplaySingleEditor());
+            LoadDisplay(new DisplaySingleEditor());
         }
 
         private void InitializeUserSubRoutines()
         {
             // Initialize our dictionary of VisiBoole Functions
-            subRoutines = new Dictionary<string, cVFunction>();
+            subRoutines = new Dictionary<string, VFunction>();
 
             if (!Directory.Exists(Path.Combine(Application.StartupPath, "UserSubRoutines")))
             {
@@ -63,7 +65,8 @@ namespace VisiBoole
             {
                 if (!subRoutines.ContainsKey(file.Name))
                 {
-                    cVFunction value = new cVFunction(file.Name);
+                    VFunction value = new VFunction(file.Name);
+                    value.File = file;
                     subRoutines.Add(value.Name, value);
                     if(path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines")))
                     {
@@ -101,7 +104,7 @@ namespace VisiBoole
         /// </summary>
         private void standardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadDisplay(new ctlDisplaySingleEditor());
+            LoadDisplay(new DisplaySingleEditor());
         }
 
         /// <summary>
@@ -109,7 +112,7 @@ namespace VisiBoole
         /// </summary>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadDisplay(new ctlDisplayHorizontal());
+            LoadDisplay(new DisplayHorizontal());
         }
 
         /// <summary>
@@ -117,7 +120,7 @@ namespace VisiBoole
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadDisplay(new ctlDisplayVertical());
+            LoadDisplay(new DisplayVertical());
         }
 
         /// <summary>
@@ -156,8 +159,24 @@ namespace VisiBoole
         private void lboSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             //How to get tab and file we need?
-            //cDisplayBase display = new cDisplayBase();
-            //display.GenerateNewTab(CurrentDisplay.TabIndex, );
+            if(CurrentDisplay != null)
+            {
+                if(CurrentDisplay is DisplaySingleEditor)
+                {
+                    TabControl tabs = ((VisiBoole.DisplaySingleEditor)CurrentDisplay).tabEditor;
+                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
+                }
+                else if (CurrentDisplay is DisplayVertical)
+                {
+                    TabControl tabs = ((VisiBoole.DisplayVertical)CurrentDisplay).tabEditor;
+                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
+                }
+                else if(CurrentDisplay is DisplayHorizontal)
+                {
+                    TabControl tabs = ((VisiBoole.DisplayHorizontal)CurrentDisplay).tabEditor;
+                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
+                }
+            }
         }
     }
 }

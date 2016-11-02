@@ -49,28 +49,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cDisplayBase.cs">
+    <Compile Include="DisplayBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctlDisplayHorizontal.cs">
+    <Compile Include="DisplayHorizontal.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctlDisplayHorizontal.Designer.cs">
-      <DependentUpon>ctlDisplayHorizontal.cs</DependentUpon>
+    <Compile Include="DisplayHorizontal.Designer.cs">
+      <DependentUpon>DisplayHorizontal.cs</DependentUpon>
     </Compile>
-    <Compile Include="ctlDisplaySingleOutput.cs">
+    <Compile Include="DisplaySingleOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctlDisplaySingleOutput.Designer.cs">
-      <DependentUpon>ctlDisplaySingleOutput.cs</DependentUpon>
+    <Compile Include="DisplaySingleOutput.Designer.cs">
+      <DependentUpon>DisplaySingleOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="ctlDisplayVertical.cs">
+    <Compile Include="DisplayVertical.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctlDisplayVertical.Designer.cs">
-      <DependentUpon>ctlDisplayVertical.cs</DependentUpon>
+    <Compile Include="DisplayVertical.Designer.cs">
+      <DependentUpon>DisplayVertical.cs</DependentUpon>
     </Compile>
-    <Compile Include="cVFunction.cs" />
+    <Compile Include="VFunction.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,20 +79,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ctlDisplaySingleEditor.cs">
+    <Compile Include="DisplaySingleEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ctlDisplaySingleEditor.Designer.cs">
-      <DependentUpon>ctlDisplaySingleEditor.cs</DependentUpon>
+    <Compile Include="DisplaySingleEditor.Designer.cs">
+      <DependentUpon>DisplaySingleEditor.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ctlDisplayHorizontal.resx">
-      <DependentUpon>ctlDisplayHorizontal.cs</DependentUpon>
+    <EmbeddedResource Include="DisplayHorizontal.resx">
+      <DependentUpon>DisplayHorizontal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctlDisplaySingleOutput.resx">
-      <DependentUpon>ctlDisplaySingleOutput.cs</DependentUpon>
+    <EmbeddedResource Include="DisplaySingleOutput.resx">
+      <DependentUpon>DisplaySingleOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ctlDisplayVertical.resx">
-      <DependentUpon>ctlDisplayVertical.cs</DependentUpon>
+    <EmbeddedResource Include="DisplayVertical.resx">
+      <DependentUpon>DisplayVertical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -107,8 +107,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ctlDisplaySingleEditor.resx">
-      <DependentUpon>ctlDisplaySingleEditor.cs</DependentUpon>
+    <EmbeddedResource Include="DisplaySingleEditor.resx">
+      <DependentUpon>DisplaySingleEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
