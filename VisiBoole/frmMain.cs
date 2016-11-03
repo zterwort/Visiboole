@@ -21,7 +21,7 @@ namespace VisiBoole
         /// </summary>
         public UserControl CurrentDisplay { get; set; }
 
-        public Dictionary<string, VFunction> subRoutines { get; set; }
+        public Dictionary<string, SubDesign> subRoutines { get; set; }
 
         DisplayBase display = new DisplayBase();
 
@@ -46,7 +46,7 @@ namespace VisiBoole
         private void InitializeUserSubRoutines()
         {
             // Initialize our dictionary of VisiBoole Functions
-            subRoutines = new Dictionary<string, VFunction>();
+            subRoutines = new Dictionary<string, SubDesign>();
 
             if (!Directory.Exists(Path.Combine(Application.StartupPath, "UserSubRoutines")))
             {
@@ -65,7 +65,7 @@ namespace VisiBoole
             {
                 if (!subRoutines.ContainsKey(file.Name))
                 {
-                    VFunction value = new VFunction(file.Name);
+                    SubDesign value = new SubDesign(file.Name);
                     value.File = file;
                     subRoutines.Add(value.Name, value);
                     if(path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines")))
@@ -73,6 +73,7 @@ namespace VisiBoole
                         file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines"), file.Name));
                     }
                 }
+                //TestOutputParser(file);
             }
             userSubRoutinesBindingSource = new BindingSource(subRoutines, null);
             lboSource.DisplayMember = "Key";
@@ -177,6 +178,21 @@ namespace VisiBoole
                     display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
                 }
             }
+        }
+
+        private void TestOutputParser(FileInfo f)
+        {
+            var Parser = new OutputParser(f);
+
+            List<string> OutputList = Parser.GenerateOutput();
+            string OutputText = string.Empty;
+
+            for (int i = 0; i < OutputList.Count; i++)
+            {
+                OutputText += OutputList[i] + Environment.NewLine;
+            }
+
+            MessageBox.Show(OutputText);
         }
     }
 }

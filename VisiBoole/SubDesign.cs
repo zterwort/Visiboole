@@ -10,7 +10,7 @@ namespace VisiBoole
     /// <summary>
     /// A User-Created VisiBoole Function
     /// </summary>
-    public class VFunction
+    public class SubDesign
     {
         /// <summary>
         /// The name of this VFunction - will be displayed to user
@@ -23,7 +23,7 @@ namespace VisiBoole
         /// </summary>
         public String FilePath { get; set; }
 
-        public VFunction(string pName)
+        public SubDesign(string pName)
         {
             if (!string.IsNullOrEmpty(pName)) 
             {
