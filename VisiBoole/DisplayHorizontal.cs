@@ -42,7 +42,7 @@ namespace VisiBoole
             rtfOutput.AppendText(": ");
             rtfOutput.AppendText(message, Color.Blue);
             rtfOutput.AppendText(Environment.NewLine);*/
-            //this.Run();
+            this.Run(Globals.subDesigns[((tabEditor.SelectedTab.ToString().Substring(0)).Split('{'))[1].TrimEnd('}')]);
         }
     }
 }

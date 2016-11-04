@@ -180,6 +180,6 @@
         private System.Windows.Forms.NumericUpDown updTickCount;
         private System.Windows.Forms.Button btnTick;
         private System.Windows.Forms.RichTextBox IndependentVars;
-        private System.Windows.Forms.WebBrowser outputBrowser;
+        public System.Windows.Forms.WebBrowser outputBrowser;
     }
 }

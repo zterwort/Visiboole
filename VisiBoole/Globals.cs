@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace VisiBoole
 {
@@ -17,5 +18,6 @@ namespace VisiBoole
 
         public static Dictionary<string, string> html = new Dictionary<string, string>();
         public static Dictionary<string, SubDesign> subDesigns { get; set; }
+        public static UserControl CurrentDisplay { get; set; }
     }
 }

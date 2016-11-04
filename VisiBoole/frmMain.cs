@@ -20,7 +20,6 @@ namespace VisiBoole
         /// <summary>
         /// The currently displayed UserControl
         /// </summary>
-        public UserControl CurrentDisplay { get; set; }
 
         public string[] subDesignKeys { get; set; }
         
@@ -120,14 +119,14 @@ namespace VisiBoole
             if (pNewDisplay == null)
                 return;
 
-            pnlDisplay.Controls.Remove(CurrentDisplay);
+            pnlDisplay.Controls.Remove(Globals.CurrentDisplay);
 
-            CurrentDisplay = pNewDisplay;
+            Globals.CurrentDisplay = pNewDisplay;
 
-            pnlDisplay.Controls.Add(CurrentDisplay);
+            pnlDisplay.Controls.Add(Globals.CurrentDisplay);
 
-            CurrentDisplay.Dock = DockStyle.Fill;
-            CurrentDisplay.Show();
+            Globals.CurrentDisplay.Dock = DockStyle.Fill;
+            Globals.CurrentDisplay.Show();
         }
 
         /// <summary>
@@ -190,21 +189,21 @@ namespace VisiBoole
         private void lboSource_SelectedIndexChanged(object sender, EventArgs e)
         {
             //How to get tab and file we need?
-            if(CurrentDisplay != null)
+            if(Globals.CurrentDisplay != null)
             {
-                if(CurrentDisplay is DisplaySingleEditor)
+                if(Globals.CurrentDisplay is DisplaySingleEditor)
                 {
-                    TabControl tabs = ((VisiBoole.DisplaySingleEditor)CurrentDisplay).tabEditor;
+                    TabControl tabs = ((VisiBoole.DisplaySingleEditor)Globals.CurrentDisplay).tabEditor;
                     display.GenerateNewTab(tabs, Globals.subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
-                else if (CurrentDisplay is DisplayVertical)
+                else if (Globals.CurrentDisplay is DisplayVertical)
                 {
-                    TabControl tabs = ((VisiBoole.DisplayVertical)CurrentDisplay).tabEditor;
+                    TabControl tabs = ((VisiBoole.DisplayVertical)Globals.CurrentDisplay).tabEditor;
                     display.GenerateNewTab(tabs, Globals.subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
-                else if(CurrentDisplay is DisplayHorizontal)
+                else if(Globals.CurrentDisplay is DisplayHorizontal)
                 {
-                    TabControl tabs = ((VisiBoole.DisplayHorizontal)CurrentDisplay).tabEditor;
+                    TabControl tabs = ((VisiBoole.DisplayHorizontal)Globals.CurrentDisplay).tabEditor;
                     display.GenerateNewTab(tabs, Globals.subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
             }

@@ -180,6 +180,6 @@
         public System.Windows.Forms.TabControl tabEditor;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.RichTextBox IndependentVars;
-        private System.Windows.Forms.WebBrowser outputBrowser;
+        public System.Windows.Forms.WebBrowser outputBrowser;
     }
 }

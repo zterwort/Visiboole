@@ -70,7 +70,28 @@ namespace VisiBoole
             List<string> outputText = output.GenerateOutput();
             HtmlBuilder html = new HtmlBuilder(outputText, info.Name);
             string htmlOutput = html.GetHTML();
-            //html.DisplayHtml(htmlOutput, browser);
+
+            if (Globals.CurrentDisplay != null)
+            {
+                if (Globals.CurrentDisplay is DisplaySingleEditor)
+                {
+                    WebBrowser browser = new WebBrowser();
+                    Form newForm = new Form();
+                    html.DisplayHtml(htmlOutput, browser);
+                    newForm.Controls.Add(browser);
+                    newForm.ShowDialog();
+                }
+                else if (Globals.CurrentDisplay is DisplayVertical)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplayVertical)Globals.CurrentDisplay).outputBrowser;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+                else if (Globals.CurrentDisplay is DisplayHorizontal)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplayHorizontal)Globals.CurrentDisplay).outputBrowser;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+            }
         }
     }
 }
