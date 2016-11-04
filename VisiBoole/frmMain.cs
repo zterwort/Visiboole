@@ -48,33 +48,53 @@ namespace VisiBoole
             // Initialize our dictionary of VisiBoole Functions
             subDesigns = new Dictionary<string, SubDesign>();
 
-            if (!Directory.Exists(Path.Combine(Application.StartupPath, "UsersubDesigns")))
+            if (!Directory.Exists(Path.Combine(Application.StartupPath, "UserSubDesigns")))
             {
-                Directory.CreateDirectory(Path.Combine(Application.StartupPath, "UsersubDesigns"));
+                Directory.CreateDirectory(Path.Combine(Application.StartupPath, "UserSubDesigns"));
             }
 
-            GetFiles(Path.Combine(Application.StartupPath, "UsersubDesigns"));
+            GetFiles(Path.Combine(Application.StartupPath, "UserSubDesigns"));
         }
 
         private void GetFiles(string path)
         {
             DirectoryInfo di = new DirectoryInfo(path);
-            FileInfo[] files = di.GetFiles("*.vbi");
-
-            foreach (FileInfo file in files)
+            FileInfo[] files;
+            try
             {
+                files = di.GetFiles("*.vbi");
+                foreach (FileInfo file in files)
+                {
+                    if (!subDesigns.ContainsKey(file.Name))
+                    {
+                        SubDesign value = new SubDesign(file.Name);
+                        value.File = file;
+                        subDesigns.Add(value.Name, value);
+                        if (path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns")))
+                        {
+                            file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
+                        }
+                    }
+                    //TestOutputParser(file);
+                }
+            }
+            catch
+            {
+                FileInfo file = new FileInfo(path);
+           
                 if (!subDesigns.ContainsKey(file.Name))
                 {
                     SubDesign value = new SubDesign(file.Name);
                     value.File = file;
                     subDesigns.Add(value.Name, value);
-                    if(path != Path.Combine(Path.Combine(Application.StartupPath, "UsersubDesigns")))
+                    if (path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns")))
                     {
-                        file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UsersubDesigns"), file.Name));
+                        file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
                     }
                 }
-                //TestOutputParser(file);
             }
+
+            
             usersubDesignsBindingSource = new BindingSource(subDesigns, null);
             lboSource.DisplayMember = "Key";
             lboSource.ValueMember = "Value";
@@ -138,13 +158,13 @@ namespace VisiBoole
                 // Check that the selected file is a valid VisiBoole file before attempting to open
                 if (string.IsNullOrEmpty(fileName) || Path.GetExtension(fileName) != ".vbi")
                 {
-                    MessageBox.Show(Path.Combine(Application.StartupPath, "UsersubDesigns"));
+                    MessageBox.Show(Path.Combine(Application.StartupPath, "UserSubDesigns"));
                     MessageBox.Show("Invalid filename. Select a valid VisiBoole file (*.vbi) extension.", "Invalid Filename", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return;
                 }
-                
+
                 //Copy the file to our UsersubDesigns project directory
-                File.Copy(fileName, Path.Combine(Application.StartupPath, "UsersubDesigns"));
+                GetFiles(fileName);
             }
         }
 
