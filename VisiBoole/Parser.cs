@@ -48,11 +48,17 @@ namespace VisiBoole
                 {
                     if (s.Contains('*'))
                     {
-                        Globals.variables[currentTab].Add(s.Substring(1), 1);
+                        if (!Globals.variables[currentTab].ContainsKey(s.Substring(1)))
+                        {
+                            Globals.variables[currentTab].Add(s.Substring(1), 1);
+                        }
                     }
                     else
                     {
-                        Globals.variables[currentTab].Add(s, 0);
+                        if (!Globals.variables[currentTab].ContainsKey(s))
+                        {
+                            Globals.variables[currentTab].Add(s, 0);
+                        }
                     }
                 }
             }
@@ -61,7 +67,10 @@ namespace VisiBoole
                 string dependent = lineOfCode.Substring(0, lineOfCode.IndexOf('='));
                 string expression = lineOfCode.Substring(lineOfCode.IndexOf('=') + 1).Trim();
                 int x = SolveExpression(expression, lineNumber);
-                Globals.variables[currentTab].Add(dependent.Trim(), x);
+                if (!Globals.variables[currentTab].ContainsKey(dependent.Trim()))
+                {
+                    Globals.variables[currentTab].Add(dependent.Trim(), x);
+                }
                 return expression;
             }
             return lineOfCode;
