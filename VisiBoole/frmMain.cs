@@ -22,7 +22,6 @@ namespace VisiBoole
         /// </summary>
         public UserControl CurrentDisplay { get; set; }
 
-        public Dictionary<string, SubDesign> subDesigns { get; set; }
         public string[] subDesignKeys { get; set; }
         
 
@@ -49,7 +48,7 @@ namespace VisiBoole
         private void InitializeUsersubDesigns()
         {
             // Initialize our dictionary of VisiBoole Functions
-            subDesigns = new Dictionary<string, SubDesign>();
+            Globals.subDesigns = new Dictionary<string, SubDesign>();
 
             if (!Directory.Exists(Path.Combine(Application.StartupPath, "UserSubDesigns")))
             {
@@ -70,11 +69,11 @@ namespace VisiBoole
                 files = di.GetFiles("*.vbi");
                 foreach (FileInfo file in files)
                 {
-                    if (!subDesigns.ContainsKey(file.Name))
+                    if (!Globals.subDesigns.ContainsKey(file.Name))
                     {
                         SubDesign value = new SubDesign(file.Name);
                         value.File = file;
-                        subDesigns.Add(value.Name, value);
+                        Globals.subDesigns.Add(value.Name, value);
                         if (path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns")))
                         {
                             file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
@@ -88,11 +87,11 @@ namespace VisiBoole
             {
                 FileInfo file = new FileInfo(path);
            
-                if (!subDesigns.ContainsKey(file.Name))
+                if (!Globals.subDesigns.ContainsKey(file.Name))
                 {
                     SubDesign value = new SubDesign(file.Name);
                     value.File = file;
-                    subDesigns.Add(value.Name, value);
+                    Globals.subDesigns.Add(value.Name, value);
                     if (path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns")))
                     {
                         file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
@@ -102,10 +101,10 @@ namespace VisiBoole
 
                 f = file;
             }
-            CodeParser(s);
-            OutputParser(f);
+            //CodeParser(s);
+            //OutputParser(f);
             
-            usersubDesignsBindingSource = new BindingSource(subDesigns, null);
+            usersubDesignsBindingSource = new BindingSource(Globals.subDesigns, null);
             
             lboSource.DisplayMember = "Key";
             lboSource.ValueMember = "Value";
@@ -196,17 +195,17 @@ namespace VisiBoole
                 if(CurrentDisplay is DisplaySingleEditor)
                 {
                     TabControl tabs = ((VisiBoole.DisplaySingleEditor)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
+                    display.GenerateNewTab(tabs, Globals.subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
                 else if (CurrentDisplay is DisplayVertical)
                 {
                     TabControl tabs = ((VisiBoole.DisplayVertical)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
+                    display.GenerateNewTab(tabs, Globals.subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
                 else if(CurrentDisplay is DisplayHorizontal)
                 {
                     TabControl tabs = ((VisiBoole.DisplayHorizontal)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
+                    display.GenerateNewTab(tabs, Globals.subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
             }
         }

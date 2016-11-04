@@ -16,5 +16,6 @@ namespace VisiBoole
         public static Dictionary<string, Dictionary<string, int>> variables = new Dictionary<string, Dictionary<string, int>>();
 
         public static Dictionary<string, string> html = new Dictionary<string, string>();
+        public static Dictionary<string, SubDesign> subDesigns { get; set; }
     }
 }

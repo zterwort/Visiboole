@@ -25,7 +25,7 @@ namespace VisiBoole
 
         private void btnRun_Click(object sender, EventArgs e)
         {
-
+            //this.Run(Globals.subDesigns[tabEditor.SelectedIndex]);
         }
     }
 }

@@ -42,6 +42,7 @@ namespace VisiBoole
             rtfOutput.AppendText(": ");
             rtfOutput.AppendText(message, Color.Blue);
             rtfOutput.AppendText(Environment.NewLine);*/
+            //this.Run();
         }
     }
 }

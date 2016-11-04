@@ -28,27 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayHorizontal));
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
             this.tabEditor = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.rtfOutput = new System.Windows.Forms.RichTextBox();
             this.pnlEditorControls = new System.Windows.Forms.Panel();
             this.btnRun = new System.Windows.Forms.Button();
             this.pnlOutputControls = new System.Windows.Forms.Panel();
-            this.tlbVariables = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.IndependentVars = new System.Windows.Forms.RichTextBox();
             this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.btnTick = new System.Windows.Forms.Button();
+            this.outputBrowser = new System.Windows.Forms.WebBrowser();
             this.pnlMain.SuspendLayout();
             this.tabEditor.SuspendLayout();
             this.pnlEditorControls.SuspendLayout();
             this.pnlOutputControls.SuspendLayout();
-            this.tlbVariables.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,9 +51,9 @@
             this.pnlMain.ColumnCount = 1;
             this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlMain.Controls.Add(this.tabEditor, 0, 0);
-            this.pnlMain.Controls.Add(this.rtfOutput, 0, 2);
             this.pnlMain.Controls.Add(this.pnlEditorControls, 0, 1);
             this.pnlMain.Controls.Add(this.pnlOutputControls, 0, 3);
+            this.pnlMain.Controls.Add(this.outputBrowser, 0, 2);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
@@ -92,15 +85,6 @@
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // rtfOutput
-            // 
-            this.rtfOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtfOutput.Location = new System.Drawing.Point(3, 303);
-            this.rtfOutput.Name = "rtfOutput";
-            this.rtfOutput.Size = new System.Drawing.Size(796, 258);
-            this.rtfOutput.TabIndex = 1;
-            this.rtfOutput.Text = "";
-            // 
             // pnlEditorControls
             // 
             this.pnlEditorControls.Controls.Add(this.btnRun);
@@ -123,7 +107,7 @@
             // 
             // pnlOutputControls
             // 
-            this.pnlOutputControls.Controls.Add(this.tlbVariables);
+            this.pnlOutputControls.Controls.Add(this.IndependentVars);
             this.pnlOutputControls.Controls.Add(this.updTickCount);
             this.pnlOutputControls.Controls.Add(this.btnTick);
             this.pnlOutputControls.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -132,66 +116,15 @@
             this.pnlOutputControls.Size = new System.Drawing.Size(796, 32);
             this.pnlOutputControls.TabIndex = 3;
             // 
-            // tlbVariables
+            // IndependentVars
             // 
-            this.tlbVariables.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.tlbVariables.Dock = System.Windows.Forms.DockStyle.None;
-            this.tlbVariables.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5});
-            this.tlbVariables.Location = new System.Drawing.Point(4, 6);
-            this.tlbVariables.Name = "tlbVariables";
-            this.tlbVariables.Size = new System.Drawing.Size(127, 25);
-            this.tlbVariables.TabIndex = 2;
-            this.tlbVariables.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.IndependentVars.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.IndependentVars.Location = new System.Drawing.Point(4, 6);
+            this.IndependentVars.Multiline = false;
+            this.IndependentVars.Name = "IndependentVars";
+            this.IndependentVars.Size = new System.Drawing.Size(626, 22);
+            this.IndependentVars.TabIndex = 2;
+            this.IndependentVars.Text = "";
             // 
             // updTickCount
             // 
@@ -211,6 +144,15 @@
             this.btnTick.Text = "Tick";
             this.btnTick.UseVisualStyleBackColor = true;
             // 
+            // outputBrowser
+            // 
+            this.outputBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBrowser.Location = new System.Drawing.Point(3, 303);
+            this.outputBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.outputBrowser.Name = "outputBrowser";
+            this.outputBrowser.Size = new System.Drawing.Size(796, 258);
+            this.outputBrowser.TabIndex = 4;
+            // 
             // DisplayHorizontal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,9 +164,6 @@
             this.tabEditor.ResumeLayout(false);
             this.pnlEditorControls.ResumeLayout(false);
             this.pnlOutputControls.ResumeLayout(false);
-            this.pnlOutputControls.PerformLayout();
-            this.tlbVariables.ResumeLayout(false);
-            this.tlbVariables.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
             this.ResumeLayout(false);
 
@@ -235,17 +174,12 @@
         private System.Windows.Forms.TableLayoutPanel pnlMain;
         public System.Windows.Forms.TabControl tabEditor;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.RichTextBox rtfOutput;
         private System.Windows.Forms.Panel pnlEditorControls;
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Panel pnlOutputControls;
-        private System.Windows.Forms.ToolStrip tlbVariables;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.NumericUpDown updTickCount;
         private System.Windows.Forms.Button btnTick;
+        private System.Windows.Forms.RichTextBox IndependentVars;
+        private System.Windows.Forms.WebBrowser outputBrowser;
     }
 }

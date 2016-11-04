@@ -4,14 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace VisiBoole
 {
     /// <summary>
     /// A User-Created VisiBoole Function
     /// </summary>
-    public class SubDesign
+    public class SubDesign : RichTextBox
     {
+        public int TabIndex;
+
         /// <summary>
         /// The name of this VFunction - will be displayed to user
         /// </summary>

@@ -64,6 +64,16 @@ namespace VisiBoole
             return HtmlText;
         }
 
+        public void DisplayHtml(string html, WebBrowser browser)
+        {
+            browser.Navigate("about:blank");
+            if (browser.Document != null)
+            {
+                browser.Document.Write(string.Empty);
+            }
+            browser.DocumentText = html;
+        }
+
         /*public RichTextBox GetRTB()
         {
             return new RichTextBox();
