@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections;
 
 namespace VisiBoole
 {
@@ -22,6 +23,8 @@ namespace VisiBoole
         public UserControl CurrentDisplay { get; set; }
 
         public Dictionary<string, SubDesign> subDesigns { get; set; }
+        public string[] subDesignKeys { get; set; }
+        
 
         DisplayBase display = new DisplayBase();
 
@@ -60,6 +63,7 @@ namespace VisiBoole
         {
             DirectoryInfo di = new DirectoryInfo(path);
             FileInfo[] files;
+            SubDesign s = new SubDesign("no");
             try
             {
                 files = di.GetFiles("*.vbi");
@@ -74,6 +78,7 @@ namespace VisiBoole
                         {
                             file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
                         }
+                        s = value;
                     }
                     //TestOutputParser(file);
                 }
@@ -91,11 +96,13 @@ namespace VisiBoole
                     {
                         file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
                     }
+                    s = value;
                 }
             }
-
+            RunParser(s);
             
             usersubDesignsBindingSource = new BindingSource(subDesigns, null);
+            
             lboSource.DisplayMember = "Key";
             lboSource.ValueMember = "Value";
             lboSource.DataSource = usersubDesignsBindingSource;
@@ -213,6 +220,25 @@ namespace VisiBoole
             }
 
             MessageBox.Show(OutputText);
+        }
+
+        private void RunParser(SubDesign s)
+        {
+            /*ArrayList lines = new ArrayList();
+            using (StreamReader reader = s.File.OpenText())
+            {
+                string text = "";
+                while ((text = reader.ReadLine()) != null)
+                {
+                    if(!text.Equals(""))
+                    {
+                        lines.Add(text);
+                    }
+                }
+            }
+            string[] code = (string[])lines.ToArray();
+            string fileName = s.File.Name;*/
+            var parser = new Parser(s);
         }
     }
 }

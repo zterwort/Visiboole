@@ -70,7 +70,9 @@
     <Compile Include="DisplayVertical.Designer.cs">
       <DependentUpon>DisplayVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="OutputParser.cs" />
+    <Compile Include="Parser.cs" />
     <Compile Include="SubDesign.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

@@ -46,3 +46,11 @@ C:\Users\Terwort\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract
 C:\Users\Terwort\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csproj.GenerateResource.Cache
 C:\Users\Terwort\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.exe
 C:\Users\Terwort\Desktop\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.pdb
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe.config
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.pdb
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csprojResolveAssemblyReference.cache
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.Properties.Resources.resources
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csproj.GenerateResource.Cache
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.exe
+C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.pdb
