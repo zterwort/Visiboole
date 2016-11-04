@@ -164,17 +164,17 @@ namespace VisiBoole
                 if(CurrentDisplay is DisplaySingleEditor)
                 {
                     TabControl tabs = ((VisiBoole.DisplaySingleEditor)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
+                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
                 else if (CurrentDisplay is DisplayVertical)
                 {
                     TabControl tabs = ((VisiBoole.DisplayVertical)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
+                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
                 else if(CurrentDisplay is DisplayHorizontal)
                 {
                     TabControl tabs = ((VisiBoole.DisplayHorizontal)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]].File);
+                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
             }
         }

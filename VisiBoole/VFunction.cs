@@ -17,6 +17,8 @@ namespace VisiBoole
         /// </summary>
         public String Name { get; set; }
 
+        public string FileText { get; set; }
+
         public FileInfo File { get; set; }
         /// <summary>
         /// The full path of this VFunction

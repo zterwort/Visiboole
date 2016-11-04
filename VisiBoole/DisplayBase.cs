@@ -15,13 +15,13 @@ namespace VisiBoole
     /// </summary>
     public class DisplayBase : VisiBooleAbstract.cDisplayBase
     {
-        public void GenerateNewTab(TabControl tabs, FileInfo file)
+        public void GenerateNewTab(TabControl tabs, VFunction info)
         {
 
-            TabPage newTabPage = new TabPage(file.Name);
+            TabPage newTabPage = new TabPage(info.File.Name);
 
             //Check if tabs all ready has the file in it, if so, return.
-            if (tabs.Controls["{ TabPage: {"+ file.Name + "} }"] != null)
+            if (tabs.Controls["{ TabPage: {"+ info.File.Name + "} }"] != null)
             {
                 return;
             }
@@ -33,7 +33,7 @@ namespace VisiBoole
             textBox.Anchor = AnchorStyles.Bottom & AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Top;
             textBox.Dock = DockStyle.Fill;
 
-            using (StreamReader reader = file.OpenText())
+            using (StreamReader reader = info.File.OpenText())
             {
                 string text = "";
                 while ((text = reader.ReadLine()) != null)
@@ -42,6 +42,8 @@ namespace VisiBoole
                     textBox.Text += Environment.NewLine;
                 }
             }
+
+            info.FileText = textBox.Text;
 
             newTabPage.Controls.Add(textBox);
             tabs.Controls.Add(newTabPage);
