@@ -119,6 +119,7 @@
             this.btnRun.TabIndex = 0;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // pnlOutputControls
             // 
@@ -210,12 +211,12 @@
             this.btnTick.Text = "Tick";
             this.btnTick.UseVisualStyleBackColor = true;
             // 
-            // ctlDisplayHorizontal
+            // DisplayHorizontal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnlMain);
-            this.Name = "ctlDisplayHorizontal";
+            this.Name = "DisplayHorizontal";
             this.Size = new System.Drawing.Size(802, 602);
             this.pnlMain.ResumeLayout(false);
             this.tabEditor.ResumeLayout(false);

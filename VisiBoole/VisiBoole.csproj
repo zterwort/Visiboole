@@ -71,6 +71,7 @@
       <DependentUpon>DisplayVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="HtmlBuilder.cs" />
     <Compile Include="OutputParser.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="SubDesign.cs" />

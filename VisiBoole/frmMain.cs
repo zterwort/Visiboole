@@ -64,6 +64,7 @@ namespace VisiBoole
             DirectoryInfo di = new DirectoryInfo(path);
             FileInfo[] files;
             SubDesign s = new SubDesign("no");
+            FileInfo f = new FileInfo("f");
             try
             {
                 files = di.GetFiles("*.vbi");
@@ -80,7 +81,7 @@ namespace VisiBoole
                         }
                         s = value;
                     }
-                    //TestOutputParser(file);
+                    f = file;
                 }
             }
             catch
@@ -98,8 +99,11 @@ namespace VisiBoole
                     }
                     s = value;
                 }
+
+                f = file;
             }
-            RunParser(s);
+            CodeParser(s);
+            OutputParser(f);
             
             usersubDesignsBindingSource = new BindingSource(subDesigns, null);
             
@@ -207,7 +211,7 @@ namespace VisiBoole
             }
         }
 
-        private void TestOutputParser(FileInfo f)
+        private void OutputParser(FileInfo f)
         {
             var Parser = new OutputParser(f);
 
@@ -218,11 +222,19 @@ namespace VisiBoole
             {
                 OutputText += OutputList[i] + Environment.NewLine;
             }
-
+            var html = new HtmlBuilder(OutputList, f.Name);
+            if(!Globals.html.ContainsKey(f.Name))
+            {
+                Globals.html.Add(f.Name, html.GetHTML());
+            }
+            else
+            {
+                Globals.html[f.Name] = html.GetHTML();
+            }
             MessageBox.Show(OutputText);
         }
 
-        private void RunParser(SubDesign s)
+        private void CodeParser(SubDesign s)
         { 
             var parser = new Parser(s);
         }

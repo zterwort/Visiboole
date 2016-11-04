@@ -14,5 +14,7 @@ namespace VisiBoole
         ///     of the variable which will either be a 1 or 0 (true or false).
         /// </summary>
         public static Dictionary<string, Dictionary<string, int>> variables = new Dictionary<string, Dictionary<string, int>>();
+
+        public static Dictionary<string, string> html = new Dictionary<string, string>();
     }
 }
