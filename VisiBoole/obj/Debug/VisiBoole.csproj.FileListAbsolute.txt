@@ -32,12 +32,8 @@ C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe.c
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.exe
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.pdb
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
-C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.ctlDisplayHorizontal.resources
-C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.ctlDisplaySingleOutput.resources
-C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.ctlDisplayVertical.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.frmMain.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
-C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.ctlDisplaySingleEditor.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe
 C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\bin\Debug\VisiBoole.pdb
@@ -73,6 +69,7 @@ C:\Users\Zachary\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.frmMain.resourc
 C:\Users\Zachary\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
 C:\Users\Zachary\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplaySingleEditor.resources
 C:\Users\Zachary\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+<<<<<<< HEAD
 C:\Users\Terwort\Desktop\Visiboole\VisiBoole\bin\Debug\VisiBoole.exe.config
 C:\Users\Terwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.exe
 C:\Users\Terwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.pdb
@@ -88,3 +85,9 @@ C:\Users\Terwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.frmMain.resourc
 C:\Users\Terwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.Properties.Resources.resources
 C:\Users\Terwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplaySingleEditor.resources
 C:\Users\Terwort\Desktop\Visiboole\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+=======
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplayHorizontal.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplaySingleOutput.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplayVertical.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisiBoole\obj\Debug\VisiBoole.DisplaySingleEditor.resources
+>>>>>>> remotes/origin/Cleary
