@@ -15,7 +15,7 @@ namespace VisiBoole
     /// </summary>
     public class DisplayBase : VisiBooleAbstract.cDisplayBase
     {
-        public void GenerateNewTab(TabControl tabs, VFunction info)
+        public void GenerateNewTab(TabControl tabs, SubDesign info)
         {
 
             TabPage newTabPage = new TabPage(info.File.Name);

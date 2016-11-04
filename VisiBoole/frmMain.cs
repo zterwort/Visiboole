@@ -21,14 +21,14 @@ namespace VisiBoole
         /// </summary>
         public UserControl CurrentDisplay { get; set; }
 
-        public Dictionary<string, SubDesign> subRoutines { get; set; }
+        public Dictionary<string, SubDesign> subDesigns { get; set; }
 
         DisplayBase display = new DisplayBase();
 
         /// <summary>
-        /// Binding Source for the UserSubRoutines ListBox
+        /// Binding Source for the UsersubDesigns ListBox
         /// </summary>
-        private BindingSource userSubRoutinesBindingSource;
+        private BindingSource usersubDesignsBindingSource;
 
         /// <summary>
         /// Constructs an instance of frmMain
@@ -37,23 +37,23 @@ namespace VisiBoole
         {
             InitializeComponent();
 
-            InitializeUserSubRoutines();
+            InitializeUsersubDesigns();
 
             // Load the default UserControl to display on application Startup
             LoadDisplay(new DisplaySingleEditor());
         }
 
-        private void InitializeUserSubRoutines()
+        private void InitializeUsersubDesigns()
         {
             // Initialize our dictionary of VisiBoole Functions
-            subRoutines = new Dictionary<string, SubDesign>();
+            subDesigns = new Dictionary<string, SubDesign>();
 
-            if (!Directory.Exists(Path.Combine(Application.StartupPath, "UserSubRoutines")))
+            if (!Directory.Exists(Path.Combine(Application.StartupPath, "UsersubDesigns")))
             {
-                Directory.CreateDirectory(Path.Combine(Application.StartupPath, "UserSubRoutines"));
+                Directory.CreateDirectory(Path.Combine(Application.StartupPath, "UsersubDesigns"));
             }
 
-            GetFiles(Path.Combine(Application.StartupPath, "UserSubRoutines"));
+            GetFiles(Path.Combine(Application.StartupPath, "UsersubDesigns"));
         }
 
         private void GetFiles(string path)
@@ -63,22 +63,22 @@ namespace VisiBoole
 
             foreach (FileInfo file in files)
             {
-                if (!subRoutines.ContainsKey(file.Name))
+                if (!subDesigns.ContainsKey(file.Name))
                 {
                     SubDesign value = new SubDesign(file.Name);
                     value.File = file;
-                    subRoutines.Add(value.Name, value);
-                    if(path != Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines")))
+                    subDesigns.Add(value.Name, value);
+                    if(path != Path.Combine(Path.Combine(Application.StartupPath, "UsersubDesigns")))
                     {
-                        file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubRoutines"), file.Name));
+                        file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UsersubDesigns"), file.Name));
                     }
                 }
                 //TestOutputParser(file);
             }
-            userSubRoutinesBindingSource = new BindingSource(subRoutines, null);
+            usersubDesignsBindingSource = new BindingSource(subDesigns, null);
             lboSource.DisplayMember = "Key";
             lboSource.ValueMember = "Value";
-            lboSource.DataSource = userSubRoutinesBindingSource;
+            lboSource.DataSource = usersubDesignsBindingSource;
         }
 
         /// <summary>
@@ -138,13 +138,13 @@ namespace VisiBoole
                 // Check that the selected file is a valid VisiBoole file before attempting to open
                 if (string.IsNullOrEmpty(fileName) || Path.GetExtension(fileName) != ".vbi")
                 {
-                    MessageBox.Show(Path.Combine(Application.StartupPath, "UserSubRoutines"));
+                    MessageBox.Show(Path.Combine(Application.StartupPath, "UsersubDesigns"));
                     MessageBox.Show("Invalid filename. Select a valid VisiBoole file (*.vbi) extension.", "Invalid Filename", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     return;
                 }
                 
-                //Copy the file to our UserSubRoutines project directory
-                File.Copy(fileName, Path.Combine(Application.StartupPath, "UserSubRoutines"));
+                //Copy the file to our UsersubDesigns project directory
+                File.Copy(fileName, Path.Combine(Application.StartupPath, "UsersubDesigns"));
             }
         }
 
@@ -165,17 +165,17 @@ namespace VisiBoole
                 if(CurrentDisplay is DisplaySingleEditor)
                 {
                     TabControl tabs = ((VisiBoole.DisplaySingleEditor)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
+                    display.GenerateNewTab(tabs, subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
                 else if (CurrentDisplay is DisplayVertical)
                 {
                     TabControl tabs = ((VisiBoole.DisplayVertical)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
+                    display.GenerateNewTab(tabs, subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
                 else if(CurrentDisplay is DisplayHorizontal)
                 {
                     TabControl tabs = ((VisiBoole.DisplayHorizontal)CurrentDisplay).tabEditor;
-                    display.GenerateNewTab(tabs, subRoutines[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
+                    display.GenerateNewTab(tabs, subDesigns[((lboSource.SelectedItem.ToString().Substring(1)).Split(','))[0]]);
                 }
             }
         }
