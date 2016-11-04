@@ -223,21 +223,7 @@ namespace VisiBoole
         }
 
         private void RunParser(SubDesign s)
-        {
-            /*ArrayList lines = new ArrayList();
-            using (StreamReader reader = s.File.OpenText())
-            {
-                string text = "";
-                while ((text = reader.ReadLine()) != null)
-                {
-                    if(!text.Equals(""))
-                    {
-                        lines.Add(text);
-                    }
-                }
-            }
-            string[] code = (string[])lines.ToArray();
-            string fileName = s.File.Name;*/
+        { 
             var parser = new Parser(s);
         }
     }
