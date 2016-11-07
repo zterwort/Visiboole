@@ -78,6 +78,8 @@ namespace VisiBoole
                     WebBrowser browser = new WebBrowser();
                     Form newForm = new Form();
                     html.DisplayHtml(htmlOutput, browser);
+                    browser.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Top & AnchorStyles.Bottom;
+                    browser.Dock = DockStyle.Fill;
                     newForm.Controls.Add(browser);
                     newForm.ShowDialog();
                 }

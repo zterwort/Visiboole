@@ -61,8 +61,6 @@ namespace VisiBoole
         {
             DirectoryInfo di = new DirectoryInfo(path);
             FileInfo[] files;
-            SubDesign s = new SubDesign("no");
-            FileInfo f = new FileInfo("f");
             try
             {
                 files = di.GetFiles("*.vbi");
@@ -77,9 +75,7 @@ namespace VisiBoole
                         {
                             file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
                         }
-                        s = value;
                     }
-                    f = file;
                 }
             }
             catch
@@ -95,13 +91,8 @@ namespace VisiBoole
                     {
                         file.CopyTo(Path.Combine(Path.Combine(Application.StartupPath, "UserSubDesigns"), file.Name));
                     }
-                    s = value;
                 }
-
-                f = file;
             }
-            //CodeParser(s);
-            //OutputParser(f);
             
             usersubDesignsBindingSource = new BindingSource(Globals.subDesigns, null);
             

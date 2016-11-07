@@ -83,49 +83,52 @@ namespace VisiBoole
             string[] tokens = expression.Split(' ');
             foreach (string s in tokens)
             {
-                if (s[0].Equals('~'))
+                if (!s.Equals(string.Empty))
                 {
-                    if (Globals.variables[currentTab].ContainsKey(s.Substring(1)))
+                    if (s[0].Equals('~'))
                     {
-                        expFinal = Negate(Globals.variables[currentTab][s.Substring(1)]);
-                    }
-                }
-                else if (Globals.variables[currentTab].ContainsKey(s))
-                {
-                    if (expFinal == -1)
-                    {
-                        expFinal = Globals.variables[currentTab][s];
-                    }
-                    else
-                    {
-                        if (operation == null)
+                        if (Globals.variables[currentTab].ContainsKey(s.Substring(1)))
                         {
-                            operation = "*";
+                            expFinal = Negate(Globals.variables[currentTab][s.Substring(1)]);
                         }
-                        if (operation.Equals("*"))
+                    }
+                    else if (Globals.variables[currentTab].ContainsKey(s))
+                    {
+                        if (expFinal == -1)
                         {
-                            expFinal = expFinal * Globals.variables[currentTab][s];
+                            expFinal = Globals.variables[currentTab][s];
                         }
-                        else if (operation.Equals("+"))
+                        else
                         {
-                            expFinal = expFinal + Globals.variables[currentTab][s];
-                            if (expFinal == 2)
+                            if (operation == null)
                             {
-                                expFinal = 1;
+                                operation = "*";
+                            }
+                            if (operation.Equals("*"))
+                            {
+                                expFinal = expFinal * Globals.variables[currentTab][s];
+                            }
+                            else if (operation.Equals("+"))
+                            {
+                                expFinal = expFinal + Globals.variables[currentTab][s];
+                                if (expFinal == 2)
+                                {
+                                    expFinal = 1;
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    if (s.Equals("+"))
-                    {
-                        operation = s;
-                    }
                     else
                     {
-                        //Error
-                        //Console.WriteLine("Error {Line " + lineNumber + " | " + s + " is undefined }");
+                        if (s.Equals("+"))
+                        {
+                            operation = s;
+                        }
+                        else
+                        {
+                            //Error
+                            //Console.WriteLine("Error {Line " + lineNumber + " | " + s + " is undefined }");
+                        }
                     }
                 }
             }

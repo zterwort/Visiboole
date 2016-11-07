@@ -1,9 +1,9 @@
 S2 S1 *S0;
 
 T3 = S2 S1 S0;
-T2 = ~S2 ~S1 S0;
-T1 = S2 + ~S1 + S0;
-T0 = S2 + S1 + ~S0;
+T2 = S2 S1 S0;
+T1 = S2 + S1 + S0;
+T0 = S2 + S1 + S0;
 
 U1 = T3 + T2 + T1 + T0;
 U0 = T3 T2 T1 T0;
