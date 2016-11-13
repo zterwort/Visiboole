@@ -65,9 +65,11 @@ namespace VisiBoole.Controllers
 
             SubDesign sd = CreateNewSubDesign(e.FileName);
 
-            CurrentDisplay.CreateNewTab(sd);
-
-            CurrentDisplay.SelectTabPage(sd.TabPageIndex);
+            foreach (KeyValuePair<Globals.DisplayType, DisplayBase> kvp in AllDisplays)
+            {
+                kvp.Value.CreateNewTab(sd);
+                kvp.Value.SelectTabPage(sd.TabPageIndex);
+            }
 
             e.CurrentDisplay = CurrentDisplay;
         }

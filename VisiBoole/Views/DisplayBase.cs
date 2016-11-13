@@ -19,8 +19,8 @@ namespace VisiBoole
         /// <summary>
         /// The TabControl shared by all of our MainWindow Displays
         /// </summary>
-        public TabControl MyTabControl = new TabControl();
-
+        public TabControl tabControl { get; set; }
+        
         /// <summary>
         /// Creates a new TabPage with the given SubDesign and appends it to our TabControl
         /// </summary>
@@ -29,13 +29,13 @@ namespace VisiBoole
         {
             if (sub == null) return;
 
-            TabPage Page = new TabPage(sub.FileSourceName);
+            TabPage newTabPage = new TabPage(sub.FileSourceName);
 
-            Page.Controls.Add(sub);
+            newTabPage.Controls.Add(sub);
             sub.Dock = DockStyle.Fill;
 
-            MyTabControl.TabPages.Add(Page);
-            sub.TabPageIndex = MyTabControl.TabPages.IndexOf(Page);
+            tabControl.TabPages.Add(newTabPage);
+            sub.TabPageIndex = tabControl.TabPages.IndexOf(newTabPage);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace VisiBoole
         {
             if (tabPageIndex < 0) throw new Exception("TabPage index must be a positive integer.");
 
-            MyTabControl.SelectTab(tabPageIndex);
+            tabControl.SelectTab(tabPageIndex);
         }
 
         /// <summary>

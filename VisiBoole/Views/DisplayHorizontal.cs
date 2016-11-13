@@ -23,8 +23,7 @@ namespace VisiBoole
         {
             InitializeComponent();
 
-            pnlMain.Controls.Add(MyTabControl, 0, 0);
-            MyTabControl.Dock = DockStyle.Fill;
+            this.tabControl = this.EditorTabControl;
         }
 
     }
