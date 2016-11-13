@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VisiBoole.Controllers;
 
 namespace VisiBoole
 {
@@ -16,7 +17,13 @@ namespace VisiBoole
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+
+            Globals.SubDesigns = new Dictionary<string, SubDesign>();
+
+            MainWindow mw = new MainWindow();
+            MainWindowController mwc = new MainWindowController(mw);
+
+            Application.Run(mw);
         }
     }
 }

@@ -12,43 +12,49 @@ using System.Collections;
 namespace VisiBoole
 {
     /// <summary>
-    /// Dummy class for cDisplayBase Inheritance - necessary due to a limitation of the .Net framework
+    /// Base class for our MainWindow displays - Single, Horizontal, and Vertical
     /// </summary>
     public class DisplayBase : VisiBooleAbstract.cDisplayBase
     {
-        public void GenerateNewTab(TabControl tabs, SubDesign info)
+        /// <summary>
+        /// The TabControl shared by all of our MainWindow Displays
+        /// </summary>
+        private TabControl MyTabControl = new TabControl();
+
+        /// <summary>
+        /// Creates a new TabPage with the given SubDesign and appends it to our TabControl
+        /// </summary>
+        /// <param name="sub">The SubDesign to be consumed by the new TabPage</param>
+        public void CreateNewTab(SubDesign sub)
         {
+            if (sub == null) return;
 
-            TabPage newTabPage = new TabPage(info.File.Name);
+            TabPage Page = new TabPage(sub.FileSourceName);
 
-            //Check if tabs all ready has the file in it, if so, return.
-            if (tabs.Controls["{ TabPage: {"+ info.File.Name + "} }"] != null)
-            {
-                //Give focus
-                return;
-            }
+            Page.Controls.Add(sub);
+            sub.Dock = DockStyle.Fill;
 
-            info.Multiline = true;
-            info.ScrollBars = RichTextBoxScrollBars.Both;
-            info.Anchor = AnchorStyles.Bottom & AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Top;
-            info.Dock = DockStyle.Fill;
-
-            using (StreamReader reader = info.File.OpenText())
-            {
-                string text = "";
-                while ((text = reader.ReadLine()) != null)
-                {
-                    info.Text += text;
-                    info.Text += Environment.NewLine;
-                }
-            }
-
-            info.FileText = info.Text;
-
-            newTabPage.Controls.Add(info);
-            tabs.Controls.Add(newTabPage);
+            MyTabControl.TabPages.Add(Page);
+            sub.TabPageIndex = MyTabControl.TabPages.IndexOf(Page);
         }
 
+        /// <summary>
+        /// Set focus to the TabPage at the given index
+        /// </summary>
+        /// <param name="tabPageIndex">The index of the TabPage in our TabControl to select</param>
+        public void SelectTabPage(int tabPageIndex)
+        {
+            if (tabPageIndex < 0) throw new Exception("TabPage index must be a positive integer.");
+
+            MyTabControl.SelectTab(tabPageIndex);
+        }
+
+        /// <summary>
+        /// Appends the independent variable to the given RichTextBox
+        /// </summary>
+        /// <param name="var">The independent variable to append</param>
+        /// <param name="enable">Whether the given variable is currently True or False</param>
+        /// <param name="tbox">The RichTextBox to append the independent variable to</param>
         public void AppendIndependentVariable(string var, bool enable, RichTextBox tbox)
         {
             var link = new LinkLabel();
@@ -61,12 +67,14 @@ namespace VisiBoole
             tbox.Controls.Add(link);
         }
 
-
-
+        /// <summary>
+        /// Parse the contents of the given SubDesign and create output from it
+        /// </summary>
+        /// <param name="info">The SubDesign to parse</param>
         public void Run(SubDesign info)
         {
-            Parser parser = new Parser(info);
-            OutputParser output = new OutputParser(info.File);
+            InputParser parser = new InputParser(info);
+            OutputParser output = new OutputParser(info.FileSource);
             List<string> outputText = output.GenerateOutput();
             HtmlBuilder html = new HtmlBuilder(outputText, info.Name);
             string htmlOutput = html.GetHTML();
@@ -78,8 +86,6 @@ namespace VisiBoole
                     WebBrowser browser = new WebBrowser();
                     Form newForm = new Form();
                     html.DisplayHtml(htmlOutput, browser);
-                    browser.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Top & AnchorStyles.Bottom;
-                    browser.Dock = DockStyle.Fill;
                     newForm.Controls.Add(browser);
                     newForm.ShowDialog();
                 }

@@ -49,57 +49,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DisplayBase.cs">
+    <Compile Include="Controllers\MainWindowController.cs" />
+    <Compile Include="Events\ProcessNewFileEventArgs.cs" />
+    <Compile Include="Events\ProcessNewFileHandler.cs" />
+    <Compile Include="Views\DisplayBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplayHorizontal.cs">
+    <Compile Include="Views\DisplayHorizontal.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplayHorizontal.Designer.cs">
+    <Compile Include="Views\DisplayHorizontal.Designer.cs">
       <DependentUpon>DisplayHorizontal.cs</DependentUpon>
     </Compile>
-    <Compile Include="DisplaySingleOutput.cs">
+    <Compile Include="Views\DisplaySingleOutput.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplaySingleOutput.Designer.cs">
+    <Compile Include="Views\DisplaySingleOutput.Designer.cs">
       <DependentUpon>DisplaySingleOutput.cs</DependentUpon>
     </Compile>
-    <Compile Include="DisplayVertical.cs">
+    <Compile Include="Views\DisplayVertical.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplayVertical.Designer.cs">
+    <Compile Include="Views\DisplayVertical.Designer.cs">
       <DependentUpon>DisplayVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
-    <Compile Include="HtmlBuilder.cs" />
-    <Compile Include="OutputParser.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="SubDesign.cs" />
-    <Compile Include="frmMain.cs">
+    <Compile Include="Parsers\HtmlBuilder.cs" />
+    <Compile Include="Parsers\OutputParser.cs" />
+    <Compile Include="Parsers\InputParser.cs" />
+    <Compile Include="Models\SubDesign.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Views\IMainWindow.cs" />
+    <Compile Include="Views\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="Views\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DisplaySingleEditor.cs">
+    <Compile Include="Views\DisplaySingleEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DisplaySingleEditor.Designer.cs">
+    <Compile Include="Views\DisplaySingleEditor.Designer.cs">
       <DependentUpon>DisplaySingleEditor.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DisplayHorizontal.resx">
+    <EmbeddedResource Include="Views\DisplayHorizontal.resx">
       <DependentUpon>DisplayHorizontal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DisplaySingleOutput.resx">
+    <EmbeddedResource Include="Views\DisplaySingleOutput.resx">
       <DependentUpon>DisplaySingleOutput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DisplayVertical.resx">
+    <EmbeddedResource Include="Views\DisplayVertical.resx">
       <DependentUpon>DisplayVertical.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="Views\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -111,7 +117,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="DisplaySingleEditor.resx">
+    <EmbeddedResource Include="Views\DisplaySingleEditor.resx">
       <DependentUpon>DisplaySingleEditor.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -139,9 +145,7 @@
   <ItemGroup>
     <Content Include="LetterV.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserSource\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

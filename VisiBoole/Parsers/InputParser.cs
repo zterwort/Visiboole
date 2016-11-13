@@ -7,20 +7,20 @@ using System.IO;
 
 namespace VisiBoole
 {
-    class Parser
+    class InputParser
     {
         public string currentTab;
-        public Parser(SubDesign sub)//string[] codeText, string fileName)
+        public InputParser(SubDesign sub)//string[] codeText, string fileName)
         {
             //SubDesign s = new SubDesign("h");
             //currentTab = fileName;
-            currentTab = sub.File.Name;
+            currentTab = sub.FileSourceName;
             if(!Globals.variables.ContainsKey(currentTab))
             {
                 Globals.variables.Add(currentTab, new Dictionary<string, int>());
             }
 
-            using (StreamReader reader = sub.File.OpenText())
+            using (StreamReader reader = sub.FileSource.OpenText())
             {
                 string text = "";
                 int lineNumber = 1;

@@ -19,5 +19,10 @@ namespace VisiBoole
         public static Dictionary<string, string> html = new Dictionary<string, string>();
         public static Dictionary<string, SubDesign> subDesigns { get; set; }
         public static UserControl CurrentDisplay { get; set; }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        public static Dictionary<string, SubDesign> SubDesigns;
+
     }
 }
