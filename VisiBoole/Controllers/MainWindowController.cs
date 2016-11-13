@@ -48,7 +48,7 @@ namespace VisiBoole.Controllers
             this.View = View;
 
             // Initialize our MainWindow displays
-            DisplayBase Single = new DisplaySingleOutput();
+            DisplayBase Single = new DisplaySingleEditor();
             DisplayBase Horizontal = new DisplayHorizontal();
             DisplayBase Vertical = new DisplayVertical();
 
