@@ -22,6 +22,11 @@ namespace VisiBoole.Events
         public DisplayBase CurrentDisplay { get; set; }
 
         /// <summary>
+        /// The display that was loaded before the CurrentDisplay in the MainWindowController
+        /// </summary>
+        public DisplayBase PreviousDisplay { get; set; }
+
+        /// <summary>
         /// Constructs an instance of LoadDisplayEventArgs
         /// </summary>
         /// <param name="display">The display that has been loaded into the MainWindowController</param>

@@ -61,13 +61,15 @@ namespace VisiBoole.Controllers
         /// </summary>
         private void View_ProcessNewFile(object sender, ProcessNewFileEventArgs e)
         {
+            e.PreviousDisplay = CurrentDisplay;
+
             SubDesign sd = CreateNewSubDesign(e.FileName);
 
             CurrentDisplay.CreateNewTab(sd);
 
             CurrentDisplay.SelectTabPage(sd.TabPageIndex);
 
-            View.ShowDisplay(CurrentDisplay);
+            e.CurrentDisplay = CurrentDisplay;
         }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace VisiBoole.Controllers
         /// </summary>
         private void View_LoadDisplay(object sender, LoadDisplayEventArgs e)
         {
+            e.PreviousDisplay = CurrentDisplay;
             DisplayBase db = LoadDisplay(e.DisplayType);
             e.CurrentDisplay = this.CurrentDisplay;
         }

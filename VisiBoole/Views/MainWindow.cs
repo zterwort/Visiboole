@@ -40,12 +40,15 @@ namespace VisiBoole
         /// <summary>
         /// Loads the given display into our MainWindow for the user to view
         /// </summary>
-        /// <param name="display">The given display to show the user</param>
-        public void ShowDisplay(DisplayBase display)
+        /// <param name="pCurrentDisplay">The given display to show the user</param>
+        public void ShowDisplay(DisplayBase previousDisplay, DisplayBase pCurrentDisplay)
         {
-            if (display == null) DisplayErrorMessage(new ArgumentNullException("Unable to load given display - the given display is null."));
+            if (pCurrentDisplay == null) DisplayErrorMessage(new ArgumentNullException("Unable to load given display - the given display is null."));
 
-            this.MainLayoutPanel.Controls.Add(display, 1, 0);
+            if (this.MainLayoutPanel.Controls.Contains(previousDisplay)) this.MainLayoutPanel.Controls.Remove(previousDisplay);
+            if (this.MainLayoutPanel.Controls.Contains(OpenFileLinkLabel)) this.MainLayoutPanel.Controls.Remove(OpenFileLinkLabel);
+
+            this.MainLayoutPanel.Controls.Add(pCurrentDisplay, 1, 0);
         }
 
         #endregion
@@ -72,7 +75,7 @@ namespace VisiBoole
                 LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
                 OnLoadDisplay(args);
 
-                ShowDisplay(args.CurrentDisplay);
+                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
             }
             catch (Exception ex)
             {
@@ -87,10 +90,10 @@ namespace VisiBoole
         {
             try
             {
-                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
+                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.HORIZONTAL);
                 OnLoadDisplay(args);
 
-                ShowDisplay(args.CurrentDisplay);
+                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
             }
             catch (Exception ex)
             {
@@ -105,10 +108,10 @@ namespace VisiBoole
         {
             try
             {
-                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
+                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.VERTICAL);
                 OnLoadDisplay(args);
 
-                ShowDisplay(args.CurrentDisplay);
+                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
             }
             catch (Exception ex)
             {
@@ -128,7 +131,10 @@ namespace VisiBoole
 
                 string filename = openFileDialog1.FileName;
 
-                OnProcessNewFile(new ProcessNewFileEventArgs(filename));
+                ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(filename);
+                OnProcessNewFile(args);
+
+                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
             }
             catch (Exception ex)
             {

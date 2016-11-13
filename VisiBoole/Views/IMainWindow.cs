@@ -8,7 +8,7 @@ namespace VisiBoole
         event ProcessNewFileHandler ProcessNewFile;
         event LoadDisplayHandler LoadDisplay;
 
-        void ShowDisplay(DisplayBase display);
+        void ShowDisplay(DisplayBase previous, DisplayBase current);
 
         void DisplayErrorMessage(Exception ex);
     }
