@@ -54,7 +54,7 @@ namespace VisiBoole
                 string nextLine = string.Empty;
                 while ((nextLine = reader.ReadLine()) != null)
                 {
-                    text += nextLine;
+                    text += nextLine + Environment.NewLine;
                 }
             }
 

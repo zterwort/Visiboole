@@ -24,5 +24,15 @@ namespace VisiBoole
 
         public static Dictionary<string, SubDesign> SubDesigns;
 
+        /// <summary>
+        /// Constants corresponding to the three different display types hosted by the MainWindow
+        /// </summary>
+        public enum DisplayType
+        {
+            SINGLE,
+            HORIZONTAL,
+            VERTICAL
+        }
+
     }
 }

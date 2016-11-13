@@ -50,6 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\MainWindowController.cs" />
+    <Compile Include="Events\LoadDisplayEventArgs.cs" />
+    <Compile Include="Events\LoadDisplayHandler.cs" />
     <Compile Include="Events\ProcessNewFileEventArgs.cs" />
     <Compile Include="Events\ProcessNewFileHandler.cs" />
     <Compile Include="Views\DisplayBase.cs">

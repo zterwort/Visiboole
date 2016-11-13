@@ -53,18 +53,68 @@ namespace VisiBoole
         #region "Events handled by Controller"
 
         public event ProcessNewFileHandler ProcessNewFile;
+        public event LoadDisplayHandler LoadDisplay;
 
-        private void OnProcessNewFile(ProcessNewFileEventArgs e)
-        {
-            if (ProcessNewFile != null)
-            {
-                ProcessNewFile(this, e);
-            }
-        }
+        protected virtual void OnProcessNewFile(ProcessNewFileEventArgs e) { if (ProcessNewFile != null) ProcessNewFile(this, e); }
+        protected virtual void OnLoadDisplay(LoadDisplayEventArgs e) { if (LoadDisplay != null) LoadDisplay(this, e); }
 
         #endregion
 
         #region "Click Events"
+
+        /// <summary>
+        /// Loads the single display usercontrol into this MainWindow
+        /// </summary>
+        private void standardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
+                OnLoadDisplay(args);
+
+                ShowDisplay(args.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
+            }
+        }
+
+        /// <summary>
+        /// Loads the horizontal display usercontrol into this MainWindow
+        /// </summary>
+        private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
+                OnLoadDisplay(args);
+
+                ShowDisplay(args.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
+            }
+        }
+
+        /// <summary>
+        /// Loads the vertical display usercontrol into this MainWindow
+        /// </summary>
+        private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
+                OnLoadDisplay(args);
+
+                ShowDisplay(args.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
+            }
+        }
 
         /// <summary>
         /// Display OpenFileDialog and process the selected File
@@ -87,6 +137,7 @@ namespace VisiBoole
         }
 
         #endregion
+
     }
 }
 

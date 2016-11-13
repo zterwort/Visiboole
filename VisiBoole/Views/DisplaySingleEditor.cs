@@ -21,11 +21,9 @@ namespace VisiBoole
         public DisplaySingleEditor()
         {
             InitializeComponent();
-        }
 
-        private void btnRun_Click(object sender, EventArgs e)
-        {
-            this.Run(Globals.subDesigns[((tabEditor.SelectedTab.ToString().Substring(0)).Split('{'))[1].TrimEnd('}')]);
+            pnlMain.Controls.Add(MyTabControl, 0, 0);
+            MyTabControl.Dock = DockStyle.Fill;
         }
     }
 }

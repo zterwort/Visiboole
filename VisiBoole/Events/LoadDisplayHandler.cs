@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace VisiBoole.Events
 {
     /// <summary>
-    /// Delegate for the ProcessNewFile event
+    /// Delegate for LoadDisplay event
     /// </summary>
-    public delegate void ProcessNewFileHandler(Object sender, ProcessNewFileEventArgs e);
+    public delegate void LoadDisplayHandler(Object sender, LoadDisplayEventArgs e);
 }

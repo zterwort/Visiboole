@@ -6,6 +6,7 @@ namespace VisiBoole
     public interface IMainWindow
     {
         event ProcessNewFileHandler ProcessNewFile;
+        event LoadDisplayHandler LoadDisplay;
 
         void ShowDisplay(DisplayBase display);
 

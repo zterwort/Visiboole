@@ -19,7 +19,7 @@ namespace VisiBoole
         /// <summary>
         /// The TabControl shared by all of our MainWindow Displays
         /// </summary>
-        private TabControl MyTabControl = new TabControl();
+        public TabControl MyTabControl = new TabControl();
 
         /// <summary>
         /// Creates a new TabPage with the given SubDesign and appends it to our TabControl
