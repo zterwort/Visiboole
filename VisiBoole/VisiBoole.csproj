@@ -54,6 +54,8 @@
     <Compile Include="Events\LoadDisplayHandler.cs" />
     <Compile Include="Events\ProcessNewFileEventArgs.cs" />
     <Compile Include="Events\ProcessNewFileHandler.cs" />
+    <Compile Include="Events\SaveFileEventArgs.cs" />
+    <Compile Include="Events\SaveFileHandler.cs" />
     <Compile Include="Views\DisplayBase.cs">
       <SubType>UserControl</SubType>
     </Compile>

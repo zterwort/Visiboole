@@ -60,5 +60,16 @@ namespace VisiBoole
 
             this.Text = text;
         }
+
+        /// <summary>
+        /// Saves the contents of this Text property to the FileSource contents
+        /// </summary>
+        public void SaveTextToFile()
+        {
+            using (FileStream fs = this.FileSource.OpenWrite())
+            {
+                fs.Write(Encoding.ASCII.GetBytes(this.Text), 0, this.TextLength);
+            }
+        }
     }
 }

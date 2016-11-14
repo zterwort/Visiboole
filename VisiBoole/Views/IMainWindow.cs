@@ -7,6 +7,7 @@ namespace VisiBoole
     {
         event ProcessNewFileHandler ProcessNewFile;
         event LoadDisplayHandler LoadDisplay;
+        event SaveFileHandler SaveFile;
 
         void ShowDisplay(DisplayBase previous, DisplayBase current);
 

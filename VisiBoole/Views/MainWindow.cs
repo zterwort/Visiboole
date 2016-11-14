@@ -19,6 +19,11 @@ namespace VisiBoole
     public partial class MainWindow : Form, IMainWindow
     {
         /// <summary>
+        /// The display that is currently hosted by the MainWindow
+        /// </summary>
+        private DisplayBase currentDisplay;
+
+        /// <summary>
         /// Constructs an instance of MainWindow
         /// </summary>
         public MainWindow()
@@ -34,13 +39,15 @@ namespace VisiBoole
         /// <param name="path">The full path of the file to add</param>
         private void AddNavTreeNode(string path)
         {
-            string filename = path.Substring(path.LastIndexOf("\\"));
+            string filename = path.Substring(path.LastIndexOf("\\") + 1);
 
             TreeNode node = new TreeNode(filename);
             node.Name = filename;
 
             if (NavTree.Nodes.ContainsKey(filename)) DisplayErrorMessage(new Exception(string.Concat("Node ", filename, " already exists in 'My SubDesings'.")));
             NavTree.Nodes[0].Nodes.Add(node);
+
+            NavTree.ExpandAll();
         }
 
         /// <summary>
@@ -55,15 +62,16 @@ namespace VisiBoole
         /// <summary>
         /// Loads the given display into our MainWindow for the user to view
         /// </summary>
-        /// <param name="pCurrentDisplay">The given display to show the user</param>
-        public void ShowDisplay(DisplayBase previousDisplay, DisplayBase pCurrentDisplay)
+        /// <param name="curDisplay">The given display to show the user</param>
+        public void ShowDisplay(DisplayBase previousDisplay, DisplayBase curDisplay)
         {
-            if (pCurrentDisplay == null) DisplayErrorMessage(new ArgumentNullException("Unable to load given display - the given display is null."));
+            if (curDisplay == null) DisplayErrorMessage(new ArgumentNullException("Unable to load given display - the given display is null."));
 
             if (this.MainLayoutPanel.Controls.Contains(previousDisplay)) this.MainLayoutPanel.Controls.Remove(previousDisplay);
             if (this.MainLayoutPanel.Controls.Contains(OpenFileLinkLabel)) this.MainLayoutPanel.Controls.Remove(OpenFileLinkLabel);
 
-            this.MainLayoutPanel.Controls.Add(pCurrentDisplay, 1, 0);
+            this.MainLayoutPanel.Controls.Add(curDisplay, 1, 0);
+            this.currentDisplay = curDisplay;
         }
 
         #endregion
@@ -72,9 +80,11 @@ namespace VisiBoole
 
         public event ProcessNewFileHandler ProcessNewFile;
         public event LoadDisplayHandler LoadDisplay;
+        public event SaveFileHandler SaveFile;
 
         protected virtual void OnProcessNewFile(ProcessNewFileEventArgs e) { if (ProcessNewFile != null) ProcessNewFile(this, e); }
         protected virtual void OnLoadDisplay(LoadDisplayEventArgs e) { if (LoadDisplay != null) LoadDisplay(this, e); }
+        protected virtual void OnSaveFile(SaveFileEventArgs e) { if (SaveFile != null) SaveFile(this, e); }
 
         #endregion
 
@@ -182,6 +192,17 @@ namespace VisiBoole
             {
                 DisplayErrorMessage(ex);
             }
+        }
+
+        /// <summary>
+        /// Saves the contents of the currently selected tab
+        /// </summary>
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileEventArgs args = new SaveFileEventArgs(currentDisplay.tabControl.SelectedIndex);
+            OnSaveFile(args);
+
+            MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         #endregion
