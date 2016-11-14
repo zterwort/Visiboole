@@ -29,6 +29,21 @@ namespace VisiBoole
         #region "Utility Functions"
 
         /// <summary>
+        /// Adds the toplevel filename of the given path as a new node on our NavTree
+        /// </summary>
+        /// <param name="path">The full path of the file to add</param>
+        private void AddNavTreeNode(string path)
+        {
+            string filename = path.Substring(path.LastIndexOf("\\"));
+
+            TreeNode node = new TreeNode(filename);
+            node.Name = filename;
+
+            if (NavTree.Nodes.ContainsKey(filename)) DisplayErrorMessage(new Exception(string.Concat("Node ", filename, " already exists in 'My SubDesings'.")));
+            NavTree.Nodes[0].Nodes.Add(node);
+        }
+
+        /// <summary>
         /// Displays any errors that are caught to the user
         /// </summary>
         /// <param name="ex">The Exception to display to the user</param>
@@ -134,11 +149,38 @@ namespace VisiBoole
                 ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(filename);
                 OnProcessNewFile(args);
 
+                AddNavTreeNode(filename);
+
                 ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DisplayErrorMessage(ex);
+            }
+        }
+
+        /// <summary>
+        /// Display OpenFileDialog and process the selected File
+        /// </summary>
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var response = openFileDialog1.ShowDialog();
+                if (response != DialogResult.OK) return;
+
+                string filename = openFileDialog1.FileName;
+
+                ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(filename);
+                OnProcessNewFile(args);
+
+                AddNavTreeNode(filename);
+
+                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
             }
         }
 

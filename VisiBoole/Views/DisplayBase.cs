@@ -30,10 +30,12 @@ namespace VisiBoole
             if (sub == null) return;
 
             TabPage newTabPage = new TabPage(sub.FileSourceName);
+            newTabPage.Name = sub.FileSourceName;
 
             newTabPage.Controls.Add(sub);
             sub.Dock = DockStyle.Fill;
 
+            if (tabControl.TabPages.ContainsKey(sub.FileSourceName)) throw new Exception("A file with that name already exists.");
             tabControl.TabPages.Add(newTabPage);
             sub.TabPageIndex = tabControl.TabPages.IndexOf(newTabPage);
         }

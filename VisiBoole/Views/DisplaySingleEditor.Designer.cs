@@ -66,11 +66,10 @@
             // 
             // btnRun
             // 
-            this.btnRun.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnRun.Location = new System.Drawing.Point(2622, 15);
+            this.btnRun.Location = new System.Drawing.Point(2636, 0);
             this.btnRun.Margin = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(275, 80);
+            this.btnRun.Size = new System.Drawing.Size(275, 105);
             this.btnRun.TabIndex = 0;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -79,7 +78,7 @@
             // 
             this.EditorTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EditorTabControl.Location = new System.Drawing.Point(4, 4);
-            this.EditorTabControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.EditorTabControl.Margin = new System.Windows.Forms.Padding(4);
             this.EditorTabControl.Name = "EditorTabControl";
             this.EditorTabControl.SelectedIndex = 0;
             this.EditorTabControl.Size = new System.Drawing.Size(2925, 1944);

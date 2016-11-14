@@ -29,12 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("My SubDesigns");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("My SubDesigns");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +76,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(16, 5, 0, 5);
-            this.menuStrip1.Size = new System.Drawing.Size(2891, 58);
+            this.menuStrip1.Size = new System.Drawing.Size(2891, 55);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "MainMenu";
             // 
@@ -86,7 +85,6 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.openToolStripMenuItem,
-            this.importToolStripMenuItem,
             this.toolStripSeparator,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
@@ -96,7 +94,7 @@
             this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(75, 48);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(75, 45);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // newToolStripMenuItem
@@ -116,12 +114,7 @@
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(327, 46);
             this.openToolStripMenuItem.Text = "&Open";
-            // 
-            // importToolStripMenuItem
-            // 
-            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
-            this.importToolStripMenuItem.Size = new System.Drawing.Size(327, 46);
-            this.importToolStripMenuItem.Text = "Import";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // toolStripSeparator
             // 
@@ -188,7 +181,7 @@
             this.toolStripSeparator4,
             this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(80, 48);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(80, 45);
             this.editToolStripMenuItem.Text = "&Edit";
             // 
             // undoToolStripMenuItem
@@ -257,7 +250,7 @@
             this.toolStripSeparator5,
             this.colorBlindModeToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(94, 48);
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(94, 45);
             this.viewToolStripMenuItem.Text = "View";
             // 
             // standardToolStripMenuItem
@@ -308,11 +301,11 @@
             this.MainLayoutPanel.Controls.Add(this.OpenFileLinkLabel, 1, 0);
             this.MainLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainLayoutPanel.Font = new System.Drawing.Font("Garamond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MainLayoutPanel.Location = new System.Drawing.Point(0, 58);
+            this.MainLayoutPanel.Location = new System.Drawing.Point(0, 55);
             this.MainLayoutPanel.Name = "MainLayoutPanel";
             this.MainLayoutPanel.RowCount = 1;
             this.MainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.MainLayoutPanel.Size = new System.Drawing.Size(2891, 1387);
+            this.MainLayoutPanel.Size = new System.Drawing.Size(2891, 1390);
             this.MainLayoutPanel.TabIndex = 1;
             // 
             // NavTree
@@ -320,11 +313,11 @@
             this.NavTree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.NavTree.Location = new System.Drawing.Point(3, 3);
             this.NavTree.Name = "NavTree";
-            treeNode3.Name = "Node0";
-            treeNode3.Text = "My SubDesigns";
+            treeNode1.Name = "Node0";
+            treeNode1.Text = "My SubDesigns";
             this.NavTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            this.NavTree.Size = new System.Drawing.Size(518, 1381);
+            treeNode1});
+            this.NavTree.Size = new System.Drawing.Size(518, 1384);
             this.NavTree.TabIndex = 0;
             // 
             // OpenFileLinkLabel
@@ -333,7 +326,7 @@
             this.OpenFileLinkLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OpenFileLinkLabel.Location = new System.Drawing.Point(527, 0);
             this.OpenFileLinkLabel.Name = "OpenFileLinkLabel";
-            this.OpenFileLinkLabel.Size = new System.Drawing.Size(2361, 1387);
+            this.OpenFileLinkLabel.Size = new System.Drawing.Size(2361, 1390);
             this.OpenFileLinkLabel.TabIndex = 1;
             this.OpenFileLinkLabel.TabStop = true;
             this.OpenFileLinkLabel.Text = "Open a VisiBoole project or file to get started";
@@ -395,7 +388,6 @@
         private System.Windows.Forms.ToolStripMenuItem colorBlindModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.TableLayoutPanel MainLayoutPanel;
         private System.Windows.Forms.TreeView NavTree;
