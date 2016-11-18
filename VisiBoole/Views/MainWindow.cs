@@ -199,14 +199,13 @@ namespace VisiBoole
         /// </summary>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileEventArgs args = new SaveFileEventArgs(currentDisplay.tabControl.SelectedIndex);
+            SaveFileEventArgs args = new SaveFileEventArgs(Globals.tabControl.SelectedIndex);
             OnSaveFile(args);
 
             MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         #endregion
-
     }
 }
 

@@ -21,8 +21,6 @@ namespace VisiBoole
         public DisplaySingleEditor()
         {
             InitializeComponent();
-
-            this.tabControl = this.EditorTabControl;
         }
     }
 }

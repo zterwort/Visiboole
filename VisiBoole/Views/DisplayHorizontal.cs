@@ -22,8 +22,6 @@ namespace VisiBoole
         public DisplayHorizontal()
         {
             InitializeComponent();
-
-            this.tabControl = this.EditorTabControl;
         }
 
     }

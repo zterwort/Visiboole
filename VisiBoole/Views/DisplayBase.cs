@@ -15,12 +15,7 @@ namespace VisiBoole
     /// Base class for our MainWindow displays - Single, Horizontal, and Vertical
     /// </summary>
     public class DisplayBase : VisiBooleAbstract.cDisplayBase
-    {
-        /// <summary>
-        /// The TabControl shared by all of our MainWindow Displays
-        /// </summary>
-        public TabControl tabControl { get; set; }
-        
+    {        
         /// <summary>
         /// Creates a new TabPage with the given SubDesign and appends it to our TabControl
         /// </summary>
@@ -35,9 +30,9 @@ namespace VisiBoole
             newTabPage.Controls.Add(sub);
             sub.Dock = DockStyle.Fill;
 
-            if (tabControl.TabPages.ContainsKey(sub.FileSourceName)) throw new Exception("A file with that name already exists.");
-            tabControl.TabPages.Add(newTabPage);
-            sub.TabPageIndex = tabControl.TabPages.IndexOf(newTabPage);
+            if (Globals.tabControl.TabPages.ContainsKey(sub.FileSourceName)) throw new Exception("A file with that name already exists.");
+            Globals.tabControl.TabPages.Add(newTabPage);
+            sub.TabPageIndex = Globals.tabControl.TabPages.IndexOf(newTabPage);
         }
 
         /// <summary>
@@ -48,7 +43,7 @@ namespace VisiBoole
         {
             if (tabPageIndex < 0) throw new Exception("TabPage index must be a positive integer.");
 
-            tabControl.SelectTab(tabPageIndex);
+            Globals.tabControl.SelectTab(tabPageIndex);
         }
 
         /// <summary>

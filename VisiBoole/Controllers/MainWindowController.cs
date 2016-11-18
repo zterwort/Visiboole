@@ -68,11 +68,7 @@ namespace VisiBoole.Controllers
 
             SubDesign sd = CreateNewSubDesign(e.FileName);
 
-            foreach (KeyValuePair<Globals.DisplayType, DisplayBase> kvp in AllDisplays)
-            {
-                kvp.Value.CreateNewTab(sd);
-                kvp.Value.SelectTabPage(sd.TabPageIndex);
-            }
+            CurrentDisplay.CreateNewTab(sd);
 
             e.CurrentDisplay = CurrentDisplay;
         }
@@ -146,6 +142,12 @@ namespace VisiBoole.Controllers
             if (!AllDisplays.ContainsKey(displayType)) throw new Exception(String.Concat("MainWindowController contains no reference to ", displayType.ToString()));
 
             CurrentDisplay = AllDisplays[displayType];
+
+            Globals.tabControl.Multiline = true;
+            Globals.tabControl.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Bottom & AnchorStyles.Top;
+            Globals.tabControl.Dock = DockStyle.Fill;
+
+            CurrentDisplay.Controls["pnlMain"].Controls.Add(Globals.tabControl);
             CurrentDisplay.Dock = DockStyle.Fill;
 
             return CurrentDisplay;

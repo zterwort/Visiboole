@@ -66,10 +66,7 @@ namespace VisiBoole
         /// </summary>
         public void SaveTextToFile()
         {
-            using (FileStream fs = this.FileSource.OpenWrite())
-            {
-                fs.Write(Encoding.ASCII.GetBytes(this.Text), 0, this.TextLength);
-            }
+            File.WriteAllText(this.FileSource.FullName, this.Text);
         }
     }
 }
