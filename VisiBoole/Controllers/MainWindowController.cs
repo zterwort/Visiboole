@@ -54,7 +54,10 @@ namespace VisiBoole.Controllers
             // Wire up our event handlers
             View.ProcessNewFile += new ProcessNewFileHandler(View_ProcessNewFile);
             View.LoadDisplay += new LoadDisplayHandler(View_LoadDisplay);
+            View.SaveFile += View_SaveFile;
         }
+
+        #region "Event Handlers"
 
         /// <summary>
         /// Constructs, loads, and displays the SubDesign created from the given data
@@ -66,8 +69,6 @@ namespace VisiBoole.Controllers
             SubDesign sd = CreateNewSubDesign(e.FileName);
 
             CurrentDisplay.CreateNewTab(sd);
-
-            CurrentDisplay.SelectTabPage(sd.TabPageIndex);
 
             e.CurrentDisplay = CurrentDisplay;
         }
@@ -81,6 +82,31 @@ namespace VisiBoole.Controllers
             DisplayBase db = LoadDisplay(e.DisplayType);
             e.CurrentDisplay = this.CurrentDisplay;
         }
+
+        /// <summary>
+        /// Saves the contents of the SubDesign matching the given tabpage index
+        /// </summary>
+        private void View_SaveFile(object sender, SaveFileEventArgs e)
+        {
+            try
+            {
+                foreach (KeyValuePair<string, SubDesign> kvp in Globals.SubDesigns)
+                {
+                    if (kvp.Value.TabPageIndex == e.tabPageIndex)
+                    {
+                        kvp.Value.SaveTextToFile();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                View.DisplayErrorMessage(ex);
+            }
+        }
+
+        #endregion
+
+        #region "Utility Functions"
 
         /// <summary>
         /// Creates a SubDesign and adds it to our global SubDesigns Dictionary
@@ -116,9 +142,17 @@ namespace VisiBoole.Controllers
             if (!AllDisplays.ContainsKey(displayType)) throw new Exception(String.Concat("MainWindowController contains no reference to ", displayType.ToString()));
 
             CurrentDisplay = AllDisplays[displayType];
+
+            Globals.tabControl.Multiline = true;
+            Globals.tabControl.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Bottom & AnchorStyles.Top;
+            Globals.tabControl.Dock = DockStyle.Fill;
+
+            CurrentDisplay.Controls["pnlMain"].Controls.Add(Globals.tabControl);
             CurrentDisplay.Dock = DockStyle.Fill;
 
             return CurrentDisplay;
         }
+
+        #endregion
     }
 }

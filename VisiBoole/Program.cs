@@ -19,6 +19,7 @@ namespace VisiBoole
             Application.SetCompatibleTextRenderingDefault(false);
 
             Globals.SubDesigns = new Dictionary<string, SubDesign>();
+            Globals.tabControl = new TabControl();
 
             MainWindow mw = new MainWindow();
             MainWindowController mwc = new MainWindowController(mw);

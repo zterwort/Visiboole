@@ -49,6 +49,7 @@ C:\Users\mjsegraves11\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\Vis
 C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe.config
 C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe
 C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.pdb
+C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csprojResolveAssemblyReference.cache
 C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.Properties.Resources.resources
 C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleUserControlBase.csproj.GenerateResource.Cache
 C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.exe

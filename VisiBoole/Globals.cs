@@ -22,7 +22,15 @@ namespace VisiBoole
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        /// <summary>
+        /// Global collection of all open subdesigns
+        /// </summary>
         public static Dictionary<string, SubDesign> SubDesigns;
+
+        /// <summary>
+        /// The TabControl that is shared between all three displays
+        /// </summary>
+        public static TabControl tabControl;
 
         /// <summary>
         /// Constants corresponding to the three different display types hosted by the MainWindow

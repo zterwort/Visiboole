@@ -35,14 +35,11 @@
             this.IndependentVars = new System.Windows.Forms.RichTextBox();
             this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.btnTick = new System.Windows.Forms.Button();
-            this.tabEditor = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.outputBrowser = new System.Windows.Forms.WebBrowser();
             this.pnlMain.SuspendLayout();
             this.pnlEditorControls.SuspendLayout();
             this.pnlOutputControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
-            this.tabEditor.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -53,7 +50,6 @@
             this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.pnlMain.Controls.Add(this.pnlEditorControls, 0, 1);
             this.pnlMain.Controls.Add(this.pnlOutputControls, 1, 1);
-            this.pnlMain.Controls.Add(this.tabEditor, 0, 0);
             this.pnlMain.Controls.Add(this.outputBrowser, 1, 0);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
@@ -122,26 +118,6 @@
             this.btnTick.Text = "Tick";
             this.btnTick.UseVisualStyleBackColor = true;
             // 
-            // tabEditor
-            // 
-            this.tabEditor.Controls.Add(this.tabPage1);
-            this.tabEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabEditor.Location = new System.Drawing.Point(3, 3);
-            this.tabEditor.Name = "tabEditor";
-            this.tabEditor.SelectedIndex = 0;
-            this.tabEditor.Size = new System.Drawing.Size(394, 558);
-            this.tabEditor.TabIndex = 2;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(386, 532);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
             // outputBrowser
             // 
             this.outputBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -163,7 +139,6 @@
             this.pnlEditorControls.ResumeLayout(false);
             this.pnlOutputControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
-            this.tabEditor.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -176,8 +151,6 @@
         private System.Windows.Forms.Panel pnlOutputControls;
         private System.Windows.Forms.NumericUpDown updTickCount;
         private System.Windows.Forms.Button btnTick;
-        public System.Windows.Forms.TabControl tabEditor;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.RichTextBox IndependentVars;
         public System.Windows.Forms.WebBrowser outputBrowser;
     }

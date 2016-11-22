@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
-            this.tabEditor = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
             this.pnlEditorControls = new System.Windows.Forms.Panel();
             this.btnRun = new System.Windows.Forms.Button();
             this.pnlOutputControls = new System.Windows.Forms.Panel();
@@ -39,7 +37,6 @@
             this.btnTick = new System.Windows.Forms.Button();
             this.outputBrowser = new System.Windows.Forms.WebBrowser();
             this.pnlMain.SuspendLayout();
-            this.tabEditor.SuspendLayout();
             this.pnlEditorControls.SuspendLayout();
             this.pnlOutputControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
@@ -50,7 +47,6 @@
             this.pnlMain.BackColor = System.Drawing.Color.Transparent;
             this.pnlMain.ColumnCount = 1;
             this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.pnlMain.Controls.Add(this.tabEditor, 0, 0);
             this.pnlMain.Controls.Add(this.pnlEditorControls, 0, 1);
             this.pnlMain.Controls.Add(this.pnlOutputControls, 0, 3);
             this.pnlMain.Controls.Add(this.outputBrowser, 0, 2);
@@ -64,26 +60,6 @@
             this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
             this.pnlMain.Size = new System.Drawing.Size(802, 602);
             this.pnlMain.TabIndex = 0;
-            // 
-            // tabEditor
-            // 
-            this.tabEditor.Controls.Add(this.tabPage1);
-            this.tabEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabEditor.Location = new System.Drawing.Point(3, 3);
-            this.tabEditor.Name = "tabEditor";
-            this.tabEditor.SelectedIndex = 0;
-            this.tabEditor.Size = new System.Drawing.Size(796, 258);
-            this.tabEditor.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(788, 232);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // pnlEditorControls
             // 
@@ -128,7 +104,7 @@
             // updTickCount
             // 
             this.updTickCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.updTickCount.Location = new System.Drawing.Point(659, 8);
+            this.updTickCount.Location = new System.Drawing.Point(659, 9);
             this.updTickCount.Name = "updTickCount";
             this.updTickCount.Size = new System.Drawing.Size(52, 20);
             this.updTickCount.TabIndex = 1;
@@ -160,7 +136,6 @@
             this.Name = "DisplayHorizontal";
             this.Size = new System.Drawing.Size(802, 602);
             this.pnlMain.ResumeLayout(false);
-            this.tabEditor.ResumeLayout(false);
             this.pnlEditorControls.ResumeLayout(false);
             this.pnlOutputControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
@@ -171,8 +146,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel pnlMain;
-        public System.Windows.Forms.TabControl tabEditor;
-        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Panel pnlEditorControls;
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Panel pnlOutputControls;
