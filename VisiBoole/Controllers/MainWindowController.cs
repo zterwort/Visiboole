@@ -54,7 +54,8 @@ namespace VisiBoole.Controllers
             // Wire up our event handlers
             View.ProcessNewFile += new ProcessNewFileHandler(View_ProcessNewFile);
             View.LoadDisplay += new LoadDisplayHandler(View_LoadDisplay);
-            View.SaveFile += View_SaveFile;
+            View.SaveFile += new SaveFileHandler(View_SaveFile);
+            View.SaveAs += new SaveAsHandler(View_SaveAs);
         }
 
         #region "Event Handlers"
@@ -95,6 +96,27 @@ namespace VisiBoole.Controllers
                     if (kvp.Value.TabPageIndex == e.tabPageIndex)
                     {
                         kvp.Value.SaveTextToFile();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                View.DisplayErrorMessage(ex);
+            }
+        }
+
+        /// <summary>
+        /// Saves the contents of the SubDesign matching the given tabpage index in a location of the user's choosing
+        /// </summary>
+        private void View_SaveAs(object sender, SaveAsEventArgs e)
+        {
+            try
+            {
+                foreach (KeyValuePair<string, SubDesign> kvp in Globals.SubDesigns)
+                {
+                    if (kvp.Value.TabPageIndex == Globals.tabControl.SelectedIndex)
+                    {
+                        File.WriteAllText(e.FilePath, kvp.Value.Text);
                     }
                 }
             }

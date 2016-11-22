@@ -1,0 +1,2 @@
+﻿1. TabControl moved to Globals - you can remove the TabPageIndex in the SaveFileEventArgs class
+2. Consider creating a GetSelectedTabPage method and removing repeated code in SaveFile and SaveAs event handlers (MainWindowController)
