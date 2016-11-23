@@ -38,6 +38,7 @@ namespace VisiBoole
 
             FileSource = new FileInfo(filename);
             this.FileSourceName = FileSource.Name;
+            if (!File.Exists(filename)) FileSource.Create().Close();
 
             SaveFileToText();
         }

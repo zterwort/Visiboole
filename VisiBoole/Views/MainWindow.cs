@@ -172,6 +172,29 @@ namespace VisiBoole
         }
 
         /// <summary>
+        /// Creates and processes a new file created by the user
+        /// </summary>
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveFileDialog1.FileName = "VisiBooleFile1.vbi";
+                var response = saveFileDialog1.ShowDialog();
+                if (response != DialogResult.OK) return;
+
+                ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(saveFileDialog1.FileName);
+                OnProcessNewFile(args);
+                AddNavTreeNode(args.FileName);
+
+                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
+            }
+        }
+
+        /// <summary>
         /// Display OpenFileDialog and process the selected File
         /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -223,6 +246,7 @@ namespace VisiBoole
         }
 
         #endregion
+
     }
 }
 

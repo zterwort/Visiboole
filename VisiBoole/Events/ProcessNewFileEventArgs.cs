@@ -12,7 +12,7 @@ namespace VisiBoole.Events
     public class ProcessNewFileEventArgs : EventArgs
     {
         /// <summary>
-        /// The filename of the file that was opened by the user
+        /// The name of the file that will be processed
         /// </summary>
         public string FileName { get; set; }
 
