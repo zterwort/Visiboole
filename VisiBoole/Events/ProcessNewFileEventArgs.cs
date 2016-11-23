@@ -12,9 +12,16 @@ namespace VisiBoole.Events
     public class ProcessNewFileEventArgs : EventArgs
     {
         /// <summary>
-        /// The name of the file that will be processed
+        /// The path of the file that will be processed
+        /// </summary>
+        public string FilePath { get; set; }
+
+        /// <summary>
+        /// The name of the file that was processed
         /// </summary>
         public string FileName { get; set; }
+
+        
 
         /// <summary>
         /// The display that is loaded by the MainWindowController
@@ -32,7 +39,7 @@ namespace VisiBoole.Events
         /// <param name="filename">The filename of the file that was opened by the user</param>
         public ProcessNewFileEventArgs(string filename)
         {
-            this.FileName = filename;
+            this.FilePath = filename;
         }
     }
 }

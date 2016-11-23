@@ -56,7 +56,9 @@ namespace VisiBoole
         /// <param name="ex">The Exception to display to the user</param>
         public void DisplayErrorMessage(Exception ex)
         {
+            this.Cursor = Cursors.Default;
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            Console.WriteLine(ex.StackTrace);
         }
 
         /// <summary>
@@ -83,10 +85,50 @@ namespace VisiBoole
         public event SaveFileHandler SaveFile;
         public event SaveAsHandler SaveAs;
 
-        protected virtual void OnProcessNewFile(ProcessNewFileEventArgs e) { if (ProcessNewFile != null) ProcessNewFile(this, e); }
-        protected virtual void OnLoadDisplay(LoadDisplayEventArgs e) { if (LoadDisplay != null) LoadDisplay(this, e); }
-        protected virtual void OnSaveFile(SaveFileEventArgs e) { if (SaveFile != null) SaveFile(this, e); }
-        protected virtual void OnSaveAs(SaveAsEventArgs e) { if (SaveAs != null) SaveAs(this, e); }
+        protected virtual void OnProcessNewFile(ProcessNewFileEventArgs e) {
+            try
+            {
+                if (ProcessNewFile != null) ProcessNewFile(this, e);
+
+                AddNavTreeNode(e.FileName);
+                Globals.tabControl.SelectTab(e.FileName);
+
+                ShowDisplay(e.PreviousDisplay, e.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
+            }
+ 
+        }
+
+        protected virtual void OnLoadDisplay(LoadDisplayEventArgs e)
+        {
+            try
+            {
+                if (LoadDisplay != null) LoadDisplay(this, e);
+
+                ShowDisplay(e.PreviousDisplay, e.CurrentDisplay);
+            }
+            catch (Exception ex)
+            {
+                DisplayErrorMessage(ex);
+            }
+        }
+
+        protected virtual void OnSaveFile(SaveFileEventArgs e)
+        {
+            if (SaveFile != null) SaveFile(this, e);
+            MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        protected virtual void OnSaveAs(SaveAsEventArgs e)
+        {
+            if (SaveAs != null) SaveAs(this, e);
+
+            AddNavTreeNode(e.FileName);
+            MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
 
         #endregion
 
@@ -97,17 +139,7 @@ namespace VisiBoole
         /// </summary>
         private void standardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.SINGLE);
-                OnLoadDisplay(args);
-
-                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex);
-            }
+            OnLoadDisplay(new LoadDisplayEventArgs(Globals.DisplayType.SINGLE));
         }
 
         /// <summary>
@@ -115,17 +147,7 @@ namespace VisiBoole
         /// </summary>
         private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.HORIZONTAL);
-                OnLoadDisplay(args);
-
-                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex);
-            }
+            OnLoadDisplay(new LoadDisplayEventArgs(Globals.DisplayType.HORIZONTAL));
         }
 
         /// <summary>
@@ -133,17 +155,7 @@ namespace VisiBoole
         /// </summary>
         private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                LoadDisplayEventArgs args = new LoadDisplayEventArgs(Globals.DisplayType.VERTICAL);
-                OnLoadDisplay(args);
-
-                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex);
-            }
+            OnLoadDisplay(new LoadDisplayEventArgs(Globals.DisplayType.VERTICAL));
         }
 
         /// <summary>
@@ -151,24 +163,10 @@ namespace VisiBoole
         /// </summary>
         private void OpenFileLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            try
-            {
-                var response = openFileDialog1.ShowDialog();
+                DialogResult response = openFileDialog1.ShowDialog();
                 if (response != DialogResult.OK) return;
 
-                string filename = openFileDialog1.FileName;
-
-                ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(filename);
-                OnProcessNewFile(args);
-
-                AddNavTreeNode(filename);
-
-                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex);
-            }
+                OnProcessNewFile(new ProcessNewFileEventArgs(openFileDialog1.FileName));
         }
 
         /// <summary>
@@ -176,22 +174,10 @@ namespace VisiBoole
         /// </summary>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                saveFileDialog1.FileName = "VisiBooleFile1.vbi";
-                var response = saveFileDialog1.ShowDialog();
-                if (response != DialogResult.OK) return;
+            DialogResult response = saveFileDialog1.ShowDialog();
+            if (response != DialogResult.OK) return;
 
-                ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(saveFileDialog1.FileName);
-                OnProcessNewFile(args);
-                AddNavTreeNode(args.FileName);
-
-                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex);
-            }
+            OnProcessNewFile(new ProcessNewFileEventArgs(saveFileDialog1.FileName));
         }
 
         /// <summary>
@@ -199,24 +185,10 @@ namespace VisiBoole
         /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var response = openFileDialog1.ShowDialog();
-                if (response != DialogResult.OK) return;
+            var response = openFileDialog1.ShowDialog();
+            if (response != DialogResult.OK) return;
 
-                string filename = openFileDialog1.FileName;
-
-                ProcessNewFileEventArgs args = new ProcessNewFileEventArgs(filename);
-                OnProcessNewFile(args);
-
-                AddNavTreeNode(filename);
-
-                ShowDisplay(args.PreviousDisplay, args.CurrentDisplay);
-            }
-            catch (Exception ex)
-            {
-                DisplayErrorMessage(ex);
-            }
+            OnProcessNewFile(new ProcessNewFileEventArgs(openFileDialog1.FileName));
         }
 
         /// <summary>
@@ -226,8 +198,6 @@ namespace VisiBoole
         {
             SaveFileEventArgs args = new SaveFileEventArgs(Globals.tabControl.SelectedIndex);
             OnSaveFile(args);
-
-            MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         /// <summary>
@@ -236,17 +206,32 @@ namespace VisiBoole
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult response = saveFileDialog1.ShowDialog();
-            if (response == DialogResult.OK)
-            {
-                SaveAsEventArgs args = new SaveAsEventArgs(saveFileDialog1.FileName);
-                OnSaveAs(args);
-                AddNavTreeNode(args.FileName);
-                MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            if (response != DialogResult.OK) return;
+
+            SaveAsEventArgs args = new SaveAsEventArgs(saveFileDialog1.FileName);
+            OnSaveAs(args);
         }
 
         #endregion
+        /// <summary>
+        /// Exit the application
+        /// </summary>
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Media.SystemSounds.Beep.Play();
+            DialogResult response = MessageBox.Show("Are you sure you want to quit VisiBoole?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            if (response == DialogResult.No) return;
 
+            this.Close();
+        }
+
+        /// <summary>
+        /// Select the tabpage corresponding to this treenode
+        /// </summary>
+        private void NavTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            Globals.tabControl.SelectTab(e.Node.Text);
+        }
     }
 }
 

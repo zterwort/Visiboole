@@ -67,9 +67,9 @@ namespace VisiBoole.Controllers
         {
             e.PreviousDisplay = CurrentDisplay;
 
-            SubDesign sd = CreateNewSubDesign(e.FileName);
-
+            SubDesign sd = CreateNewSubDesign(e.FilePath);
             CurrentDisplay.CreateNewTab(sd);
+            e.FileName = sd.FileSourceName;
 
             e.CurrentDisplay = CurrentDisplay;
         }

@@ -1,2 +1,4 @@
 ﻿1. TabControl moved to Globals - you can remove the TabPageIndex in the SaveFileEventArgs class
 2. Consider creating a GetSelectedTabPage method and removing repeated code in SaveFile and SaveAs event handlers (MainWindowController)
+3. SaveAs button breaks if used when the program first starts - and an open file to save does not already exist
+4. After processing new file and adding a tabpage for it we need to select that tabpage
