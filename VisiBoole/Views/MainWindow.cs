@@ -81,10 +81,12 @@ namespace VisiBoole
         public event ProcessNewFileHandler ProcessNewFile;
         public event LoadDisplayHandler LoadDisplay;
         public event SaveFileHandler SaveFile;
+        public event SaveAsHandler SaveAs;
 
         protected virtual void OnProcessNewFile(ProcessNewFileEventArgs e) { if (ProcessNewFile != null) ProcessNewFile(this, e); }
         protected virtual void OnLoadDisplay(LoadDisplayEventArgs e) { if (LoadDisplay != null) LoadDisplay(this, e); }
         protected virtual void OnSaveFile(SaveFileEventArgs e) { if (SaveFile != null) SaveFile(this, e); }
+        protected virtual void OnSaveAs(SaveAsEventArgs e) { if (SaveAs != null) SaveAs(this, e); }
 
         #endregion
 
@@ -203,6 +205,21 @@ namespace VisiBoole
             OnSaveFile(args);
 
             MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        /// <summary>
+        /// Saves the content in the selected tabpage in the file indicated by the user
+        /// </summary>
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult response = saveFileDialog1.ShowDialog();
+            if (response == DialogResult.OK)
+            {
+                SaveAsEventArgs args = new SaveAsEventArgs(saveFileDialog1.FileName);
+                OnSaveAs(args);
+                AddNavTreeNode(args.FileName);
+                MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         #endregion

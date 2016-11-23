@@ -54,7 +54,8 @@ namespace VisiBoole.Controllers
             // Wire up our event handlers
             View.ProcessNewFile += new ProcessNewFileHandler(View_ProcessNewFile);
             View.LoadDisplay += new LoadDisplayHandler(View_LoadDisplay);
-            View.SaveFile += View_SaveFile;
+            View.SaveFile += new SaveFileHandler(View_SaveFile);
+            View.SaveAs += new SaveAsHandler(View_SaveAs);
         }
 
         #region "Event Handlers"
@@ -95,6 +96,37 @@ namespace VisiBoole.Controllers
                     if (kvp.Value.TabPageIndex == e.tabPageIndex)
                     {
                         kvp.Value.SaveTextToFile();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                View.DisplayErrorMessage(ex);
+            }
+        }
+
+        /// <summary>
+        /// Saves the contents of the SubDesign matching the given tabpage index in a location of the user's choosing
+        /// </summary>
+        private void View_SaveAs(object sender, SaveAsEventArgs e)
+        {
+            try
+            {
+                foreach (KeyValuePair<string, SubDesign> kvp in Globals.SubDesigns)
+                {
+                    if (kvp.Value.TabPageIndex == Globals.tabControl.SelectedIndex)
+                    {
+                        // Extract the short filename
+                        string fileName = e.FilePath.Substring(e.FilePath.LastIndexOf("\\") + 1);
+                        e.FileName = fileName;
+
+                        // Write the contents of the file at the location of the given path
+                        File.WriteAllText(Path.ChangeExtension(e.FilePath, ".vbi"), kvp.Value.Text);
+
+                        // Create a new SubDesign, then a new TabPage with it, then select that TabPage
+                        SubDesign sd = new SubDesign(e.FilePath);
+                        CurrentDisplay.CreateNewTab(sd);
+                        Globals.tabControl.SelectTab(sd.TabPageIndex);
                     }
                 }
             }

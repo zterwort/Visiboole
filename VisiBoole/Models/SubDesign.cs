@@ -39,13 +39,13 @@ namespace VisiBoole
             FileSource = new FileInfo(filename);
             this.FileSourceName = FileSource.Name;
 
-            CopyFileTextToTextProperty();
+            SaveFileToText();
         }
 
         /// <summary>
-        /// Copies the text contents of this subdesign file to its Text property
+        /// Copies the file contents of this subdesign filesource to this Text property
         /// </summary>
-        private void CopyFileTextToTextProperty()
+        private void SaveFileToText()
         {
             string text = string.Empty;
 

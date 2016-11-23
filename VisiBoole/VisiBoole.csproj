@@ -54,6 +54,8 @@
     <Compile Include="Events\LoadDisplayHandler.cs" />
     <Compile Include="Events\ProcessNewFileEventArgs.cs" />
     <Compile Include="Events\ProcessNewFileHandler.cs" />
+    <Compile Include="Events\SaveAsEventArgs.cs" />
+    <Compile Include="Events\SaveAsHandler.cs" />
     <Compile Include="Events\SaveFileEventArgs.cs" />
     <Compile Include="Events\SaveFileHandler.cs" />
     <Compile Include="Views\DisplayBase.cs">
@@ -148,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="LetterV.ico" />
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
