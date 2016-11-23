@@ -116,7 +116,17 @@ namespace VisiBoole.Controllers
                 {
                     if (kvp.Value.TabPageIndex == Globals.tabControl.SelectedIndex)
                     {
-                        File.WriteAllText(e.FilePath, kvp.Value.Text);
+                        // Extract the short filename
+                        string fileName = e.FilePath.Substring(e.FilePath.LastIndexOf("\\") + 1);
+                        e.FileName = fileName;
+
+                        // Write the contents of the file at the location of the given path
+                        File.WriteAllText(Path.ChangeExtension(e.FilePath, ".vbi"), kvp.Value.Text);
+
+                        // Create a new SubDesign, then a new TabPage with it, then select that TabPage
+                        SubDesign sd = new SubDesign(e.FilePath);
+                        CurrentDisplay.CreateNewTab(sd);
+                        Globals.tabControl.SelectTab(sd.TabPageIndex);
                     }
                 }
             }

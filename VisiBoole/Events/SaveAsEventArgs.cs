@@ -17,6 +17,11 @@ namespace VisiBoole.Events
         public string FilePath;
 
         /// <summary>
+        /// The short filename for the saved file
+        /// </summary>
+        public string FileName;
+
+        /// <summary>
         /// Constructs an instance of SaveAsEventArgs
         /// </summary>
         /// <param name="fileName">The file location to save the file at</param>

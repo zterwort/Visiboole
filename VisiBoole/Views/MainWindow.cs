@@ -217,7 +217,7 @@ namespace VisiBoole
             {
                 SaveAsEventArgs args = new SaveAsEventArgs(saveFileDialog1.FileName);
                 OnSaveAs(args);
-
+                AddNavTreeNode(args.FileName);
                 MessageBox.Show("File save successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
