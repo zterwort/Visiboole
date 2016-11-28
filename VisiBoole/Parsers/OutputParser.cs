@@ -13,17 +13,17 @@ namespace VisiBoole
     public class OutputParser
     {
         /// <summary>
-        /// The file containing the user source that will be parsed
+        /// The file text containing the user source that will be parsed
         /// </summary>
-        private FileInfo InputFile;
+        private string input;
 
         /// <summary>
         /// Constructs an instance of OutputParser
         /// </summary>
-        /// <param name="InputFile">The input file containing user source code to be parsed</param>
-        public OutputParser(FileInfo InputFile)
+        /// <param name="input">The input file text containing user source code to be parsed</param>
+        public OutputParser(string input)
         {
-            this.InputFile = InputFile;
+            this.input = input;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace VisiBoole
         {
             try
             {
-                return TrimOutputText(ConvertStringToList(GetFileContents()));
+                return TrimOutputText(ConvertStringToList(input));
             }
             catch (Exception ex)
             {
@@ -47,24 +47,24 @@ namespace VisiBoole
         /// Fetches the text contents of the InputFile
         /// </summary>
         /// <returns>Returns the contents of the InputFile as System.String</returns>
-        private string GetFileContents()
-        {
-            if (!InputFile.Exists) throw new Exception(string.Concat("File at ", InputFile.FullName, " does not exist!"));
+        //private string GetFileContents()
+        //{
+        //    if (!InputFile.Exists) throw new Exception(string.Concat("File at ", InputFile.FullName, " does not exist!"));
 
-            string Content = string.Empty;
+        //    string Content = string.Empty;
 
-            using (StreamReader sr = InputFile.OpenText())
-            {
-                string NextLine = string.Empty;
+        //    using (StreamReader sr = InputFile.OpenText())
+        //    {
+        //        string NextLine = string.Empty;
 
-                while ((NextLine = sr.ReadLine()) != null)
-                {
-                    Content = string.Concat(Content, NextLine, Environment.NewLine);
-                }
-            }
+        //        while ((NextLine = sr.ReadLine()) != null)
+        //        {
+        //            Content = string.Concat(Content, NextLine, Environment.NewLine);
+        //        }
+        //    }
 
-            return Content;
-        }
+        //    return Content;
+        //}
 
         /// <summary>
         /// Converts the given string to an array of strings, delimited by NewLine
@@ -75,7 +75,7 @@ namespace VisiBoole
         {
             if (string.IsNullOrEmpty(pText)) return null;
 
-            string[] splitText = pText.Split(new String[] { Environment.NewLine }, StringSplitOptions.None);
+            string[] splitText = pText.Split(new String[] { "\n", Environment.NewLine }, StringSplitOptions.None);
             List<string> newText = new List<string>();
 
             // Add the first element if there is one

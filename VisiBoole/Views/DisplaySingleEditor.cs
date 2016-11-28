@@ -21,6 +21,7 @@ namespace VisiBoole
         public DisplaySingleEditor()
         {
             InitializeComponent();
+            this.btnRun.Click += new System.EventHandler(base.btnRun_Click);
         }
     }
 }

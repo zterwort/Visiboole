@@ -39,7 +39,7 @@ namespace VisiBoole
         /// Set focus to the TabPage at the given index
         /// </summary>
         /// <param name="tabPageIndex">The index of the TabPage in our TabControl to select</param>
-        public void SelectTabPage(int tabPageIndex)
+        protected void SelectTabPage(int tabPageIndex)
         {
             if (tabPageIndex < 0) throw new Exception("TabPage index must be a positive integer.");
 
@@ -52,7 +52,7 @@ namespace VisiBoole
         /// <param name="var">The independent variable to append</param>
         /// <param name="enable">Whether the given variable is currently True or False</param>
         /// <param name="tbox">The RichTextBox to append the independent variable to</param>
-        public void AppendIndependentVariable(string var, bool enable, RichTextBox tbox)
+        protected void AppendIndependentVariable(string var, bool enable, RichTextBox tbox)
         {
             var link = new LinkLabel();
 
@@ -64,16 +64,14 @@ namespace VisiBoole
             tbox.Controls.Add(link);
         }
 
-        /// <summary>
-        /// Parse the contents of the given SubDesign and create output from it
-        /// </summary>
-        /// <param name="info">The SubDesign to parse</param>
-        public void Run(SubDesign info)
+        protected void btnRun_Click(object sender, EventArgs e)
         {
+            SubDesign info = Globals.SubDesigns[Globals.tabControl.SelectedTab.Name];
+
             InputParser parser = new InputParser(info);
-            OutputParser output = new OutputParser(info.FileSource);
+            OutputParser output = new OutputParser(info.Text);
             List<string> outputText = output.GenerateOutput();
-            HtmlBuilder html = new HtmlBuilder(outputText, info.Name);
+            HtmlBuilder html = new HtmlBuilder(outputText, info.FileSourceName);
             string htmlOutput = html.GetHTML();
 
             if (Globals.CurrentDisplay != null)
@@ -82,9 +80,10 @@ namespace VisiBoole
                 {
                     WebBrowser browser = new WebBrowser();
                     Form newForm = new Form();
+                    DisplaySingleOutput singleOutput = new DisplaySingleOutput();
                     html.DisplayHtml(htmlOutput, browser);
-                    newForm.Controls.Add(browser);
-                    newForm.ShowDialog();
+                    singleOutput.Controls.Add(browser);
+                    singleOutput.Show();
                 }
                 else if (Globals.CurrentDisplay is DisplayVertical)
                 {

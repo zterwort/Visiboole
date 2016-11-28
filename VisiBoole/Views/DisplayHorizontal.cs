@@ -22,7 +22,8 @@ namespace VisiBoole
         public DisplayHorizontal()
         {
             InitializeComponent();
-        }
 
+            this.btnRun.Click += new System.EventHandler(base.btnRun_Click);
+        }
     }
 }

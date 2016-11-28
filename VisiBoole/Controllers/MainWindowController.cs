@@ -20,11 +20,6 @@ namespace VisiBoole.Controllers
         private IMainWindow View;
 
         /// <summary>
-        /// The Display that is currently being hosted by the MainWindow
-        /// </summary>
-        private DisplayBase CurrentDisplay;
-
-        /// <summary>
         /// All of the Displays - single, horizontal, and vertical - that are hosted by the MainWindow
         /// </summary>
         private Dictionary<Globals.DisplayType, DisplayBase> AllDisplays;
@@ -65,23 +60,23 @@ namespace VisiBoole.Controllers
         /// </summary>
         private void View_ProcessNewFile(object sender, ProcessNewFileEventArgs e)
         {
-            e.PreviousDisplay = CurrentDisplay;
+            e.PreviousDisplay = Globals.CurrentDisplay;
 
             SubDesign sd = CreateNewSubDesign(e.FilePath);
-            CurrentDisplay.CreateNewTab(sd);
+            Globals.CurrentDisplay.CreateNewTab(sd);
             e.FileName = sd.FileSourceName;
 
-            e.CurrentDisplay = CurrentDisplay;
+            e.CurrentDisplay = Globals.CurrentDisplay;
         }
 
         /// <summary>
-        /// Loads the currentdisplay with the display of the given type and returns the current display through the event args
+        /// Loads the Globals.CurrentDisplay with the display of the given type and returns the current display through the event args
         /// </summary>
         private void View_LoadDisplay(object sender, LoadDisplayEventArgs e)
         {
-            e.PreviousDisplay = CurrentDisplay;
+            e.PreviousDisplay = Globals.CurrentDisplay;
             DisplayBase db = LoadDisplay(e.DisplayType);
-            e.CurrentDisplay = this.CurrentDisplay;
+            e.CurrentDisplay = Globals.CurrentDisplay;
         }
 
         /// <summary>
@@ -125,7 +120,7 @@ namespace VisiBoole.Controllers
 
                         // Create a new SubDesign, then a new TabPage with it, then select that TabPage
                         SubDesign sd = new SubDesign(e.FilePath);
-                        CurrentDisplay.CreateNewTab(sd);
+                        Globals.CurrentDisplay.CreateNewTab(sd);
                         Globals.tabControl.SelectTab(sd.TabPageIndex);
                     }
                 }
@@ -164,7 +159,7 @@ namespace VisiBoole.Controllers
         }
 
         /// <summary>
-        /// Loads the display of the given type into our CurrentDisplay
+        /// Loads the display of the given type into our Globals.CurrentDisplay
         /// </summary>
         /// <param name="displayType">The type of display to fetch from our AllDisplays Dictionary</param>
         /// <returns>Returns the display that was loaded on success; Throws exception otherwise</returns>
@@ -173,16 +168,16 @@ namespace VisiBoole.Controllers
             if (AllDisplays.Count != 3) throw new Exception("MainWindow Displays have been loaded incorrectly.");
             if (!AllDisplays.ContainsKey(displayType)) throw new Exception(String.Concat("MainWindowController contains no reference to ", displayType.ToString()));
 
-            CurrentDisplay = AllDisplays[displayType];
+            Globals.CurrentDisplay = AllDisplays[displayType];
 
             Globals.tabControl.Multiline = true;
             Globals.tabControl.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Bottom & AnchorStyles.Top;
             Globals.tabControl.Dock = DockStyle.Fill;
 
-            CurrentDisplay.Controls["pnlMain"].Controls.Add(Globals.tabControl);
-            CurrentDisplay.Dock = DockStyle.Fill;
+            Globals.CurrentDisplay.Controls["pnlMain"].Controls.Add(Globals.tabControl);
+            Globals.CurrentDisplay.Dock = DockStyle.Fill;
 
-            return CurrentDisplay;
+            return Globals.CurrentDisplay;
         }
 
         #endregion
