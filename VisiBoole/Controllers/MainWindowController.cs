@@ -36,12 +36,14 @@ namespace VisiBoole.Controllers
             DisplayBase Single = new DisplaySingleEditor();
             DisplayBase Horizontal = new DisplayHorizontal();
             DisplayBase Vertical = new DisplayVertical();
+            DisplayBase SingleOutput = new DisplaySingleOutput();
 
             // Add them to our local Dictionary
             AllDisplays = new Dictionary<Globals.DisplayType, DisplayBase>();
             AllDisplays.Add(Globals.DisplayType.SINGLE, Single);
             AllDisplays.Add(Globals.DisplayType.HORIZONTAL, Horizontal);
             AllDisplays.Add(Globals.DisplayType.VERTICAL, Vertical);
+            AllDisplays.Add(Globals.DisplayType.SINGLEOUTPUT, SingleOutput);
 
             // Load up the Single display
             LoadDisplay(Globals.DisplayType.SINGLE);
@@ -51,6 +53,46 @@ namespace VisiBoole.Controllers
             View.LoadDisplay += new LoadDisplayHandler(View_LoadDisplay);
             View.SaveFile += new SaveFileHandler(View_SaveFile);
             View.SaveAs += new SaveAsHandler(View_SaveAs);
+
+            foreach (KeyValuePair<Globals.DisplayType, DisplayBase> kvp in AllDisplays)
+            {
+                DisplayBase display = kvp.Value;
+                display.ShowSingleOutput += new ShowSingleOutputHandler(Display_ShowSingleOutput);
+            }
+        }
+
+        private void Display_ShowSingleOutput(object sender, EventArgs e)
+        {
+            SubDesign info = Globals.SubDesigns[Globals.tabControl.SelectedTab.Name];
+
+            InputParser parser = new InputParser(info);
+            OutputParser output = new OutputParser(info.Text);
+            List<string> outputText = output.GenerateOutput();
+            HtmlBuilder html = new HtmlBuilder(outputText, info.FileSourceName);
+            string htmlOutput = html.GetHTML();
+
+            if (Globals.CurrentDisplay != null)
+            {
+                if (Globals.CurrentDisplay is DisplaySingleEditor)
+                {
+                    WebBrowser browser = new WebBrowser();
+                    DisplaySingleOutput singleOutput = new DisplaySingleOutput();
+                    html.DisplayHtml(htmlOutput, browser);
+                    singleOutput.Controls.Add(browser);
+                    Globals.CurrentDisplay = singleOutput;
+                    LoadDisplay(Globals.DisplayType.SINGLEOUTPUT);
+                }
+                else if (Globals.CurrentDisplay is DisplayVertical)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplayVertical)Globals.CurrentDisplay).outputBrowser;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+                else if (Globals.CurrentDisplay is DisplayHorizontal)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplayHorizontal)Globals.CurrentDisplay).outputBrowser;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+            }
         }
 
         #region "Event Handlers"
@@ -165,7 +207,7 @@ namespace VisiBoole.Controllers
         /// <returns>Returns the display that was loaded on success; Throws exception otherwise</returns>
         private DisplayBase LoadDisplay(Globals.DisplayType displayType)
         {
-            if (AllDisplays.Count != 3) throw new Exception("MainWindow Displays have been loaded incorrectly.");
+            if (AllDisplays.Count != 4) throw new Exception("MainWindow Displays have been loaded incorrectly.");
             if (!AllDisplays.ContainsKey(displayType)) throw new Exception(String.Concat("MainWindowController contains no reference to ", displayType.ToString()));
 
             Globals.CurrentDisplay = AllDisplays[displayType];

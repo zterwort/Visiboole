@@ -39,7 +39,8 @@ namespace VisiBoole
         {
             SINGLE,
             HORIZONTAL,
-            VERTICAL
+            VERTICAL,
+            SINGLEOUTPUT
         }
 
     }

@@ -58,6 +58,7 @@
     <Compile Include="Events\SaveAsHandler.cs" />
     <Compile Include="Events\SaveFileEventArgs.cs" />
     <Compile Include="Events\SaveFileHandler.cs" />
+    <Compile Include="Events\ShowSingleOutputHandler.cs" />
     <Compile Include="Views\DisplayBase.cs">
       <SubType>UserControl</SubType>
     </Compile>

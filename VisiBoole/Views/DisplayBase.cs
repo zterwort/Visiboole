@@ -8,6 +8,7 @@ using VisiBooleAbstract;
 using System.Windows.Forms;
 using System.IO;
 using System.Collections;
+using VisiBoole.Events;
 
 namespace VisiBoole
 {
@@ -66,36 +67,16 @@ namespace VisiBoole
 
         protected void btnRun_Click(object sender, EventArgs e)
         {
-            SubDesign info = Globals.SubDesigns[Globals.tabControl.SelectedTab.Name];
-
-            InputParser parser = new InputParser(info);
-            OutputParser output = new OutputParser(info.Text);
-            List<string> outputText = output.GenerateOutput();
-            HtmlBuilder html = new HtmlBuilder(outputText, info.FileSourceName);
-            string htmlOutput = html.GetHTML();
-
-            if (Globals.CurrentDisplay != null)
-            {
-                if (Globals.CurrentDisplay is DisplaySingleEditor)
-                {
-                    WebBrowser browser = new WebBrowser();
-                    Form newForm = new Form();
-                    DisplaySingleOutput singleOutput = new DisplaySingleOutput();
-                    html.DisplayHtml(htmlOutput, browser);
-                    singleOutput.Controls.Add(browser);
-                    singleOutput.Show();
-                }
-                else if (Globals.CurrentDisplay is DisplayVertical)
-                {
-                    WebBrowser browser = ((VisiBoole.DisplayVertical)Globals.CurrentDisplay).outputBrowser;
-                    html.DisplayHtml(htmlOutput, browser);
-                }
-                else if (Globals.CurrentDisplay is DisplayHorizontal)
-                {
-                    WebBrowser browser = ((VisiBoole.DisplayHorizontal)Globals.CurrentDisplay).outputBrowser;
-                    html.DisplayHtml(htmlOutput, browser);
-                }
-            }
+            OnShowSingleOutput(sender, e);
         }
+
+        public event ShowSingleOutputHandler ShowSingleOutput;
+
+        private void OnShowSingleOutput(Object sender, EventArgs e)
+        {
+            ShowSingleOutput?.Invoke(sender, e);
+
+        }
+        
     }
 }
