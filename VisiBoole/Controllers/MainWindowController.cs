@@ -79,8 +79,8 @@ namespace VisiBoole.Controllers
                     DisplaySingleOutput singleOutput = new DisplaySingleOutput();
                     html.DisplayHtml(htmlOutput, browser);
                     singleOutput.Controls.Add(browser);
-                    Globals.CurrentDisplay = singleOutput;
-                    LoadDisplay(Globals.DisplayType.SINGLEOUTPUT);
+                    DisplayBase updatedDisplay = LoadDisplay(Globals.DisplayType.SINGLEOUTPUT);
+                    View.ShowDisplay(Globals.CurrentDisplay, updatedDisplay);
                 }
                 else if (Globals.CurrentDisplay is DisplayVertical)
                 {
