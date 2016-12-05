@@ -57,6 +57,7 @@ namespace VisiBoole
 
         public void DisplayHtml(string html, WebBrowser browser)
         {
+            browser.Refresh();
             browser.Navigate("about:blank");
             if (browser.Document != null)
             {

@@ -75,11 +75,13 @@ namespace VisiBoole.Controllers
             {
                 if (Globals.CurrentDisplay is DisplaySingleEditor)
                 {
-                    WebBrowser browser = new WebBrowser();
                     DisplaySingleOutput singleOutput = new DisplaySingleOutput();
-                    html.DisplayHtml(htmlOutput, browser);
-                    singleOutput.Controls.Add(browser);
+                    Globals.CurrentDisplay = singleOutput;
                     DisplayBase updatedDisplay = LoadDisplay(Globals.DisplayType.SINGLEOUTPUT);
+
+                    WebBrowser browser = ((VisiBoole.DisplaySingleOutput)Globals.CurrentDisplay).outputBrowser;
+                    html.DisplayHtml(htmlOutput, browser);
+
                     View.ShowDisplay(Globals.CurrentDisplay, updatedDisplay);
                 }
                 else if (Globals.CurrentDisplay is DisplayVertical)
@@ -212,11 +214,14 @@ namespace VisiBoole.Controllers
 
             Globals.CurrentDisplay = AllDisplays[displayType];
 
-            Globals.tabControl.Multiline = true;
-            Globals.tabControl.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Bottom & AnchorStyles.Top;
-            Globals.tabControl.Dock = DockStyle.Fill;
+            if(displayType != Globals.DisplayType.SINGLEOUTPUT)
+            {
+                Globals.tabControl.Multiline = true;
+                Globals.tabControl.Anchor = AnchorStyles.Left & AnchorStyles.Right & AnchorStyles.Bottom & AnchorStyles.Top;
+                Globals.tabControl.Dock = DockStyle.Fill;
 
-            Globals.CurrentDisplay.Controls["pnlMain"].Controls.Add(Globals.tabControl);
+                Globals.CurrentDisplay.Controls["pnlMain"].Controls.Add(Globals.tabControl);
+            }
             Globals.CurrentDisplay.Dock = DockStyle.Fill;
 
             return Globals.CurrentDisplay;

@@ -33,7 +33,7 @@
             this.IndependentVars = new System.Windows.Forms.RichTextBox();
             this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.btnTick = new System.Windows.Forms.Button();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.outputBrowser = new System.Windows.Forms.WebBrowser();
             this.pnlMain.SuspendLayout();
             this.pnlOutputControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
@@ -46,7 +46,7 @@
             this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.pnlMain.Controls.Add(this.pnlOutputControls, 0, 1);
-            this.pnlMain.Controls.Add(this.webBrowser1, 0, 0);
+            this.pnlMain.Controls.Add(this.outputBrowser, 0, 0);
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
@@ -95,14 +95,14 @@
             this.btnTick.Text = "Tick";
             this.btnTick.UseVisualStyleBackColor = true;
             // 
-            // webBrowser1
+            // outputBrowser
             // 
-            this.webBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 3);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(794, 558);
-            this.webBrowser1.TabIndex = 1;
+            this.outputBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBrowser.Location = new System.Drawing.Point(3, 3);
+            this.outputBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.outputBrowser.Name = "outputBrowser";
+            this.outputBrowser.Size = new System.Drawing.Size(794, 558);
+            this.outputBrowser.TabIndex = 1;
             // 
             // DisplaySingleOutput
             // 
@@ -125,6 +125,6 @@
         private System.Windows.Forms.NumericUpDown updTickCount;
         private System.Windows.Forms.Button btnTick;
         private System.Windows.Forms.RichTextBox IndependentVars;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        public System.Windows.Forms.WebBrowser outputBrowser;
     }
 }
