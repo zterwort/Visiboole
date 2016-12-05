@@ -10,31 +10,51 @@ namespace VisiBoole
     class InputParser
     {
         public string currentTab;
-        public InputParser(SubDesign sub)//string[] codeText, string fileName)
+        public string currentDependent;
+        public InputParser(SubDesign sub, string variableClicked)//string[] codeText, string fileName)
         {
-            //SubDesign s = new SubDesign("h");
-            //currentTab = fileName;
             currentTab = sub.FileSourceName;
-            if(!Globals.variables.ContainsKey(currentTab))
+            if (!Globals.dependencies.ContainsKey(currentTab))
             {
-                Globals.variables.Add(currentTab, new Dictionary<string, int>());
+                Globals.dependencies.Add(currentTab, new Dictionary<string, List<string>>());
+                Globals.expressions.Add(currentTab, new Dictionary<string, string>());
             }
-
-            using (StreamReader reader = sub.FileSource.OpenText())
+            if (String.IsNullOrEmpty(variableClicked))
             {
-                string text = "";
-                int lineNumber = 1;
-                while ((text = reader.ReadLine()) != null)
+                //currentTab = sub.FileSourceName;
+                if (!Globals.variables.ContainsKey(currentTab))
                 {
-                    if(!text.Contains(';'))
-                    {
+                    Globals.variables.Add(currentTab, new Dictionary<string, int>());
+                }
 
-                    }
-                    else
+                using (StreamReader reader = sub.FileSource.OpenText())
+                {
+                    string text = "";
+                    int lineNumber = 1;
+                    while ((text = reader.ReadLine()) != null)
                     {
-                        ContainsVariable(text.Substring(0, text.Length - 1), lineNumber);
+                        if (!text.Contains(';'))
+                        {
+
+                        }
+                        else
+                        {
+                            ContainsVariable(text.Substring(0, text.Length - 1), lineNumber);
+                        }
+                        lineNumber++;
                     }
-                    lineNumber++;
+                }
+            }
+            else
+            {
+                //currentTab = sub.FileSourceName;
+                int newValue = Negate(Globals.variables[currentTab][variableClicked]);
+                Globals.variables[currentTab][variableClicked] = newValue;
+                foreach(string dependentVariable in Globals.dependencies[currentTab][variableClicked])
+                {
+                    currentDependent = dependentVariable;
+                    int updatedVariable = SolveExpression(Globals.expressions[currentTab][dependentVariable], -1);
+                    Globals.variables[currentTab][dependentVariable] = updatedVariable;
                 }
             }
         }
@@ -51,6 +71,7 @@ namespace VisiBoole
                         if (!Globals.variables[currentTab].ContainsKey(s.Substring(1)))
                         {
                             Globals.variables[currentTab].Add(s.Substring(1), 1);
+                            Globals.dependencies[currentTab][s.Substring(1)] = new List<string>();
                         }
                     }
                     else
@@ -58,6 +79,7 @@ namespace VisiBoole
                         if (!Globals.variables[currentTab].ContainsKey(s))
                         {
                             Globals.variables[currentTab].Add(s, 0);
+                            Globals.dependencies[currentTab][s] = new List<string>();
                         }
                     }
                 }
@@ -65,7 +87,12 @@ namespace VisiBoole
             else
             {
                 string dependent = lineOfCode.Substring(0, lineOfCode.IndexOf('='));
+                currentDependent = dependent.Trim();
+                Globals.dependencies[currentTab].Add(currentDependent, new List<string>());
+                //Globals.dependencies[currentTab][dependent.Trim()] = new List<string>();
                 string expression = lineOfCode.Substring(lineOfCode.IndexOf('=') + 1).Trim();
+                Globals.expressions[currentTab].Add(currentDependent, expression);
+                //Globals.expressions[currentTab][dependent.Trim()] = expression;
                 int x = SolveExpression(expression, lineNumber);
                 if (!Globals.variables[currentTab].ContainsKey(dependent.Trim()))
                 {
@@ -90,6 +117,10 @@ namespace VisiBoole
                         if (Globals.variables[currentTab].ContainsKey(s.Substring(1)))
                         {
                             expFinal = Negate(Globals.variables[currentTab][s.Substring(1)]);
+                            if (!Globals.dependencies[currentTab][s.Substring(1)].Contains(currentDependent))
+                            {
+                                Globals.dependencies[currentTab][s.Substring(1)].Add(currentDependent);
+                            }
                         }
                     }
                     else if (Globals.variables[currentTab].ContainsKey(s))
@@ -97,20 +128,32 @@ namespace VisiBoole
                         if (expFinal == -1)
                         {
                             expFinal = Globals.variables[currentTab][s];
+                            if (!Globals.dependencies[currentTab][s].Contains(currentDependent))
+                            {
+                                Globals.dependencies[currentTab][s].Add(currentDependent);
+                            }
                         }
                         else
                         {
-                            if (operation == null)
-                            {
-                                operation = "*";
-                            }
-                            if (operation.Equals("*"))
+                            //if (String.IsNullOrEmpty(operation))
+                            //{
+                            //    operation = "*";
+                            //}
+                            if (String.IsNullOrEmpty(operation))
                             {
                                 expFinal = expFinal * Globals.variables[currentTab][s];
+                                if (!Globals.dependencies[currentTab][s].Contains(currentDependent))
+                                {
+                                    Globals.dependencies[currentTab][s].Add(currentDependent);
+                                }
                             }
                             else if (operation.Equals("+"))
                             {
                                 expFinal = expFinal + Globals.variables[currentTab][s];
+                                if (!Globals.dependencies[currentTab][s].Contains(currentDependent))
+                                {
+                                    Globals.dependencies[currentTab][s].Add(currentDependent);
+                                }
                                 if (expFinal == 2)
                                 {
                                     expFinal = 1;

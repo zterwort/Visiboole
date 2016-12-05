@@ -27,19 +27,19 @@ namespace VisiBoole
                 {
                     if(!Globals.variables[fileName].ContainsKey(token))
                     {
-                        currentLine += "<font color='black'>" + token + "</font>";
+                        currentLine += "<font color='black' >" + token + "</font>";
                         currentLine += " ";
                     }
                     else
                     {
                         if(Globals.variables[fileName][token] == 1)
                         {
-                            currentLine += "<font color='red'>" + token + "</font>";
+                            currentLine += "<font color='red' onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
                             currentLine += " ";
                         }
                         else
                         {
-                            currentLine += "<font color='green'>" + token + "</font>";
+                            currentLine += "<font color='green' onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
                             currentLine += " ";
                         }
                     }

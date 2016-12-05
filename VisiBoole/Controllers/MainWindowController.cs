@@ -6,12 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisiBoole.Events;
+using System.Security.Permissions;
 
 namespace VisiBoole.Controllers
 {
     /// <summary>
     /// The controller for the MainWindow view
     /// </summary>
+    [PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
+    [System.Runtime.InteropServices.ComVisibleAttribute(true)]
     public class MainWindowController
     {
         /// <summary>
@@ -65,7 +68,7 @@ namespace VisiBoole.Controllers
         {
             SubDesign info = Globals.SubDesigns[Globals.tabControl.SelectedTab.Name];
 
-            InputParser parser = new InputParser(info);
+            InputParser parser = new InputParser(info, null);
             OutputParser output = new OutputParser(info.Text);
             List<string> outputText = output.GenerateOutput();
             HtmlBuilder html = new HtmlBuilder(outputText, info.FileSourceName);
@@ -80,6 +83,7 @@ namespace VisiBoole.Controllers
                     DisplayBase updatedDisplay = LoadDisplay(Globals.DisplayType.SINGLEOUTPUT);
 
                     WebBrowser browser = ((VisiBoole.DisplaySingleOutput)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
                     html.DisplayHtml(htmlOutput, browser);
 
                     View.ShowDisplay(Globals.CurrentDisplay, updatedDisplay);
@@ -87,11 +91,13 @@ namespace VisiBoole.Controllers
                 else if (Globals.CurrentDisplay is DisplayVertical)
                 {
                     WebBrowser browser = ((VisiBoole.DisplayVertical)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
                     html.DisplayHtml(htmlOutput, browser);
                 }
                 else if (Globals.CurrentDisplay is DisplayHorizontal)
                 {
                     WebBrowser browser = ((VisiBoole.DisplayHorizontal)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
                     html.DisplayHtml(htmlOutput, browser);
                 }
             }
@@ -227,6 +233,49 @@ namespace VisiBoole.Controllers
             return Globals.CurrentDisplay;
         }
 
+        public void Variable_Click(string variableName)
+        {
+            SubDesign info = Globals.SubDesigns[Globals.tabControl.SelectedTab.Name];
+            InputParser inputParser = new InputParser(info, variableName);
+            OutputParser output = new OutputParser(info.Text);
+            List<string> outputText = output.GenerateOutput();
+            HtmlBuilder html = new HtmlBuilder(outputText, info.FileSourceName);
+            string htmlOutput = html.GetHTML();
+
+            if (Globals.CurrentDisplay != null)
+            {
+                if (Globals.CurrentDisplay is DisplaySingleEditor)
+                {
+                    DisplaySingleOutput singleOutput = new DisplaySingleOutput();
+                    Globals.CurrentDisplay = singleOutput;
+                    DisplayBase updatedDisplay = LoadDisplay(Globals.DisplayType.SINGLEOUTPUT);
+
+                    WebBrowser browser = ((VisiBoole.DisplaySingleOutput)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
+                    html.DisplayHtml(htmlOutput, browser);
+
+                    View.ShowDisplay(Globals.CurrentDisplay, updatedDisplay);
+                }
+                else if (Globals.CurrentDisplay is DisplayVertical)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplayVertical)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+                else if (Globals.CurrentDisplay is DisplayHorizontal)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplayHorizontal)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+                else if(Globals.CurrentDisplay is DisplaySingleOutput)
+                {
+                    WebBrowser browser = ((VisiBoole.DisplaySingleOutput)Globals.CurrentDisplay).outputBrowser;
+                    browser.ObjectForScripting = this;
+                    html.DisplayHtml(htmlOutput, browser);
+                }
+            }
+        }
         #endregion
     }
 }

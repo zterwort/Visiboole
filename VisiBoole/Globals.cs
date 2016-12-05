@@ -16,8 +16,13 @@ namespace VisiBoole
         /// </summary>
         public static Dictionary<string, Dictionary<string, int>> variables = new Dictionary<string, Dictionary<string, int>>();
 
+        public static Dictionary<string, Dictionary<string, List<string>>> dependencies = new Dictionary<string, Dictionary<string, List<string>>>();
+
+        public static Dictionary<string, Dictionary<string, string>> expressions = new Dictionary<string, Dictionary<string, string>>();
+
         public static Dictionary<string, string> html = new Dictionary<string, string>();
         public static Dictionary<string, SubDesign> subDesigns { get; set; }
+
         public static DisplayBase CurrentDisplay { get; set; }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
