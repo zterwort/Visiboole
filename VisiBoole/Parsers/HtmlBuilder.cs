@@ -29,19 +29,33 @@ namespace VisiBoole
                     {
                         if (!Globals.variables[fileName].ContainsKey(token.Substring(1)))
                         {
-                            currentLine += "<font color='black' >" + token + "</font>";
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + token + "</font>";
                             currentLine += " ";
                         }
                         else
                         {
                             if (Globals.variables[fileName][token.Substring(1)] == 1)
                             {
-                                currentLine += "<font color='black' >~</font><font color='green' onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
+                                if (Globals.expressions[Globals.CurrentTab].ContainsKey(token))
+                                {
+                                    currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='green' >" + token.Substring(1) + "</font>";
+                                }
+                                else
+                                {
+                                    currentLine += "<font color='black' >~</font><font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
+                                }
                                 currentLine += " ";
                             }
                             else
                             {
-                                currentLine += "<font color='black' >~</font><font color='red' onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
+                                if (Globals.expressions[Globals.CurrentTab].ContainsKey(token))
+                                {
+                                    currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='red' >" + token.Substring(1) + "</font>";
+                                }
+                                else
+                                {
+                                    currentLine += "<font color='black' >~</font><font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
+                                }
                                 currentLine += " ";
                             }
                         }
@@ -50,19 +64,33 @@ namespace VisiBoole
                     {
                         if (!Globals.variables[fileName].ContainsKey(token))
                         {
-                            currentLine += "<font color='black' >" + token + "</font>";
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + token + "</font>";
                             currentLine += " ";
                         }
                         else
                         {
                             if (Globals.variables[fileName][token] == 1)
                             {
-                                currentLine += "<font color='red' onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
+                                if (Globals.expressions[Globals.CurrentTab].ContainsKey(token))
+                                {
+                                    currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + token + "</font>";
+                                }
+                                else
+                                {
+                                    currentLine += "<font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
+                                }
                                 currentLine += " ";
                             }
                             else
                             {
-                                currentLine += "<font color='green' onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
+                                if (Globals.expressions[Globals.CurrentTab].ContainsKey(token))
+                                {
+                                    currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + token + "</font>";
+                                }
+                                else
+                                {
+                                    currentLine += "<font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
+                                }
                                 currentLine += " ";
                             }
                         }

@@ -37,6 +37,8 @@ namespace VisiBoole
         /// </summary>
         public static TabControl tabControl;
 
+        public static string CurrentTab;
+
         /// <summary>
         /// Constants corresponding to the three different display types hosted by the MainWindow
         /// </summary>
