@@ -50,12 +50,41 @@ namespace VisiBoole
                 //currentTab = sub.FileSourceName;
                 int newValue = Negate(Globals.variables[currentTab][variableClicked]);
                 Globals.variables[currentTab][variableClicked] = newValue;
-                foreach(string dependentVariable in Globals.dependencies[currentTab][variableClicked])
+
+                //build list of all dependent variables based on user click
+                List<string> totalVariables = new List<string>();
+                foreach (string dependentVariable in Globals.dependencies[currentTab][variableClicked])
                 {
+                    totalVariables.Add(dependentVariable);
+                }
+                int count = 0;
+                int end = totalVariables.Count;
+                while (count != end)
+                {
+                    for(int i = count; i < end; i++)
+                    {
+                        foreach(string dependentVariable in Globals.dependencies[currentTab][totalVariables[i]])
+                        {
+                            totalVariables.Add(dependentVariable);
+                        }
+                    }
+                    count = end;
+                    end = totalVariables.Count;
+                }
+                foreach(string dependentVariable in totalVariables)
+                {
+                    //currentDependent is used in SolveExpression()
                     currentDependent = dependentVariable;
                     int updatedVariable = SolveExpression(Globals.expressions[currentTab][dependentVariable], -1);
                     Globals.variables[currentTab][dependentVariable] = updatedVariable;
                 }
+                //all dependent variable list(loop through with foreach)
+                /*foreach(string dependentVariable in Globals.dependencies[currentTab][variableClicked])
+                {                  
+                    currentDependent = dependentVariable;
+                    int updatedVariable = SolveExpression(Globals.expressions[currentTab][dependentVariable], -1);
+                    Globals.variables[currentTab][dependentVariable] = updatedVariable;
+                }*/
             }
         }
 
