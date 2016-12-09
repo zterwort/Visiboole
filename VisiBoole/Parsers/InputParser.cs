@@ -117,10 +117,16 @@ namespace VisiBoole
             {
                 string dependent = lineOfCode.Substring(0, lineOfCode.IndexOf('='));
                 currentDependent = dependent.Trim();
-                Globals.dependencies[Globals.CurrentTab].Add(currentDependent, new List<string>());
+                if (!Globals.dependencies[Globals.CurrentTab].ContainsKey(currentDependent))
+                {
+                    Globals.dependencies[Globals.CurrentTab].Add(currentDependent, new List<string>());
+                }
                 //Globals.dependencies[Globals.CurrentTab][dependent.Trim()] = new List<string>();
                 string expression = lineOfCode.Substring(lineOfCode.IndexOf('=') + 1).Trim();
-                Globals.expressions[Globals.CurrentTab].Add(currentDependent, expression);
+                if (!Globals.expressions[Globals.CurrentTab].ContainsKey(currentDependent))
+                {
+                    Globals.expressions[Globals.CurrentTab].Add(currentDependent, expression);
+                }
                 //Globals.expressions[Globals.CurrentTab][dependent.Trim()] = expression;
                 int x = SolveExpression(expression, lineNumber);
                 if (!Globals.variables[Globals.CurrentTab].ContainsKey(dependent.Trim()))

@@ -231,6 +231,10 @@ namespace VisiBoole
         private void NavTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             Globals.tabControl.SelectTab(e.Node.Text);
+            if(Globals.CurrentDisplay is DisplaySingleOutput)
+            {
+                OnLoadDisplay(new LoadDisplayEventArgs(Globals.DisplayType.SINGLE));
+            }
         }
     }
 }
