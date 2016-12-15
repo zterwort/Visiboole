@@ -45,3 +45,6 @@ C:\Users\Grim\Documents\GitHub\VisiBoole\obj\Debug\VisiBoole.pdb
 C:\Users\zterwort\Desktop\Visiboole2\bin\Debug\VisiBoole.exe.config
 C:\Users\zterwort\Desktop\Visiboole2\obj\Debug\VisiBoole.exe
 C:\Users\zterwort\Desktop\Visiboole2\obj\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
+C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
+C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
