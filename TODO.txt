@@ -1,0 +1,3 @@
+﻿1. Wire up parsers to run buttons.
+2. Finish event handlers for Print buttons and Edit menustrip buttons.
+3. Fix weird bug that shrinks usercontrols after every switch.
