@@ -52,25 +52,50 @@ namespace VisiBoole.Tests
             {
 
             }
-
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod()]
         public void SolveExpressionTest()
         {
-            Assert.Fail();
+            string filename = "newFile1.vbi";
+            SubDesign subDesign = new SubDesign(filename);
+            FileInfo file = new FileInfo(filename);
+            InputParser inputParser = new InputParser();
+            inputParser.ParseInput(subDesign, null);
+
+            //A0, A1, A2, and A3 are all true (1)
+            Assert.AreEqual(inputParser.SolveExpression("A3 + A2 + A1 + A0", -1), 0);
+            Assert.AreEqual(inputParser.SolveExpression("~A3 + ~A0", -1), 1);
+            Assert.AreEqual(inputParser.SolveExpression("B2 B1 B0", -1), 0);
+            Assert.AreEqual(inputParser.SolveExpression("A3 A2 A1 A0", -1), 0);
         }
 
         [TestMethod()]
         public void NegateTest()
         {
-            Assert.Fail();
+            string filename = "newFile1.vbi";
+            SubDesign subDesign = new SubDesign(filename);
+            FileInfo file = new FileInfo(filename);
+            InputParser inputParser = new InputParser();
+            inputParser.ParseInput(subDesign, null);
+
+            Assert.AreEqual(inputParser.Negate(0), 1);
+            Assert.AreEqual(inputParser.Negate(1), 0);
         }
 
         [TestMethod()]
         public void BinaryToDecimalTest()
         {
-            Assert.Fail();
+            string filename = "newFile1.vbi";
+            SubDesign subDesign = new SubDesign(filename);
+            FileInfo file = new FileInfo(filename);
+            InputParser inputParser = new InputParser();
+            inputParser.ParseInput(subDesign, null);
+
+            Assert.AreEqual(inputParser.BinaryToDecimal("1010"), 10);
         }
     }
 }
