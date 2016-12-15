@@ -35,12 +35,23 @@ namespace VisiBoole.Controllers
 			this.displayController = displayController;			
 		}
 
-		/// <summary>
-		/// Creates a new SubDesign with a file created from the given filename
-		/// </summary>
-		/// <param name="filename">The filename of the file to create the new SubDesign with</param>
-		/// <returns>Returns the SubDesign created from the given filename</returns>
-		private SubDesign CreateNewSubDesign(string filename)
+        /// <summary>
+        /// Used to check if the display is the output, if it is, change it to editor.
+        /// </summary>
+        public void checkSingleViewChange()
+        {
+            if (displayController.CurrentDisplay is DisplaySingleOutput)
+            {
+                LoadDisplay(Globals.DisplayType.SINGLE);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new SubDesign with a file created from the given filename
+        /// </summary>
+        /// <param name="filename">The filename of the file to create the new SubDesign with</param>
+        /// <returns>Returns the SubDesign created from the given filename</returns>
+        private SubDesign CreateNewSubDesign(string filename)
 		{
 			try
 			{

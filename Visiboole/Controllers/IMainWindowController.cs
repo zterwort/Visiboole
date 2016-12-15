@@ -45,5 +45,11 @@ namespace VisiBoole.Controllers
 		/// </summary>
 		/// <param name="fileName">The name of the tabpage to select</param>
 		void SelectTabPage(string fileName);
-	}
+
+        /// <summary>
+        /// Used to check if the display is the output, if it is, change it to editor.
+        /// </summary>
+        void checkSingleViewChange();
+
+    }
 }

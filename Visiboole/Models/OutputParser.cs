@@ -94,7 +94,7 @@ namespace VisiBoole
 			for (int i = 0; i < pText.Count; i++)
 			{
 				pText[i] = pText[i].Replace("*", "");
-				pText[i] = pText[i].Replace("~", "");
+				//pText[i] = pText[i].Replace("~", "");
 				pText[i] = pText[i].Replace(";", "");
 
 				// TODO: What to do with the format specifiers? (%{...};)

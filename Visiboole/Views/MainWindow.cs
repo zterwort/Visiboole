@@ -128,6 +128,7 @@ namespace VisiBoole
 		private void NavTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
 			controller.SelectTabPage(e.Node.Name);
+            controller.checkSingleViewChange();
 		}
 
 		/// <summary>
