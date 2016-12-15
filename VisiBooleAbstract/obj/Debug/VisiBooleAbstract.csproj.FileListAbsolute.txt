@@ -1,7 +1,0 @@
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe.config
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.exe
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\bin\Debug\VisiBooleAbstract.pdb
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.Properties.Resources.resources
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.csproj.GenerateResource.Cache
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.exe
-C:\Users\Grim\Documents\GitHub\Visiboole\VisiBooleAbstract\obj\Debug\VisiBooleAbstract.pdb
