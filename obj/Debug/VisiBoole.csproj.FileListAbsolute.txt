@@ -55,3 +55,15 @@ C:\Users\Mjsegraves11\Documents\GitHub\VisiBoole\obj\Debug\VisiBoole.Views.Displ
 C:\Users\Mjsegraves11\Documents\GitHub\VisiBoole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
 C:\Users\Mjsegraves11\Documents\GitHub\VisiBoole\obj\Debug\VisiBoole.MainWindow.resources
 C:\Users\Mjsegraves11\Documents\GitHub\VisiBoole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zterwort\Desktop\Visiboole\bin\Debug\VisiBoole.exe.config
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.exe
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\bin\Debug\VisiBoole.exe
+C:\Users\zterwort\Desktop\Visiboole\bin\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.Properties.Resources.resources
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.Views.DisplayHorizontal.resources
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
+C:\Users\zterwort\Desktop\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
