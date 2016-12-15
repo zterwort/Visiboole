@@ -15,8 +15,8 @@ namespace VisiBoole
 		//color font = <font color='red'>string</font>
 		//line should be contained in <p> line </p>
 		//List<string> HtmlText = new List<string>();
-		string HtmlText = "";
-		string currentLine = "";
+		public string HtmlText = "";
+		public string currentLine = "";
 		public HtmlBuilder(List<string> text, string fileName, Dictionary<string, int> Variables, Dictionary<string, string> Expressions)
 		{
 			foreach (string line in text)

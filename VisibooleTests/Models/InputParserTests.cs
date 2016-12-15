@@ -12,12 +12,18 @@ namespace VisiBoole.Tests
     [TestClass()]
     public class InputParserTests
     {
+        /// <summary>
+        /// Tests the InputParser Method inside of /Models/InputParser.cs
+        /// </summary>
         [TestMethod()]
         public void InputParserTest()
         {
             InputParser inputParser = new InputParser();
         }
 
+        /// <summary>
+        /// Tests the ParseInput Method inside of /Models/InputParser.cs
+        /// </summary>
         [TestMethod()]
         public void ParseInputTest()
         {
@@ -32,6 +38,9 @@ namespace VisiBoole.Tests
 
         }
 
+        /// <summary>
+        /// Tests the ContainsVariable Method inside of /Models/InputParser.cs
+        /// </summary>
         [TestMethod()]
         public void ContainsVariableTest()
         {
@@ -55,7 +64,7 @@ namespace VisiBoole.Tests
         }
 
         /// <summary>
-        /// 
+        /// Tests the SolveExpression Method inside of /Models/InputParser.cs
         /// </summary>
         [TestMethod()]
         public void SolveExpressionTest()
@@ -73,6 +82,9 @@ namespace VisiBoole.Tests
             Assert.AreEqual(inputParser.SolveExpression("A3 A2 A1 A0", -1), 0);
         }
 
+        /// <summary>
+        /// Tests the Negate Method inside of /Models/InputParser.cs
+        /// </summary>
         [TestMethod()]
         public void NegateTest()
         {
@@ -86,6 +98,9 @@ namespace VisiBoole.Tests
             Assert.AreEqual(inputParser.Negate(1), 0);
         }
 
+        /// <summary>
+        /// Tests the BinaryToDecimal Method inside of /Models/InputParser.cs
+        /// </summary>
         [TestMethod()]
         public void BinaryToDecimalTest()
         {
