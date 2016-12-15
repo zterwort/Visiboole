@@ -102,11 +102,20 @@ namespace VisiBoole
 			}
 		}
 
+		/// <summary>
+		/// Returns the generated HTML text
+		/// </summary>
+		/// <returns>Returns the generated HTML text</returns>
 		public string GetHTML()
 		{
 			return HtmlText;
 		}
 
+		/// <summary>
+		/// Displays the html text within the give WebBrowser object
+		/// </summary>
+		/// <param name="html">The html text to display</param>
+		/// <param name="browser">The WebBrowser object to display the HTML in</param>
 		public void DisplayHtml(string html, WebBrowser browser)
 		{
 			browser.Refresh();

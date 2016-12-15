@@ -17,13 +17,9 @@
   <Class Name="VisiBoole.Controllers.MainWindowController" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="6.25" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAABAAhAEAAIIAAEAAgCAABQAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAABAAgAAAAIIAAEAAgAAABQAAAAAAAAA=</HashCode>
       <FileName>Controllers\MainWindowController.cs</FileName>
     </TypeIdentifier>
-    <ShowAsAssociation>
-      <Property Name="IDisplayController" />
-      <Property Name="IMainWindow" />
-    </ShowAsAssociation>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="VisiBoole.ExtensionMethods" Collapsed="true">
@@ -48,7 +44,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="VisiBoole.SubDesign" Collapsed="true">
-    <Position X="11" Y="3.75" Width="1.5" />
+    <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAgACAACCAAAgAAAAAAAAAAAkAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SubDesign.cs</FileName>
@@ -114,14 +110,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="VisiBoole.InputParser" Collapsed="true">
-    <Position X="11" Y="4.75" Width="1.5" />
+    <Position X="11" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gAACAAAAAAAACACAAAAAAAAAAAAAAAAACgQEAgAAAAA=</HashCode>
       <FileName>Models\InputParser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="VisiBoole.HtmlBuilder" Collapsed="true">
-    <Position X="11" Y="2.25" Width="1.5" />
+    <Position X="11" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAEAAAIAAAAA=</HashCode>
       <FileName>Models\HtmlBuilder.cs</FileName>
@@ -137,7 +133,7 @@
   <Interface Name="VisiBoole.Controllers.IMainWindowController" Collapsed="true">
     <Position X="6.25" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAgAAAAAIAAEAAgAAABAAAAAAAAAA=</HashCode>
       <FileName>Controllers\IMainWindowController.cs</FileName>
     </TypeIdentifier>
   </Interface>

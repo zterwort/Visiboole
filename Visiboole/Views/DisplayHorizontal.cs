@@ -11,15 +11,19 @@ using VisiBoole.Controllers;
 
 namespace VisiBoole.Views
 {
+	/// <summary>
+	/// The horizontally-split display that is hosted by the MainWindow
+	/// </summary>
 	public partial class DisplayHorizontal : UserControl, IDisplay
 	{
-		public DisplayHorizontal()
-		{
-			InitializeComponent();
-		}
-
+		/// <summary>
+		/// Handle to the controller for this display
+		/// </summary>
 		private IDisplayController controller;
 
+		/// <summary>
+		/// Returns the type of this display
+		/// </summary>
 		public Globals.DisplayType TypeOfDisplay
 		{
 			get
@@ -28,11 +32,27 @@ namespace VisiBoole.Views
 			}
 		}
 
+		/// <summary>
+		/// Constucts an instance of DisplayHorizontal
+		/// </summary>
+		public DisplayHorizontal()
+		{
+			InitializeComponent();
+		}
+		
+		/// <summary>
+		/// Saves the handle to the controller for this display
+		/// </summary>
+		/// <param name="controller">The handle to the controller to save</param>
 		public void AttachController(IDisplayController controller)
 		{
 			this.controller = controller;
 		}
 
+		/// <summary>
+		/// Loads the given tabcontrol into this display
+		/// </summary>
+		/// <param name="tc">The tabcontrol that will be loaded by this display</param>
 		public void LoadTabControl(TabControl tc)
 		{
 			if (!(tc == null))
@@ -42,6 +62,10 @@ namespace VisiBoole.Views
 			}
 		}
 
+		/// <summary>
+		/// Loads the given web browser into this display
+		/// </summary>
+		/// <param name="browser">The browser that will be loaded by this display</param>
 		public void LoadWebBrowser(WebBrowser browser)
 		{
 			if (!(browser == null))
@@ -51,6 +75,11 @@ namespace VisiBoole.Views
 			}
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when run button is clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnRun_Click(object sender, EventArgs e)
 		{
 			controller.Run();

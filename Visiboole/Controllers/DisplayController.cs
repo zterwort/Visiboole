@@ -10,26 +10,78 @@ using VisiBoole.Views;
 
 namespace VisiBoole.Controllers
 {
+    /// <summary>
+    /// Handles the logic, and communication with other objects for the displays hosted by the MainWindow
+    /// </summary>
 	[PermissionSet(SecurityAction.Demand, Name = "FullTrust")]
 	[System.Runtime.InteropServices.ComVisibleAttribute(true)]
 	public class DisplayController : IDisplayController
-	{
+	{		
+		#region "Class Fields and Properties"
+
+		/// <summary>
+		/// No-split input view that is hosted by the MainWindow
+		/// </summary>
 		private IDisplay single;
+
+		/// <summary>
+		/// Horizontal-split view that is hosted by the MainWindow
+		/// </summary>
 		private IDisplay horizontal;
+
+		/// <summary>
+		/// Vertical-split view that is hosted by the MainWindow
+		/// </summary>
 		private IDisplay vertical;
+
+		/// <summary>
+		/// No-split output view that is hosted by the MainWindow
+		/// </summary>
 		private IDisplay singleOutput;
+
+		/// <summary>
+		/// No-split view that is hosted by the MainWindow
+		/// </summary>
 		private Dictionary<Globals.DisplayType, IDisplay> allDisplays;
 
+		/// <summary>
+		/// Handle to the controller for the MainWindow
+		/// </summary>
 		private IMainWindowController mwController;
 
+		/// <summary>
+		/// The TabControl that shows the input that is shared amongst the displays that are hosted by the MainWindow
+		/// </summary>
 		private TabControl tabControl;
+
+		/// <summary>
+		/// The WebBrowser that shows the output that is shared amongst the displays that are hosted by the MainWindow
+		/// </summary>
 		private WebBrowser browser;
+
+		/// <summary>
+		/// Handle to the input parser that parses the VisiBoole source code input from the user
+		/// </summary>
 		private InputParser parseIn;
+
+		/// <summary>
+		/// Handle to the output parser that parses the output that is viewed by the user
+		/// </summary>
 		private OutputParser parseOut;
 
+		/// <summary>
+		/// The display that was hosted by the MainWindow before the current one
+		/// </summary>
 		public IDisplay PreviousDisplay { get; set; }
 
+		/// <summary>
+		/// The display that is currently hosted by the MainWindow
+		/// </summary>
 		private IDisplay _CurrentDisplay;
+
+		/// <summary>
+		/// The display that is currently hosted by the MainWindow
+		/// </summary>
 		public IDisplay CurrentDisplay
 		{
 			get
@@ -44,6 +96,17 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		#endregion
+
+		#region "Class Initialization
+
+		/// <summary>
+		/// Constructs an instance of DisplayController with a handle to the four displays
+		/// </summary>
+		/// <param name="single">Handle to the no-split input view hosted by the MainWindow</param>
+		/// <param name="horizontal">Handle to the horizontally-split view hosted by the MainWindow</param>
+		/// <param name="vertical">Handle to the vertically-split view hosted by the MainWindow</param>
+		/// <param name="singleOutput">Handle to the no-split output view hosted by the MainWindow</param>
 		public DisplayController(IDisplay single, IDisplay horizontal, IDisplay vertical, IDisplay singleOutput)
 		{
 			tabControl = new TabControl();
@@ -65,11 +128,60 @@ namespace VisiBoole.Controllers
 			CurrentDisplay = single;
 		}
 
+		/// <summary>
+		/// Saves the handle to the controller for the MainWindow
+		/// </summary>
+		/// <param name="mwController"></param>
 		public void AttachMainWindowController(IMainWindowController mwController)
 		{
 			this.mwController = mwController;
 		}
 
+		#endregion
+
+		#region "TabControl Interaction"
+
+		/// <summary>
+		/// Saves the file that is associated with the currently selected tabpage
+		/// </summary>
+		/// <returns></returns>
+		public bool SaveActiveTab()
+		{
+			SubDesign sd = tabControl.SelectedTab.SubDesign();
+			if (sd == null)
+			{
+				return false;
+			}
+			else
+			{
+				sd.SaveTextToFile();
+				return true;
+			}
+		}
+
+		/// <summary>
+		/// Selects the tabpage with matching name
+		/// </summary>
+		/// <param name="fileName">The name of the tabpage to select</param>
+		/// <returns>Returns the tabpage that matches the given string</returns>
+		public bool SelectTabPage(string fileName)
+		{
+			if (tabControl.TabPages.IndexOfKey(fileName) != -1)
+			{
+				tabControl.SelectTab(fileName);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Creates a new tab on the TabControl
+		/// </summary>
+		/// <param name="sd">The SubDesign that is displayed in the new tab</param>
+		/// <returns>Returns true if a new tab was successfully created</returns>
 		public bool CreateNewTab(SubDesign sd)
 		{
 			TabPage tab = new TabPage(sd.FileSourceName);
@@ -96,11 +208,24 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Returns the TabPage that is currently selected
+		/// </summary>
+		/// <returns>Returns the TabPage that is currently selected</returns>
 		public TabPage GetActiveTabPage()
 		{
 			return tabControl.SelectedTab;
 		}
 
+		#endregion
+
+		#region "Display Interaction
+
+		/// <summary>
+		/// Returns a handle to the display of the matching type
+		/// </summary>
+		/// <param name="dType">The type of the display to return</param>
+		/// <returns>Returns a handle to the display of the matching type</returns>
 		public IDisplay GetDisplayOfType(Globals.DisplayType dType)
 		{
 			switch (dType)
@@ -118,33 +243,9 @@ namespace VisiBoole.Controllers
 			}
 		}
 
-		public bool SaveActiveTab()
-		{
-			SubDesign sd = tabControl.SelectedTab.SubDesign();
-			if (sd == null)
-			{
-				return false;
-			}
-			else
-			{
-				sd.SaveTextToFile();
-				return true;
-			}
-		}
-
-		public bool SelectTabPage(string fileName)
-		{
-			if (tabControl.TabPages.IndexOfKey(fileName) != -1)
-			{
-				tabControl.SelectTab(fileName);
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
+		/// <summary>
+		/// Handles the event that occurs when the user runs the parser
+		/// </summary>
 		public void Run()
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
@@ -161,6 +262,10 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when the user clicks on an independent variable
+		/// </summary>
+		/// <param name="variableName">The name of the variable that was clicked by the user</param>
 		public void Variable_Click(string variableName)
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
@@ -176,5 +281,7 @@ namespace VisiBoole.Controllers
 				mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
 			}
 		}
+
+		#endregion		
 	}
 }

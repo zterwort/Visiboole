@@ -12,6 +12,9 @@ namespace VisiBoole
 	/// </summary>
 	public class OutputParser
 	{
+		/// <summary>
+		/// The input that will be parsed
+		/// </summary>
 		public string Input { get; set; }
 
 		/// <summary>
@@ -78,7 +81,6 @@ namespace VisiBoole
 					newText.Add(curLine);
 				}
 			}
-
 			return newText;
 		}
 
@@ -92,13 +94,12 @@ namespace VisiBoole
 			for (int i = 0; i < pText.Count; i++)
 			{
 				pText[i] = pText[i].Replace("*", "");
-				//pText[i] = pText[i].Replace("~", "");
+				pText[i] = pText[i].Replace("~", "");
 				pText[i] = pText[i].Replace(";", "");
 
 				// TODO: What to do with the format specifiers? (%{...};)
 				// TODO: Any other characters that need removed?
 			}
-
 			return pText;
 		}
 	}

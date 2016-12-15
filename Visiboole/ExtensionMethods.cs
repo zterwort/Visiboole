@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace VisiBoole
 {
+	/// <summary>
+	/// Extension methods for this application
+	/// </summary>
 	public static class ExtensionMethods
 	{
 		/// <summary>

@@ -12,17 +12,43 @@ using VisiBoole.Views;
 
 namespace VisiBoole
 {
+	/// <summary>
+	/// The MainWindow of this application
+	/// </summary>
 	public partial class MainWindow : Form, IMainWindow
 	{
+		/// <summary>
+		/// Handle to the controller for this view
+		/// </summary>
 		private IMainWindowController controller;
 
+		#region "Class Initialization"
+
+		/// <summary>
+		/// Constructs an instance of MainWindow
+		/// </summary>
 		public MainWindow()
 		{
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Saves the handle to the controller for this view
+		/// </summary>
+		/// <param name="controller">The handle to the controller for this view</param>
+		public void AttachController(IMainWindowController controller)
+		{
+			this.controller = controller;
+		}
+
+		#endregion
+
 		#region "Utility Methods"
 
+		/// <summary>
+		/// Adds a new node in the TreeView
+		/// </summary>
+		/// <param name="path">The filepath string that will be parsed to obtain the name of this treenode</param>
 		public void AddNavTreeNode(string path)
 		{
 			string filename = path.Substring(path.LastIndexOf("\\") + 1);
@@ -36,11 +62,10 @@ namespace VisiBoole
 			NavTree.ExpandAll();
 		}
 
-		public void AttachController(IMainWindowController controller)
-		{
-			this.controller = controller;
-		}
-
+		/// <summary>
+		/// Confirms exit with the user if the application is dirty
+		/// </summary>
+		/// <param name="isDirty">True if any open SubDesigns have been modified since last save</param>
 		public void ConfirmExit(bool isDirty)
 		{
 			if (isDirty == true)
@@ -58,6 +83,11 @@ namespace VisiBoole
 			}
 		}
 
+		/// <summary>
+		/// Loads the given IDisplay
+		/// </summary>
+		/// <param name="previous">The display to replace</param>
+		/// <param name="current">The display to be loaded</param>
 		public void LoadDisplay(IDisplay previous, IDisplay current)
 		{
 			if (current == null) Globals.DisplayException(new ArgumentNullException("Unable to load given display - the given display is null."));
@@ -70,6 +100,10 @@ namespace VisiBoole
 			this.MainLayoutPanel.Controls.Add(c);
 		}
 
+		/// <summary>
+		/// Displays file-save success message to the user
+		/// </summary>
+		/// <param name="fileSaved">True if the file was saved successfully</param>
 		public void SaveFileSuccess(bool fileSaved)
 		{
 			if (fileSaved == true)
@@ -86,12 +120,21 @@ namespace VisiBoole
 
 		#region "Click Events"
 
+		/// <summary>
+		/// Handles the event that occurs when a node on the treeview was double-clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void NavTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
 			controller.SelectTabPage(e.Node.Name);
-            controller.ReturnToSingleDisplay();
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when New button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogResult response = saveFileDialog1.ShowDialog();
@@ -101,6 +144,11 @@ namespace VisiBoole
 			saveFileDialog1.FileName = "newFile1.vbi";
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Open button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogResult response = openFileDialog1.ShowDialog();
@@ -111,11 +159,21 @@ namespace VisiBoole
 			}
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Save button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			controller.SaveFile();
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when SaveAs button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogResult response = saveFileDialog1.ShowDialog();
@@ -126,36 +184,71 @@ namespace VisiBoole
 			}
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Print button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void printToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Print-Preview button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void printPreviewToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Exit button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			controller.ExitApplication();
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Standard button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void standardToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			controller.LoadDisplay(Globals.DisplayType.SINGLE);
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Horizontal button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void horizontalToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			controller.LoadDisplay(Globals.DisplayType.HORIZONTAL);
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when Vertical button (on menustrip) was clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void verticalToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			controller.LoadDisplay(Globals.DisplayType.VERTICAL);
 		}
 
+		/// <summary>
+		/// Handles the event that occurs when the link-label is clicked
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void OpenFileLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			DialogResult response = openFileDialog1.ShowDialog();

@@ -8,6 +8,9 @@ using VisiBoole.Views;
 
 namespace VisiBoole
 {
+	/// <summary>
+	/// The entry-point of this application
+	/// </summary>
 	static class Program
 	{
 		/// <summary>

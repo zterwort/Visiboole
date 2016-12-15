@@ -8,52 +8,38 @@ using System.IO;
 
 namespace VisiBoole.Controllers
 {
+	/// <summary>
+	/// Handles the logic and communication with other objects for the actions in the MainWindow
+	/// </summary>
 	public class MainWindowController : IMainWindowController
 	{
+		/// <summary>
+		/// Handle to the MainWindow which is the view for this controller
+		/// </summary>
 		private IMainWindow view;
+
+		/// <summary>
+		/// Handle to the controller for the displays that are hosted by the MainWindow
+		/// </summary>
 		private IDisplayController displayController;
 
+		/// <summary>
+		/// Constructs an instance of MainWindowController with handles to its view and the display controller
+		/// </summary>
+		/// <param name="view">Handle to the MainWindow which is the view for this controller</param>
+		/// <param name="displayController">Handle to the controller for the displays that are hosted by the MainWindow</param>
 		public MainWindowController(IMainWindow view, IDisplayController displayController)
 		{
 			this.view = view;
 			view.AttachController(this);
-
-			this.displayController = displayController;
-			
+			this.displayController = displayController;			
 		}
 
-        public void ReturnToSingleDisplay()
-        {
-            if (displayController.CurrentDisplay is DisplaySingleOutput)
-            {
-                LoadDisplay(Globals.DisplayType.SINGLE);
-            }
-        }
-
-		public IDisplayController IDisplayController
-		{
-			get
-			{
-				throw new System.NotImplementedException();
-			}
-
-			set
-			{
-			}
-		}
-
-		public IMainWindow IMainWindow
-		{
-			get
-			{
-				throw new System.NotImplementedException();
-			}
-
-			set
-			{
-			}
-		}
-
+		/// <summary>
+		/// Creates a new SubDesign with a file created from the given filename
+		/// </summary>
+		/// <param name="filename">The filename of the file to create the new SubDesign with</param>
+		/// <returns>Returns the SubDesign created from the given filename</returns>
 		private SubDesign CreateNewSubDesign(string filename)
 		{
 			try
@@ -70,6 +56,9 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Performs a dirty check and confirms application exit with the user
+		/// </summary>
 		public void ExitApplication()
 		{
 			bool isDirty = false;
@@ -84,6 +73,10 @@ namespace VisiBoole.Controllers
 			view.ConfirmExit(isDirty);
 		}
 
+		/// <summary>
+		/// Loads into the MainWindow the display of the given type
+		/// </summary>
+		/// <param name="dType">The type of display that should be loaded</param>
 		public void LoadDisplay(Globals.DisplayType dType)
 		{
 			displayController.PreviousDisplay = displayController.CurrentDisplay;
@@ -91,6 +84,11 @@ namespace VisiBoole.Controllers
 			view.LoadDisplay(displayController.PreviousDisplay, displayController.CurrentDisplay);
 		}
 
+		/// <summary>
+		/// Processes a new file that is created or opened by the user
+		/// </summary>
+		/// <param name="path">The path of the file that was created or opened by the user</param>
+		/// <param name="overwriteExisting">True if the file at the given path should be overwritten</param>
 		public void ProcessNewFile(string path, bool overwriteExisting = false)
 		{
 			try
@@ -106,6 +104,9 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Saves the file that is currently active in the selected tabpage
+		/// </summary>
 		public void SaveFile()
 		{
 			try
@@ -118,6 +119,10 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Saves the file that is currently active in the selected tabpage with the filename chosen by the user
+		/// </summary>
+		/// <param name="path">The new file path to save the active file to</param>
 		public void SaveFileAs(string path)
 		{
 			try
@@ -137,6 +142,10 @@ namespace VisiBoole.Controllers
 			}
 		}
 
+		/// <summary>
+		/// Selects the tabpage in the tabcontrol with name matching the given string
+		/// </summary>
+		/// <param name="fileName">The name of the tabpage to select</param>
 		public void SelectTabPage(string fileName)
 		{
 			try

@@ -51,6 +51,11 @@ namespace VisiBoole
 			this.TextChanged += SubDesign_TextChanged;
         }
 
+		/// <summary>
+		/// Sets the dirty flag when the contents of this SubDesign have changed
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void SubDesign_TextChanged(object sender, EventArgs e)
 		{
 			isDirty = true;

@@ -7,21 +7,46 @@ using System.IO;
 
 namespace VisiBoole
 {
+	/// <summary>
+	/// Parses the VisiBoole source code input by the user
+	/// </summary>
 	public class InputParser
 	{
+		/// <summary>
+		/// Dependent variables associated with the (independent) Variables dictionary
+		/// </summary>
 		public Dictionary<string, List<string>> Dependencies { get; set; }
+
+		/// <summary>
+		/// Independent variables associated with the (dependent) Dependencies dictionary
+		/// </summary>
 		public Dictionary<string, int> Variables { get; set; }
+
+		/// <summary>
+		/// Expressions constructed from independent and dependent variables
+		/// </summary>
 		public Dictionary<string, string> Expressions { get; set; }
 
+		/// <summary>
+		/// The current dependent variable
+		/// </summary>
 		public string currentDependent;
 
-		public InputParser()
+		/// <summary>
+		/// Constructs an instance of InputParser
+		/// </summary>
+		public InputParser()//string[] codeText, string fileName)
 		{
 			Dependencies = new Dictionary<string, List<string>>();
 			Expressions = new Dictionary<string, string>();
 			Variables = new Dictionary<string, int>();
 		}
 
+		/// <summary>
+		/// Parses the VisiBoole source code from the user into independent/dependent variables and their associated expressions
+		/// </summary>
+		/// <param name="sub">The SubDesign containing the text to be parsed</param>
+		/// <param name="variableClicked">The variable that was last clicked by the user, if any</param>
 		public void ParseInput(SubDesign sub, string variableClicked)
 		{
 
@@ -89,6 +114,12 @@ namespace VisiBoole
 			}
 		}
 
+		/// <summary>
+		/// Checks to see if the line of code contains variables; if so, splits them into independent/dependent variable expressions
+		/// </summary>
+		/// <param name="lineOfCode">The line of code to check</param>
+		/// <param name="lineNumber">The line number of the line of code to check</param>
+		/// <returns>Returns the expression or the line given to it, depending on whether variables were found</returns>
 		public string ContainsVariable(string lineOfCode, int lineNumber)
 		{
 			if (!lineOfCode.Contains('='))
@@ -139,6 +170,12 @@ namespace VisiBoole
 			return lineOfCode;
 		}
 
+		/// <summary>
+		/// Solves the given expression
+		/// </summary>
+		/// <param name="expression">The expression to solve</param>
+		/// <param name="lineNumber">The line number of the expression to solve</param>
+		/// <returns>Returns the line number of the expression that is solved</returns>
 		public int SolveExpression(string expression, int lineNumber)
 		{
 			int expFinal = -1;
@@ -214,6 +251,11 @@ namespace VisiBoole
 			return expFinal;
 		}
 
+		/// <summary>
+		/// Negates the given value
+		/// </summary>
+		/// <param name="value">The value to negate</param>
+		/// <returns>Returns the opposite of the given value</returns>
 		public int Negate(int value)
 		{
 			if (value == 0)
@@ -226,6 +268,11 @@ namespace VisiBoole
 			}
 		}
 
+		/// <summary>
+		/// Converts binary to decimal
+		/// </summary>
+		/// <param name="binary">The binary to convert to decimal</param>
+		/// <returns>Returns the converted decimal</returns>
 		public int BinaryToDecimal(string binary)
 		{
 			int dec = 0;

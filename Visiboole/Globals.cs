@@ -7,10 +7,19 @@ using System.Windows.Forms;
 
 namespace VisiBoole
 {
+	/// <summary>
+	/// Global variables for this application
+	/// </summary>
 	public static class Globals
 	{
+		/// <summary>
+		/// All open SubDesigns currently loaded by this application
+		/// </summary>
 		public static Dictionary<string, SubDesign> SubDesigns = new Dictionary<string, SubDesign>();
 
+		/// <summary>
+		/// The different display types for the UserControl displays that are hosted by the MainWindow
+		/// </summary>
 		public enum DisplayType
 		{
 			SINGLE,
@@ -19,6 +28,10 @@ namespace VisiBoole
 			OUTPUT
 		}
 
+		/// <summary>
+		/// Error-handling method for errors in the application
+		/// </summary>
+		/// <param name="e"></param>
 		public static void DisplayException(Exception e)
 		{
 			Cursor.Current = Cursors.Default;
