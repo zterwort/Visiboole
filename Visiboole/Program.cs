@@ -27,6 +27,7 @@ namespace VisiBoole
 			DisplayHorizontal horizontal = new DisplayHorizontal();
 			DisplayVertical vertical = new DisplayVertical();
 			DisplayController dc = new DisplayController(single, horizontal, vertical, singleOutput);
+
 			single.AttachController(dc);
 			singleOutput.AttachController(dc);
 			horizontal.AttachController(dc);
@@ -34,6 +35,7 @@ namespace VisiBoole
 
 			MainWindow mw = new MainWindow();
 			MainWindowController mwc = new MainWindowController(mw, dc);
+
 			dc.AttachMainWindowController(mwc);
 			
 			Application.Run(mw);

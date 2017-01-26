@@ -27,8 +27,8 @@ namespace VisiBoole.Tests
 
             inputParser.ParseInput(subDesign, null);
             outputParser.Input = subDesign.Text;
-            List<string> outputText = outputParser.GenerateOutput();
 
+            List<string> outputText = outputParser.GenerateOutput();
             HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, inputParser.Variables, inputParser.Expressions);
 
             Assert.AreNotEqual(htmlBuilder.HtmlText, null);
@@ -50,8 +50,8 @@ namespace VisiBoole.Tests
 
             inputParser.ParseInput(subDesign, null);
             outputParser.Input = subDesign.Text;
-            List<string> outputText = outputParser.GenerateOutput();
 
+            List<string> outputText = outputParser.GenerateOutput();
             HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, inputParser.Variables, inputParser.Expressions);
             string html = htmlBuilder.GetHTML();
 
@@ -75,10 +75,11 @@ namespace VisiBoole.Tests
 
             inputParser.ParseInput(subDesign, null);
             outputParser.Input = subDesign.Text;
-            List<string> outputText = outputParser.GenerateOutput();
 
+            List<string> outputText = outputParser.GenerateOutput();
             HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, inputParser.Variables, inputParser.Expressions);
             string html = htmlBuilder.GetHTML();
+
             htmlBuilder.DisplayHtml(html, browser);
         }
     }

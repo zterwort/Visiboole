@@ -36,7 +36,9 @@ namespace VisiBoole.Tests
 
             inputParser.ParseInput(subDesign, null);
             outputParser.Input = subDesign.Text;
+
             List<string> outputText = outputParser.GenerateOutput();
+
             Assert.IsNotNull(outputText);
             Assert.IsNotNull(outputText[0]);
         }

@@ -39,11 +39,18 @@ namespace VisiBoole
         /// <param name="filename">The path of the file source for this SubDesign</param>
         public SubDesign(string filename)
         {
-            if (string.IsNullOrEmpty(filename)) throw new ArgumentNullException("Invalid filename");
+            if (string.IsNullOrEmpty(filename))
+            {
+                throw new ArgumentNullException("Invalid filename");
+            }
 
             FileSource = new FileInfo(filename);
             this.FileSourceName = FileSource.Name;
-            if (!File.Exists(filename)) FileSource.Create().Close();
+
+            if (!File.Exists(filename))
+            {
+                FileSource.Create().Close();
+            }
 
             SaveFileToText();
 			isDirty = false;
@@ -71,6 +78,7 @@ namespace VisiBoole
             using (StreamReader reader = this.FileSource.OpenText())
             {
                 string nextLine = string.Empty;
+
                 while ((nextLine = reader.ReadLine()) != null)
                 {
                     text += nextLine + Environment.NewLine;

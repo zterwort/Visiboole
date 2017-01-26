@@ -50,13 +50,19 @@ namespace VisiBoole
 		/// <returns>Returns an array of strings, each line in its own box, if successful; Returns null if otherwise</returns>
 		private List<string> ConvertStringToList(string pText)
 		{
-			if (string.IsNullOrEmpty(pText)) return null;
+            if (string.IsNullOrEmpty(pText))
+            {
+                return null;
+            }
 
 			string[] splitText = pText.Split(new String[] { "\n", Environment.NewLine }, StringSplitOptions.None);
 			List<string> newText = new List<string>();
 
-			// Add the first element if there is one
-			if (splitText.Length > 0) newText.Add(splitText[0]);
+            // Add the first element if there is one
+            if (splitText.Length > 0)
+            {
+                newText.Add(splitText[0]);
+            }
 
 			// Add the rest of the elements if they exist
 			for (int i = 1; i < splitText.Count(); i++)
@@ -94,7 +100,6 @@ namespace VisiBoole
 			for (int i = 0; i < pText.Count; i++)
 			{
 				pText[i] = pText[i].Replace("*", "");
-				//pText[i] = pText[i].Replace("~", "");
 				pText[i] = pText[i].Replace(";", "");
 
 				// TODO: What to do with the format specifiers? (%{...};)

@@ -55,10 +55,13 @@ namespace VisiBoole.Controllers
 		{
 			try
 			{
-				SubDesign sd = new SubDesign(filename);
-				if (!Globals.SubDesigns.ContainsKey(sd.FileSourceName)) Globals.SubDesigns.Add(sd.FileSourceName, sd);
+				SubDesign newSubDesign = new SubDesign(filename);
+                if (!Globals.SubDesigns.ContainsKey(newSubDesign.FileSourceName))
+                {
+                    Globals.SubDesigns.Add(newSubDesign.FileSourceName, newSubDesign);
+                }
 
-				return sd;
+				return newSubDesign;
 			}
 			catch (Exception ex)
 			{
@@ -73,9 +76,11 @@ namespace VisiBoole.Controllers
 		public void ExitApplication()
 		{
 			bool isDirty = false;
+
 			foreach (KeyValuePair<string, SubDesign> kvp in Globals.SubDesigns)
 			{
 				SubDesign sd = kvp.Value;
+
 				if (sd.isDirty)
 				{
 					isDirty = true;
@@ -104,9 +109,18 @@ namespace VisiBoole.Controllers
 		{
 			try
 			{
-				if (overwriteExisting == true && File.Exists(path)) File.Delete(path);
+                if (overwriteExisting == true && File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
 				SubDesign sd = CreateNewSubDesign(path);
-				if (displayController.CreateNewTab(sd) == true) view.AddNavTreeNode(sd.FileSourceName);
+
+                if (displayController.CreateNewTab(sd) == true)
+                {
+                    view.AddNavTreeNode(sd.FileSourceName);
+                }
+
 				LoadDisplay(displayController.CurrentDisplay.TypeOfDisplay);
 			}
 			catch (Exception ex)

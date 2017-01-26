@@ -52,13 +52,16 @@ namespace VisiBoole
 		public void AddNavTreeNode(string path)
 		{
 			string filename = path.Substring(path.LastIndexOf("\\") + 1);
-
 			TreeNode node = new TreeNode(filename);
+
 			node.Name = filename;
 
-			if (NavTree.Nodes.ContainsKey(filename)) Globals.DisplayException(new Exception(string.Concat("Node ", filename, " already exists in 'My SubDesings'.")));
-			NavTree.Nodes[0].Nodes.Add(node);
+            if (NavTree.Nodes.ContainsKey(filename))
+            {
+                Globals.DisplayException(new Exception(string.Concat("Node ", filename, " already exists in 'My SubDesings'.")));
+            }
 
+			NavTree.Nodes[0].Nodes.Add(node);
 			NavTree.ExpandAll();
 		}
 
@@ -72,6 +75,7 @@ namespace VisiBoole
 			{
 				System.Media.SystemSounds.Asterisk.Play();
 				DialogResult response = MessageBox.Show("You have made changes that have not been saved - do you wish to continue?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
 				if (response == DialogResult.Yes)
 				{
 					Application.Exit();
@@ -90,10 +94,20 @@ namespace VisiBoole
 		/// <param name="current">The display to be loaded</param>
 		public void LoadDisplay(IDisplay previous, IDisplay current)
 		{
-			if (current == null) Globals.DisplayException(new ArgumentNullException("Unable to load given display - the given display is null."));
+            if (current == null)
+            {
+                Globals.DisplayException(new ArgumentNullException("Unable to load given display - the given display is null."));
+            }
 
-			if (this.MainLayoutPanel.Controls.Contains((Control)previous)) this.MainLayoutPanel.Controls.Remove((Control)previous);
-			if (this.MainLayoutPanel.Controls.Contains(OpenFileLinkLabel)) this.MainLayoutPanel.Controls.Remove(OpenFileLinkLabel);
+            if (this.MainLayoutPanel.Controls.Contains((Control)previous))
+            {
+                this.MainLayoutPanel.Controls.Remove((Control)previous);
+            }
+
+            if (this.MainLayoutPanel.Controls.Contains(OpenFileLinkLabel))
+            {
+                this.MainLayoutPanel.Controls.Remove(OpenFileLinkLabel);
+            }
 
 			Control c = (Control)current;
 			c.Dock = DockStyle.Fill;
@@ -139,7 +153,11 @@ namespace VisiBoole
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogResult response = saveFileDialog1.ShowDialog();
-			if (response != DialogResult.OK) return;
+
+            if (response != DialogResult.OK)
+            {
+                return;
+            }
 
 			controller.ProcessNewFile(saveFileDialog1.FileName, true);
 			saveFileDialog1.FileName = "newFile1.vbi";
@@ -153,6 +171,7 @@ namespace VisiBoole
 		private void openToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogResult response = openFileDialog1.ShowDialog();
+
 			if (response == DialogResult.OK)
 			{
 				controller.ProcessNewFile(openFileDialog1.FileName);
@@ -178,6 +197,7 @@ namespace VisiBoole
 		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DialogResult response = saveFileDialog1.ShowDialog();
+
 			if (response == DialogResult.OK)
 			{
 				controller.SaveFileAs(saveFileDialog1.FileName);
@@ -253,7 +273,11 @@ namespace VisiBoole
 		private void OpenFileLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			DialogResult response = openFileDialog1.ShowDialog();
-			if (response != DialogResult.OK) return;
+
+            if (response != DialogResult.OK)
+            {
+                return;
+            }
 
 			controller.ProcessNewFile(openFileDialog1.FileName);
 			openFileDialog1.FileName = string.Empty;

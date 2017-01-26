@@ -48,11 +48,13 @@ namespace VisiBoole.Tests
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser();
+
             inputParser.ParseInput(subDesign, null);
 
             inputParser.ContainsVariable("B2 = A3 A2 A1 A0", -1);
             inputParser.ContainsVariable("", -1);
             inputParser.ContainsVariable("A1", -1);
+
             try
             {
                 inputParser.ContainsVariable(null, -1);
@@ -73,6 +75,7 @@ namespace VisiBoole.Tests
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser();
+
             inputParser.ParseInput(subDesign, null);
 
             //A0, A1, A2, and A3 are all true (1)
@@ -92,6 +95,7 @@ namespace VisiBoole.Tests
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser();
+
             inputParser.ParseInput(subDesign, null);
 
             Assert.AreEqual(inputParser.Negate(0), 1);
@@ -108,6 +112,7 @@ namespace VisiBoole.Tests
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser();
+
             inputParser.ParseInput(subDesign, null);
 
             Assert.AreEqual(inputParser.BinaryToDecimal("1010"), 10);

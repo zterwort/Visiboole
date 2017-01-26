@@ -23,6 +23,7 @@ namespace VisiBoole
 			{
 				currentLine = "<p>";
 				string[] tokens = line.Split(' ');
+
 				foreach (string token in tokens)
 				{
 					if (token.Contains('~'))
@@ -120,6 +121,7 @@ namespace VisiBoole
 		{
 			browser.Refresh();
 			browser.Navigate("about:blank");
+
 			if (browser.Document != null)
 			{
 				browser.Document.Write(string.Empty);

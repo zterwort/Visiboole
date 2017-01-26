@@ -148,6 +148,7 @@ namespace VisiBoole.Controllers
 		public bool SaveActiveTab()
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
+
 			if (sd == null)
 			{
 				return false;
@@ -185,14 +186,15 @@ namespace VisiBoole.Controllers
 		public bool CreateNewTab(SubDesign sd)
 		{
 			TabPage tab = new TabPage(sd.FileSourceName);
-			tab.Name = sd.FileSourceName;
 
+            tab.Name = sd.FileSourceName;
 			tab.Controls.Add(sd);
 			sd.Dock = DockStyle.Fill;
 
 			if (tabControl.TabPages.ContainsKey(sd.FileSourceName))
 			{
 				int index = tabControl.TabPages.IndexOfKey(sd.FileSourceName);
+
 				tabControl.TabPages.RemoveByKey(sd.FileSourceName);
 				tabControl.TabPages.Insert(index, tab);
 				sd.TabPageIndex = tabControl.TabPages.IndexOf(tab);
@@ -249,13 +251,15 @@ namespace VisiBoole.Controllers
 		public void Run()
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
-			parseIn.ParseInput(sd, null);
+            List<string> outputText = parseOut.GenerateOutput();
+            parseIn.ParseInput(sd, null);
 			parseOut.Input = sd.Text;
-			List<string> outputText = parseOut.GenerateOutput();
 			HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, parseIn.Variables, parseIn.Expressions);
 			string htmlOutput = html.GetHTML();
+
 			browser.ObjectForScripting = this;
 			html.DisplayHtml(htmlOutput, browser);
+
 			if (CurrentDisplay is DisplaySingle)
 			{
 				mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
@@ -269,13 +273,15 @@ namespace VisiBoole.Controllers
 		public void Variable_Click(string variableName)
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
-			parseIn.ParseInput(sd, variableName);
+            List<string> outputText = parseOut.GenerateOutput();
+            parseIn.ParseInput(sd, variableName);
 			parseOut.Input = sd.Text;
-			List<string> outputText = parseOut.GenerateOutput();
 			HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, parseIn.Variables, parseIn.Expressions);
 			string htmlOutput = html.GetHTML();
+
 			browser.ObjectForScripting = this;
 			html.DisplayHtml(htmlOutput, browser);
+
 			if (CurrentDisplay is DisplaySingle)
 			{
 				mwController.LoadDisplay(Globals.DisplayType.OUTPUT);

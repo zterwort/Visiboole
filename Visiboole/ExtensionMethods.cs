@@ -21,7 +21,10 @@ namespace VisiBoole
 		{
 			foreach (Control c in tab.Controls)
 			{
-				if ((c as SubDesign) != null) return c as SubDesign;
+                if ((c as SubDesign) != null)
+                {
+                    return c as SubDesign;
+                }
 			}
 			return null;
 		}

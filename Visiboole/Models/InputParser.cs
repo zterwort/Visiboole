@@ -57,6 +57,7 @@ namespace VisiBoole
 				{
 					string text = "";
 					int lineNumber = 1;
+
 					while ((text = reader.ReadLine()) != null)
 					{
 						if (!text.Contains(';'))
@@ -79,12 +80,15 @@ namespace VisiBoole
 
 				//build list of all dependent variables based on user click
 				List<string> totalVariables = new List<string>();
+
 				foreach (string dependentVariable in Dependencies[variableClicked])
 				{
 					totalVariables.Add(dependentVariable);
 				}
+
 				int count = 0;
 				int end = totalVariables.Count;
+
 				while (count != end)
 				{
 					for (int i = count; i < end; i++)
@@ -97,6 +101,7 @@ namespace VisiBoole
 					count = end;
 					end = totalVariables.Count;
 				}
+
 				foreach (string dependentVariable in totalVariables)
 				{
 					//currentDependent is used in SolveExpression()
@@ -104,6 +109,7 @@ namespace VisiBoole
 					int updatedVariable = SolveExpression(Expressions[dependentVariable], -1);
 					Variables[dependentVariable] = updatedVariable;
 				}
+
 				//all dependent variable list(loop through with foreach)
 				/*foreach(string dependentVariable in Globals.dependencies[Globals.CurrentTab][variableClicked])
 				{                  
@@ -181,6 +187,7 @@ namespace VisiBoole
 			int expFinal = -1;
 			string operation = "";
 			string[] tokens = expression.Split(' ');
+
 			foreach (string s in tokens)
 			{
 				if (!s.Equals(string.Empty))
@@ -276,6 +283,7 @@ namespace VisiBoole
 		public int BinaryToDecimal(string binary)
 		{
 			int dec = 0;
+
 			for (int i = 0; i < binary.Length; i++)
 			{
 				if (binary[binary.Length - i - 1] == '0') continue;
