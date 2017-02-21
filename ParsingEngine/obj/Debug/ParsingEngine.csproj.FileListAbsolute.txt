@@ -1,0 +1,5 @@
+C:\Users\zcleary1\Documents\GitHub\Visiboole\ParsingEngine\bin\Debug\ParsingEngine.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\ParsingEngine\bin\Debug\ParsingEngine.pdb
+C:\Users\zcleary1\Documents\GitHub\Visiboole\ParsingEngine\obj\Debug\ParsingEngine.csprojResolveAssemblyReference.cache
+C:\Users\zcleary1\Documents\GitHub\Visiboole\ParsingEngine\obj\Debug\ParsingEngine.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\ParsingEngine\obj\Debug\ParsingEngine.pdb

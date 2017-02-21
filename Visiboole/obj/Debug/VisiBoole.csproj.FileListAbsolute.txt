@@ -58,3 +58,6 @@ C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayS
 C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
 C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
 C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
