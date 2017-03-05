@@ -60,11 +60,6 @@ namespace VisiBoole.Controllers
 		private WebBrowser browser;
 
 		/// <summary>
-		/// Handle to the input parser that parses the VisiBoole source code input from the user
-		/// </summary>
-		private InputParser parseIn;
-
-		/// <summary>
 		/// Handle to the output parser that parses the output that is viewed by the user
 		/// </summary>
 		private OutputParser parseOut;
@@ -111,7 +106,6 @@ namespace VisiBoole.Controllers
 		{
 			tabControl = new TabControl();
 			browser = new WebBrowser();
-			parseIn = new InputParser();
 			parseOut = new OutputParser();
 
 			this.single = single;
@@ -251,10 +245,11 @@ namespace VisiBoole.Controllers
 		public void Run()
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
-            List<string> outputText = parseOut.GenerateOutput();
-            parseIn.ParseInput(sd, null);
+            InputParser parseIn = new InputParser(sd);
+            parseIn.ParseInput(null);
 			parseOut.Input = sd.Text;
-			HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, parseIn.Variables, parseIn.Expressions);
+            List<string> outputText = parseOut.GenerateOutput();
+            HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
 			string htmlOutput = html.GetHTML();
 
 			browser.ObjectForScripting = this;
@@ -273,10 +268,11 @@ namespace VisiBoole.Controllers
 		public void Variable_Click(string variableName)
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
-            List<string> outputText = parseOut.GenerateOutput();
-            parseIn.ParseInput(sd, variableName);
+            InputParser parseIn = new InputParser(sd);
+            parseIn.ParseInput(variableName);
 			parseOut.Input = sd.Text;
-			HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, parseIn.Variables, parseIn.Expressions);
+            List<string> outputText = parseOut.GenerateOutput();
+            HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
 			string htmlOutput = html.GetHTML();
 
 			browser.ObjectForScripting = this;

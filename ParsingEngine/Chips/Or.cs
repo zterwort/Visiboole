@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ParsingEngine.Chips
 {
-	class Or
+	public class Or
 	{
 	}
 }

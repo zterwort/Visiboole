@@ -44,6 +44,7 @@
     <Compile Include="Chips\IChip.cs" />
     <Compile Include="Chips\Not.cs" />
     <Compile Include="Chips\Or.cs" />
+    <Compile Include="Clock.cs" />
     <Compile Include="Expression.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

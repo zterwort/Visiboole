@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ParsingEngine.Chips
 {
-	class And
+	public class And
 	{
+        
 	}
 }

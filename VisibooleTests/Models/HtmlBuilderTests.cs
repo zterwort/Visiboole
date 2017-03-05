@@ -22,14 +22,14 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
             OutputParser outputParser = new OutputParser();
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
             outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
-            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, inputParser.Variables, inputParser.Expressions);
+            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
 
             Assert.AreNotEqual(htmlBuilder.HtmlText, null);
             Assert.AreNotEqual(htmlBuilder.HtmlText, "");
@@ -45,14 +45,14 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
             OutputParser outputParser = new OutputParser();
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
             outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
-            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, inputParser.Variables, inputParser.Expressions);
+            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
             string html = htmlBuilder.GetHTML();
 
             Assert.IsNotNull(html);
@@ -69,15 +69,15 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
             OutputParser outputParser = new OutputParser();
             WebBrowser browser = new WebBrowser();
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
             outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
-            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, inputParser.Variables, inputParser.Expressions);
+            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
             string html = htmlBuilder.GetHTML();
 
             htmlBuilder.DisplayHtml(html, browser);

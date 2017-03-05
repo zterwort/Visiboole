@@ -18,7 +18,7 @@ namespace VisiBoole.Tests
         [TestMethod()]
         public void InputParserTest()
         {
-            InputParser inputParser = new InputParser();
+
         }
 
         /// <summary>
@@ -30,11 +30,11 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
 
-            inputParser.ParseInput(subDesign, null);
-            inputParser.ParseInput(subDesign, "A3");
-            inputParser.ParseInput(subDesign, "B0");
+            inputParser.ParseInput(null);
+            inputParser.ParseInput("A3");
+            inputParser.ParseInput("B0");
 
         }
 
@@ -47,9 +47,9 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
 
             inputParser.ContainsVariable("B2 = A3 A2 A1 A0", -1);
             inputParser.ContainsVariable("", -1);
@@ -74,9 +74,9 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
 
             //A0, A1, A2, and A3 are all true (1)
             Assert.AreEqual(inputParser.SolveExpression("A3 + A2 + A1 + A0", -1), 0);
@@ -94,9 +94,9 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
 
             Assert.AreEqual(inputParser.Negate(0), 1);
             Assert.AreEqual(inputParser.Negate(1), 0);
@@ -111,9 +111,9 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
 
             Assert.AreEqual(inputParser.BinaryToDecimal("1010"), 10);
         }

@@ -31,10 +31,10 @@ namespace VisiBoole.Tests
             string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser();
+            InputParser inputParser = new InputParser(subDesign);
             OutputParser outputParser = new OutputParser();
 
-            inputParser.ParseInput(subDesign, null);
+            inputParser.ParseInput(null);
             outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();

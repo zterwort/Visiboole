@@ -12,21 +12,7 @@ namespace VisiBoole
 	/// </summary>
 	public class InputParser
 	{
-		/// <summary>
-		/// Dependent variables associated with the (independent) Variables dictionary
-		/// </summary>
-		public Dictionary<string, List<string>> Dependencies { get; set; }
-
-		/// <summary>
-		/// Independent variables associated with the (dependent) Dependencies dictionary
-		/// </summary>
-		public Dictionary<string, int> Variables { get; set; }
-
-		/// <summary>
-		/// Expressions constructed from independent and dependent variables
-		/// </summary>
-		public Dictionary<string, string> Expressions { get; set; }
-
+        SubDesign subDesign;
 		/// <summary>
 		/// The current dependent variable
 		/// </summary>
@@ -35,11 +21,9 @@ namespace VisiBoole
 		/// <summary>
 		/// Constructs an instance of InputParser
 		/// </summary>
-		public InputParser()//string[] codeText, string fileName)
+		public InputParser(SubDesign sub)//string[] codeText, string fileName)
 		{
-			Dependencies = new Dictionary<string, List<string>>();
-			Expressions = new Dictionary<string, string>();
-			Variables = new Dictionary<string, int>();
+            this.subDesign = sub;
 		}
 
 		/// <summary>
@@ -47,13 +31,11 @@ namespace VisiBoole
 		/// </summary>
 		/// <param name="sub">The SubDesign containing the text to be parsed</param>
 		/// <param name="variableClicked">The variable that was last clicked by the user, if any</param>
-		public void ParseInput(SubDesign sub, string variableClicked)
+		public void ParseInput(string variableClicked)
 		{
-
-
 			if (String.IsNullOrEmpty(variableClicked))
 			{
-				using (StreamReader reader = sub.FileSource.OpenText())
+				using (StreamReader reader = subDesign.FileSource.OpenText())
 				{
 					string text = "";
 					int lineNumber = 1;
@@ -74,14 +56,14 @@ namespace VisiBoole
 			}
 			else
 			{
-				//Globals.CurrentTab = sub.FileSourceName;
-				int newValue = Negate(Variables[variableClicked]);
-				Variables[variableClicked] = newValue;
+				//Globals.CurrentTab = subDesign.FileSourceName;
+				int newValue = Negate(subDesign.Variables[variableClicked]);
+				subDesign.Variables[variableClicked] = newValue;
 
 				//build list of all dependent variables based on user click
 				List<string> totalVariables = new List<string>();
 
-				foreach (string dependentVariable in Dependencies[variableClicked])
+				foreach (string dependentVariable in subDesign.Dependencies[variableClicked])
 				{
 					totalVariables.Add(dependentVariable);
 				}
@@ -93,7 +75,7 @@ namespace VisiBoole
 				{
 					for (int i = count; i < end; i++)
 					{
-						foreach (string dependentVariable in Dependencies[totalVariables[i]])
+						foreach (string dependentVariable in subDesign.Dependencies[totalVariables[i]])
 						{
 							totalVariables.Add(dependentVariable);
 						}
@@ -106,8 +88,8 @@ namespace VisiBoole
 				{
 					//currentDependent is used in SolveExpression()
 					currentDependent = dependentVariable;
-					int updatedVariable = SolveExpression(Expressions[dependentVariable], -1);
-					Variables[dependentVariable] = updatedVariable;
+					int updatedVariable = SolveExpression(subDesign.Expressions[dependentVariable], -1);
+					subDesign.Variables[dependentVariable] = updatedVariable;
 				}
 
 				//all dependent variable list(loop through with foreach)
@@ -135,18 +117,18 @@ namespace VisiBoole
 				{
 					if (s.Contains('*'))
 					{
-						if (!Variables.ContainsKey(s.Substring(1)))
+						if (!subDesign.Variables.ContainsKey(s.Substring(1)))
 						{
-							Variables.Add(s.Substring(1), 1);
-							Dependencies[s.Substring(1)] = new List<string>();
+							subDesign.Variables.Add(s.Substring(1), 1);
+							subDesign.Dependencies[s.Substring(1)] = new List<string>();
 						}
 					}
 					else
 					{
-						if (!Variables.ContainsKey(s))
+						if (!subDesign.Variables.ContainsKey(s))
 						{
-							Variables.Add(s, 0);
-							Dependencies[s] = new List<string>();
+							subDesign.Variables.Add(s, 0);
+							subDesign.Dependencies[s] = new List<string>();
 						}
 					}
 				}
@@ -155,21 +137,21 @@ namespace VisiBoole
 			{
 				string dependent = lineOfCode.Substring(0, lineOfCode.IndexOf('='));
 				currentDependent = dependent.Trim();
-				if (!Dependencies.ContainsKey(currentDependent))
+				if (!subDesign.Dependencies.ContainsKey(currentDependent))
 				{
-					Dependencies.Add(currentDependent, new List<string>());
+					subDesign.Dependencies.Add(currentDependent, new List<string>());
 				}
 				//Globals.dependencies[Globals.CurrentTab][dependent.Trim()] = new List<string>();
 				string expression = lineOfCode.Substring(lineOfCode.IndexOf('=') + 1).Trim();
-				if (!Expressions.ContainsKey(currentDependent))
+				if (!subDesign.Expressions.ContainsKey(currentDependent))
 				{
-					Expressions.Add(currentDependent, expression);
+					subDesign.Expressions.Add(currentDependent, expression);
 				}
 				//Globals.expressions[Globals.CurrentTab][dependent.Trim()] = expression;
 				int x = SolveExpression(expression, lineNumber);
-				if (!Variables.ContainsKey(dependent.Trim()))
+				if (!subDesign.Variables.ContainsKey(dependent.Trim()))
 				{
-					Variables.Add(dependent.Trim(), x);
+					subDesign.Variables.Add(dependent.Trim(), x);
 				}
 				return expression;
 			}
@@ -194,23 +176,23 @@ namespace VisiBoole
 				{
 					if (s[0].Equals('~'))
 					{
-						if (Variables.ContainsKey(s.Substring(1)))
+						if (subDesign.Variables.ContainsKey(s.Substring(1)))
 						{
-							expFinal = Negate(Variables[s.Substring(1)]);
-							if (!Dependencies[s.Substring(1)].Contains(currentDependent))
+							expFinal = Negate(subDesign.Variables[s.Substring(1)]);
+							if (!subDesign.Dependencies[s.Substring(1)].Contains(currentDependent))
 							{
-								Dependencies[s.Substring(1)].Add(currentDependent);
+								subDesign.Dependencies[s.Substring(1)].Add(currentDependent);
 							}
 						}
 					}
-					else if (Variables.ContainsKey(s))
+					else if (subDesign.Variables.ContainsKey(s))
 					{
 						if (expFinal == -1)
 						{
-							expFinal = Variables[s];
-							if (!Dependencies[s].Contains(currentDependent))
+							expFinal = subDesign.Variables[s];
+							if (!subDesign.Dependencies[s].Contains(currentDependent))
 							{
-								Dependencies[s].Add(currentDependent);
+								subDesign.Dependencies[s].Add(currentDependent);
 							}
 						}
 						else
@@ -221,18 +203,18 @@ namespace VisiBoole
 							//}
 							if (String.IsNullOrEmpty(operation))
 							{
-								expFinal = expFinal * Variables[s];
-								if (!Dependencies[s].Contains(currentDependent))
+								expFinal = expFinal * subDesign.Variables[s];
+								if (!subDesign.Dependencies[s].Contains(currentDependent))
 								{
-									Dependencies[s].Add(currentDependent);
+									subDesign.Dependencies[s].Add(currentDependent);
 								}
 							}
 							else if (operation.Equals("+"))
 							{
-								expFinal = expFinal + Variables[s];
-								if (!Dependencies[s].Contains(currentDependent))
+								expFinal = expFinal + subDesign.Variables[s];
+								if (!subDesign.Dependencies[s].Contains(currentDependent))
 								{
-									Dependencies[s].Add(currentDependent);
+									subDesign.Dependencies[s].Add(currentDependent);
 								}
 								if (expFinal == 2)
 								{
