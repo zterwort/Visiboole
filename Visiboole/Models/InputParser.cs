@@ -92,14 +92,6 @@ namespace VisiBoole
 					int updatedVariable = SolveExpression(subDesign.Expressions[dependentVariable], -1);
 					subDesign.Variables[dependentVariable] = updatedVariable;
 				}
-
-				//all dependent variable list(loop through with foreach)
-				/*foreach(string dependentVariable in Globals.dependencies[Globals.CurrentTab][variableClicked])
-				{                  
-					currentDependent = dependentVariable;
-					int updatedVariable = SolveExpression(Globals.expressions[Globals.CurrentTab][dependentVariable], -1);
-					Globals.variables[Globals.CurrentTab][dependentVariable] = updatedVariable;
-				}*/
 			}
 		}
 
@@ -253,7 +245,7 @@ namespace VisiBoole
                     else
                     {
                         // replace variable with FALSE
-                        basicExpression = basicExpression.Replace(oldVariable, "TRUE");
+                        basicExpression = basicExpression.Replace(oldVariable, "FALSE");
                     }
                     // adds the current dependent variable to the dependencies of this variable
                     if (!subDesign.Dependencies[newVariable].Contains(currentDependent))
