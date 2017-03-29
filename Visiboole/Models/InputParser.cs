@@ -35,25 +35,28 @@ namespace VisiBoole
 		public void ParseInput(string variableClicked)
 		{
 			if (String.IsNullOrEmpty(variableClicked))
-			{
-				using (StreamReader reader = subDesign.FileSource.OpenText())
-				{
-					string text = "";
-					int lineNumber = 1;
+            {
+                string txt = subDesign.Text;
+                byte[] byteArr = Encoding.UTF8.GetBytes(txt);
+                MemoryStream stream = new MemoryStream(byteArr);
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    string text = "";
+                    int lineNumber = 1;
 
-					while ((text = reader.ReadLine()) != null)
-					{
-						if (!text.Contains(';'))
-						{
+                    while ((text = reader.ReadLine()) != null)
+                    {
+                        if (!text.Contains(';'))
+                        {
 
-						}
-						else
-						{
-							ContainsVariable(text.Substring(0, text.Length - 1), lineNumber);
-						}
-						lineNumber++;
-					}
-				}
+                        }
+                        else
+                        {
+                            ContainsVariable(text.Substring(0, text.Length - 1), lineNumber);
+                        }
+                        lineNumber++;
+                    }
+                }
 			}
 			else
 			{
@@ -296,6 +299,11 @@ namespace VisiBoole
                     {
                         //set input
                         inputs[i] = subDesign.Variables[elements[i]];
+                        // adds the current dependent variable to the dependencies of this variable
+                        if (!subDesign.Dependencies[elements[i]].Contains(currentDependent))
+                        {
+                            subDesign.Dependencies[elements[i]].Add(currentDependent);
+                        }
                     }
                 }
 
@@ -357,6 +365,10 @@ namespace VisiBoole
                             //set value
                             values[i] = 0;
                         }
+                    }
+                    if (!subDesign.Dependencies[orExpression[i]].Contains(currentDependent))
+                    {
+                        subDesign.Dependencies[orExpression[i]].Add(currentDependent);
                     }
                 }
             }
