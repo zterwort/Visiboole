@@ -68,6 +68,7 @@
 			// 
 			// menuStrip1
 			// 
+			this.menuStrip1.BackColor = System.Drawing.Color.DarkGray;
 			this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -316,7 +317,9 @@
 			// OpenFileLinkLabel
 			// 
 			this.OpenFileLinkLabel.AutoSize = true;
+			this.OpenFileLinkLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.OpenFileLinkLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.OpenFileLinkLabel.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(226)))), ((int)(((byte)(85)))));
 			this.OpenFileLinkLabel.Location = new System.Drawing.Point(197, 0);
 			this.OpenFileLinkLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
 			this.OpenFileLinkLabel.Name = "OpenFileLinkLabel";
@@ -329,7 +332,9 @@
 			// 
 			// NavTree
 			// 
+			this.NavTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(77)))), ((int)(((byte)(81)))));
 			this.NavTree.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.NavTree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(226)))), ((int)(((byte)(85)))));
 			this.NavTree.FullRowSelect = true;
 			this.NavTree.HideSelection = false;
 			this.NavTree.Location = new System.Drawing.Point(1, 1);
@@ -357,13 +362,14 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(77)))), ((int)(((byte)(81)))));
 			this.ClientSize = new System.Drawing.Size(1120, 659);
 			this.Controls.Add(this.MainLayoutPanel);
 			this.Controls.Add(this.menuStrip1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainWindow";
-			this.ShowIcon = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+			this.Text = "VisiBoole - Visualizing HDL";
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.MainLayoutPanel.ResumeLayout(false);
