@@ -57,8 +57,8 @@ namespace VisiBoole.Views
 		{
 			if (!(tc == null))
 			{
-			this.pnlMain.Controls.Add(tc, 0, 0);
-			tc.Dock = DockStyle.Fill;
+				this.pnlMain.Controls.Add(tc, 0, 0);
+				tc.Dock = DockStyle.Fill;
 			}
 		}
 

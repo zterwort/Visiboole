@@ -59,5 +59,15 @@ namespace VisiBoole.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Letter_V_blue {
+            get {
+                object obj = ResourceManager.GetObject("Letter_V_blue", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }
