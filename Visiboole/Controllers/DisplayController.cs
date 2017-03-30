@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisiBoole;
+using VisiBoole.Models;
 using VisiBoole.Views;
 
 namespace VisiBoole.Controllers

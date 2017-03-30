@@ -61,3 +61,43 @@ C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.Generat
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Properties.Resources.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayHorizontal.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.pdb
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Properties.Resources.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayHorizontal.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\bin\Debug\VisiBoole.exe
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\bin\Debug\VisiBoole.pdb
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\bin\Debug\RicherTextBox.dll
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Properties.Resources.resources
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayHorizontal.resources
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache

@@ -36,6 +36,9 @@
     <StartupObject>VisiBoole.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RicherTextBox">
+      <HintPath>.\RicherTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

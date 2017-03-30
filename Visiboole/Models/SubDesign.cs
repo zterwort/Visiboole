@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using Ionic;
 
-namespace VisiBoole
+namespace VisiBoole.Models
 {
     /// <summary>
     /// A User-Created SubDesign
     /// </summary>
-    public class SubDesign : RichTextBox
+    public class SubDesign : RichTextBoxEx
     {
         /// <summary>
         /// Dependent variables associated with the (independent) Variables dictionary
@@ -74,6 +73,8 @@ namespace VisiBoole
             this.Variables = new Dictionary<string, int>();
             this.Expressions = new Dictionary<string, string>();
             this.Dependencies = new Dictionary<string, List<string>>();
+
+	        this.ShowLineNumbers = true;
         }
 
 		/// <summary>

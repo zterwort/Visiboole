@@ -307,8 +307,11 @@
 			this.MainLayoutPanel.Name = "MainLayoutPanel";
 			this.MainLayoutPanel.RowCount = 1;
 			this.MainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.MainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.MainLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.MainLayoutPanel.Size = new System.Drawing.Size(1120, 635);
 			this.MainLayoutPanel.TabIndex = 2;
+			this.MainLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MainLayoutPanel_Paint);
 			// 
 			// OpenFileLinkLabel
 			// 

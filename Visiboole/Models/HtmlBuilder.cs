@@ -24,14 +24,39 @@ namespace VisiBoole
 				currentLine = "<p>";
 				string[] tokens = line.Split(' ');
 
-				foreach (string token in tokens)
-				{
-					if (token.Contains('~'))
+				foreach (string variable in tokens)
+                {
+                    string token = variable;
+                    //These lists are used to keep track of the amount of parenthesis in front or behind a variable
+                    List<string> openParenthesisHolder = new List<string>();
+                    List<string> closeParenthesisHolder = new List<string>();
+
+                    while (token.Contains('('))
+                    {
+                        int index = token.IndexOf("(");
+                        token = token.Substring(index + 1, token.Length - 1);
+                        openParenthesisHolder.Add("(");
+                    }
+
+                    while (token.Contains(')'))
+                    {
+                        int index = token.LastIndexOf(')');
+                        token = token.Substring(0, index);
+                        closeParenthesisHolder.Add(")");
+                    }
+
+                    //Used to holder the amount of parenthesis in front or behind each variable
+                    string openParenthesis = String.Join(String.Empty, openParenthesisHolder);
+                    string closeParenthesis = String.Join(String.Empty, closeParenthesisHolder);
+
+                    if (token.Contains('~'))
 					{
 						if (!Variables.ContainsKey(token.Substring(1)))
 						{
-							currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + token + "</font>";
-							currentLine += " ";
+                            currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + token + "</font>";
+                            currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                            currentLine += " ";
 						}
 						else
 						{
@@ -39,24 +64,32 @@ namespace VisiBoole
 							{
 								if (Expressions.ContainsKey(token))
 								{
-									currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='green' >" + token.Substring(1) + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='green' >" + token.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								else
 								{
-									currentLine += "<font color='black' >~</font><font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' >~</font><font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								currentLine += " ";
 							}
 							else
 							{
 								if (Expressions.ContainsKey(token))
 								{
-									currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='red' >" + token.Substring(1) + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='red' >" + token.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								else
 								{
-									currentLine += "<font color='black' >~</font><font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' >~</font><font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token.Substring(1) + "')\" >" + token.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								currentLine += " ";
 							}
 						}
@@ -65,8 +98,10 @@ namespace VisiBoole
 					{
 						if (!Variables.ContainsKey(token))
 						{
-							currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + token + "</font>";
-							currentLine += " ";
+                            currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + token + "</font>";
+                            currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                            currentLine += " ";
 						}
 						else
 						{
@@ -74,24 +109,32 @@ namespace VisiBoole
 							{
 								if (Expressions.ContainsKey(token))
 								{
-									currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + token + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + token + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								else
 								{
-									currentLine += "<font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								currentLine += " ";
 							}
 							else
 							{
 								if (Expressions.ContainsKey(token))
 								{
-									currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + token + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + token + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								else
 								{
-									currentLine += "<font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token + "')\" >" + token + "</font>";
-								}
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+									currentLine += "<font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + token + "')\" >" +  token + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
 								currentLine += " ";
 							}
 						}

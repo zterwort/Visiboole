@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VisiBoole.Views;
 using System.IO;
+using VisiBoole.Models;
 
 namespace VisiBoole.Controllers
 {
