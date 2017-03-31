@@ -58,6 +58,7 @@
     <Compile Include="Controllers\MainWindowController.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Models\FormatSpecifier.cs" />
     <Compile Include="Models\HtmlBuilder.cs" />
     <Compile Include="Models\InputParser.cs" />
     <Compile Include="Models\OutputParser.cs" />
