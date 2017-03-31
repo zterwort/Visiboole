@@ -24,7 +24,7 @@ namespace VisiBoole
 		/// <summary>
 		/// A list of any format specifiers that were parsed from the input
 		/// </summary>
-		private List<FormatSpecifier> _formatSpecifiers = new List<FormatSpecifier>();
+		private static List<FormatSpecifier> _formatSpecifiers = new List<FormatSpecifier>();
 
 		/// <summary>
 		/// Constructs an instance of InputParser
@@ -101,6 +101,20 @@ namespace VisiBoole
 					currentDependent = dependentVariable;
 					int updatedVariable = SolveExpression(subDesign.Expressions[dependentVariable], -1);
 					subDesign.Variables[dependentVariable] = updatedVariable;
+				}
+
+				// TODO: HACK -> FIX THIS (_formatSpecifiers is static)
+				_formatSpecifiers.Clear();
+				foreach (var pair in hackList)
+				{
+					var lineNumber = pair.Item1;
+					var lineOfCode = pair.Item2;
+					Tuple<string, List<int>> data = ParseFormatSpecifier(lineOfCode, lineNumber);
+					_formatSpecifiers.Add(new FormatSpecifier(lineNumber, data.Item1, data.Item2));
+				}
+				foreach (FormatSpecifier oSpcfr in _formatSpecifiers)
+				{
+					changeLine(subDesign, oSpcfr.LineNumber - 1, oSpcfr.Calculate());
 				}
 			}
 			foreach (FormatSpecifier oSpcfr in _formatSpecifiers)
@@ -208,6 +222,8 @@ namespace VisiBoole
 			}			
 		}
 
+		// TODO: HACK -> FIX THIS
+		private static List<Tuple<int, string>> hackList = new List<Tuple<int, string>>();
 
 		/// <summary>
 		/// Checks to see if the line of code contains variables; if so, splits them into independent/dependent variable expressions
@@ -219,6 +235,7 @@ namespace VisiBoole
 		{
 			if (lineOfCode.Contains("%"))
 			{
+				hackList.Add(new Tuple<int, string>(lineNumber, lineOfCode));
 				Tuple<string, List<int>> data = ParseFormatSpecifier(lineOfCode, lineNumber);
 				_formatSpecifiers.Add(new FormatSpecifier(lineNumber, data.Item1, data.Item2));
 			}
