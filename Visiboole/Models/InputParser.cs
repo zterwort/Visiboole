@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Forms.VisualStyles;
 using VisiBoole.Models;
 
 namespace VisiBoole
@@ -19,6 +20,8 @@ namespace VisiBoole
 		/// The current dependent variable
 		/// </summary>
 		public string currentDependent;
+
+		
 
 		/// <summary>
 		/// Constructs an instance of InputParser
@@ -99,6 +102,79 @@ namespace VisiBoole
 			}
 		}
 
+		private Tuple<string, List<int>> ParseFormatSpecifier(string txt, int lnNum)
+		{
+			try
+			{
+				// obtain the format specifier token
+				Regex regex = new Regex(@"([ubhd])", RegexOptions.None);
+				string format = regex.Match(txt).Value;
+
+				// strip the surrounding specifier and brackets to get the content
+				string content = regex.Replace(txt, string.Empty, 1);
+				regex = new Regex(@"[%{};]", RegexOptions.None);
+				content = regex.Replace(content, string.Empty);
+
+				// obtain the variables within the content. First search for pattern A[N..n]
+				List<int> elems = new List<int>();
+				regex = new Regex(@"[a-zA-Z0-9_]+\[\d+\.\.\d\]", RegexOptions.None);
+				string match = regex.Match(content).Value;
+				if (!string.IsNullOrEmpty(match))
+				{
+					// first pattern found. Expand the expression to extract the variables
+					regex = new Regex(@"[a-zA-Z0-9_]+", RegexOptions.None);
+					string var = regex.Match(match).Value;
+					regex = new Regex(@"\d");
+					MatchCollection matches = regex.Matches(match);
+					int beg = Convert.ToInt32(matches[0].Value);
+					int end = Convert.ToInt32(matches[1].Value);
+					if (end < beg)
+					{
+						int temp = beg;
+						beg = end;
+						end = temp;
+					}
+					for (int i = beg; i < end; i++)
+					{
+						string key = string.Concat(var, i);
+						if (subDesign.Variables.ContainsKey(key))
+						{
+							elems.Add(subDesign.Variables[key]);
+						}
+					}
+				}
+				else
+				{
+					// first pattern was not found. Search the content for the second pattern: A1 A2 An
+					regex = new Regex(@"[a-zA-Z0-9_]{1,20}", RegexOptions.None);
+					MatchCollection matches = regex.Matches(content);
+					foreach (Match m in matches)
+					{
+						if (subDesign.Variables.ContainsKey(m.Value))
+						{
+							elems.Add(subDesign.Variables[m.Value]);
+						}
+					}
+				}
+
+				// if no variables have been found, then there is a user syntax error
+				if (elems.Count == 0)
+				{
+					// TODO: throw a proper error with metadata
+					throw new Exception();
+				}
+
+				return new Tuple<string, List<int>>(format, elems);
+			}
+			catch (Exception ex)
+			{
+				// TODO: proper exception handling
+				Globals.DisplayException(ex);
+				return null;
+			}			
+		}
+
+
 		/// <summary>
 		/// Checks to see if the line of code contains variables; if so, splits them into independent/dependent variable expressions
 		/// </summary>
@@ -107,7 +183,13 @@ namespace VisiBoole
 		/// <returns>Returns the expression or the line given to it, depending on whether variables were found</returns>
 		public string ContainsVariable(string lineOfCode, int lineNumber)
 		{
-			if (!lineOfCode.Contains('='))
+			if (lineOfCode.Contains("%"))
+			{
+				Tuple<string, List<int>> data = ParseFormatSpecifier(lineOfCode, lineNumber);
+				FormatSpecifier oSpcfr = new FormatSpecifier(lineNumber, data.Item1, data.Item2);
+				string result = oSpcfr.Calculate();
+			}
+			else if (!lineOfCode.Contains('='))
 			{
 				string[] independent = lineOfCode.Split(' ');
 				foreach (string s in independent)
