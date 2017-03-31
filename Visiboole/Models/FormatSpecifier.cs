@@ -11,7 +11,7 @@ namespace VisiBoole.Models
 		/// <summary>
 		/// The line number where this format specifier is located
 		/// </summary>
-		private int _lineNumber;
+		public int LineNumber;
 
 		/// <summary>
 		/// The list of variables that this format specifier is composed of
@@ -31,7 +31,7 @@ namespace VisiBoole.Models
 		/// <param name="format">The format that this calculated variable list should return</param>
 		public FormatSpecifier(int lineNumber, string format, List<int> vals)
 		{
-			_lineNumber = lineNumber;
+			LineNumber = lineNumber;
 			_vals = vals;
 			_format = format;
 		}
@@ -45,16 +45,16 @@ namespace VisiBoole.Models
 			switch (_format.ToUpper())
 			{
 				case "B":
-					break;
+					return ToBinary();
+				case "H":
+					return ToHex();
 				case "D":
-					break;
+					return ToSigned(ToBinary());
 				case "U":
-					break;
-				default:
-					break;
+					return ToUnsigned(ToBinary());				
+				default:					
+					return string.Empty;
 			}
-
-			throw new NotImplementedException();
 		}
 
 		private string ToBinary()
@@ -72,8 +72,7 @@ namespace VisiBoole.Models
 
 		public string ToUnsigned(string binary) // decimal
 		{
-			int dec = 0;
-
+			int dec = 0;		
 			for (int i = 0; i < binary.Length; i++)
 			{
 				if (binary[binary.Length - i - 1] == '0') continue;
@@ -88,9 +87,15 @@ namespace VisiBoole.Models
 			return Convert.ToInt32(binary, 2).ToString("X");
 		}
 
-		private string ToSigned(string input)
+		private string ToSigned(string binary)
 		{
-			throw new NotImplementedException();
+			int index = binary.IndexOf("1", StringComparison.Ordinal);
+			if (index == 0)
+			{
+				int num = -1 * Convert.ToInt32(ToUnsigned(binary.Substring(1)));
+				return num.ToString();
+			}
+			return ToUnsigned(binary);
 		}
 	}
 }

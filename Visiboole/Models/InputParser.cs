@@ -21,7 +21,10 @@ namespace VisiBoole
 		/// </summary>
 		public string currentDependent;
 
-		
+		/// <summary>
+		/// A list of any format specifiers that were parsed from the input
+		/// </summary>
+		private List<FormatSpecifier> _formatSpecifiers = new List<FormatSpecifier>();
 
 		/// <summary>
 		/// Constructs an instance of InputParser
@@ -100,6 +103,20 @@ namespace VisiBoole
 					subDesign.Variables[dependentVariable] = updatedVariable;
 				}
 			}
+			foreach (FormatSpecifier oSpcfr in _formatSpecifiers)
+			{
+				changeLine(subDesign, oSpcfr.LineNumber-1, oSpcfr.Calculate());
+			}
+		}
+
+		private void changeLine(SubDesign rtb, int line, string text)
+		{
+			int s1 = rtb.GetFirstCharIndexFromLine(line);
+			int s2 = line < rtb.Lines.Count() - 1 ?
+					  rtb.GetFirstCharIndexFromLine(line + 1) - 1 :
+					  rtb.Text.Length;
+			rtb.Select(s1, s2 - s1);
+			rtb.SelectedText = text;
 		}
 
 		private Tuple<string, List<int>> ParseFormatSpecifier(string txt, int lnNum)
@@ -128,18 +145,28 @@ namespace VisiBoole
 					MatchCollection matches = regex.Matches(match);
 					int beg = Convert.ToInt32(matches[0].Value);
 					int end = Convert.ToInt32(matches[1].Value);
+
+					// arrange beg and end from smallest to largest
 					if (end < beg)
 					{
 						int temp = beg;
 						beg = end;
 						end = temp;
 					}
+
+					// add to our list the value of each variable
 					for (int i = beg; i < end; i++)
 					{
 						string key = string.Concat(var, i);
 						if (subDesign.Variables.ContainsKey(key))
 						{
 							elems.Add(subDesign.Variables[key]);
+						}
+						else
+						{
+							// if a variable wasn't found then the given data is erroneous
+							// TODO: throw a proper error with metadata
+							throw new Exception();
 						}
 					}
 				}
@@ -150,14 +177,21 @@ namespace VisiBoole
 					MatchCollection matches = regex.Matches(content);
 					foreach (Match m in matches)
 					{
+						// add to our list the value of each variable
 						if (subDesign.Variables.ContainsKey(m.Value))
 						{
 							elems.Add(subDesign.Variables[m.Value]);
 						}
+						else
+						{
+							// if a variable wasn't found then the given data is erroneous
+							// TODO: throw a proper error with metadata
+							throw new Exception();
+						}
 					}
 				}
 
-				// if no variables have been found, then there is a user syntax error
+				// if no values have been gathered, then there was a user syntax error
 				if (elems.Count == 0)
 				{
 					// TODO: throw a proper error with metadata
@@ -186,8 +220,7 @@ namespace VisiBoole
 			if (lineOfCode.Contains("%"))
 			{
 				Tuple<string, List<int>> data = ParseFormatSpecifier(lineOfCode, lineNumber);
-				FormatSpecifier oSpcfr = new FormatSpecifier(lineNumber, data.Item1, data.Item2);
-				string result = oSpcfr.Calculate();
+				_formatSpecifiers.Add(new FormatSpecifier(lineNumber, data.Item1, data.Item2));
 			}
 			else if (!lineOfCode.Contains('='))
 			{
