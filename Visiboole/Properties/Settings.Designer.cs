@@ -22,5 +22,17 @@ namespace VisiBoole.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SimulationComments {
+            get {
+                return ((bool)(this["SimulationComments"]));
+            }
+            set {
+                this["SimulationComments"] = value;
+            }
+        }
     }
 }

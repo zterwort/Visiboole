@@ -1,14 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using VisiBoole;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisiBoole.Models;
 
-namespace VisiBoole.Tests
+namespace VisibooleTests.Models
 {
     [TestClass()]
     public class OutputParserTests

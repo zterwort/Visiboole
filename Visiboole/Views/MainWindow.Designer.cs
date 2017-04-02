@@ -1,4 +1,4 @@
-﻿namespace VisiBoole
+﻿namespace VisiBoole.Views
 {
 	partial class MainWindow
 	{

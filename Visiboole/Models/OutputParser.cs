@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace VisiBoole
+namespace VisiBoole.Models
 {
 	/// <summary>
 	/// Parse an input file into an output formatted for use by the HTML parser

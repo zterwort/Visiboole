@@ -71,23 +71,33 @@
     <Compile Include="Controllers\IDisplayController.cs" />
     <Compile Include="Controllers\IMainWindowController.cs" />
     <Compile Include="Controllers\MainWindowController.cs" />
+    <Compile Include="ErrorHandling\ErrorHandler.cs" />
     <Compile Include="ErrorHandling\MissingEndOfStatementException.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="Models\BooleanAssignment.cs" />
-    <Compile Include="Models\CommentStmt.cs" />
-    <Compile Include="Models\EmptyStmt.cs" />
+    <Compile Include="ParsingEngine\Statements\BooleanAssignmentStmt.cs" />
+    <Compile Include="ParsingEngine\Statements\CommentStmt.cs" />
+    <Compile Include="ParsingEngine\Database.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\DependentVariable.cs" />
+    <Compile Include="ParsingEngine\Statements\EmptyStmt.cs" />
     <Compile Include="Models\FormatSpecifier.cs" />
+    <Compile Include="ParsingEngine\Statements\FormatSpecifierStmt.cs" />
     <Compile Include="Models\HtmlBuilder.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\IObjectCodeElement.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\IndependentVariable.cs" />
     <Compile Include="Models\InputParser.cs" />
-    <Compile Include="Models\ModuleDeclaration.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\LineFeed.cs" />
+    <Compile Include="ParsingEngine\Statements\ModuleDeclarationStmt.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\Operator.cs" />
     <Compile Include="Models\OutputParser.cs" />
-    <Compile Include="Models\Statement.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\Parser.cs" />
+    <Compile Include="ParsingEngine\Statements\Statement.cs" />
     <Compile Include="Models\SubDesign.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Models\SubmoduleInstantiationStmt.cs" />
-    <Compile Include="Models\VariableListStmt.cs" />
+    <Compile Include="ParsingEngine\Statements\SubmoduleInstantiationStmt.cs" />
+    <Compile Include="ParsingEngine\ObjectCode\Variable.cs" />
+    <Compile Include="ParsingEngine\Statements\VariableListStmt.cs" />
     <Compile Include="Views\DisplayHorizontal.cs">
       <SubType>UserControl</SubType>
     </Compile>
