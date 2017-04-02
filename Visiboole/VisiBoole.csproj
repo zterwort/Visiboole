@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,15 +71,23 @@
     <Compile Include="Controllers\IDisplayController.cs" />
     <Compile Include="Controllers\IMainWindowController.cs" />
     <Compile Include="Controllers\MainWindowController.cs" />
+    <Compile Include="ErrorHandling\MissingEndOfStatementException.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="Models\BooleanAssignment.cs" />
+    <Compile Include="Models\CommentStmt.cs" />
+    <Compile Include="Models\EmptyStmt.cs" />
     <Compile Include="Models\FormatSpecifier.cs" />
     <Compile Include="Models\HtmlBuilder.cs" />
     <Compile Include="Models\InputParser.cs" />
+    <Compile Include="Models\ModuleDeclaration.cs" />
     <Compile Include="Models\OutputParser.cs" />
+    <Compile Include="Models\Statement.cs" />
     <Compile Include="Models\SubDesign.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Models\SubmoduleInstantiationStmt.cs" />
+    <Compile Include="Models\VariableListStmt.cs" />
     <Compile Include="Views\DisplayHorizontal.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -143,6 +166,19 @@
     <None Include="Resources\Letter V blue.ico" />
     <Content Include="TODO.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

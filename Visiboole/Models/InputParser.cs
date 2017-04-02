@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms.VisualStyles;
+using VisiBoole.ErrorHandling;
 using VisiBoole.Models;
 
 namespace VisiBoole
@@ -33,6 +34,109 @@ namespace VisiBoole
 		{
             this.subDesign = sub;
 		}
+
+		#region "modified"
+
+		public void Parse(SubDesign sd)
+		{
+			List<Statement> stmtList = ParseStatements(sd);
+
+		}
+
+		private List<Statement> ParseStatements(SubDesign sd)
+		{
+			List<Statement> stmtList = new List<Statement>();
+			string txt = sd.Text;
+			byte[] byteArr = Encoding.UTF8.GetBytes(txt);
+			MemoryStream stream = new MemoryStream(byteArr);
+			using (StreamReader reader = new StreamReader(stream))
+			{
+				string nextLine;
+				int preLnNum = 0;     // the line number in edit mode, before the text is parsed
+				int postLnNum = 0;    // the line number in simulation mode, after the text is parsed
+				bool flag = false;    // flag is set to true after the first non-empty/comment is found
+				while ((nextLine = reader.ReadLine()) != null)
+				{
+					// check for an empty statement
+					if (string.IsNullOrEmpty(nextLine.Trim()))
+					{
+						stmtList.Add(new EmptyStmt(postLnNum, nextLine));
+						preLnNum++;
+						postLnNum++;
+						continue;
+					}
+
+					// check for a comment
+					if (nextLine.Trim().Substring(0, 2) == "//")
+					{
+						stmtList.Add(new CommentStmt(postLnNum, nextLine));
+						preLnNum++;
+						postLnNum++;
+						continue;
+					}
+
+					// collate statement if end of statement not detected
+					do
+					{						
+						string substr = reader.ReadLine();
+						if (substr == null)
+							throw new MissingEndOfStatementException("Expected end of statement. Missing ';' character?", preLnNum);
+						preLnNum++;
+						nextLine += substr;
+					} while (!nextLine.Contains(";"));
+
+					// check for a module declaration statement
+					Regex regex = new Regex(@"");
+					Match match = regex.Match(nextLine);
+					if (flag == false && match.Success)
+					{
+						stmtList.Add(new ModuleDeclarationStmt(postLnNum, nextLine));
+						flag = true;
+						preLnNum++;
+						postLnNum++;
+						continue;
+					}
+
+					// check for a boolean assignment statement
+					regex = new Regex(@"");
+					match = regex.Match(nextLine);
+					if (match.Success)
+					{
+						stmtList.Add(new BooleanAssignmentStmt(postLnNum, nextLine));
+						flag = true;
+						preLnNum++;
+						postLnNum++;
+						continue;
+					}
+
+					// check for a variable list statement
+					regex = new Regex(@"");
+					match = regex.Match(nextLine);
+					if (match.Success)
+					{
+						stmtList.Add(new VariableListStmt(postLnNum, nextLine));
+						flag = true;
+						preLnNum++;
+						postLnNum++;
+						continue;
+					}
+
+					// check for a submodule instantiation statement
+					regex = new Regex(@"");
+					match = regex.Match(nextLine);
+					if (match.Success)
+					{
+						stmtList.Add(new SubmoduleInstantiationStmt(postLnNum, nextLine));
+						flag = true;
+						preLnNum++;
+						postLnNum++;
+					}
+				}
+			}
+			return stmtList;
+		}
+
+		#endregion
 
 		/// <summary>
 		/// Parses the VisiBoole source code from the user into independent/dependent variables and their associated expressions
