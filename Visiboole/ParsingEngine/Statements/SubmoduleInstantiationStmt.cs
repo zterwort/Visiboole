@@ -6,7 +6,7 @@ namespace VisiBoole.ParsingEngine.Statements
 {
 	public class SubmoduleInstantiationStmt : Statement
 	{
-		public static Regex Pattern { get; } = new Regex(@"");
+		public static Regex Pattern { get; } = new Regex(@"^@\w{1,20}\(.*:.*:.*\);$");
 
 		public SubmoduleInstantiationStmt(int lnNum, string txt) : base(lnNum, txt)
 		{

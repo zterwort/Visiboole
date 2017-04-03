@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using VisiBoole;
 using VisiBoole.Models;
+using VisiBoole.ParsingEngine;
 using VisiBoole.Views;
 
 namespace VisiBoole.Controllers
@@ -247,20 +248,24 @@ namespace VisiBoole.Controllers
 		public void Run()
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
-            InputParser parseIn = new InputParser(sd);
-            parseIn.ParseInput(null);
-			parseOut.Input = sd.Text;
-            List<string> outputText = parseOut.GenerateOutput();
-            HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
-			string htmlOutput = html.GetHTML();
+			Parser p = new Parser();
+			p.Parse(sd);
 
-			browser.ObjectForScripting = this;
-			html.DisplayHtml(htmlOutput, browser);
+			//SubDesign sd = tabControl.SelectedTab.SubDesign();
+			//InputParser parseIn = new InputParser(sd);
+			//parseIn.ParseInput(null);
+			//parseOut.Input = sd.Text;
+			//List<string> outputText = parseOut.GenerateOutput();
+			//HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
+			//string htmlOutput = html.GetHTML();
 
-			if (CurrentDisplay is DisplaySingle)
-			{
-				mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
-			}
+			//browser.ObjectForScripting = this;
+			//html.DisplayHtml(htmlOutput, browser);
+
+			//if (CurrentDisplay is DisplaySingle)
+			//{
+			//	mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
+			//}
 		}
 
 		/// <summary>

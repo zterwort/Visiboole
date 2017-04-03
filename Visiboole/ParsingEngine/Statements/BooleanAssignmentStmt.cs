@@ -6,7 +6,7 @@ namespace VisiBoole.ParsingEngine.Statements
 {
 	public class BooleanAssignmentStmt : Statement
 	{
-		public static Regex Pattern { get; } = new Regex(@"");
+		public static Regex Pattern { get; } = new Regex(@"^\w{1,20} <?= ~?(~?\(?\w{1,20}\)? ?\+? ?)+~?\w{1,20}\)?;$");
 
 		public BooleanAssignmentStmt(int lnNum, string txt) : base(lnNum, txt)
 		{

@@ -6,7 +6,7 @@ namespace VisiBoole.ParsingEngine.Statements
 {
 	public class VariableListStmt : Statement
 	{
-		public static Regex Pattern { get; } = new Regex(@"");
+		public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)+;$");
 
 		public VariableListStmt(int lnNum, string txt) : base(lnNum, txt)
 		{

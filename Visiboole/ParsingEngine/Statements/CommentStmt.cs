@@ -6,7 +6,7 @@ namespace VisiBoole.ParsingEngine.Statements
 {
 	public class CommentStmt : Statement, IObjectCodeElement
 	{
-		public static Regex Pattern { get; } = new Regex(@"^//");
+		public static Regex Pattern { get; } = new Regex(@"^//.*$");
 
 		public CommentStmt(int lnNum, string txt) : base(lnNum, txt)
 		{
