@@ -25,6 +25,32 @@ namespace VisiBoole.ParsingEngine.Statements
 
 		}
 
+		public List<IObjectCodeElement> ParseSimpleExpression(ref string input)
+		{						
+			List<IObjectCodeElement> elems = new List<IObjectCodeElement>();
+			Regex regex = new Regex(@"\w{1,20}");
+			Match match = regex.Match(input);
+			int beg = match.Index;
+			string left = input.Substring(0, beg + 1);
+			string right = input.Substring(beg + match.Length);
+			// remove this expression from the containing string
+			input = string.Concat(left, right);
+			while (match.Success)
+			{
+				IndependentVariable iv = Database.TryGetVariable<IndependentVariable>(match.Value) as IndependentVariable;
+				string mval = match.Value;
+				if (iv == null)
+				{
+					// Declare the variable as 'false' if preceded by a tilda '~'
+					iv = new IndependentVariable(mval.IndexOf('~') == 0 ? mval.Substring(1) : mval, mval.IndexOf('~') != 0);
+					Database.AddVariable<IndependentVariable>(iv);
+				}
+				elems.Add(iv);
+				match = match.NextMatch();
+			}
+			return elems;
+		}
+
 		private string GetInnermostParens(string input)
 		{
 			// collect the contents of the outermost parens, non-inclusive

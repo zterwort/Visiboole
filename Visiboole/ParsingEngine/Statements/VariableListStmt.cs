@@ -22,14 +22,15 @@ namespace VisiBoole.ParsingEngine.Statements
 			Match match = regex.Match(input);
 			while (match.Success)
 			{
-				IndependentVariable val = Database.TryGetVariable<IndependentVariable>(match.Value) as IndependentVariable;
-				if (val == null)
+				IndependentVariable iv = Database.TryGetVariable<IndependentVariable>(match.Value) as IndependentVariable;
+				string mval = match.Value;
+				if (iv == null)
 				{
 					// Declare the variable as 'true' if preceded by an asterisk '*'
-					val = new IndependentVariable(match.Value, match.Value.IndexOf('*') == 0);
-					Database.AddVariable<IndependentVariable>(val);
+					iv = new IndependentVariable(mval.IndexOf('*') == 0 ? mval.Substring(1) : mval, mval.IndexOf('*') == 0);
+					Database.AddVariable<IndependentVariable>(iv);
 				}
-				Output.Add(val);
+				Output.Add(iv);
 				match = match.NextMatch();
 			}
 		}
