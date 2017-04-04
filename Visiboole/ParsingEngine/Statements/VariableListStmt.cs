@@ -7,16 +7,31 @@ using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
+    /// <summary>
+    /// A list of visiboole independent variables that can be interacted with by the user
+    /// </summary>
 	public class VariableListStmt : Statement
 	{
+        /// <summary>
+        /// The regex pattern that is used to identify a variable list statement
+        /// </summary>
 		public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)+;$");
 
+        /// <summary>
+        /// Constructs an instance of VariableListStmt
+        /// </summary>
+        /// <param name="lnNum">The line number that contains this statement</param>
+        /// <param name="txt">The full text of this statement</param>
 		public VariableListStmt(int lnNum, string txt) : base(lnNum, txt)
 		{
 		}
 
+        /// <summary>
+        /// Parse this statement into object code
+        /// </summary>
 		public override void Parse()
 		{
+            // add each variable to our database
 			string input = Text;
 			Regex regex = new Regex(@"\*?\w{1,20}");
 			Match match = regex.Match(input);
@@ -30,6 +45,7 @@ namespace VisiBoole.ParsingEngine.Statements
 					iv = new IndependentVariable(mval.IndexOf('*') == 0 ? mval.Substring(1) : mval, mval.IndexOf('*') == 0);
 					Database.AddVariable<IndependentVariable>(iv);
 				}
+                // add each discrete unit to our list of object code output
 				Output.Add(iv);
 				match = match.NextMatch();
 			}

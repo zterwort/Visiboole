@@ -109,6 +109,6 @@ C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
-C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources

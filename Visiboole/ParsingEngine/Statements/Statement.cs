@@ -14,7 +14,7 @@ namespace VisiBoole.ParsingEngine.Statements
 	{
 		public int LineNumber { get; set; }
 		public string Text { get; set; }
-		public List<IObjectCodeElement> Output { get; set; }
+		public List<IObjectCodeElement> Output { get; set; } = new List<IObjectCodeElement>();
 
 		protected Statement(int lnNum, string txt)
 		{

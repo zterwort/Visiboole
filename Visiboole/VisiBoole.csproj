@@ -72,6 +72,7 @@
     <Compile Include="Controllers\IMainWindowController.cs" />
     <Compile Include="Controllers\MainWindowController.cs" />
     <Compile Include="ErrorHandling\ErrorHandler.cs" />
+    <Compile Include="ErrorHandling\FormatSpecifierSyntaxException.cs" />
     <Compile Include="ErrorHandling\MissingEndOfStatementException.cs" />
     <Compile Include="ErrorHandling\ModuleDeclarationPlacementException.cs" />
     <Compile Include="ErrorHandling\StatementNotRecognizedException.cs" />

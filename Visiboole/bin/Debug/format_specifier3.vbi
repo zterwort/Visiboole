@@ -1,6 +1,11 @@
 *A3 *A2 A1 A0;
-A3 A2 B3 B2;
+%b{A[3..0]};
+%b{A3 A2 A1 A0};
+
 B3 B2 B1 B0;
+
+// This is a test comment
+
 B3 = A3 + ~A2 + ~A1 + A0;
 B2 = A3 A2 A1 A0;
 B1 = A3 + A2 + A1 + A0;
@@ -8,6 +13,7 @@ B0 = ~A3 + ~A0;
 C0 = B2 B1 B0;
 D0 = (A0 + B1 A1) + C0;
 
+// Format Specifiers
 %u{B3 B2 B1 B0};
 %b{B3 B2 B1 B0};
 %h{B3 B2 B1 B0};
