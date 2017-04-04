@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using VisiBoole.Models;
+using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
@@ -13,8 +16,25 @@ namespace VisiBoole.ParsingEngine.Statements
 		}
 
 		public override void Parse()
+		{			
+			// var tokens = Text.Split(new char[] {'='}, StringSplitOptions.None);
+			Regex regex = new Regex(@"<?=");
+			List<string> tokens = regex.Split(Text).Select(x => x.Trim()).ToList();
+			List<IndependentVariable> indVars = new List<IndependentVariable>();
+			string inrTxt = GetInnermostParens(tokens.Last());
+
+		}
+
+		private string GetInnermostParens(string input)
 		{
-			throw new NotImplementedException();
+			// collect the contents of the outermost parens, non-inclusive
+			Regex regex = new Regex(@"(?<=\().*(?=\))");
+			Match match = regex.Match(input);
+			if (match.Success)
+			{
+				return GetInnermostParens(match.Value);				
+			}
+			return input;
 		}
 	}
 

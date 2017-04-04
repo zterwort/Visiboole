@@ -1,4 +1,6 @@
-A3 A2 A1 A0;
+*A3 *A2 A1 A0;
+A3 A2 B3 B2;
+B3 B2 B1 B0;
 B3 = A3 + ~A2 + ~A1 + A0;
 B2 = A3 A2 A1 A0;
 B1 = A3 + A2 + A1 + A0;

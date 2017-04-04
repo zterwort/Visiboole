@@ -8,11 +8,7 @@ namespace VisiBoole.ParsingEngine.ObjectCode
 {
 	public class LineFeed : IObjectCodeElement
 	{
-		public bool? Value { get; set; }
-
-		public string ElemToString()
-		{
-			throw new NotImplementedException();
-		}
+		public string ObjCodeText { get { return Environment.NewLine; } }
+		public bool? ObjCodeValue { get { return null; } }
 	}
 }

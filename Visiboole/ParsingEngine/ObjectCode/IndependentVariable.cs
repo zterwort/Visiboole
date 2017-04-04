@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace VisiBoole.ParsingEngine.ObjectCode
 {
-	public class IndependentVariable : Variable
+	public class IndependentVariable : Variable, IObjectCodeElement
 	{
+		public bool? ObjCodeValue { get { return Value; } }
+		public string ObjCodeText { get { return Name; } }
+
+		public IndependentVariable(string name, bool value)
+		{
+			Name = name;
+			Value = value;
+		}
 	}
 }

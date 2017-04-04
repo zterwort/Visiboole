@@ -7,26 +7,53 @@ namespace VisiBoole.ParsingEngine
 {
 	public static class Database
 	{
-		private static Dictionary<string, IndependentVariable> _indVars = new Dictionary<string, IndependentVariable>();
-		private static Dictionary<string, DependentVariable> _depVars = new Dictionary<string, DependentVariable>();
-		private static Dictionary<string, Variable> _allVars = new Dictionary<string, Variable>();
+		private static readonly Dictionary<string, IndependentVariable> IndVars = new Dictionary<string, IndependentVariable>();
+		private static readonly Dictionary<string, DependentVariable> DepVars = new Dictionary<string, DependentVariable>();
+		private static readonly Dictionary<string, Variable> AllVars = new Dictionary<string, Variable>();
+		public static readonly List<IObjectCodeElement> ObjectCode = new List<IObjectCodeElement>();
 
-		public static bool AddVariable<T>(T var)
+		public static bool AddVariable<T>(T v)
 		{
 			Type varType = typeof(T);
 			if (varType == typeof(IndependentVariable))
 			{
-				IndependentVariable iv = (IndependentVariable) Convert.ChangeType(var, typeof(IndependentVariable));
-				_indVars.Add(iv.Name, iv);
+				IndependentVariable iv = (IndependentVariable)Convert.ChangeType(v, typeof(IndependentVariable));
+				IndVars.Add(iv.Name, iv);
+				AllVars.Add(iv.Name, iv);
 			}
 			else
 			{
-				DependentVariable dv = (DependentVariable)Convert.ChangeType(var, typeof(DependentVariable));
-				_depVars.Add(dv.Name, dv);
+				DependentVariable dv = (DependentVariable)Convert.ChangeType(v, typeof(DependentVariable));
+				DepVars.Add(dv.Name, dv);
+				AllVars.Add(dv.Name, dv);
 			}
-			Variable av = (Variable)Convert.ChangeType(var, typeof(Variable));
-			_allVars.Add(av.Name, av);
 			return true;
+		}
+
+		public static Variable TryGetVariable<T>(string name) where T : Variable
+		{
+			Type varType = typeof(T);
+			if (varType == typeof(IndependentVariable))
+			{
+				if (IndVars.ContainsKey(name))
+					return IndVars[name];
+			}
+			else if (varType == typeof(DependentVariable))
+			{
+				if (DepVars.ContainsKey(name))
+					return DepVars[name];
+			}
+			else if (varType == typeof(Variable))
+			{
+				if (AllVars.ContainsKey(name))
+					return AllVars[name];
+			}
+			return null;
+		}
+
+		public static void AddObjectCodeElement(IObjectCodeElement elem)
+		{
+			ObjectCode.Add(elem);
 		}
 	}
 }

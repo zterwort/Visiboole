@@ -2,7 +2,7 @@
 {
 	public interface IObjectCodeElement
 	{
-		bool? Value { get; set; }
-		string ElemToString();
+		string ObjCodeText { get; }
+		bool? ObjCodeValue { get; }
 	}
 }

@@ -9,11 +9,13 @@ namespace VisiBoole.ParsingEngine.ObjectCode
 {
 	public class Operator : IObjectCodeElement
 	{
-		public bool? Value { get; set; }
+		public string ObjCodeText { get { return OperatorChar; } }
+		public bool? ObjCodeValue { get { return null; } }
+		public string OperatorChar { get; set; }
 
-		public string ElemToString()
+		public Operator(string opChar)
 		{
-			throw new NotImplementedException();
+			OperatorChar = opChar;
 		}
 	}
 }

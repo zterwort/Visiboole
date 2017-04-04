@@ -7,20 +7,9 @@ using VisiBoole.ParsingEngine;
 
 namespace VisiBoole.ParsingEngine.ObjectCode
 {
-	public abstract class Variable : IObjectCodeElement
+	public abstract class Variable
 	{
 		public string Name { get; set; }
-		public bool? Value { get; set; }
-
-		bool? IObjectCodeElement.Value
-		{
-			get { return Value; }
-			set { Value = value; }
-		}
-
-		public string ElemToString()
-		{
-			throw new NotImplementedException();
-		}
+		public bool Value { get; set; }
 	}
 }
