@@ -27,10 +27,9 @@ namespace VisiBoole.ParsingEngine.Statements
 				{
 					// Declare the variable as 'true' if preceded by an asterisk '*'
 					val = new IndependentVariable(match.Value, match.Value.IndexOf('*') == 0);
-					Database.AddVariable<IndependentVariable>(val);					
+					Database.AddVariable<IndependentVariable>(val);
 				}
-				Database.AddObjectCodeElement(val);
-				var x = Database.ObjectCode;
+				Output.Add(val);
 				match = match.NextMatch();
 			}
 		}

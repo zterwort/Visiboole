@@ -73,6 +73,8 @@
     <Compile Include="Controllers\MainWindowController.cs" />
     <Compile Include="ErrorHandling\ErrorHandler.cs" />
     <Compile Include="ErrorHandling\MissingEndOfStatementException.cs" />
+    <Compile Include="ErrorHandling\ModuleDeclarationPlacementException.cs" />
+    <Compile Include="ErrorHandling\StatementNotRecognizedException.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="ParsingEngine\Statements\BooleanAssignmentStmt.cs" />
@@ -90,7 +92,7 @@
     <Compile Include="ParsingEngine\Statements\ModuleDeclarationStmt.cs" />
     <Compile Include="ParsingEngine\ObjectCode\Operator.cs" />
     <Compile Include="Models\OutputParser.cs" />
-    <Compile Include="ParsingEngine\ObjectCode\Parser.cs" />
+    <Compile Include="ParsingEngine\Parser.cs" />
     <Compile Include="ParsingEngine\Statements\Statement.cs" />
     <Compile Include="Models\SubDesign.cs">
       <SubType>Component</SubType>

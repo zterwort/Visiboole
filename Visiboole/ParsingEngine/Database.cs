@@ -50,10 +50,5 @@ namespace VisiBoole.ParsingEngine
 			}
 			return null;
 		}
-
-		public static void AddObjectCodeElement(IObjectCodeElement elem)
-		{
-			ObjectCode.Add(elem);
-		}
 	}
 }
