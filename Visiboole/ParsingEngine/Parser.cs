@@ -4,6 +4,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using VisiBoole.ErrorHandling;
 using VisiBoole.Models;
+using VisiBoole.ParsingEngine.ObjectCode;
 using VisiBoole.ParsingEngine.Statements;
 
 namespace VisiBoole.ParsingEngine
@@ -15,6 +16,13 @@ namespace VisiBoole.ParsingEngine
 			List<Statement> stmtList = ParseStatements(sd);
 			foreach (Statement stmt in stmtList)
 				stmt.Parse();
+            List<IObjectCodeElement> o = new List<IObjectCodeElement>();
+            foreach ( Statement stmt in stmtList)
+            {
+                o.AddRange(stmt.Output);
+            }
+            string s = "";
+            // concatenate all the output
 		}
 
 		/// <summary>

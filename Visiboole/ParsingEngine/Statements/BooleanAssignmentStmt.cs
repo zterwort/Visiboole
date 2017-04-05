@@ -20,6 +20,11 @@ namespace VisiBoole.ParsingEngine.Statements
             //line of code to start with
             string fullExpression = Text;
 
+            if(fullExpression.Contains(';'))
+            {
+                fullExpression.Substring(0, fullExpression.IndexOf(';'));
+            }
+
             //get our dependent variable and expression
             string dependent = fullExpression.Substring(0, fullExpression.IndexOf('='));
             string expression = fullExpression.Substring(fullExpression.IndexOf('=') + 1);
@@ -42,9 +47,59 @@ namespace VisiBoole.ParsingEngine.Statements
 
             //add the variable to the Database
             Database.AddVariable<DependentVariable>(depVariable);
+
+            MakeOrderedOutput(depVariable, expression);
         }
 
-        public bool SolveExpression(string dependent, string expression)
+
+        private void MakeOrderedOutput(DependentVariable dependentVar, string expression)
+        {
+            //Add dependent to output
+            Output.Add(dependentVar);
+
+            //Add sign to output
+            Operator sign = new Operator("=");
+            Output.Add(sign);
+
+            //Add expression variables to output
+            string exp = expression;
+            string[] elements = exp.Split(' ');
+            foreach (string item in elements)
+            {
+                string variable = item.Trim();
+                if(variable.Contains('~'))
+                {
+                    variable = variable.Substring(1);
+                }
+                if(variable.Contains(';'))
+                {
+                    variable = variable.Substring(0, variable.IndexOf(';'));
+                }
+                IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variable) as IndependentVariable;
+                DependentVariable depVar = Database.TryGetVariable<DependentVariable>(variable) as DependentVariable;
+
+                if(indVar != null)
+                {
+                    Output.Add(indVar);
+                }
+                else if(depVar != null)
+                {
+                    Output.Add(depVar);
+                }
+                else
+                {
+                    Operator op = new Operator(variable);
+                    Output.Add(op);
+                }
+
+            }
+
+            //Add linefeed to output
+            LineFeed lf = new LineFeed();
+            Output.Add(lf);
+        }
+
+        private bool SolveExpression(string dependent, string expression)
         {
             string fullExp = expression;
             string exp = "";
@@ -67,7 +122,7 @@ namespace VisiBoole.ParsingEngine.Statements
             }
         }
 
-        public string GetInnerMostExpression(string expression)
+        private string GetInnerMostExpression(string expression)
         {
             // this variable keeps track of the ('s in the expression.
             int innerStart;
@@ -111,7 +166,7 @@ namespace VisiBoole.ParsingEngine.Statements
             if(indVariable != null)
             {
                 //add variable to Output
-                Output.Add(indVariable);
+                //Output.Add(indVariable);
 
                 //return the value of the independent variable
                 return indVariable.Value;
@@ -121,7 +176,7 @@ namespace VisiBoole.ParsingEngine.Statements
             else if(depVariable != null)
             {
                 //add variable to Output
-                Output.Add(depVariable);
+                //Output.Add(depVariable);
 
                 //return the value of the dependent variable
                 return depVariable.Value;
@@ -137,7 +192,7 @@ namespace VisiBoole.ParsingEngine.Statements
                 Database.AddVariable<IndependentVariable>(indVariable);
 
                 //Add variable to Output
-                Output.Add(indVariable);
+                //Output.Add(indVariable);
 
                 //return the value of the independent variable
                 return indVariable.Value;
