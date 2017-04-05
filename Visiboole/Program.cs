@@ -38,7 +38,9 @@ namespace VisiBoole
 
 			dc.AttachMainWindowController(mwc);
 			
-			Application.Run(mw);
+			//Application.Run(mw);
+
+            Application.Run(new VisiBoole.Forms.MainWindow());
 		}
 	}
 }

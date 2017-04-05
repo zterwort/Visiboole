@@ -112,3 +112,8 @@ C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Debug\EZNetButton.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Forms.MainWindow.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Debug\ListViewPrinter.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Debug\ObjectListView.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Debug\SparkleLibrary.dll

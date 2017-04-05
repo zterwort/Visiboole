@@ -77,8 +77,6 @@ namespace VisiBoole.Models
             this.Dependencies = new Dictionary<string, List<string>>();
 
 	        this.ShowLineNumbers = true;
-	        this.BackColor = Color.FromArgb(75, 77, 81);
-	        this.ForeColor = Color.FromArgb(34, 226, 85);
         }
 
 		/// <summary>
