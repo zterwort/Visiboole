@@ -7,29 +7,70 @@ namespace VisiBoole.ParsingEngine
 {
 	public static class Database
 	{
+        // Independent Variables
 		private static readonly Dictionary<string, IndependentVariable> IndVars = new Dictionary<string, IndependentVariable>();
+
+        // Dependent Variables
 		private static readonly Dictionary<string, DependentVariable> DepVars = new Dictionary<string, DependentVariable>();
-		private static readonly Dictionary<string, Variable> AllVars = new Dictionary<string, Variable>();
+
+        // Dependencies - List of all variables in the expression that 
+        //                relates to the dependent variable for the expression
+        private static readonly Dictionary<string, List<string>> Dependencies = new Dictionary<string, List<string>>();
+
+        // Expressions - expression that relates to the dependent variable
+        //               for the expression
+        private static readonly Dictionary<string, string> Expressions = new Dictionary<string, string>();
+
+        // All Variables - list of all variables independent and dependent
+        public static readonly Dictionary<string, Variable> AllVars = new Dictionary<string, Variable>();
+
+        // ObjectCode - list of "compiled" VisiBoole Object Code. Each item 
+        //              has text and value to be interpreted by the HTML parser
 		public static readonly List<IObjectCodeElement> ObjectCode = new List<IObjectCodeElement>();
 
+        /// <summary>
+        /// Adds a variable to that respective variables dictionary
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="v"></param>
+        /// <returns></returns>
 		public static bool AddVariable<T>(T v)
 		{
 			Type varType = typeof(T);
 			if (varType == typeof(IndependentVariable))
 			{
 				IndependentVariable iv = (IndependentVariable)Convert.ChangeType(v, typeof(IndependentVariable));
-				IndVars.Add(iv.Name, iv);
-				AllVars.Add(iv.Name, iv);
+                if (!IndVars.ContainsKey(iv.Name))
+                {
+                    IndVars.Add(iv.Name, iv);
+                }
+				if (!AllVars.ContainsKey(iv.Name))
+                {
+                    AllVars.Add(iv.Name, iv);
+                }
 			}
 			else
 			{
 				DependentVariable dv = (DependentVariable)Convert.ChangeType(v, typeof(DependentVariable));
-				DepVars.Add(dv.Name, dv);
-				AllVars.Add(dv.Name, dv);
+                if (!DepVars.ContainsKey(dv.Name))
+                {
+				    DepVars.Add(dv.Name, dv);
+                }
+                if (!AllVars.ContainsKey(dv.Name))
+                {
+                    AllVars.Add(dv.Name, dv);
+                }
 			}
 			return true;
 		}
 
+        /// <summary>
+        /// Returns the variable if it exists. If the variable does not
+        ///   exist then it will simply return null
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="name"></param>
+        /// <returns></returns>
 		public static Variable TryGetVariable<T>(string name) where T : Variable
 		{
 			Type varType = typeof(T);
@@ -50,5 +91,36 @@ namespace VisiBoole.ParsingEngine
 			}
 			return null;
 		}
+
+        public static void CreateDependenciesList(string dependentName)
+        {
+            if(!Dependencies.ContainsKey(dependentName))
+            {
+                Dependencies.Add(dependentName, new List<string>());
+            }
+        }
+
+        public static void AddDependencies(string dependentName, string ExpressionVariableName)
+        {
+            if(!Dependencies[dependentName].Contains(ExpressionVariableName))
+            {
+                Dependencies[dependentName].Add(ExpressionVariableName);
+            }
+        }
+
+        public static void AddExpression(string dependentName, string expressionValue)
+        {
+            if (Expressions.ContainsKey(dependentName))
+            {
+                if (!Expressions[dependentName].Contains(expressionValue))
+                {
+                    Expressions[dependentName] = expressionValue;
+                }
+            }
+            else
+            {
+                Expressions.Add(dependentName, expressionValue);
+            }
+        }
 	}
 }

@@ -72,7 +72,6 @@ C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.Disp
 C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
 C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
 C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
-C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
 C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe.config
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\bin\Debug\VisiBoole.exe
@@ -112,3 +111,5 @@ C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
 C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\bin\Debug\RicherTextBox.dll
+C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources

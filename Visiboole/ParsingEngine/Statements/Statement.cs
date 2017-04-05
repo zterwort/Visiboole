@@ -13,6 +13,9 @@ namespace VisiBoole.ParsingEngine.Statements
 	public abstract class Statement
 	{
 		public int LineNumber { get; set; }
+
+        // Hidden Property used by other classes in Statements 
+        //   folder to get access to the lines code.
 		public string Text { get; set; }
 		public List<IObjectCodeElement> Output { get; set; } = new List<IObjectCodeElement>();
 

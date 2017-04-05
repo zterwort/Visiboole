@@ -76,11 +76,17 @@ namespace VisiBoole.ParsingEngine.Statements
 		            {
 		                // add each variable to our output list of object code
 		                string key = m.Value;
-		                IndependentVariable v = Database.TryGetVariable<IndependentVariable>(key) as IndependentVariable;
-		                if (v != null)
+		                IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(key) as IndependentVariable;
+                        DependentVariable depVar = Database.TryGetVariable<DependentVariable>(key) as DependentVariable;
+                        var x = Database.AllVars;
+		                if (indVar != null)
 		                {
-		                    Output.Add(v);
+		                    Output.Add(indVar);
 		                }
+                        else if (depVar != null)
+                        {
+                            Output.Add(depVar);
+                        }
 		                else
 		                {
 		                    // if a variable wasn't found then the given data is erroneous
