@@ -250,15 +250,15 @@ namespace VisiBoole.Controllers
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
 			Parser p = new Parser();
-			List<IObjectCodeElement> output = p.Parse(sd);
+			List<IObjectCodeElement> output = p.Parse(sd, null);
 
             //make output
             parseOut.Input = sd.Text;
             List<string> outputText = parseOut.GenerateOutput();
 
             //make html
-            HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
-            //HtmlBuilder html = new HtmlBuilder(output);
+            //HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
+            HtmlBuilder html = new HtmlBuilder(output);
             string htmlOutput = html.GetHTML();
 
             browser.ObjectForScripting = this;
@@ -292,13 +292,20 @@ namespace VisiBoole.Controllers
 		/// <param name="variableName">The name of the variable that was clicked by the user</param>
 		public void Variable_Click(string variableName)
 		{
-			SubDesign sd = tabControl.SelectedTab.SubDesign();
-            InputParser parseIn = new InputParser(sd);
-            parseIn.ParseInput(variableName);
-			parseOut.Input = sd.Text;
-            List<string> outputText = parseOut.GenerateOutput();
-            HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
-			string htmlOutput = html.GetHTML();
+            SubDesign sd = tabControl.SelectedTab.SubDesign();
+            Parser p = new Parser();
+            List<IObjectCodeElement> output = p.Parse(sd, variableName);
+
+
+
+            //SubDesign sd = tabControl.SelectedTab.SubDesign();
+            //InputParser parseIn = new InputParser(sd);
+            //parseIn.ParseInput(variableName);
+            //parseOut.Input = sd.Text;
+            //List<string> outputText = parseOut.GenerateOutput();
+            //HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
+            HtmlBuilder html = new HtmlBuilder(output);
+            string htmlOutput = html.GetHTML();
 
 			browser.ObjectForScripting = this;
 			html.DisplayHtml(htmlOutput, browser);

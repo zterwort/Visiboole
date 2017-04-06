@@ -22,7 +22,7 @@ namespace VisiBoole.ParsingEngine.Statements
 
             if(fullExpression.Contains(';'))
             {
-                fullExpression.Substring(0, fullExpression.IndexOf(';'));
+                fullExpression = fullExpression.Substring(0, fullExpression.IndexOf(';'));
             }
 
             //get our dependent variable and expression
@@ -43,7 +43,15 @@ namespace VisiBoole.ParsingEngine.Statements
             bool dependentValue = SolveExpression(dependent, expression);
 
             //make a dependent variable
-            DependentVariable depVariable = new DependentVariable(dependent, dependentValue);
+            DependentVariable depVariable = Database.TryGetVariable<DependentVariable>(dependent) as DependentVariable;
+            if(depVariable != null)
+            {
+                Database.SetDepVar(dependent, dependentValue);
+            }
+            else
+            {
+                depVariable = new DependentVariable(dependent, dependentValue);
+            }
 
             //add the variable to the Database
             Database.AddVariable<DependentVariable>(depVariable);
@@ -69,29 +77,111 @@ namespace VisiBoole.ParsingEngine.Statements
                 string variable = item.Trim();
                 if(variable.Contains('~'))
                 {
-                    variable = variable.Substring(1);
+                    string newVariable = variable.Substring(1);
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
+                    if (indVar != null)
+                    {
+                        IndependentVariable var = new IndependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else if (depVar != null)
+                    {
+                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else
+                    {
+                        Operator op = new Operator(variable);
+                        Output.Add(op);
+                    }
                 }
-                if(variable.Contains(';'))
+                else if(variable.Contains('('))
                 {
-                    variable = variable.Substring(0, variable.IndexOf(';'));
+                    string newVariable = variable.Substring(1);
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
+                    if (indVar != null)
+                    {
+                        IndependentVariable var = new IndependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else if (depVar != null)
+                    {
+                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else
+                    {
+                        Operator op = new Operator(variable);
+                        Output.Add(op);
+                    }
                 }
-                IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variable) as IndependentVariable;
-                DependentVariable depVar = Database.TryGetVariable<DependentVariable>(variable) as DependentVariable;
-
-                if(indVar != null)
+                else if(variable.Contains(')'))
                 {
-                    Output.Add(indVar);
+                    string newVariable = variable.Substring(0, variable.IndexOf(')'));
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
+                    if (indVar != null)
+                    {
+                        IndependentVariable var = new IndependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else if (depVar != null)
+                    {
+                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else
+                    {
+                        Operator op = new Operator(variable);
+                        Output.Add(op);
+                    }
                 }
-                else if(depVar != null)
+                else if(variable.Contains('~') && variable.Contains(';'))
                 {
-                    Output.Add(depVar);
+                    string newVariable = variable.Substring(1, variable.IndexOf(';'));
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
+                    if (indVar != null)
+                    {
+                        IndependentVariable var = new IndependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else if (depVar != null)
+                    {
+                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+                        Output.Add(var);
+                    }
+                    else
+                    {
+                        Operator op = new Operator(variable);
+                        Output.Add(op);
+                    }
                 }
                 else
                 {
-                    Operator op = new Operator(variable);
-                    Output.Add(op);
-                }
+                    if (variable.Contains(';'))
+                    {
+                        variable = variable.Substring(0, variable.IndexOf(';'));
+                    }
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(variable) as DependentVariable;
 
+                    if (indVar != null)
+                    {
+                        Output.Add(indVar);
+                    }
+                    else if (depVar != null)
+                    {
+                        Output.Add(depVar);
+                    }
+                    else
+                    {
+                        Operator op = new Operator(variable);
+                        Output.Add(op);
+                    }
+                }
             }
 
             //Add linefeed to output
@@ -249,11 +339,11 @@ namespace VisiBoole.ParsingEngine.Statements
                 ///
                 if(variableValue)
                 {
-                    basicExpression = basicExpression.Replace(oldVariable, "TRUE");
+                    basicExpression = basicExpression.Replace(oldVariable, "FALSE");
                 }
                 else
                 {
-                    basicExpression = basicExpression.Replace(oldVariable, "FALSE");
+                    basicExpression = basicExpression.Replace(oldVariable, "TRUE");
                 }
 
                 // Add the variable to the Dependencies
@@ -446,54 +536,6 @@ namespace VisiBoole.ParsingEngine.Statements
             }
             return 0;
         }
-
-        /*public override void Parse()
-		{			
-			// var tokens = Text.Split(new char[] {'='}, StringSplitOptions.None);
-			Regex regex = new Regex(@"<?=");
-			List<string> tokens = regex.Split(Text).Select(x => x.Trim()).ToList();
-			List<IndependentVariable> indVars = new List<IndependentVariable>();
-			string inrTxt = GetInnermostParens(tokens.Last());
-
-		}*/
-
-        /*public List<IObjectCodeElement> ParseSimpleExpression(ref string input)
-		{						
-			List<IObjectCodeElement> elems = new List<IObjectCodeElement>();
-			Regex regex = new Regex(@"\w{1,20}");
-			Match match = regex.Match(input);
-			int beg = match.Index;
-			string left = input.Substring(0, beg + 1);
-			string right = input.Substring(beg + match.Length);
-			// remove this expression from the containing string
-			input = string.Concat(left, right);
-			while (match.Success)
-			{
-				IndependentVariable iv = Database.TryGetVariable<IndependentVariable>(match.Value) as IndependentVariable;
-				string mval = match.Value;
-				if (iv == null)
-				{
-					// Declare the variable as 'false' if preceded by a tilda '~'
-					iv = new IndependentVariable(mval.IndexOf('~') == 0 ? mval.Substring(1) : mval, mval.IndexOf('~') != 0);
-					Database.AddVariable<IndependentVariable>(iv);
-				}
-				elems.Add(iv);
-				match = match.NextMatch();
-			}
-			return elems;
-		}
-
-		private string GetInnermostParens(string input)
-		{
-			// collect the contents of the outermost parens, non-inclusive
-			Regex regex = new Regex(@"(?<=\().*(?=\))");
-			Match match = regex.Match(input);
-			if (match.Success)
-			{
-				return GetInnermostParens(match.Value);				
-			}
-			return input;
-		}*/
     }
 
 }

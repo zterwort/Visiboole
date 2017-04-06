@@ -11,18 +11,39 @@ namespace VisiBoole.ParsingEngine
 {
 	public class Parser
 	{
-		public List<IObjectCodeElement> Parse(SubDesign sd)
+		public List<IObjectCodeElement> Parse(SubDesign sd, string variableName)
 		{
-			List<Statement> stmtList = ParseStatements(sd);
-			foreach (Statement stmt in stmtList)
-				stmt.Parse();
-            List<IObjectCodeElement> output = new List<IObjectCodeElement>();
-            foreach ( Statement stmt in stmtList)
+            if(string.IsNullOrEmpty(variableName))
             {
-                output.AddRange(stmt.Output);
+                List<Statement> stmtList = ParseStatements(sd);
+                foreach (Statement stmt in stmtList)
+                    stmt.Parse();
+                List<IObjectCodeElement> output = new List<IObjectCodeElement>();
+                foreach (Statement stmt in stmtList)
+                {
+                    output.AddRange(stmt.Output);
+                }
+                //Database.SetOutput(output);
+                return output;
             }
-            return output;
-            // concatenate all the output
+			else
+            {
+                Database.VariableClicked(variableName);
+                List<Statement> stmtList = ParseStatements(sd);
+                foreach (Statement stmt in stmtList)
+                {
+                    stmt.Parse();
+                }
+                List<IObjectCodeElement> output = new List<IObjectCodeElement>();
+                foreach (Statement stmt in stmtList)
+                {
+                    output.AddRange(stmt.Output);
+                }
+                //Database.SetOutput(output);
+                Dictionary<string, IndependentVariable> z = Database.GetIndVars();
+                Dictionary<string, DependentVariable> x = Database.GetDepVars();
+                return output;
+            }
 		}
 
 		/// <summary>

@@ -102,6 +102,8 @@ namespace VisiBoole.ParsingEngine.Statements
                     string final = Calculate(format, valueList);
                     Operator val = new Operator(final);
                     Output.Add(val);
+                    LineFeed lf = new LineFeed();
+                    Output.Add(lf);
                 }
 		        else
 		        {
@@ -151,7 +153,9 @@ namespace VisiBoole.ParsingEngine.Statements
                     string final = Calculate(format, valueList);
                     Operator val = new Operator(final);
                     Output.Add(val);
-		        }
+                    LineFeed lf = new LineFeed();
+                    Output.Add(lf);
+                }
 
 		        // if no values have been gathered, then there was a user syntax error
 		        if (Output.Count == 0)

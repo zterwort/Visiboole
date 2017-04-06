@@ -19,6 +19,8 @@ namespace VisiBoole.ParsingEngine.Statements
 			{
 				Output.Add(this);
 			}
+            LineFeed lf = new LineFeed();
+            Output.Add(lf);
 		}
 
 		#region IObjectCodeElement attributes

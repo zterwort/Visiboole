@@ -35,7 +35,42 @@ namespace VisiBoole.ParsingEngine.Statements
 			string input = Text;
 			Regex regex = new Regex(@"\*?\w{1,20}");
 			Match match = regex.Match(input);
-			while (match.Success)
+
+            //used to specify variables name and value
+            string variableName;
+            bool variableValue;
+
+            while (match.Success)
+            {
+                if (match.Value.Contains("*"))
+                {
+                    variableName = match.Value.Substring(1);
+                    variableValue = true;
+                }
+                else
+                {
+                    variableName = match.Value;
+                    variableValue = false;
+                }
+                IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variableName) as IndependentVariable;
+                if(indVar != null)
+                {
+                    Output.Add(indVar);
+                }
+                else
+                {
+                    indVar = new IndependentVariable(variableName, variableValue);
+                    Database.AddVariable<IndependentVariable>(indVar);
+                    Output.Add(indVar);
+                }
+                match = match.NextMatch();
+            }
+            LineFeed lf = new LineFeed();
+            Output.Add(lf);
+
+
+
+            /*while (match.Success)
 			{
 				IndependentVariable iv = Database.TryGetVariable<IndependentVariable>(match.Value) as IndependentVariable;
 				string mval = match.Value;
@@ -49,6 +84,8 @@ namespace VisiBoole.ParsingEngine.Statements
 				Output.Add(iv);
 				match = match.NextMatch();
 			}
+            LineFeed lf = new LineFeed();
+            Output.Add(lf);*/
 		}
 	}
 }

@@ -26,7 +26,31 @@ namespace VisiBoole.ParsingEngine
 
         // ObjectCode - list of "compiled" VisiBoole Object Code. Each item 
         //              has text and value to be interpreted by the HTML parser
-		public static readonly List<IObjectCodeElement> ObjectCode = new List<IObjectCodeElement>();
+		private static List<IObjectCodeElement> ObjectCode { get; set; }
+
+        public static Dictionary<string, DependentVariable> GetDepVars()
+        {
+            return DepVars;
+        }
+        public static Dictionary<string, IndependentVariable> GetIndVars()
+        {
+            return IndVars;
+        }
+
+        public static void SetOutput(List<IObjectCodeElement> list)
+        {
+            ObjectCode = list;
+        }
+
+        public static List<IObjectCodeElement> GetOutput()
+        {
+            return ObjectCode;
+        }
+
+        public static void SetDepVar(string name, bool value)
+        {
+            DepVars[name].Value = value;
+        }
 
         /// <summary>
         /// Adds a variable to that respective variables dictionary
@@ -91,6 +115,36 @@ namespace VisiBoole.ParsingEngine
 			}
 			return null;
 		}
+
+        public static void VariableClicked(string variableName)
+        {
+            if(IndVars.ContainsKey(variableName))
+            {
+                if(IndVars[variableName].Value.Equals(true))
+                {
+                    IndVars[variableName].Value = false;
+                    return;
+                }
+                else
+                {
+                    IndVars[variableName].Value = true;
+                    return;
+                }
+            }
+            if(DepVars.ContainsKey(variableName))
+            {
+                if (DepVars[variableName].Value.Equals(true))
+                {
+                    DepVars[variableName].Value = false;
+                    return;
+                }
+                else
+                {
+                    DepVars[variableName].Value = true;
+                    return;
+                }
+            }
+        }
 
         public static void CreateDependenciesList(string dependentName)
         {

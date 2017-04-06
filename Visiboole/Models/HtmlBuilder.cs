@@ -147,10 +147,158 @@ namespace VisiBoole.Models
 
         public HtmlBuilder(List<IObjectCodeElement> output)
         {
-            foreach(IObjectCodeElement element in output)
+            List<List<IObjectCodeElement>> newOutput = PreParseHTML(output);
+            foreach (List<IObjectCodeElement> line in newOutput)
             {
-                
+                currentLine = "<p>";
+                //string[] tokens = line.Split(' ');
+
+                foreach (IObjectCodeElement token in line)
+                {
+                    string variable = token.ObjCodeText;
+                    if(variable.Contains(';'))
+                    {
+                        variable = variable.Substring(0, variable.IndexOf(';'));
+                    }
+                    bool? value = token.ObjCodeValue;
+                    Type varType = token.GetType();
+                    //These lists are used to keep track of the amount of parenthesis in front or behind a variable
+                    List<string> openParenthesisHolder = new List<string>();
+                    List<string> closeParenthesisHolder = new List<string>();
+
+                    while (variable.Contains('('))
+                    {
+                        int index = variable.IndexOf("(");
+                        variable = variable.Substring(index + 1, variable.Length - 1);
+                        openParenthesisHolder.Add("(");
+                    }
+
+                    while (variable.Contains(')'))
+                    {
+                        int index = variable.LastIndexOf(')');
+                        variable = variable.Substring(0, index);
+                        closeParenthesisHolder.Add(")");
+                    }
+
+                    //Used to holder the amount of parenthesis in front or behind each variable
+                    string openParenthesis = String.Join(String.Empty, openParenthesisHolder);
+                    string closeParenthesis = String.Join(String.Empty, closeParenthesisHolder);
+
+                    if (variable.Contains('~'))
+                    {
+                        if (value.Equals(null))
+                        {
+                            currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                            currentLine += " ";
+                        }
+                        else
+                        {
+                            if (value.Equals(true))
+                            {
+                                if (varType == typeof(DependentVariable)) //if variable is dependent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='green' >" + variable.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                else //if variable is independent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' >~</font><font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable.Substring(1) + "')\" >" + variable.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                currentLine += " ";
+                            }
+                            else
+                            {
+                                if (varType == typeof(DependentVariable)) //if variable is dependent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='red' >" + variable.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                else //if variable is independent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='black' >~</font><font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable.Substring(1) + "')\" >" + variable.Substring(1) + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                currentLine += " ";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (value.Equals(null))
+                        {
+                            currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                            currentLine += " ";
+                        }
+                        else
+                        {
+                            if (value.Equals(true))
+                            {
+                                if (varType == typeof(DependentVariable)) //if variable is dependent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                else //if variable is independent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable + "')\" >" + variable + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                currentLine += " ";
+                            }
+                            else
+                            {
+                                if (varType == typeof(DependentVariable)) //if variable is dependent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                else //if variable is independent
+                                {
+                                    currentLine += "<font color='black' >" + openParenthesis + "</font>";
+                                    currentLine += "<font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable + "')\" >" + variable + "</font>";
+                                    currentLine += "<font color='black' >" + closeParenthesis + "</font>";
+                                }
+                                currentLine += " ";
+                            }
+                        }
+                    }
+                }
+                currentLine = currentLine.Substring(0, currentLine.Length - 1);
+                currentLine += "</p>";
+                HtmlText += currentLine + "\n";
             }
+        }
+
+        private List<List<IObjectCodeElement>> PreParseHTML(List<IObjectCodeElement> output)
+        {
+            List<List<IObjectCodeElement>> fullText = new List<List<IObjectCodeElement>>();
+            List<IObjectCodeElement> subText = new List<IObjectCodeElement>();
+            foreach (IObjectCodeElement element in output)
+            {
+                Type elementType = element.GetType();
+                if (elementType == typeof(LineFeed))
+                {
+                    fullText.Add(subText);
+                    subText = new List<IObjectCodeElement>();
+                }
+                else
+                {
+                    subText.Add(element);
+                }
+            }
+            return fullText;
         }
 
 		/// <summary>
