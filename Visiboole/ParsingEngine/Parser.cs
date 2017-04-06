@@ -11,17 +11,17 @@ namespace VisiBoole.ParsingEngine
 {
 	public class Parser
 	{
-		public void Parse(SubDesign sd)
+		public List<IObjectCodeElement> Parse(SubDesign sd)
 		{
 			List<Statement> stmtList = ParseStatements(sd);
 			foreach (Statement stmt in stmtList)
 				stmt.Parse();
-            List<IObjectCodeElement> o = new List<IObjectCodeElement>();
+            List<IObjectCodeElement> output = new List<IObjectCodeElement>();
             foreach ( Statement stmt in stmtList)
             {
-                o.AddRange(stmt.Output);
+                output.AddRange(stmt.Output);
             }
-            string s = "";
+            return output;
             // concatenate all the output
 		}
 

@@ -41,7 +41,7 @@ namespace VisiBoole.Models
 		}
 
 		/// <summary>
-		/// Converts the given string to an array of strings, delimited by NewLine
+		/// Converts the given string to a list of strings, delimited by NewLine
 		/// </summary>
 		/// <param name="pText">The text to convert</param>
 		/// <returns>Returns an array of strings, each line in its own box, if successful; Returns null if otherwise</returns>
@@ -104,5 +104,17 @@ namespace VisiBoole.Models
 			}
 			return pText;
 		}
+
+        private List<string> FormatSpecToFormat(List<string> pText)
+        {
+            for (int i = 0; i < pText.Count; i++)
+            {
+                if(pText[i].Contains('%'))
+                {
+                    //change pText[i] to the correct format
+                }
+            }
+            return pText;
+        }
 	}
 }

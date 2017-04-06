@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.Models
 {
@@ -14,6 +15,7 @@ namespace VisiBoole.Models
 		//List<string> HtmlText = new List<string>();
 		public string HtmlText = "";
 		public string currentLine = "";
+
 		public HtmlBuilder(List<string> text, string fileName, Dictionary<string, int> Variables, Dictionary<string, string> Expressions)
 		{
 			foreach (string line in text)
@@ -142,6 +144,14 @@ namespace VisiBoole.Models
 				HtmlText += currentLine + "\n";
 			}
 		}
+
+        public HtmlBuilder(List<IObjectCodeElement> output)
+        {
+            foreach(IObjectCodeElement element in output)
+            {
+                
+            }
+        }
 
 		/// <summary>
 		/// Returns the generated HTML text

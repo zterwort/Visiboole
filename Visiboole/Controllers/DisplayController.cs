@@ -10,6 +10,7 @@ using VisiBoole;
 using VisiBoole.Models;
 using VisiBoole.ParsingEngine;
 using VisiBoole.Views;
+using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.Controllers
 {
@@ -249,7 +250,24 @@ namespace VisiBoole.Controllers
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
 			Parser p = new Parser();
-			p.Parse(sd);
+			List<IObjectCodeElement> output = p.Parse(sd);
+
+            //make output
+            parseOut.Input = sd.Text;
+            List<string> outputText = parseOut.GenerateOutput();
+
+            //make html
+            HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
+            //HtmlBuilder html = new HtmlBuilder(output);
+            string htmlOutput = html.GetHTML();
+
+            browser.ObjectForScripting = this;
+            html.DisplayHtml(htmlOutput, browser);
+
+            if(CurrentDisplay is DisplaySingle)
+            {
+                mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
+            }
 
 			//SubDesign sd = tabControl.SelectedTab.SubDesign();
 			//InputParser parseIn = new InputParser(sd);
