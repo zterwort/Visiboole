@@ -1,5 +1,4 @@
 ﻿using System;
-using VisiBoole.Models;
 using VisiBoole.ParsingEngine.Statements;
 
 namespace VisiBoole.ErrorHandling

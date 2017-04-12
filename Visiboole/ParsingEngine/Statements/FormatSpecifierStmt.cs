@@ -2,21 +2,43 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using VisiBoole.ErrorHandling;
-using VisiBoole.Models;
 using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
+    /// <summary>
+    /// A formatted field is a way of displaying multiple Boolean variables as a single numeric
+    /// value. A formatted field begins with a percent sign followed by a radix specifier followed by the
+    /// list of variables enclosed in braces. The supported radix specifiers are: b, h, d, and u
+    /// </summary>
 	public class FormatSpecifierStmt : Statement
 	{
-		public static Regex Pattern1 { get; } = new Regex(@"^%[ubhd]{[a-zA-z0-9_]{1,20}\[\d\.\.\d\]};$");
-		public static Regex Pattern2 { get; } = new Regex(@"^%[ubhd]{([a-zA-Z0-9_]{1,20} ?)+};$");
+        /// <summary>
+        /// The identifying pattern that can be used to identify and extract this statement from raw text
+        /// This pattern is the second identifying pattern and is of a form similar to: A[m.step.n]
+        /// </summary>
+        public static Regex Pattern1 { get; } = new Regex(@"^%[ubhd]{[a-zA-z0-9_]{1,20}\[\d\.\.\d\]};$");
 
-		public FormatSpecifierStmt(int lnNum, string txt) : base(lnNum, txt)
+	    /// <summary>
+	    /// The identifying pattern that can be used to identify and extract this statement from raw text.
+	    /// This pattern is the second identifying pattern and is of a form similar to: A(m) A(m-1*step) A(m-2*step) An
+	    /// </summary>
+        public static Regex Pattern2 { get; } = new Regex(@"^%[ubhd]{([a-zA-Z0-9_]{1,20} ?)+};$");
+
+        /// <summary>
+        /// Constructs an instance of FormatSpecifierStmt
+        /// </summary>
+        /// <param name="lnNum">The line number that this statement is located on within edit mode - not simulation mode</param>
+        /// <param name="txt">The raw, unparsed text of this statement</param>
+        public FormatSpecifierStmt(int lnNum, string txt) : base(lnNum, txt)
 		{
 		}
 
-		public override void Parse()
+	    /// <summary>
+	    /// Parses the Text of this statement into a list of discrete IObjectCodeElement elements
+	    /// to be used by the html parser to generate formatted output to be displayed in simulation mode.
+	    /// </summary>
+        public override void Parse()
 		{
 		    try
 		    {
@@ -171,6 +193,13 @@ namespace VisiBoole.ParsingEngine.Statements
 
         }
 
+        /// <summary>
+        /// Converts the list of boolean values into a string representation of the 
+        /// given format (specifier) token; binary, hex, signed, or unsigned.
+        /// </summary>
+        /// <param name="specifier">Format that the values should be converted to; binary, hex, signed, or unsigned.</param>
+        /// <param name="values">The list of boolean (binary) values for this statement</param>
+        /// <returns></returns>
         public string Calculate(string specifier, List<int> values)
         {
             switch (specifier.ToUpper())
@@ -188,6 +217,11 @@ namespace VisiBoole.ParsingEngine.Statements
             }
         }
 
+        /// <summary>
+        /// Converts the given list to its string binary equivalent
+        /// </summary>
+        /// <param name="_vals">A list of 0 or 1 values</param>
+        /// <returns>Returns a binary string representation</returns>
         private string ToBinary(List<int> _vals)
         {
             string binary = "";
@@ -198,6 +232,11 @@ namespace VisiBoole.ParsingEngine.Statements
             return binary;
         }
 
+        /// <summary>
+        /// Converts the given binary to its string unsigned decimal equivalent
+        /// </summary>
+        /// <param name="binary">A binary string representation</param>
+        /// <returns>Returns an unsigned decimal string representation</returns>
         public string ToUnsigned(string binary) // decimal
         {
             int dec = 0;
@@ -209,12 +248,22 @@ namespace VisiBoole.ParsingEngine.Statements
             return dec.ToString();
         }
 
+        /// <summary>
+        /// Converts the given binary to its string hex equivalent
+        /// </summary>
+        /// <param name="binary">A binary string representation</param>
+        /// <returns>Returns a hexadecimal string representation</returns>
         private string ToHex(string binary)
         {
             //string binary = ToBinary(new List<int>());
             return Convert.ToInt32(binary, 2).ToString("X");
         }
 
+        /// <summary>
+        /// Converts the given binary to its string signed decimal equivalent
+        /// </summary>
+        /// <param name="binary">A binary string representation</param>
+        /// <returns>Returns a signed decimal string representation</returns>
         private string ToSigned(string binary)
         {
             int index = binary.IndexOf("1", StringComparison.Ordinal);

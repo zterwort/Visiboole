@@ -1,20 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
-using VisiBoole.Models;
 using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
+    /// <summary>
+    /// The Boolean assignment statement is the primary type of statement used to
+    /// create digital designs. Assignment statements specify the value of a Boolean variable as a
+    /// (digital logic) function of other Boolean variables. Its format is a variable name followed by
+    /// either an equal sign or a less-than equal pair followed by a Boolean logic expression.Each such
+    /// statement represents a network of logic gates and wires.
+    /// </summary>
 	public class BooleanAssignmentStmt : Statement
 	{
+        /// <summary>
+        /// The identifying pattern that can be used to identify and extract this statement from raw text
+        /// </summary>
 		public static Regex Pattern { get; } = new Regex(@"^\w{1,20} <?= ~?(~?\(?\w{1,20}\)? ?\+? ?)+~?\w{1,20}\)?;$");
 
+        /// <summary>
+        /// Constructs an instance of BooleanAssignmentStmt
+        /// </summary>
+        /// <param name="lnNum">The line number that this statement is located on within edit mode - not simulation mode</param>
+        /// <param name="txt">The raw, unparsed text of this statement</param>
 		public BooleanAssignmentStmt(int lnNum, string txt) : base(lnNum, txt)
 		{
 		}
 
+	    /// <summary>
+	    /// Parses the Text of this statement into a list of discrete IObjectCodeElement elements
+	    /// to be used by the html parser to generate formatted output to be displayed in simulation mode.
+	    /// </summary>
         public override void Parse()
         {
             //line of code to start with
@@ -59,7 +75,11 @@ namespace VisiBoole.ParsingEngine.Statements
             MakeOrderedOutput(depVariable, expression);
         }
 
-
+        /// <summary>
+        /// Arranges the output (IObjectCodeElement) elements to represent this statement as it is written, left to right.
+        /// </summary>
+        /// <param name="dependentVar">The dependent variable being assigned to in the given expression</param>
+        /// <param name="expression">The string boolean expression associated with the given dependent variable</param>
         private void MakeOrderedOutput(DependentVariable dependentVar, string expression)
         {
             //Add dependent to output
@@ -189,6 +209,12 @@ namespace VisiBoole.ParsingEngine.Statements
             Output.Add(lf);
         }
 
+        /// <summary>
+        /// Solves the given boolean expression
+        /// </summary>
+        /// <param name="dependent">The dependent variable assigned the value of the given expression</param>
+        /// <param name="expression">The boolean expression associated with the given dependent variable</param>
+        /// <returns>Returns the value of the given expression assigned to the dependent variable</returns>
         private bool SolveExpression(string dependent, string expression)
         {
             string fullExp = expression;
@@ -212,6 +238,11 @@ namespace VisiBoole.ParsingEngine.Statements
             }
         }
 
+        /// <summary>
+        /// Parses out the content contained within the innermost parenthesis of the expression
+        /// </summary>
+        /// <param name="expression">The expression to parse</param>
+        /// <returns>Returns the content contained within the innermost parenthesis of the expression</returns>
         private string GetInnerMostExpression(string expression)
         {
             // this variable keeps track of the ('s in the expression.
@@ -244,6 +275,12 @@ namespace VisiBoole.ParsingEngine.Statements
             return expression;
         }
 
+        /// <summary>
+        /// Returns the value of the variable matching the given name. If there is no match,
+        /// a new variable initialized to false is inserted into the database
+        /// </summary>
+        /// <param name="variableName">The name of the variable to search for</param>
+        /// <returns>Returns the value of the variable matching the given name</returns>
         private bool GetVariable(string variableName)
         {
             //See if variable was already declared in IndependentVariables
@@ -289,6 +326,12 @@ namespace VisiBoole.ParsingEngine.Statements
             }
         }
 
+        /// <summary>
+        /// Solves a boolean expression that has been simplified to only ands, ors, and nots
+        /// </summary>
+        /// <param name="dependent">The dependent variable that is assigned the given expression</param>
+        /// <param name="expression">The expression that is associated with the given dependent variable</param>
+        /// <returns>Returns a string of 'TRUE' and 'FALSE'</returns>
         private string SolveBasicBooleanExpression(string dependent, string expression)
         {
             // set basicExpression variable
@@ -308,10 +351,11 @@ namespace VisiBoole.ParsingEngine.Statements
         }
 
         /// <summary>
-        /// NEED TO ADD DEPENDENCIES
+        /// Parses the negated subexpressions within the given expression
         /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
+        /// <param name="dependent">The dependent variable that is assigned the given expression</param>
+        /// <param name="expression">The expression that is associated with the given dependent variable</param>
+        /// <returns>Return expression with [not] gates replaced with values</returns>
         private string ParseNots(string dependent, string expression)
         {
             // set basicExpression variable
@@ -334,9 +378,7 @@ namespace VisiBoole.ParsingEngine.Statements
 
                 bool variableValue = GetVariable(newVariable);
 
-                ///
-                /// Might have to switch around
-                ///
+                // Might have to switch around
                 if(variableValue)
                 {
                     basicExpression = basicExpression.Replace(oldVariable, "FALSE");
@@ -357,11 +399,12 @@ namespace VisiBoole.ParsingEngine.Statements
             return basicExpression;
         }
 
-        /// <summary>
-        /// NEED TO ADD DEPENDENCIES
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
+	    /// <summary>
+	    /// Parses the "and" subexpressions within the given expression
+	    /// </summary>
+	    /// <param name="dependent">The dependent variable that is assigned the given expression</param>
+	    /// <param name="expression">The expression that is associated with the given dependent variable</param>
+	    /// <returns>Return expression with [not] gates replaced with values</returns>
         private string ParseAnds(string dependent, string expression)
         {
             // set basicExpression variable
@@ -432,11 +475,12 @@ namespace VisiBoole.ParsingEngine.Statements
             return basicExpression;
         }
 
-        /// <summary>
-        /// NEED TO ADD DEPENDENCIES
-        /// </summary>
-        /// <param name="expression"></param>
-        /// <returns></returns>
+	    /// <summary>
+	    /// Parses the "or" subexpressions within the given expression
+	    /// </summary>
+	    /// <param name="dependent">The dependent variable that is assigned the given expression</param>
+	    /// <param name="expression">The expression that is associated with the given dependent variable</param>
+	    /// <returns>Return expression with [not] gates replaced with values</returns>
         private string ParseOrs(string dependent, string expression)
         {
             // set basicExpression variable
@@ -498,7 +542,11 @@ namespace VisiBoole.ParsingEngine.Statements
             }
         }
 
-        //[Negate]s a variable (1 or 0)
+        /// <summary>
+        /// Negates the given value
+        /// </summary>
+        /// <param name="value">The value to negate</param>
+        /// <returns>Returns the negated value</returns>
         private int Negate(int value)
         {
             if (value == 0)
@@ -511,7 +559,11 @@ namespace VisiBoole.ParsingEngine.Statements
             }
         }
 
-        //[And]s variable's (1 or 0)
+        /// <summary>
+        /// "Ands" the given value
+        /// </summary>
+        /// <param name="values">The values to "And"</param>
+        /// <returns>Returns the "And'ed" values</returns>
         private int And(int[] values)
         {
             foreach (int value in values)
@@ -524,7 +576,11 @@ namespace VisiBoole.ParsingEngine.Statements
             return 1;
         }
 
-        //[Or]s variable's (1 or 0)
+        /// <summary>
+        /// "Ors" the given value
+        /// </summary>
+        /// <param name="values">The values to "Or"</param>
+        /// <returns>Returns the "Or'ed" values</returns>
         private int Or(int[] values)
         {
             foreach (int value in values)

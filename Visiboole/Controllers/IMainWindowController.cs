@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VisiBoole.Controllers
+﻿namespace VisiBoole.Controllers
 {
 	/// <summary>
 	/// Exposes methods on the controller for the MainWindow

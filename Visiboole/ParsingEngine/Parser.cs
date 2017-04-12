@@ -9,8 +9,18 @@ using VisiBoole.ParsingEngine.Statements;
 
 namespace VisiBoole.ParsingEngine
 {
+    /// <summary>
+    /// The main class of the parsing engine. This class is the brains of the parsing engine and 
+    /// communicates with the calling classes.
+    /// </summary>
 	public class Parser
 	{
+        /// <summary>
+        /// The entry method of the parsing engine. This method acts as "main" for the parsing engine.
+        /// </summary>
+        /// <param name="sd">The subdesign containing the text to parse</param>
+        /// <param name="variableName">The clicked variable if it exists, else the empty string</param>
+        /// <returns>Returns a list of parsed elements containing the text and value of each unit in the given expression</returns>
 		public List<IObjectCodeElement> Parse(SubDesign sd, string variableName)
 		{
             if(string.IsNullOrEmpty(variableName))

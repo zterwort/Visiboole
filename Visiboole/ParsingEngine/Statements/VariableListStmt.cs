@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using VisiBoole.Models;
+﻿using System.Text.RegularExpressions;
 using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
@@ -12,24 +8,25 @@ namespace VisiBoole.ParsingEngine.Statements
     /// </summary>
 	public class VariableListStmt : Statement
 	{
-        /// <summary>
-        /// The regex pattern that is used to identify a variable list statement
-        /// </summary>
-		public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)+;$");
+	    /// <summary>
+	    /// The identifying pattern that can be used to identify and extract this statement from raw text
+	    /// </summary>
+        public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)+;$");
 
         /// <summary>
         /// Constructs an instance of VariableListStmt
         /// </summary>
-        /// <param name="lnNum">The line number that contains this statement</param>
-        /// <param name="txt">The full text of this statement</param>
+        /// <param name="lnNum">The line number that this statement is located on within edit mode - not simulation mode</param>
+        /// <param name="txt">The raw, unparsed text of this statement</param>
 		public VariableListStmt(int lnNum, string txt) : base(lnNum, txt)
 		{
 		}
 
-        /// <summary>
-        /// Parse this statement into object code
-        /// </summary>
-		public override void Parse()
+	    /// <summary>
+	    /// Parses the Text of this statement into a list of discrete IObjectCodeElement elements
+	    /// to be used by the html parser to generate formatted output to be displayed in simulation mode.
+	    /// </summary>
+        public override void Parse()
 		{
             // add each variable to our database
 			string input = Text;

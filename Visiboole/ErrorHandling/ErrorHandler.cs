@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VisiBoole.ErrorHandling
+﻿namespace VisiBoole.ErrorHandling
 {
+    /// <summary>
+    /// This class manages errors that are caught within the application
+    /// </summary>
 	public class ErrorHandler
 	{
 	}

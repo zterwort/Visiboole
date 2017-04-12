@@ -1,17 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VisiBoole.ParsingEngine.ObjectCode
+﻿namespace VisiBoole.ParsingEngine.ObjectCode
 {
-	public class IndependentVariable : Variable, IObjectCodeElement
+    /// <summary>
+    /// A variable whose value does not depend on that of any other; e.g to the right of the "=" sign
+    /// </summary>
+    public class IndependentVariable : Variable, IObjectCodeElement
 	{
-		public bool? ObjCodeValue { get { return Value; } }
-		public string ObjCodeText { get { return Name; } }
 
-		public IndependentVariable(string name, bool value)
+	    /// <summary>
+	    /// The boolean value of this variable to be added to the statement's Output
+	    /// </summary>
+	    public bool? ObjCodeValue { get { return Value; } }
+
+	    /// <summary>
+	    /// The string representation of this variable to be added to the statement's Output
+	    /// </summary>
+	    public string ObjCodeText { get { return Name; } }
+
+        /// <summary>
+        /// Constructs an instance of IndependentVariable with given name and value
+        /// </summary>
+        /// <param name="name">The string name of this variable</param>
+        /// <param name="value">The boolean value of this variable</param>
+        public IndependentVariable(string name, bool value)
 		{
 			Name = name;
 			Value = value;
