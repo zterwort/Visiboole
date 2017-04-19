@@ -281,5 +281,20 @@ namespace VisiBoole.Views
 		{
 
 		}
-	}
+
+        private void lightThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("light");
+        }
+
+        private void darkThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("dark");
+        }
+
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+    }
 }

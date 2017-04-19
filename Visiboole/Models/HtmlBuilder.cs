@@ -315,7 +315,7 @@ namespace VisiBoole.Models
 		/// </summary>
 		/// <param name="html">The html text to display</param>
 		/// <param name="browser">The WebBrowser object to display the HTML in</param>
-		public void DisplayHtml(string html, WebBrowser browser)
+		public WebBrowser DisplayHtml(string html, WebBrowser browser)
 		{
 			browser.Refresh();
 			browser.Navigate("about:blank");
@@ -325,6 +325,8 @@ namespace VisiBoole.Models
 				browser.Document.Write(string.Empty);
 			}
 			browser.DocumentText = html;
+
+            return browser;
 		}
 	}
 }

@@ -302,9 +302,17 @@ namespace VisiBoole.Controllers
             string htmlOutput = html.GetHTML();
 
 			browser.ObjectForScripting = this;
-			html.DisplayHtml(htmlOutput, browser);
+            var offset = browser.Document.Body.ScrollTop;
+			browser = html.DisplayHtml(htmlOutput, browser);
 
-			if (CurrentDisplay is DisplaySingle)
+            while (browser.Document.Body == null)
+            {
+                Application.DoEvents();
+            }
+
+            browser.Document.Body.ScrollTop = offset;
+
+            if (CurrentDisplay is DisplaySingle)
 			{
 				mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
 			}
