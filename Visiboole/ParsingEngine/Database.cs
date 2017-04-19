@@ -169,6 +169,30 @@ namespace VisiBoole.ParsingEngine
         }
 
         /// <summary>
+        /// Sets specific value
+        /// </summary>
+        /// <param name="variableName"></param>
+        /// <param name="value"></param>
+        public static void SetValue(string variableName, bool value)
+        {
+            if (IndVars.ContainsKey(variableName))
+            {
+                IndVars[variableName].Value = value;
+                return;
+            }
+            else if (DepVars.ContainsKey(variableName))
+            {
+                DepVars[variableName].Value = value;
+                return;
+            }
+            else
+            {
+                IndependentVariable Ind = new IndependentVariable(variableName, value);
+                IndVars.Add(variableName, Ind);
+            }
+        }
+
+        /// <summary>
         /// Creates a list containing the expression associated with the dependent variable
         /// </summary>
         /// <param name="dependentName"></param>

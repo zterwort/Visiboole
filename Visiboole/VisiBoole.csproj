@@ -82,6 +82,7 @@
     <Compile Include="ParsingEngine\Statements\CommentStmt.cs" />
     <Compile Include="ParsingEngine\Database.cs" />
     <Compile Include="ParsingEngine\ObjectCode\DependentVariable.cs" />
+    <Compile Include="ParsingEngine\Statements\DffClockStmt.cs" />
     <Compile Include="ParsingEngine\Statements\EmptyStmt.cs" />
     <Compile Include="Models\FormatSpecifier.cs" />
     <Compile Include="ParsingEngine\Statements\FormatSpecifierStmt.cs" />

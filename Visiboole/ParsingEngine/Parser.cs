@@ -159,6 +159,15 @@ namespace VisiBoole.ParsingEngine
 						continue;
 					}
 
+                    if(nextLine.Contains(".d") || nextLine.Contains("<"))
+                    {
+                        stmtList.Add(new DffClockStmt(postLnNum, nextLine));
+                        flag = true;
+                        preLnNum++;
+                        postLnNum++;
+                        continue;
+                    }
+
 					// if we have reached this point with no match then there is a user syntax error
 					// TODO: add more validation checks for augmented error-checking granularity
 					match = ModuleDeclarationStmt.Pattern.Match(nextLine);
