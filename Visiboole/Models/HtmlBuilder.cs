@@ -148,9 +148,14 @@ namespace VisiBoole.Models
         public HtmlBuilder(List<IObjectCodeElement> output)
         {
             List<List<IObjectCodeElement>> newOutput = PreParseHTML(output);
+            int lineNumber = 0;
             foreach (List<IObjectCodeElement> line in newOutput)
             {
+                lineNumber++;
                 currentLine = "<p>";
+                int openParenthesesCount = 0;
+                int closedParenthesesCount = 0;
+
                 //string[] tokens = line.Split(' ');
 
                 foreach (IObjectCodeElement token in line)
@@ -171,6 +176,7 @@ namespace VisiBoole.Models
                         int index = variable.IndexOf("(");
                         variable = variable.Substring(index + 1, variable.Length - 1);
                         openParenthesisHolder.Add("(");
+                        openParenthesesCount++;
                     }
 
                     while (variable.Contains(')'))
@@ -178,6 +184,7 @@ namespace VisiBoole.Models
                         int index = variable.LastIndexOf(')');
                         variable = variable.Substring(0, index);
                         closeParenthesisHolder.Add(")");
+                        closedParenthesesCount++;
                     }
 
                     //Used to holder the amount of parenthesis in front or behind each variable
@@ -274,6 +281,12 @@ namespace VisiBoole.Models
                             }
                         }
                     }
+                }
+                if (openParenthesesCount != closedParenthesesCount)
+                {
+                    MessageBox.Show("Parentheses do not match on line: " + lineNumber, "Syntax Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    HtmlText = null;
+                    return;
                 }
                 currentLine = currentLine.Substring(0, currentLine.Length - 1);
                 currentLine += "</p>";

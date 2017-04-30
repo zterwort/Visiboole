@@ -245,6 +245,10 @@ namespace VisiBoole.Controllers
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
 			Parser p = new Parser();
 			List<IObjectCodeElement> output = p.Parse(sd, null);
+            if(output == null)
+            {
+                return;
+            }
 
             //make output
             parseOut.Input = sd.Text;
@@ -253,6 +257,10 @@ namespace VisiBoole.Controllers
             //make html
             //HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
             HtmlBuilder html = new HtmlBuilder(output);
+            if(html.HtmlText == null)
+            {
+                return;
+            }
             string htmlOutput = html.GetHTML();
 
             browser.ObjectForScripting = this;
@@ -289,6 +297,10 @@ namespace VisiBoole.Controllers
             SubDesign sd = tabControl.SelectedTab.SubDesign();
             Parser p = new Parser();
             List<IObjectCodeElement> output = p.Parse(sd, variableName);
+            if(output == null)
+            {
+                return;
+            }
 
 
 
@@ -299,6 +311,10 @@ namespace VisiBoole.Controllers
             //List<string> outputText = parseOut.GenerateOutput();
             //HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
             HtmlBuilder html = new HtmlBuilder(output);
+            if(html.HtmlText == null)
+            {
+                return;
+            }
             string htmlOutput = html.GetHTML();
 
 			browser.ObjectForScripting = this;

@@ -16,7 +16,7 @@ namespace VisiBoole.ParsingEngine.Statements
         /// <summary>
         /// The identifying pattern that can be used to identify and extract this statement from raw text
         /// </summary>
-		public static Regex Pattern { get; } = new Regex(@"^\w{1,20} <?= ~?(~?\(?\w{1,20}\)? ?\+? ?)+~?\w{1,20}\)?;$");
+		public static Regex Pattern { get; } = new Regex(@"^\w{1,20} <?= ~?(~?\(*?\w{1,20}?\)*? ?\+? ?)+~?\w{1,20}\)?;$");
 
         /// <summary>
         /// Constructs an instance of BooleanAssignmentStmt
@@ -118,17 +118,26 @@ namespace VisiBoole.ParsingEngine.Statements
                 }
                 else if(variable.Contains('('))
                 {
-                    string newVariable = variable.Substring(1);
-                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
-                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
+                    Operator openParen = new Operator("(");
+                    while (variable.Contains("("))
+                    {
+                        variable = variable.Remove(variable.IndexOf('('), 1);
+
+                        Output.Add(openParen);
+                    }
+
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(variable) as DependentVariable;
                     if (indVar != null)
                     {
+
                         IndependentVariable var = new IndependentVariable(variable, indVar.Value);
                         Output.Add(var);
                     }
                     else if (depVar != null)
                     {
-                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+
+                        DependentVariable var = new DependentVariable(variable, depVar.Value);
                         Output.Add(var);
                     }
                     else
@@ -139,9 +148,15 @@ namespace VisiBoole.ParsingEngine.Statements
                 }
                 else if(variable.Contains(')'))
                 {
-                    string newVariable = variable.Substring(0, variable.IndexOf(')'));
-                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
-                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
+                    int closedParenCount = 0;
+                    while (variable.Contains(")"))
+                    {
+                        variable = variable.Remove(variable.IndexOf(')'), 1);
+                        closedParenCount++;
+                    }
+
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variable) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(variable) as DependentVariable;
                     if (indVar != null)
                     {
                         IndependentVariable var = new IndependentVariable(variable, indVar.Value);
@@ -149,13 +164,19 @@ namespace VisiBoole.ParsingEngine.Statements
                     }
                     else if (depVar != null)
                     {
-                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+                        DependentVariable var = new DependentVariable(variable, depVar.Value);
                         Output.Add(var);
                     }
                     else
                     {
                         Operator op = new Operator(variable);
                         Output.Add(op);
+                    }
+
+                    Operator closedParen = new Operator(")");
+                    for (int i = closedParenCount; i != 0; i--)
+                    {
+                        Output.Add(closedParen);
                     }
                 }
                 else if(variable.Contains('~') && variable.Contains(';'))

@@ -11,7 +11,7 @@ namespace VisiBoole.ParsingEngine.Statements
 	    /// <summary>
 	    /// The identifying pattern that can be used to identify and extract this statement from raw text
 	    /// </summary>
-        public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)+;$");
+        public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)");
 
         /// <summary>
         /// Constructs an instance of VariableListStmt

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using VisiBoole.ErrorHandling;
 using VisiBoole.Models;
 using VisiBoole.ParsingEngine.ObjectCode;
@@ -26,6 +27,10 @@ namespace VisiBoole.ParsingEngine
             if(string.IsNullOrEmpty(variableName))
             {
                 List<Statement> stmtList = ParseStatements(sd);
+                if(stmtList == null)
+                {
+                    return null;
+                }
                 foreach (Statement stmt in stmtList)
                     stmt.Parse();
                 List<IObjectCodeElement> output = new List<IObjectCodeElement>();
@@ -40,6 +45,10 @@ namespace VisiBoole.ParsingEngine
             {
                 Database.VariableClicked(variableName);
                 List<Statement> stmtList = ParseStatements(sd);
+                if (stmtList == null)
+                {
+                    return null;
+                }
                 foreach (Statement stmt in stmtList)
                 {
                     stmt.Parse();
@@ -94,18 +103,33 @@ namespace VisiBoole.ParsingEngine
 						continue;
 					}
 
-					// collate statement if end of statement not detected
-					while (!nextLine.Contains(";"))
-					{
-						string substr = reader.ReadLine();
-						if (substr == null)
-							throw new MissingEndOfStatementException("Expected end of statement. Missing ';' character?", preLnNum);
-						preLnNum++;
-						nextLine += substr;
-					}
+                    // collate statement if end of statement not detected
+                    //while (!nextLine.Contains(";"))
+                    //{
+                    //	string substr = reader.ReadLine();
+                    //	if (substr == null)
+                    //		throw new MissingEndOfStatementException("Expected end of statement. Missing ';' character?", preLnNum);
+                    //	preLnNum++;
+                    //	nextLine += substr;
+                    //}
 
-					// check for a module declaration statement
-					match = ModuleDeclarationStmt.Pattern.Match(nextLine);
+                    if (!nextLine.Contains(";") && nextLine.Contains("="))
+                    {
+                        MessageBox.Show("You are missing a ';' at the end of line: " + (postLnNum + 1), "Syntax Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
+                    }
+
+                    if (nextLine.Contains(".d") || nextLine.Contains("<"))
+                    {
+                        stmtList.Add(new DffClockStmt(postLnNum, nextLine));
+                        flag = true;
+                        preLnNum++;
+                        postLnNum++;
+                        continue;
+                    }
+
+                    // check for a module declaration statement
+                    match = ModuleDeclarationStmt.Pattern.Match(nextLine);
 					if (flag == false && match.Success)
 					{
 						stmtList.Add(new ModuleDeclarationStmt(postLnNum, nextLine));
@@ -158,15 +182,6 @@ namespace VisiBoole.ParsingEngine
 						postLnNum++;
 						continue;
 					}
-
-                    if(nextLine.Contains(".d") || nextLine.Contains("<"))
-                    {
-                        stmtList.Add(new DffClockStmt(postLnNum, nextLine));
-                        flag = true;
-                        preLnNum++;
-                        postLnNum++;
-                        continue;
-                    }
 
 					// if we have reached this point with no match then there is a user syntax error
 					// TODO: add more validation checks for augmented error-checking granularity
