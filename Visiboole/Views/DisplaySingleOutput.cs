@@ -62,5 +62,10 @@ namespace VisiBoole.Views
 				browser.Dock = DockStyle.Fill;
 			}
 		}
-	}
+
+        private void btnTick_Click(object sender, System.EventArgs e)
+        {
+            controller.Tick();
+        }
+    }
 }

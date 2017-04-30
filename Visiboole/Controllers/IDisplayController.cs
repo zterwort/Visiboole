@@ -61,5 +61,7 @@ namespace VisiBoole.Controllers
 		/// Handles the event that occurs when the user runs the parser
 		/// </summary>
 		void Run();
+
+        void Tick();
 	}
 }
