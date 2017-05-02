@@ -22,7 +22,6 @@ namespace VisibooleTests.Models
             OutputParser outputParser = new OutputParser();
 
             inputParser.ParseInput(null);
-            outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
             HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
@@ -45,7 +44,6 @@ namespace VisibooleTests.Models
             OutputParser outputParser = new OutputParser();
 
             inputParser.ParseInput(null);
-            outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
             HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
@@ -70,7 +68,6 @@ namespace VisibooleTests.Models
             WebBrowser browser = new WebBrowser();
 
             inputParser.ParseInput(null);
-            outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
             HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);

@@ -19,3 +19,4 @@ C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
 C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
 C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.dll
 C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
+C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\RicherTextBox.dll

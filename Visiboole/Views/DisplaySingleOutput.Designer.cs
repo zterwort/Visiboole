@@ -30,7 +30,6 @@
 		{
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlOutputControls = new System.Windows.Forms.Panel();
-            this.IndependentVars = new System.Windows.Forms.RichTextBox();
             this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.btnTick = new System.Windows.Forms.Button();
             this.pnlMain.SuspendLayout();
@@ -57,7 +56,6 @@
             // 
             // pnlOutputControls
             // 
-            this.pnlOutputControls.Controls.Add(this.IndependentVars);
             this.pnlOutputControls.Controls.Add(this.updTickCount);
             this.pnlOutputControls.Controls.Add(this.btnTick);
             this.pnlOutputControls.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -65,16 +63,6 @@
             this.pnlOutputControls.Name = "pnlOutputControls";
             this.pnlOutputControls.Size = new System.Drawing.Size(794, 30);
             this.pnlOutputControls.TabIndex = 0;
-            // 
-            // IndependentVars
-            // 
-            this.IndependentVars.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.IndependentVars.Location = new System.Drawing.Point(3, 5);
-            this.IndependentVars.Multiline = false;
-            this.IndependentVars.Name = "IndependentVars";
-            this.IndependentVars.Size = new System.Drawing.Size(626, 22);
-            this.IndependentVars.TabIndex = 3;
-            this.IndependentVars.Text = "";
             // 
             // updTickCount
             // 
@@ -113,7 +101,6 @@
 
 		private System.Windows.Forms.TableLayoutPanel pnlMain;
 		private System.Windows.Forms.Panel pnlOutputControls;
-		private System.Windows.Forms.RichTextBox IndependentVars;
 		private System.Windows.Forms.NumericUpDown updTickCount;
 		private System.Windows.Forms.Button btnTick;
 	}

@@ -32,7 +32,6 @@ namespace VisibooleTests.Models
             OutputParser outputParser = new OutputParser();
 
             inputParser.ParseInput(null);
-            outputParser.Input = subDesign.Text;
 
             List<string> outputText = outputParser.GenerateOutput();
 

@@ -244,7 +244,7 @@ namespace VisiBoole.Controllers
 		{
 			SubDesign sd = tabControl.SelectedTab.SubDesign();
 			Parser p = new Parser();
-			List<IObjectCodeElement> output = p.Parse(sd, null);
+			List<IObjectCodeElement> output = p.Parse(sd, null, false);
             if(output == null)
             {
                 return;
@@ -276,7 +276,7 @@ namespace VisiBoole.Controllers
 		{
             SubDesign sd = tabControl.SelectedTab.SubDesign();
             Parser p = new Parser();
-            List<IObjectCodeElement> output = p.Parse(sd, variableName);
+            List<IObjectCodeElement> output = p.Parse(sd, variableName, false);
             if(output == null)
             {
                 return;

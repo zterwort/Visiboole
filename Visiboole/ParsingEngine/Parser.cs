@@ -67,6 +67,7 @@ namespace VisiBoole.ParsingEngine
                 List<Statement> stmtList = ParseStatements(sd, true, false);
                 foreach (Statement stmt in stmtList)
                 {
+
                     if (stmt.GetType() == typeof(DffClockStmt))
                     {
                         stmt.Parse();
@@ -142,6 +143,15 @@ namespace VisiBoole.ParsingEngine
                         return null;
                     }
 
+                    if (nextLine.Contains(".d") || nextLine.Contains("<"))
+                    {
+                        stmtList.Add(new DffClockStmt(postLnNum, nextLine, tick, init));
+                        flag = true;
+                        preLnNum++;
+                        postLnNum++;
+                        continue;
+                    }
+
 
                     // check for a module declaration statement
                     match = ModuleDeclarationStmt.Pattern.Match(nextLine);
@@ -197,14 +207,7 @@ namespace VisiBoole.ParsingEngine
 						postLnNum++;
 						continue;
 					}
-                    if(nextLine.Contains(".d") || nextLine.Contains("<"))
-                    {
-                        stmtList.Add(new DffClockStmt(postLnNum, nextLine, tick, init));
-                        flag = true;
-                        preLnNum++;
-                        postLnNum++;
-                        continue;
-                    }
+
 
 					// if we have reached this point with no match then there is a user syntax error
 					// TODO: add more validation checks for augmented error-checking granularity

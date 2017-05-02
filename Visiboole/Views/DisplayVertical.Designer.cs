@@ -28,107 +28,95 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
-			this.pnlEditorControls = new System.Windows.Forms.Panel();
-			this.btnRun = new System.Windows.Forms.Button();
-			this.pnlOutputControls = new System.Windows.Forms.Panel();
-			this.IndependentVars = new System.Windows.Forms.RichTextBox();
-			this.updTickCount = new System.Windows.Forms.NumericUpDown();
-			this.btnTick = new System.Windows.Forms.Button();
-			this.pnlMain.SuspendLayout();
-			this.pnlEditorControls.SuspendLayout();
-			this.pnlOutputControls.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// pnlMain
-			// 
-			this.pnlMain.BackColor = System.Drawing.Color.Transparent;
-			this.pnlMain.ColumnCount = 2;
-			this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.pnlMain.Controls.Add(this.pnlEditorControls, 0, 1);
-			this.pnlMain.Controls.Add(this.pnlOutputControls, 1, 1);
-			this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlMain.Location = new System.Drawing.Point(0, 0);
-			this.pnlMain.Name = "pnlMain";
-			this.pnlMain.RowCount = 2;
-			this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94F));
-			this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
-			this.pnlMain.Size = new System.Drawing.Size(800, 600);
-			this.pnlMain.TabIndex = 1;
-			// 
-			// pnlEditorControls
-			// 
-			this.pnlEditorControls.Controls.Add(this.btnRun);
-			this.pnlEditorControls.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlEditorControls.Location = new System.Drawing.Point(3, 567);
-			this.pnlEditorControls.Name = "pnlEditorControls";
-			this.pnlEditorControls.Size = new System.Drawing.Size(394, 30);
-			this.pnlEditorControls.TabIndex = 0;
-			// 
-			// btnRun
-			// 
-			this.btnRun.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.btnRun.Location = new System.Drawing.Point(315, 4);
-			this.btnRun.Name = "btnRun";
-			this.btnRun.Size = new System.Drawing.Size(75, 23);
-			this.btnRun.TabIndex = 0;
-			this.btnRun.Text = "Run";
-			this.btnRun.UseVisualStyleBackColor = true;
-			this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
-			// 
-			// pnlOutputControls
-			// 
-			this.pnlOutputControls.Controls.Add(this.IndependentVars);
-			this.pnlOutputControls.Controls.Add(this.updTickCount);
-			this.pnlOutputControls.Controls.Add(this.btnTick);
-			this.pnlOutputControls.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlOutputControls.Location = new System.Drawing.Point(403, 567);
-			this.pnlOutputControls.Name = "pnlOutputControls";
-			this.pnlOutputControls.Size = new System.Drawing.Size(394, 30);
-			this.pnlOutputControls.TabIndex = 1;
-			// 
-			// IndependentVars
-			// 
-			this.IndependentVars.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.IndependentVars.Location = new System.Drawing.Point(12, 4);
-			this.IndependentVars.Multiline = false;
-			this.IndependentVars.Name = "IndependentVars";
-			this.IndependentVars.Size = new System.Drawing.Size(225, 22);
-			this.IndependentVars.TabIndex = 3;
-			this.IndependentVars.Text = "";
-			// 
-			// updTickCount
-			// 
-			this.updTickCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.updTickCount.Location = new System.Drawing.Point(261, 7);
-			this.updTickCount.Name = "updTickCount";
-			this.updTickCount.Size = new System.Drawing.Size(49, 20);
-			this.updTickCount.TabIndex = 1;
-			// 
-			// btnTick
-			// 
-			this.btnTick.Anchor = System.Windows.Forms.AnchorStyles.Right;
-			this.btnTick.Location = new System.Drawing.Point(316, 4);
-			this.btnTick.Name = "btnTick";
-			this.btnTick.Size = new System.Drawing.Size(75, 23);
-			this.btnTick.TabIndex = 0;
-			this.btnTick.Text = "Tick";
-			this.btnTick.UseVisualStyleBackColor = true;
-			// 
-			// DisplayVertical
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Controls.Add(this.pnlMain);
-			this.Name = "DisplayVertical";
-			this.Size = new System.Drawing.Size(800, 600);
-			this.pnlMain.ResumeLayout(false);
-			this.pnlEditorControls.ResumeLayout(false);
-			this.pnlOutputControls.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
-			this.ResumeLayout(false);
+            this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlEditorControls = new System.Windows.Forms.Panel();
+            this.btnRun = new System.Windows.Forms.Button();
+            this.pnlOutputControls = new System.Windows.Forms.Panel();
+            this.updTickCount = new System.Windows.Forms.NumericUpDown();
+            this.btnTick = new System.Windows.Forms.Button();
+            this.pnlMain.SuspendLayout();
+            this.pnlEditorControls.SuspendLayout();
+            this.pnlOutputControls.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.BackColor = System.Drawing.Color.Transparent;
+            this.pnlMain.ColumnCount = 2;
+            this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.pnlMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.pnlMain.Controls.Add(this.pnlEditorControls, 0, 1);
+            this.pnlMain.Controls.Add(this.pnlOutputControls, 1, 1);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(0, 0);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.RowCount = 2;
+            this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94F));
+            this.pnlMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6F));
+            this.pnlMain.Size = new System.Drawing.Size(800, 600);
+            this.pnlMain.TabIndex = 1;
+            // 
+            // pnlEditorControls
+            // 
+            this.pnlEditorControls.Controls.Add(this.btnRun);
+            this.pnlEditorControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlEditorControls.Location = new System.Drawing.Point(3, 567);
+            this.pnlEditorControls.Name = "pnlEditorControls";
+            this.pnlEditorControls.Size = new System.Drawing.Size(394, 30);
+            this.pnlEditorControls.TabIndex = 0;
+            // 
+            // btnRun
+            // 
+            this.btnRun.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnRun.Location = new System.Drawing.Point(315, 4);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(75, 23);
+            this.btnRun.TabIndex = 0;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
+            // pnlOutputControls
+            // 
+            this.pnlOutputControls.Controls.Add(this.updTickCount);
+            this.pnlOutputControls.Controls.Add(this.btnTick);
+            this.pnlOutputControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlOutputControls.Location = new System.Drawing.Point(403, 567);
+            this.pnlOutputControls.Name = "pnlOutputControls";
+            this.pnlOutputControls.Size = new System.Drawing.Size(394, 30);
+            this.pnlOutputControls.TabIndex = 1;
+            // 
+            // updTickCount
+            // 
+            this.updTickCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.updTickCount.Location = new System.Drawing.Point(261, 7);
+            this.updTickCount.Name = "updTickCount";
+            this.updTickCount.Size = new System.Drawing.Size(49, 20);
+            this.updTickCount.TabIndex = 1;
+            // 
+            // btnTick
+            // 
+            this.btnTick.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnTick.Location = new System.Drawing.Point(316, 4);
+            this.btnTick.Name = "btnTick";
+            this.btnTick.Size = new System.Drawing.Size(75, 23);
+            this.btnTick.TabIndex = 0;
+            this.btnTick.Text = "Tick";
+            this.btnTick.UseVisualStyleBackColor = true;
+            // 
+            // DisplayVertical
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pnlMain);
+            this.Name = "DisplayVertical";
+            this.Size = new System.Drawing.Size(800, 600);
+            this.pnlMain.ResumeLayout(false);
+            this.pnlEditorControls.ResumeLayout(false);
+            this.pnlOutputControls.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 
@@ -138,7 +126,6 @@
 		private System.Windows.Forms.Panel pnlEditorControls;
 		private System.Windows.Forms.Button btnRun;
 		private System.Windows.Forms.Panel pnlOutputControls;
-		private System.Windows.Forms.RichTextBox IndependentVars;
 		private System.Windows.Forms.NumericUpDown updTickCount;
 		private System.Windows.Forms.Button btnTick;
 	}
