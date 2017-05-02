@@ -414,6 +414,11 @@
                 this.NavTree.ForeColor = System.Drawing.Color.Black;
                 this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(243)))));
                 this.OpenFileLinkLabel.LinkColor = System.Drawing.Color.Blue;
+
+                foreach (var sub in Globals.SubDesigns)
+                {
+                    sub.Value.Change_Theme("light");
+                }
             }
             else if(theme == "dark")
             {
@@ -422,9 +427,11 @@
                 this.NavTree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(226)))), ((int)(((byte)(85)))));
                 this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(77)))), ((int)(((byte)(81)))));
                 this.OpenFileLinkLabel.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(226)))), ((int)(((byte)(85)))));
-                //Trying to change the color of the highlight -- no luck
-                this.NavTree.SelectedNode.BackColor = System.Drawing.Color.Purple;
-                this.NavTree.SelectedNode.ForeColor = System.Drawing.Color.Purple;
+
+                foreach(var sub in Globals.SubDesigns)
+                {
+                    sub.Value.Change_Theme("dark");
+                }
             }
         }
 
