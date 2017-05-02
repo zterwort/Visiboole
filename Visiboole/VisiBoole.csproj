@@ -78,6 +78,7 @@
     <Compile Include="ErrorHandling\StatementNotRecognizedException.cs" />
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="ParsingEngine\Boolean\Expression.cs" />
     <Compile Include="ParsingEngine\Statements\BooleanAssignmentStmt.cs" />
     <Compile Include="ParsingEngine\Statements\CommentStmt.cs" />
     <Compile Include="ParsingEngine\Database.cs" />

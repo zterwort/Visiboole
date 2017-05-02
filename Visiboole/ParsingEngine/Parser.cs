@@ -22,11 +22,12 @@ namespace VisiBoole.ParsingEngine
         /// <param name="sd">The subdesign containing the text to parse</param>
         /// <param name="variableName">The clicked variable if it exists, else the empty string</param>
         /// <returns>Returns a list of parsed elements containing the text and value of each unit in the given expression</returns>
-		public List<IObjectCodeElement> Parse(SubDesign sd, string variableName)
+		public List<IObjectCodeElement> Parse(SubDesign sd, string variableName, bool tick)
 		{
-            if(string.IsNullOrEmpty(variableName))
+            //initial run
+            if(string.IsNullOrEmpty(variableName) && tick.Equals(false))
             {
-                List<Statement> stmtList = ParseStatements(sd);
+                List<Statement> stmtList = ParseStatements(sd, false, true);
                 if(stmtList == null)
                 {
                     return null;
@@ -38,13 +39,13 @@ namespace VisiBoole.ParsingEngine
                 {
                     output.AddRange(stmt.Output);
                 }
-                //Database.SetOutput(output);
                 return output;
             }
-			else
+            //variable clicked
+			else if(!string.IsNullOrEmpty(variableName) && tick.Equals(false))
             {
                 Database.VariableClicked(variableName);
-                List<Statement> stmtList = ParseStatements(sd);
+                List<Statement> stmtList = ParseStatements(sd, false, false);
                 if (stmtList == null)
                 {
                     return null;
@@ -58,9 +59,31 @@ namespace VisiBoole.ParsingEngine
                 {
                     output.AddRange(stmt.Output);
                 }
-                //Database.SetOutput(output);
-                Dictionary<string, IndependentVariable> z = Database.GetIndVars();
-                Dictionary<string, DependentVariable> x = Database.GetDepVars();
+                return output;
+            }
+            //clock tick
+            else
+            {
+                List<Statement> stmtList = ParseStatements(sd, true, false);
+                foreach (Statement stmt in stmtList)
+                {
+                    if (stmt.GetType() == typeof(DffClockStmt))
+                    {
+                        stmt.Parse();
+                    }
+                }
+                foreach (Statement stmt in stmtList)
+                {
+                    if (stmt.GetType() != typeof(DffClockStmt))
+                    {
+                        stmt.Parse();
+                    }
+                }
+                List<IObjectCodeElement> output = new List<IObjectCodeElement>();
+                foreach (Statement stmt in stmtList)
+                {
+                    output.AddRange(stmt.Output);
+                }
                 return output;
             }
 		}
@@ -70,7 +93,7 @@ namespace VisiBoole.ParsingEngine
 		/// </summary>
 		/// <param name="sd">The subdesign containing the user source code to be parsed</param>
 		/// <returns>Returns a list of visiboole statements, indexed by line number</returns>
-		private List<Statement> ParseStatements(SubDesign sd)
+		private List<Statement> ParseStatements(SubDesign sd, bool tick, bool init)
 		{
 			List<Statement> stmtList = new List<Statement>();
 			string txt = sd.Text;
@@ -119,14 +142,6 @@ namespace VisiBoole.ParsingEngine
                         return null;
                     }
 
-                    if (nextLine.Contains(".d") || nextLine.Contains("<"))
-                    {
-                        stmtList.Add(new DffClockStmt(postLnNum, nextLine));
-                        flag = true;
-                        preLnNum++;
-                        postLnNum++;
-                        continue;
-                    }
 
                     // check for a module declaration statement
                     match = ModuleDeclarationStmt.Pattern.Match(nextLine);
@@ -141,7 +156,7 @@ namespace VisiBoole.ParsingEngine
 
 					// check for a boolean assignment statement
 					match = BooleanAssignmentStmt.Pattern.Match(nextLine);
-					if (match.Success)
+					if (match.Success && !nextLine.Contains("<"))
 					{
 						stmtList.Add(new BooleanAssignmentStmt(postLnNum, nextLine));
 						flag = true;
@@ -182,6 +197,14 @@ namespace VisiBoole.ParsingEngine
 						postLnNum++;
 						continue;
 					}
+                    if(nextLine.Contains(".d") || nextLine.Contains("<"))
+                    {
+                        stmtList.Add(new DffClockStmt(postLnNum, nextLine, tick, init));
+                        flag = true;
+                        preLnNum++;
+                        postLnNum++;
+                        continue;
+                    }
 
 					// if we have reached this point with no match then there is a user syntax error
 					// TODO: add more validation checks for augmented error-checking granularity

@@ -250,12 +250,8 @@ namespace VisiBoole.Controllers
                 return;
             }
 
-            //make output
             parseOut.Input = sd.Text;
             List<string> outputText = parseOut.GenerateOutput();
-
-            //make html
-            //HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
             HtmlBuilder html = new HtmlBuilder(output);
             if(html.HtmlText == null)
             {
@@ -270,22 +266,6 @@ namespace VisiBoole.Controllers
             {
                 mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
             }
-
-			//SubDesign sd = tabControl.SelectedTab.SubDesign();
-			//InputParser parseIn = new InputParser(sd);
-			//parseIn.ParseInput(null);
-			//parseOut.Input = sd.Text;
-			//List<string> outputText = parseOut.GenerateOutput();
-			//HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
-			//string htmlOutput = html.GetHTML();
-
-			//browser.ObjectForScripting = this;
-			//html.DisplayHtml(htmlOutput, browser);
-
-			//if (CurrentDisplay is DisplaySingle)
-			//{
-			//	mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
-			//}
 		}
 
 		/// <summary>
@@ -302,14 +282,6 @@ namespace VisiBoole.Controllers
                 return;
             }
 
-
-
-            //SubDesign sd = tabControl.SelectedTab.SubDesign();
-            //InputParser parseIn = new InputParser(sd);
-            //parseIn.ParseInput(variableName);
-            //parseOut.Input = sd.Text;
-            //List<string> outputText = parseOut.GenerateOutput();
-            //HtmlBuilder html = new HtmlBuilder(outputText, sd.FileSourceName, sd.Variables, sd.Expressions);
             HtmlBuilder html = new HtmlBuilder(output);
             if(html.HtmlText == null)
             {
@@ -326,6 +298,23 @@ namespace VisiBoole.Controllers
 			}
 		}
 
-		#endregion		
-	}
+        public void Tick()
+        {
+            SubDesign sd = tabControl.SelectedTab.SubDesign();
+            Parser p = new Parser();
+            List<IObjectCodeElement> output = p.Parse(sd, null, true);
+            HtmlBuilder html = new HtmlBuilder(output);
+            string htmlOutput = html.GetHTML();
+
+            browser.ObjectForScripting = this;
+            html.DisplayHtml(htmlOutput, browser);
+
+            if (CurrentDisplay is DisplaySingle)
+            {
+                mwController.LoadDisplay(Globals.DisplayType.OUTPUT);
+            }
+        }
+
+        #endregion
+    }
 }

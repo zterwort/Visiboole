@@ -5,18 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using VisiBoole.ParsingEngine.ObjectCode;
+using VisiBoole.ParsingEngine.Boolean;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
     public class DffClockStmt : Statement
     {
-        public DffClockStmt(int lnNum, string txt) : base(lnNum, txt)
-        {
+        private bool clock_tick;
+        private bool initial_run;
 
+        public DffClockStmt(int lnNum, string txt, bool tick, bool init) : base(lnNum, txt)
+        {
+            clock_tick = tick;
+            initial_run = init;
         }
 
         public override void Parse()
-        {
+        {            
             string fullExpression = Text;
             if (fullExpression.Contains(';'))
             {
@@ -52,13 +57,27 @@ namespace VisiBoole.ParsingEngine.Statements
             expression = expression.Trim();
 
             //dependent = delay;
-            bool dependentValue = GetVariable(delay);
-            //once we have this we need to check database to see if value exists in ind or dep var lists
-            Database.SetValue(dependent, dependentValue);
+            bool dependentValue;
+            if (clock_tick || initial_run)
+            {
+                dependentValue = GetVariable(delay);
+                Database.SetValue(dependent, dependentValue);
+            }
+
             //make dependencies list
             Database.CreateDependenciesList(delay);
             //solve for delay;
-            bool delayValue = SolveExpression(delay, expression);
+            bool delayValue;
+            if (clock_tick || initial_run)
+            {
+                Expression exp = new Expression();
+                delayValue = exp.Solve(expression);
+            }
+            else
+            {
+                IndependentVariable delayVar = Database.TryGetVariable<IndependentVariable>(delay) as IndependentVariable;
+                delayValue = delayVar.Value;
+            }
             //get the delay variable
             IndependentVariable delayVariable = Database.TryGetVariable<IndependentVariable>(delay) as IndependentVariable;
             if (delayVariable != null)
@@ -71,8 +90,6 @@ namespace VisiBoole.ParsingEngine.Statements
                 delayVariable = new IndependentVariable(delay, delayValue);
                 Database.AddVariable<IndependentVariable>(delayVariable);
             }
-            //add the delay variable to the Database
-            //Database.AddVariable<IndependentVariable>(delayVariable);
             //make the output
             IndependentVariable dependentInd = Database.TryGetVariable<IndependentVariable>(dependent) as IndependentVariable;
             DependentVariable dependentDep = Database.TryGetVariable<DependentVariable>(dependent) as DependentVariable;
@@ -253,339 +270,6 @@ namespace VisiBoole.ParsingEngine.Statements
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Solves the given boolean expression
-        /// </summary>
-        /// <param name="dependent">The dependent variable assigned the value of the given expression</param>
-        /// <param name="expression">The boolean expression associated with the given dependent variable</param>
-        /// <returns>Returns the value of the given expression assigned to the dependent variable</returns>
-        private bool SolveExpression(string dependent, string expression)
-        {
-            string fullExp = expression;
-            string exp = "";
-            string value = "";
-            while (!GetInnerMostExpression(fullExp).Equals(fullExp))
-            {
-                exp = GetInnerMostExpression(fullExp);
-                value = SolveBasicBooleanExpression(dependent, exp);
-                exp = "(" + exp + ")";
-                fullExp = fullExp.Replace(exp, value);
-            }
-            fullExp = SolveBasicBooleanExpression(dependent, fullExp);
-            if (fullExp.Equals("TRUE"))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Parses out the content contained within the innermost parenthesis of the expression
-        /// </summary>
-        /// <param name="expression">The expression to parse</param>
-        /// <returns>Returns the content contained within the innermost parenthesis of the expression</returns>
-        private string GetInnerMostExpression(string expression)
-        {
-            // this variable keeps track of the ('s in the expression.
-            int innerStart;
-            // this variable makes sure to keep the farthest inward  (  before hitting a  )  .
-            int lastStart = 0;
-            // this variable finds the index innermost  )  .
-            int innerEnd = expression.IndexOf(')');
-            // this will be the final expression if there are  ()  within the starting expression.
-            string exp;
-            // check to see if any  )'s  were found.
-            if (innerEnd != -1)
-            {
-                // chop off the right side of the expression where the  )  starts.
-                exp = expression.Substring(0, innerEnd);
-                // chop off all  ('s  until there is only one left.
-                do
-                {
-                    innerStart = exp.IndexOf('(');
-                    // if there was a  (  found chop off the left side of expression where the  ( starts.
-                    if (innerStart != -1)
-                    {
-                        lastStart = innerStart;
-                        exp = exp.Substring(lastStart + 1);
-                    }
-                } while (innerStart != -1);
-                // now return the inner most expression with no  ()'s  .
-                return exp;
-            }
-            return expression;
-        }
-
-        /// <summary>
-        /// Solves a boolean expression that has been simplified to only ands, ors, and nots
-        /// </summary>
-        /// <param name="dependent">The dependent variable that is assigned the given expression</param>
-        /// <param name="expression">The expression that is associated with the given dependent variable</param>
-        /// <returns>Returns a string of 'TRUE' and 'FALSE'</returns>
-        private string SolveBasicBooleanExpression(string dependent, string expression)
-        {
-            // set basicExpression variable
-            string basicExpression = expression;
-
-            // look for [not] gates
-            basicExpression = ParseNots(dependent, basicExpression);
-
-            // look for [and] gates
-            basicExpression = ParseAnds(dependent, basicExpression);
-
-            // look for [or] gates
-            basicExpression = ParseOrs(dependent, basicExpression);
-
-            // return the end result ("TRUE" or "FALSE")
-            return basicExpression;
-        }
-
-        /// <summary>
-        /// Parses the negated subexpressions within the given expression
-        /// </summary>
-        /// <param name="dependent">The dependent variable that is assigned the given expression</param>
-        /// <param name="expression">The expression that is associated with the given dependent variable</param>
-        /// <returns>Return expression with [not] gates replaced with values</returns>
-        private string ParseNots(string dependent, string expression)
-        {
-            // set basicExpression variable
-            string basicExpression = expression;
-
-            //get first not gate's index (if there is one)
-            int notGate = basicExpression.IndexOf('~');
-
-            while (notGate != -1)
-            {
-                // eleminating everything but the varible
-                string oldVariable = basicExpression.Substring(notGate);
-                if (!oldVariable.IndexOf(' ').Equals(-1))
-                {
-                    oldVariable = oldVariable.Substring(0, oldVariable.IndexOf(' '));
-                }
-
-                // get rid of the ~ so we can check for the variable in the dictionary
-                string newVariable = oldVariable.Substring(1);
-
-                bool variableValue = GetVariable(newVariable);
-
-                // Might have to switch around
-                if (variableValue)
-                {
-                    basicExpression = basicExpression.Replace(oldVariable, "FALSE");
-                }
-                else
-                {
-                    basicExpression = basicExpression.Replace(oldVariable, "TRUE");
-                }
-
-                // Add the variable to the Dependencies
-                Database.AddDependencies(dependent, newVariable);
-
-                // find the next not gate
-                notGate = basicExpression.IndexOf('~');
-            }
-
-            // return expression with [not] gates replaced with values
-            return basicExpression;
-        }
-
-        /// <summary>
-        /// Parses the "and" subexpressions within the given expression
-        /// </summary>
-        /// <param name="dependent">The dependent variable that is assigned the given expression</param>
-        /// <param name="expression">The expression that is associated with the given dependent variable</param>
-        /// <returns>Return expression with [not] gates replaced with values</returns>
-        private string ParseAnds(string dependent, string expression)
-        {
-            // set basicExpression variable
-            string basicExpression = expression;
-
-            // split into a string array off of the [or] gate
-            string[] andExpression = basicExpression.Split('+');
-
-            // format the expression
-            for (int i = 0; i < andExpression.Length; i++)
-            {
-                andExpression[i] = andExpression[i].Trim();
-            }
-
-            // loop through each element
-            foreach (string exp in andExpression)
-            {
-                // break element up to see if it has multiple variables
-                string[] elements = exp.Split(' ');
-
-                // make a new array to store int's instead of string's
-                int[] inputs = new int[elements.Length];
-
-                // loop through each element to get their boolean value
-                for (int i = 0; i < elements.Length; i++)
-                {
-                    // check for TRUE
-                    if (elements[i].Equals("TRUE"))
-                    {
-                        inputs[i] = 1;
-                    }
-                    // check for FALSE
-                    else if (elements[i].Equals("FALSE"))
-                    {
-                        inputs[i] = 0;
-                    }
-                    // check independent and dependent variables
-                    else
-                    {
-                        bool variableValue = GetVariable(elements[i]);
-                        if (variableValue)
-                        {
-                            inputs[i] = 1;
-                        }
-                        else
-                        {
-                            inputs[i] = 0;
-                        }
-
-                        // Add the variable to the Dependencies
-                        Database.AddDependencies(dependent, elements[i]);
-                    }
-                }
-                // applies [and] gate to each input/expression
-                if (And(inputs) == 1)
-                {
-                    // replace variable with TRUE
-                    basicExpression = basicExpression.Replace(exp, "TRUE");
-                }
-                else
-                {
-                    // replace variable with FALSE
-                    basicExpression = basicExpression.Replace(exp, "FALSE");
-                }
-            }
-
-            // return expression with [and] gates replaced with values
-            return basicExpression;
-        }
-
-        /// <summary>
-        /// Parses the "or" subexpressions within the given expression
-        /// </summary>
-        /// <param name="dependent">The dependent variable that is assigned the given expression</param>
-        /// <param name="expression">The expression that is associated with the given dependent variable</param>
-        /// <returns>Return expression with [not] gates replaced with values</returns>
-        private string ParseOrs(string dependent, string expression)
-        {
-            // set basicExpression variable
-            string basicExpression = expression;
-
-            // split into a string array off of the [or] gate
-            string[] elements = basicExpression.Split('+');
-
-            // format the expression
-            for (int i = 0; i < elements.Length; i++)
-            {
-                elements[i] = elements[i].Trim();
-            }
-
-            // make a new array to store int's instead of string's
-            int[] inputs = new int[elements.Length];
-
-            // loop through each element of get their boolean value
-            for (int i = 0; i < elements.Length; i++)
-            {
-                // check for TRUE
-                if (elements[i].Equals("TRUE"))
-                {
-                    inputs[i] = 1;
-                }
-                // check for FALSE
-                else if (elements[i].Equals("FALSE"))
-                {
-                    inputs[i] = 0;
-                }
-                // check independent and dependent variables
-                else
-                {
-                    bool variableValue = GetVariable(elements[i]);
-                    if (variableValue)
-                    {
-                        inputs[i] = 1;
-                    }
-                    else
-                    {
-                        inputs[i] = 0;
-                    }
-
-                    // Add the variable to the Dependencies
-                    Database.AddDependencies(dependent, elements[i]);
-                }
-            }
-            // compute the whole value of the expression
-            int finalValue = Or(inputs);
-
-            // return the result as a string 
-            if (finalValue == 1)
-            {
-                return "TRUE";
-            }
-            else
-            {
-                return "FALSE";
-            }
-        }
-
-        /// <summary>
-        /// Negates the given value
-        /// </summary>
-        /// <param name="value">The value to negate</param>
-        /// <returns>Returns the negated value</returns>
-        private int Negate(int value)
-        {
-            if (value == 0)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        /// <summary>
-        /// "Ands" the given value
-        /// </summary>
-        /// <param name="values">The values to "And"</param>
-        /// <returns>Returns the "And'ed" values</returns>
-        private int And(int[] values)
-        {
-            foreach (int value in values)
-            {
-                if (value == 0)
-                {
-                    return 0;
-                }
-            }
-            return 1;
-        }
-
-        /// <summary>
-        /// "Ors" the given value
-        /// </summary>
-        /// <param name="values">The values to "Or"</param>
-        /// <returns>Returns the "Or'ed" values</returns>
-        private int Or(int[] values)
-        {
-            foreach (int value in values)
-            {
-                if (value == 1)
-                {
-                    return 1;
-                }
-            }
-            return 0;
         }
 
         /// <summary>
