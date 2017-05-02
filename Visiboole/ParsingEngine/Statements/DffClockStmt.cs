@@ -162,51 +162,33 @@ namespace VisiBoole.ParsingEngine.Statements
             foreach (string item in elements)
             {
                 string variable = item.Trim();
+
+                int closedParenCount = 0;
+
+                if (variable.Contains('('))
+                {
+                    Operator openParen = new Operator("(");
+                    while (variable.Contains("("))
+                    {
+                        variable = variable.Remove(variable.IndexOf('('), 1);
+
+                        Output.Add(openParen);
+                    }
+                }
+
+                if (variable.Contains(')'))
+                {
+                    while (variable.Contains(")"))
+                    {
+                        variable = variable.Remove(variable.IndexOf(')'), 1);
+                        closedParenCount++;
+                    }
+                }
+
+
                 if (variable.Contains('~'))
                 {
                     string newVariable = variable.Substring(1);
-                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
-                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
-                    if (indVar != null)
-                    {
-                        IndependentVariable var = new IndependentVariable(variable, indVar.Value);
-                        Output.Add(var);
-                    }
-                    else if (depVar != null)
-                    {
-                        DependentVariable var = new DependentVariable(variable, indVar.Value);
-                        Output.Add(var);
-                    }
-                    else
-                    {
-                        Operator op = new Operator(variable);
-                        Output.Add(op);
-                    }
-                }
-                else if (variable.Contains('('))
-                {
-                    string newVariable = variable.Substring(1);
-                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
-                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
-                    if (indVar != null)
-                    {
-                        IndependentVariable var = new IndependentVariable(variable, indVar.Value);
-                        Output.Add(var);
-                    }
-                    else if (depVar != null)
-                    {
-                        DependentVariable var = new DependentVariable(variable, indVar.Value);
-                        Output.Add(var);
-                    }
-                    else
-                    {
-                        Operator op = new Operator(variable);
-                        Output.Add(op);
-                    }
-                }
-                else if (variable.Contains(')'))
-                {
-                    string newVariable = variable.Substring(0, variable.IndexOf(')'));
                     IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
                     DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
                     if (indVar != null)
@@ -268,6 +250,12 @@ namespace VisiBoole.ParsingEngine.Statements
                         Operator op = new Operator(variable);
                         Output.Add(op);
                     }
+                }
+
+                Operator closedParen = new Operator(")");
+                for (int i = closedParenCount; i != 0; i--)
+                {
+                    Output.Add(closedParen);
                 }
             }
         }
