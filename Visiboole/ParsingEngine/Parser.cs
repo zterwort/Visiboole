@@ -33,7 +33,9 @@ namespace VisiBoole.ParsingEngine
                     return null;
                 }
                 foreach (Statement stmt in stmtList)
+                {
                     stmt.Parse();
+                }
                 List<IObjectCodeElement> output = new List<IObjectCodeElement>();
                 foreach (Statement stmt in stmtList)
                 {

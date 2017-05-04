@@ -250,8 +250,7 @@ namespace VisiBoole.Controllers
                 return;
             }
 
-            parseOut.Input = sd.Text;
-            List<string> outputText = parseOut.GenerateOutput();
+            
             HtmlBuilder html = new HtmlBuilder(output);
             if(html.HtmlText == null)
             {

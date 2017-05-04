@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VisiBoole.ParsingEngine.Boolean;
 using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
