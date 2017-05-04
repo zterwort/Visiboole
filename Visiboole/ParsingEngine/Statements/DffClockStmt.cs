@@ -68,16 +68,8 @@ namespace VisiBoole.ParsingEngine.Statements
             Database.CreateDependenciesList(delay);
             //solve for delay;
             bool delayValue;
-            if (clock_tick || initial_run)
-            {
-                Expression exp = new Expression();
-                delayValue = exp.Solve(expression);
-            }
-            else
-            {
-                IndependentVariable delayVar = Database.TryGetVariable<IndependentVariable>(delay) as IndependentVariable;
-                delayValue = delayVar.Value;
-            }
+            Expression exp = new Expression();
+            delayValue = exp.Solve(expression);
             //get the delay variable
             IndependentVariable delayVariable = Database.TryGetVariable<IndependentVariable>(delay) as IndependentVariable;
             if (delayVariable != null)
