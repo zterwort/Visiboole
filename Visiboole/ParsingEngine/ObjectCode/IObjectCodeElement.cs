@@ -13,6 +13,6 @@
         /// <summary>
         /// The boolean value of this element
         /// </summary>
-		bool? ObjCodeValue { get; }
+		bool? ObjCodeValue { get; set; }
 	}
 }

@@ -5,6 +5,7 @@
     /// </summary>
 	public class Operator : IObjectCodeElement
 	{
+        private bool? Value = false;
         /// <summary>
         /// The string representation of this output element
         /// </summary>
@@ -13,7 +14,7 @@
         /// <summary>
         /// The boolean value of this output element, null
         /// </summary>
-		public bool? ObjCodeValue { get { return null; } }
+		public bool? ObjCodeValue { get { return Value; } set { Value = value; } }
 
         /// <summary>
         /// The string representation of this element
@@ -27,6 +28,7 @@
 		public Operator(string opChar)
 		{
 			OperatorChar = opChar;
+            Value = null;
 		}
 	}
 }

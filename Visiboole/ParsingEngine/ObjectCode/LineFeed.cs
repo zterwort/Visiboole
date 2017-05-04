@@ -10,11 +10,11 @@ namespace VisiBoole.ParsingEngine.ObjectCode
         /// <summary>
         /// The text representation of this outpute element, a newline character
         /// </summary>
-		public string ObjCodeText { get { return Environment.NewLine; } }
+		public string ObjCodeText { get { return Environment.NewLine; } set { } }
 
         /// <summary>
         /// The value of this element is null as it is a newline character, not a variable
         /// </summary>
-		public bool? ObjCodeValue { get { return null; } }
+		public bool? ObjCodeValue { get { return null; }set { } }
 	}
 }

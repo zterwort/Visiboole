@@ -81,7 +81,6 @@ C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.D
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingle.resources
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplaySingleOutput.resources
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.DisplayVertical.resources
-C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.MainWindow.resources
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
 C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
@@ -114,3 +113,5 @@ C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\bin\Debug\RicherTextBox.dll
 C:\Users\mjsegraves11\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
 C:\Users\zterwort\Desktop\Visiboole\Visiboole\bin\Debug\RicherTextBox.dll
 C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\bin\Debug\RicherTextBox.dll
+C:\Users\zterwort laptop\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindow.resources

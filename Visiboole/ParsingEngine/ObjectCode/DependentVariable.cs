@@ -8,12 +8,12 @@
         /// <summary>
         /// The boolean value of this variable to be added to the statement's Output
         /// </summary>
-		public bool? ObjCodeValue { get { return Value; } }
+		public bool? ObjCodeValue { get { return Value; } set { } }
 
         /// <summary>
         /// The string representation of this variable to be added to the statement's Output
         /// </summary>
-		public string ObjCodeText { get { return Name; } }
+		public string ObjCodeText { get { return Name; } set { } }
 
         /// <summary>
         /// Constructs an instance of DependentVariable with name and value
