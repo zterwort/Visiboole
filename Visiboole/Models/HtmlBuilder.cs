@@ -26,8 +26,7 @@ namespace VisiBoole.Models
             {
                 lineNumber++;
                 currentLine = "<p>";
-                int openParenthesesCount = 0;
-                int closedParenthesesCount = 0;
+
                 string fullLine = "";
                 foreach(var token in line)
                 {
@@ -37,35 +36,10 @@ namespace VisiBoole.Models
                 string outermost = "";
                 if(fullLine.Contains("(") && fullLine.Contains(")"))
                 {
-                    int openCounter = 0;
-                    int closeCounter = 0;
-                    string holder = fullLine;
-                    while (holder.Contains("("))
-                    {
-                        openCounter++;
-                        holder = holder.Remove(holder.IndexOf("("), 1);
-                    }
-                    while (holder.Contains(")"))
-                    {
-                        closeCounter++;
-                        holder = holder.Remove(holder.IndexOf(")"), 1);
-                    }
-
-                    if (openCounter == closeCounter)
-                    {
                         int startIndex = fullLine.IndexOf('(');
                         int endIndex = fullLine.LastIndexOf(')');
                         outermost = fullLine.Substring(startIndex, endIndex - startIndex + 1);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Parentheses do not match on line: " + lineNumber, "Syntax Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        HtmlText = null;
-                        return;
-                    }
                 }
-
-
 
                 if (!String.IsNullOrWhiteSpace(outermost))
                 {
@@ -74,9 +48,6 @@ namespace VisiBoole.Models
                     line.First(x => x.ObjCodeText == "(").ObjCodeValue = colorValue;
                     line.Last(x => x.ObjCodeText == ")").ObjCodeValue = colorValue;
                 }
-
-
-                //string[] tokens = line.Split(' ');
 
                 foreach (IObjectCodeElement token in line)
                 {
@@ -87,20 +58,17 @@ namespace VisiBoole.Models
                     }
                     bool? value = token.ObjCodeValue;
                     Type varType = token.GetType();
-                    //These lists are used to keep track of the amount of parenthesis in front or behind a variable
-                    List<string> openParenthesisHolder = new List<string>();
-                    List<string> closeParenthesisHolder = new List<string>();
 
                     if (variable.Contains('('))
                     {
                         if(token.ObjCodeValue == true)
                         {
-                            currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
                         else
                         {
-                            currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
                         continue;
@@ -110,28 +78,22 @@ namespace VisiBoole.Models
                     {
                         if (token.ObjCodeValue == true)
                         {
-                            currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
                         else
                         {
-                            currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
                         continue;
                     }
 
-                    ////Used to holder the amount of parenthesis in front or behind each variable
-                    //string openParenthesis = String.Join(String.Empty, openParenthesisHolder);
-                    //string closeParenthesis = String.Join(String.Empty, closeParenthesisHolder);
-
                     if (variable.Contains('~'))
                     {
                         if (value.Equals(null))
                         {
-                            //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                             currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + variable + "</font>";
-                            //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                             currentLine += " ";
                         }
                         else
@@ -140,15 +102,11 @@ namespace VisiBoole.Models
                             {
                                 if (varType == typeof(DependentVariable)) //if variable is dependent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='green' >" + variable.Substring(1) + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 else //if variable is independent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='black' >~</font><font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable.Substring(1) + "')\" >" + variable.Substring(1) + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 currentLine += " ";
                             }
@@ -156,15 +114,11 @@ namespace VisiBoole.Models
                             {
                                 if (varType == typeof(DependentVariable)) //if variable is dependent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='black' style=\"cursor: no-drop;\" >~</font><font color='red' >" + variable.Substring(1) + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 else //if variable is independent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='black' >~</font><font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable.Substring(1) + "')\" >" + variable.Substring(1) + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 currentLine += " ";
                             }
@@ -174,9 +128,7 @@ namespace VisiBoole.Models
                     {
                         if (value.Equals(null))
                         {
-                            //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                             currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + variable + "</font>";
-                            //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                             currentLine += " ";
                         }
                         else
@@ -185,15 +137,11 @@ namespace VisiBoole.Models
                             {
                                 if (varType == typeof(DependentVariable)) //if variable is dependent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 else //if variable is independent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='red' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable + "')\" >" + variable + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 currentLine += " ";
                             }
@@ -201,15 +149,11 @@ namespace VisiBoole.Models
                             {
                                 if (varType == typeof(DependentVariable)) //if variable is dependent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 else //if variable is independent
                                 {
-                                    //currentLine += "<font color='black' >" + openParenthesis + "</font>";
                                     currentLine += "<font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable + "')\" >" + variable + "</font>";
-                                    //currentLine += "<font color='black' >" + closeParenthesis + "</font>";
                                 }
                                 currentLine += " ";
                             }

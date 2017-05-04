@@ -34,6 +34,25 @@ namespace VisiBoole.ParsingEngine
                 }
                 foreach (Statement stmt in stmtList)
                 {
+                    int openCounter = 0;
+                    int closeCounter = 0;
+                    string holder = stmt.Text;
+                    while (holder.Contains("("))
+                    {
+                        openCounter++;
+                        holder = holder.Remove(holder.IndexOf("("), 1);
+                    }
+                    while (holder.Contains(")"))
+                    {
+                        closeCounter++;
+                        holder = holder.Remove(holder.IndexOf(")"), 1);
+                    }
+
+                    if (!(openCounter == closeCounter))
+                    { 
+                        MessageBox.Show("Parentheses do not match on line: " + (stmtList.IndexOf(stmt) + 1), "Syntax Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
+                    }
                     stmt.Parse();
                 }
                 List<IObjectCodeElement> output = new List<IObjectCodeElement>();
