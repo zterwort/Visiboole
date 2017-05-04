@@ -209,6 +209,8 @@ namespace VisiBoole.Models
 			{
 				browser.Document.Write(string.Empty);
 			}
+            string styles = "<html><head><style type=\"text/css\"> p { margin: 0;} </style ></head >";
+            html = styles + html;
             browser.DocumentText = html;
 		}
 	}
