@@ -187,7 +187,7 @@ namespace VisiBoole.ParsingEngine
 
 					// check for a boolean assignment statement
 					match = BooleanAssignmentStmt.Pattern.Match(nextLine);
-					if (match.Success && !nextLine.Contains("<"))
+					if (match.Success && !nextLine.Contains("<") || nextLine.Contains("^"))
 					{
 						stmtList.Add(new BooleanAssignmentStmt(postLnNum, nextLine));
 						flag = true;
