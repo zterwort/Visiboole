@@ -26,27 +26,53 @@ namespace VisiBoole.Models
             {
                 lineNumber++;
                 currentLine = "<p>";
+                Dictionary<int, int> parenIndexes = new Dictionary<int, int>();
 
                 string fullLine = "";
+                int indexer = 0;
                 foreach(var token in line)
                 {
-                    fullLine += token.ObjCodeText;
+                    if(token.ObjCodeText == "(" || token.ObjCodeText == ")")
+                    {
+                        parenIndexes[fullLine.Length] = line.IndexOf(token, indexer);
+                        indexer = line.IndexOf(token, indexer) + 1;
+                    }
+                    fullLine += token.ObjCodeText + " ";
                 }
 
                 string outermost = "";
                 if(fullLine.Contains("(") && fullLine.Contains(")"))
                 {
-                        int startIndex = fullLine.IndexOf('(');
-                        int endIndex = fullLine.LastIndexOf(')');
-                        outermost = fullLine.Substring(startIndex, endIndex - startIndex + 1);
-                }
+                    int startIndex = fullLine.IndexOf('(');
+                    int endIndex = fullLine.IndexOf(')');
+                    List<int> previousStartingIndexes = new List<int>();
+                        
+                    while(startIndex < endIndex)
+                    {
+                        int holdingIndex = startIndex;
+                        startIndex = fullLine.IndexOf('(', startIndex + 1);
 
-                if (!String.IsNullOrWhiteSpace(outermost))
-                {
-                    Expression exp = new Expression();
-                    bool colorValue = exp.Solve(outermost);
-                    line.First(x => x.ObjCodeText == "(").ObjCodeValue = colorValue;
-                    line.Last(x => x.ObjCodeText == ")").ObjCodeValue = colorValue;
+                        if(startIndex == -1 || previousStartingIndexes.Contains(startIndex))
+                        {
+                            startIndex = holdingIndex;
+
+                            outermost = fullLine.Substring(startIndex, endIndex - startIndex + 1);
+                            Expression exp = new Expression();
+                            bool colorValue = exp.Solve(outermost);
+                            line[parenIndexes[startIndex]].ObjCodeValue = colorValue;
+                            line[parenIndexes[endIndex]].ObjCodeValue = colorValue;
+
+                            previousStartingIndexes.Add(startIndex);
+
+                            endIndex = fullLine.IndexOf(')', endIndex + 1);
+                            startIndex = 0;
+
+                            if(endIndex == -1)
+                            {
+                                break;
+                            }
+                        }
+                    }
                 }
 
                 foreach (IObjectCodeElement token in line)

@@ -120,9 +120,9 @@ namespace VisiBoole.ParsingEngine.Statements
                 }
                 else if(variable.Contains('('))
                 {
-                    Operator openParen = new Operator("(");
                     while (variable.Contains("("))
                     {
+                        Parentheses openParen = new Parentheses("(");
                         variable = variable.Remove(variable.IndexOf('('), 1);
 
                         Output.Add(openParen);
@@ -175,9 +175,9 @@ namespace VisiBoole.ParsingEngine.Statements
                         Output.Add(op);
                     }
 
-                    Operator closedParen = new Operator(")");
                     for (int i = closedParenCount; i != 0; i--)
                     {
+                        Parentheses closedParen = new Parentheses(")");
                         Output.Add(closedParen);
                     }
                 }

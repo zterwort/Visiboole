@@ -14,7 +14,7 @@
         /// <summary>
         /// The boolean value of this output element, null
         /// </summary>
-		public bool? ObjCodeValue { get { return Value; } set { Value = value; } }
+		public bool? ObjCodeValue { get { return Value; } set { this.Value = value; } }
 
         /// <summary>
         /// The string representation of this element
@@ -28,7 +28,7 @@
 		public Operator(string opChar)
 		{
 			OperatorChar = opChar;
-            Value = null;
+            this.Value = null;
 		}
 	}
 }
