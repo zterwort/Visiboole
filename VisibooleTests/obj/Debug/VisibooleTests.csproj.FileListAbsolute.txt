@@ -7,16 +7,16 @@ C:\Users\zterwort\Desktop\VisibooleTests\bin\Debug\Microsoft.VisualStudio.Qualit
 C:\Users\zterwort\Desktop\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
 C:\Users\zterwort\Desktop\VisibooleTests\obj\Debug\VisibooleTests.dll
 C:\Users\zterwort\Desktop\VisibooleTests\obj\Debug\VisibooleTests.pdb
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.dll
+C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
+C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\VisibooleTests.dll
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\VisibooleTests.pdb
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\VisiBoole.exe
+C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\RicherTextBox.dll
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\VisiBoole.pdb
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
-C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.dll
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
-C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
-C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.dll
-C:\Users\Grim\Documents\GitHub\Visual Studio 2015\Projects\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
-C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\RicherTextBox.dll

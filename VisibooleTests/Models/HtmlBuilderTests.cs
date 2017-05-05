@@ -24,11 +24,7 @@ namespace VisibooleTests.Models
             inputParser.ParseInput(null);
 
             List<string> outputText = outputParser.GenerateOutput();
-            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
 
-            Assert.AreNotEqual(htmlBuilder.HtmlText, null);
-            Assert.AreNotEqual(htmlBuilder.HtmlText, "");
-            Assert.AreNotEqual(htmlBuilder.currentLine, 0);
         }
 
         /// <summary>
@@ -46,11 +42,7 @@ namespace VisibooleTests.Models
             inputParser.ParseInput(null);
 
             List<string> outputText = outputParser.GenerateOutput();
-            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
-            string html = htmlBuilder.GetHTML();
 
-            Assert.IsNotNull(html);
-            Assert.IsNotNull(html, "");
         }
 
         /// <summary>
@@ -70,10 +62,6 @@ namespace VisibooleTests.Models
             inputParser.ParseInput(null);
 
             List<string> outputText = outputParser.GenerateOutput();
-            HtmlBuilder htmlBuilder = new HtmlBuilder(outputText, filename, subDesign.Variables, subDesign.Expressions);
-            string html = htmlBuilder.GetHTML();
-
-            htmlBuilder.DisplayHtml(html, browser);
         }
     }
 }
