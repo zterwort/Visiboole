@@ -429,7 +429,7 @@ namespace VisiBoole.ParsingEngine.Boolean
         }
 
         /// <summary>
-        /// "Ands" the given value
+        /// "Ands" the given values
         /// </summary>
         /// <param name="values">The values to "And"</param>
         /// <returns>Returns the "And'ed" values</returns>
@@ -446,7 +446,7 @@ namespace VisiBoole.ParsingEngine.Boolean
         }
 
         /// <summary>
-        /// "Ors" the given value
+        /// "Ors" the given values
         /// </summary>
         /// <param name="values">The values to "Or"</param>
         /// <returns>Returns the "Or'ed" values</returns>
@@ -462,6 +462,11 @@ namespace VisiBoole.ParsingEngine.Boolean
             return 0;
         }
 
+        /// <summary>
+        /// "XOrs" the given values
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
         private int XOr(int[] values)
         {
             int count = 0;
