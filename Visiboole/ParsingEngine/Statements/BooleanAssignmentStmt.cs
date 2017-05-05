@@ -99,6 +99,21 @@ namespace VisiBoole.ParsingEngine.Statements
                 string variable = item.Trim();
                 if(variable.Contains('~'))
                 {
+                    int closedParenCount = 0;
+                    while (variable.Contains("("))
+                    {
+                        Parentheses openParen = new Parentheses("(");
+                        variable = variable.Remove(variable.IndexOf('('), 1);
+
+                        Output.Add(openParen);
+                    }
+
+                    while (variable.Contains(")"))
+                    {
+                        variable = variable.Remove(variable.IndexOf(')'), 1);
+                        closedParenCount++;
+                    }
+
                     string newVariable = variable.Substring(1);
                     IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
                     DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
@@ -116,6 +131,12 @@ namespace VisiBoole.ParsingEngine.Statements
                     {
                         Operator op = new Operator(variable);
                         Output.Add(op);
+                    }
+
+                    for (int i = closedParenCount; i != 0; i--)
+                    {
+                        Parentheses closedParen = new Parentheses(")");
+                        Output.Add(closedParen);
                     }
                 }
                 else if(variable.Contains('('))
