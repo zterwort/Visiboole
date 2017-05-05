@@ -137,14 +137,22 @@ namespace VisiBoole.ParsingEngine.Boolean
             // set basicExpression variable
             string basicExpression = expression;
 
-            // look for [not] gates
-            basicExpression = ParseNots(basicExpression);
+            if(basicExpression.Contains("^"))
+            {
+                // look for [xor] gates
+                basicExpression = ParseXOrs(basicExpression);
+            }
+            else
+            {
+                // look for [not] gates
+                basicExpression = ParseNots(basicExpression);
 
-            // look for [and] gates
-            basicExpression = ParseAnds(basicExpression);
+                // look for [and] gates
+                basicExpression = ParseAnds(basicExpression);
 
-            // look for [or] gates
-            basicExpression = ParseOrs(basicExpression);
+                // look for [or] gates
+                basicExpression = ParseOrs(basicExpression);
+            }
 
             // return the end result ("TRUE" or "FALSE")
             return basicExpression;
@@ -342,6 +350,67 @@ namespace VisiBoole.ParsingEngine.Boolean
             }
         }
 
+        private string ParseXOrs(string expression)
+        {
+            // set basicExpression variable
+            string basicExpression = expression;
+
+            // split into a string array off of the [or] gate
+            string[] elements = basicExpression.Split('^');
+
+            // format the expression
+            for (int i = 0; i < elements.Length; i++)
+            {
+                elements[i] = elements[i].Trim();
+            }
+
+            // make a new array to store int's instead of string's
+            int[] inputs = new int[elements.Length];
+
+            for (int i = 0; i < elements.Length; i++)
+            {
+                // check for TRUE
+                if (elements[i].Equals("TRUE"))
+                {
+                    inputs[i] = 1;
+                }
+                // check for FALSE
+                else if (elements[i].Equals("FALSE"))
+                {
+                    inputs[i] = 0;
+                }
+                // check independent and dependent variables
+                else
+                {
+                    bool variableValue = GetVariable(elements[i]);
+                    if (variableValue)
+                    {
+                        inputs[i] = 1;
+                    }
+                    else
+                    {
+                        inputs[i] = 0;
+                    }
+
+                    // Add the variable to the Dependencies
+                    //Database.AddDependencies(dependent, elements[i]);
+                }
+            }
+            // applies [and] gate to each input/expression
+            if (XOr(inputs) == 1)
+            {
+                // replace variable with TRUE
+                //basicExpression = basicExpression.Replace(exp, "TRUE");
+                return "TRUE";
+            }
+            else
+            {
+                // replace variable with FALSE
+                //basicExpression = basicExpression.Replace(exp, "FALSE");
+                return "FALSE";
+            }
+        }
+
         /// <summary>
         /// Negates the given value
         /// </summary>
@@ -360,7 +429,7 @@ namespace VisiBoole.ParsingEngine.Boolean
         }
 
         /// <summary>
-        /// "Ands" the given value
+        /// "Ands" the given values
         /// </summary>
         /// <param name="values">The values to "And"</param>
         /// <returns>Returns the "And'ed" values</returns>
@@ -377,7 +446,7 @@ namespace VisiBoole.ParsingEngine.Boolean
         }
 
         /// <summary>
-        /// "Ors" the given value
+        /// "Ors" the given values
         /// </summary>
         /// <param name="values">The values to "Or"</param>
         /// <returns>Returns the "Or'ed" values</returns>
@@ -389,6 +458,25 @@ namespace VisiBoole.ParsingEngine.Boolean
                 {
                     return 1;
                 }
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// "XOrs" the given values
+        /// </summary>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        private int XOr(int[] values)
+        {
+            int count = 0;
+            foreach (int value in values)
+            {
+                count += value;
+            }
+            if(count%2 != 0)
+            {
+                return 1;
             }
             return 0;
         }
