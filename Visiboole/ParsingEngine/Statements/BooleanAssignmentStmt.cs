@@ -149,7 +149,7 @@ namespace VisiBoole.ParsingEngine.Statements
                     }
                     else if (depVar != null)
                     {
-                        DependentVariable var = new DependentVariable(variable, indVar.Value);
+                        DependentVariable var = new DependentVariable(variable, depVar.Value);
                         Output.Add(var);
                     }
                     else
