@@ -118,7 +118,8 @@ namespace VisiBoole.Controllers
 			allDisplays.Add(Globals.DisplayType.OUTPUT, singleOutput);
 
 			CurrentDisplay = single;
-		}
+            Globals.tabControl = tabControl;
+        }
 
 		/// <summary>
 		/// Saves the handle to the controller for the MainWindow

@@ -292,5 +292,15 @@ namespace VisiBoole.Views
                 sub.Value.DecreaseFont();
             }
         }
+
+        private void lightThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("light");
+        }
+
+        private void darkThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTheme("dark");
+        }
     }
 }

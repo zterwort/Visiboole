@@ -74,8 +74,31 @@ namespace VisiBoole.Models
             this.Dependencies = new Dictionary<string, List<string>>();
 
 	        this.ShowLineNumbers = true;
-	        this.BackColor = Color.FromArgb(75, 77, 81);
-	        this.ForeColor = Color.FromArgb(34, 226, 85);
+            if (Globals.Theme == "light")
+            {
+                this.BackColor = Color.White;
+                this.ForeColor = Color.Black;
+            }
+            else if (Globals.Theme == "dark")
+            {
+                this.BackColor = Color.FromArgb(75, 77, 81);
+                this.ForeColor = Color.FromArgb(34, 226, 85);
+            }
+
+        }
+
+        public void Change_Theme(string theme)
+        {
+            if (theme == "light")
+            {
+                this.BackColor = Color.White;
+                this.ForeColor = Color.Black;
+            }
+            else if (theme == "dark")
+            {
+                this.BackColor = Color.FromArgb(75, 77, 81);
+                this.ForeColor = Color.FromArgb(34, 226, 85);
+            }
         }
 
         /// <summary>

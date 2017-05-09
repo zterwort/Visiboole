@@ -37,5 +37,9 @@ namespace VisiBoole
 		}
 
         public static float FontSize = 20;
-	}
+
+        public static TabControl tabControl = null;
+
+        public static string Theme = "dark";
+    }
 }

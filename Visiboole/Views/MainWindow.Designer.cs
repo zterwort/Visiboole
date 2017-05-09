@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("My SubDesigns");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("My SubDesigns");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,6 +63,9 @@
             this.NavTree = new System.Windows.Forms.TreeView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.lightThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.darkThemeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.MainLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -256,7 +259,10 @@
             this.verticalToolStripMenuItem,
             this.toolStripSeparator5,
             this.increaseFontToolStripMenuItem,
-            this.decreaseFontToolStripMenuItem});
+            this.decreaseFontToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.lightThemeToolStripMenuItem,
+            this.darkThemeToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -349,10 +355,10 @@
             this.NavTree.Location = new System.Drawing.Point(1, 1);
             this.NavTree.Margin = new System.Windows.Forms.Padding(1);
             this.NavTree.Name = "NavTree";
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "My SubDesigns";
+            treeNode2.Name = "Node0";
+            treeNode2.Text = "My SubDesigns";
             this.NavTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.NavTree.ShowLines = false;
             this.NavTree.Size = new System.Drawing.Size(194, 633);
             this.NavTree.TabIndex = 0;
@@ -366,6 +372,25 @@
             // 
             this.saveFileDialog1.FileName = "newFile1.vbi";
             this.saveFileDialog1.Filter = "VisiBoole (*.vbi) File|*.vbi";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(176, 6);
+            // 
+            // lightThemeToolStripMenuItem
+            // 
+            this.lightThemeToolStripMenuItem.Name = "lightThemeToolStripMenuItem";
+            this.lightThemeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.lightThemeToolStripMenuItem.Text = "Light Theme";
+            this.lightThemeToolStripMenuItem.Click += new System.EventHandler(this.lightThemeToolStripMenuItem_Click);
+            // 
+            // darkThemeToolStripMenuItem
+            // 
+            this.darkThemeToolStripMenuItem.Name = "darkThemeToolStripMenuItem";
+            this.darkThemeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.darkThemeToolStripMenuItem.Text = "Dark Theme";
+            this.darkThemeToolStripMenuItem.Click += new System.EventHandler(this.darkThemeToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -388,6 +413,42 @@
             this.PerformLayout();
 
 		}
+
+        public void ChangeTheme(string theme)
+        {
+            if (theme == "light")
+            {
+                Globals.Theme = "light";
+                this.menuStrip1.BackColor = System.Drawing.Color.LightGray;
+                this.NavTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(243)))));
+                this.NavTree.ForeColor = System.Drawing.Color.Black;
+                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(242)))), ((int)(((byte)(243)))));
+                this.OpenFileLinkLabel.LinkColor = System.Drawing.Color.Blue;
+
+                foreach (var sub in Globals.SubDesigns)
+                {
+                    sub.Value.Change_Theme("light");
+                }
+                Globals.tabControl.TabPages.Add("!@#$ThisTabWillNeverBeShownCauseZachMattZach!@#$");
+                Globals.tabControl.TabPages.Remove(Globals.tabControl.TabPages[Globals.tabControl.TabPages.Count - 1]);
+            }
+            else if (theme == "dark")
+            {
+                Globals.Theme = "dark";
+                this.menuStrip1.BackColor = System.Drawing.Color.DarkGray;
+                this.NavTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(77)))), ((int)(((byte)(81)))));
+                this.NavTree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(226)))), ((int)(((byte)(85)))));
+                this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(77)))), ((int)(((byte)(81)))));
+                this.OpenFileLinkLabel.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(226)))), ((int)(((byte)(85)))));
+
+                foreach (var sub in Globals.SubDesigns)
+                {
+                    sub.Value.Change_Theme("dark");
+                }
+                Globals.tabControl.TabPages.Add("!@#$ThisTabWillNeverBeShownCauseZachMattZach!@#$");
+                Globals.tabControl.TabPages.Remove(Globals.tabControl.TabPages[Globals.tabControl.TabPages.Count - 1]);
+            }
+        }
 
         private void MainWindow_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
@@ -442,6 +503,9 @@
 		private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem increaseFontToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem decreaseFontToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem lightThemeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem darkThemeToolStripMenuItem;
     }
 }
 
