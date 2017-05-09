@@ -419,6 +419,8 @@
                 {
                     sub.Value.Change_Theme("light");
                 }
+                Globals.tabControl.TabPages.Add("!@#$ThisTabWillNeverBeShownCauseZachMattZach!@#$");
+                Globals.tabControl.TabPages.Remove(Globals.tabControl.TabPages[Globals.tabControl.TabPages.Count - 1]);
             }
             else if(theme == "dark")
             {
@@ -432,6 +434,8 @@
                 {
                     sub.Value.Change_Theme("dark");
                 }
+                Globals.tabControl.TabPages.Add("!@#$ThisTabWillNeverBeShownCauseZachMattZach!@#$");
+                Globals.tabControl.TabPages.Remove(Globals.tabControl.TabPages[Globals.tabControl.TabPages.Count - 1]);
             }
         }
 
