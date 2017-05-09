@@ -16,6 +16,9 @@
 	    /// </summary>
 	    public string ObjCodeText { get { return Name; } set { } }
 
+        public int Match { get; set; }
+        public int MatchingIndex { get; set; }
+
         /// <summary>
         /// Constructs an instance of IndependentVariable with given name and value
         /// </summary>

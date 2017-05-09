@@ -42,6 +42,8 @@ namespace VisiBoole.ParsingEngine.Statements
 
 		public bool? ObjCodeValue { get; set; } = false;
 		public string ObjCodeText { get { return Text; } set { } } 
+        public int Match { get; set; }
+        public int MatchingIndex { get; set; }
 
 		#endregion
 

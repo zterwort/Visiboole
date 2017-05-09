@@ -22,6 +22,10 @@ namespace VisiBoole.ParsingEngine.ObjectCode
         /// </summary>
 		public string OperatorChar { get; set; }
 
+        public int Match { get; set; }
+
+        public int MatchingIndex { get; set; }
+
         /// <summary>
         /// Constructs an instance of Operator 
         /// </summary>

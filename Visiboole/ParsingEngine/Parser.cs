@@ -185,17 +185,6 @@ namespace VisiBoole.ParsingEngine
 						continue;
 					}
 
-					// check for a boolean assignment statement
-					match = BooleanAssignmentStmt.Pattern.Match(nextLine);
-					if (match.Success && !nextLine.Contains("<") || nextLine.Contains("^"))
-					{
-						stmtList.Add(new BooleanAssignmentStmt(postLnNum, nextLine));
-						flag = true;
-						preLnNum++;
-						postLnNum++;
-						continue;
-					}
-
 					// check for a variable list statement
 					match = VariableListStmt.Pattern.Match(nextLine);
 					if (match.Success)
@@ -229,10 +218,20 @@ namespace VisiBoole.ParsingEngine
 						continue;
 					}
 
+                    // check for a boolean assignment statement
+                    if (!nextLine.Contains("<") || nextLine.Contains("^"))
+                    {
+                        stmtList.Add(new BooleanAssignmentStmt(postLnNum, nextLine));
+                        flag = true;
+                        preLnNum++;
+                        postLnNum++;
+                        continue;
+                    }
 
-					// if we have reached this point with no match then there is a user syntax error
-					// TODO: add more validation checks for augmented error-checking granularity
-					match = ModuleDeclarationStmt.Pattern.Match(nextLine);
+
+                    // if we have reached this point with no match then there is a user syntax error
+                    // TODO: add more validation checks for augmented error-checking granularity
+                    match = ModuleDeclarationStmt.Pattern.Match(nextLine);
 					if (flag == true && match.Success)
 						// module declaration must be on the first line, throw an exception
 						throw new ModuleDeclarationPlacementException("Module declarations must be at the top of the file. Did you mean to use a submodule declaration instead?", preLnNum);

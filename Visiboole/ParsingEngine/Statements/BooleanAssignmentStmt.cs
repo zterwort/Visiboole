@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using VisiBoole.ParsingEngine.ObjectCode;
 using VisiBoole.ParsingEngine.Boolean;
+using System;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
@@ -102,8 +103,27 @@ namespace VisiBoole.ParsingEngine.Statements
                     int closedParenCount = 0;
                     while (variable.Contains("("))
                     {
-                        Parentheses openParen = new Parentheses("(");
-                        variable = variable.Remove(variable.IndexOf('('), 1);
+                        Parentheses openParen;
+                        try
+                        {
+                            if (variable[variable.IndexOf('(') - 1] == '~')
+                            {
+                                Operator notGate = new Operator("~");
+                                openParen = new Parentheses("(");
+                                variable = variable.Remove(variable.IndexOf('(') - 1, 2);
+                                Output.Add(notGate);
+                            }
+                            else
+                            {
+                                openParen = new Parentheses("(");
+                                variable = variable.Remove(variable.IndexOf('('), 1);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            openParen = new Parentheses("(");
+                            variable = variable.Remove(variable.IndexOf('('), 1);
+                        }
 
                         Output.Add(openParen);
                     }
@@ -114,7 +134,12 @@ namespace VisiBoole.ParsingEngine.Statements
                         closedParenCount++;
                     }
 
-                    string newVariable = variable.Substring(1);
+                    string newVariable = variable;
+                    //If it STILL contains a not gate. HACK.
+                    if (variable.Contains('~'))
+                    {
+                        newVariable = variable.Substring(1);
+                    }
                     IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(newVariable) as IndependentVariable;
                     DependentVariable depVar = Database.TryGetVariable<DependentVariable>(newVariable) as DependentVariable;
                     if (indVar != null)
@@ -143,8 +168,27 @@ namespace VisiBoole.ParsingEngine.Statements
                 {
                     while (variable.Contains("("))
                     {
-                        Parentheses openParen = new Parentheses("(");
-                        variable = variable.Remove(variable.IndexOf('('), 1);
+                        Parentheses openParen;
+                        try
+                        {
+                            if (variable[variable.IndexOf('(') - 1] == '~')
+                            {
+                                Operator notGate = new Operator("~");
+                                openParen = new Parentheses("(");
+                                variable = variable.Remove(variable.IndexOf('(') - 1, 2);
+                                Output.Add(notGate);
+                            }
+                            else
+                            {
+                                openParen = new Parentheses("(");
+                                variable = variable.Remove(variable.IndexOf('('), 1);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            openParen = new Parentheses("(");
+                            variable = variable.Remove(variable.IndexOf('('), 1);
+                        }
 
                         Output.Add(openParen);
                     }

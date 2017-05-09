@@ -59,8 +59,13 @@ namespace VisiBoole.Models
                             outermost = fullLine.Substring(startIndex, endIndex - startIndex + 1);
                             Expression exp = new Expression();
                             bool colorValue = exp.Solve(outermost);
+
                             line[parenIndexes[startIndex]].ObjCodeValue = colorValue;
+                            line[parenIndexes[startIndex]].MatchingIndex = startIndex;
+                            line[parenIndexes[startIndex]].Match = endIndex;
                             line[parenIndexes[endIndex]].ObjCodeValue = colorValue;
+                            line[parenIndexes[endIndex]].Match = startIndex;
+                            line[parenIndexes[endIndex]].MatchingIndex = endIndex;
 
                             previousStartingIndexes.Add(startIndex);
 
@@ -75,6 +80,9 @@ namespace VisiBoole.Models
                     }
                 }
 
+                bool nextLineOverBarForParentheses = false;
+                List<int> overBarList = new List<int>();
+
                 foreach (IObjectCodeElement token in line)
                 {
                     string variable = token.ObjCodeText;
@@ -87,7 +95,21 @@ namespace VisiBoole.Models
 
                     if (variable.Contains('('))
                     {
-                        if(token.ObjCodeValue == true)
+                        if(nextLineOverBarForParentheses == true && token.ObjCodeValue == true)
+                        {
+                            overBarList.Add(token.MatchingIndex);
+                            currentLine += "<font color='green' style=\"cursor: no-drop; text-decoration: overline;\" >" + variable + "</font>";
+                            currentLine += " ";
+                            nextLineOverBarForParentheses = false;
+                        }
+                        else if (nextLineOverBarForParentheses == true && token.ObjCodeValue == false)
+                        {
+                            overBarList.Add(token.MatchingIndex);
+                            currentLine += "<font color='red' style=\"cursor: no-drop; text-decoration: overline;\" >" + variable + "</font>";
+                            currentLine += " ";
+                            nextLineOverBarForParentheses = false;
+                        }
+                        else if(token.ObjCodeValue == true)
                         {
                             currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
@@ -102,7 +124,17 @@ namespace VisiBoole.Models
 
                     if (variable.Contains(')'))
                     {
-                        if (token.ObjCodeValue == true)
+                        if (overBarList.Contains(token.Match) && token.ObjCodeValue == true)
+                        {
+                            currentLine += "<font color='green' style=\"cursor: no-drop; text-decoration: overline;\" >" + variable + "</font>";
+                            currentLine += " ";
+                        }
+                        else if(overBarList.Contains(token.Match) && token.ObjCodeValue == false)
+                        {
+                            currentLine += "<font color='red' style=\"cursor: no-drop; text-decoration: overline;\" >" + variable + "</font>";
+                            currentLine += " ";
+                        }
+                        else if (token.ObjCodeValue == true)
                         {
                             currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
@@ -112,6 +144,12 @@ namespace VisiBoole.Models
                             currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
+                        continue;
+                    }
+
+                    if(variable == "~")
+                    {
+                        nextLineOverBarForParentheses = true;
                         continue;
                     }
 

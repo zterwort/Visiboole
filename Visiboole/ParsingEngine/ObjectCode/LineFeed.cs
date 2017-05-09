@@ -16,5 +16,8 @@ namespace VisiBoole.ParsingEngine.ObjectCode
         /// The value of this element is null as it is a newline character, not a variable
         /// </summary>
 		public bool? ObjCodeValue { get { return null; }set { } }
-	}
+
+        public int Match { get; set; }
+        public int MatchingIndex { get; set; }
+    }
 }

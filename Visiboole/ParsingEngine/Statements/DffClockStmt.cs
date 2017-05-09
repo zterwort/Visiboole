@@ -161,8 +161,27 @@ namespace VisiBoole.ParsingEngine.Statements
                 {
                     while (variable.Contains("("))
                     {
-                        Parentheses openParen = new Parentheses("(");
-                        variable = variable.Remove(variable.IndexOf('('), 1);
+                        Parentheses openParen;
+                        try
+                        {
+                            if (variable[variable.IndexOf('(') - 1] == '~')
+                            {
+                                Operator notGate = new Operator("~");
+                                openParen = new Parentheses("(");
+                                variable = variable.Remove(variable.IndexOf('(') - 1, 2);
+                                Output.Add(notGate);
+                            }
+                            else
+                            {
+                                openParen = new Parentheses("(");
+                                variable = variable.Remove(variable.IndexOf('('), 1);
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            openParen = new Parentheses("(");
+                            variable = variable.Remove(variable.IndexOf('('), 1);
+                        }
 
                         Output.Add(openParen);
                     }

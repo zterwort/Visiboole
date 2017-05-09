@@ -14,5 +14,9 @@
         /// The boolean value of this element
         /// </summary>
 		bool? ObjCodeValue { get; set; }
-	}
+
+        int Match { get; set; }
+
+        int MatchingIndex { get; set; }
+    }
 }
