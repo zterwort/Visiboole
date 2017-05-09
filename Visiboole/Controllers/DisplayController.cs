@@ -118,6 +118,7 @@ namespace VisiBoole.Controllers
 			allDisplays.Add(Globals.DisplayType.OUTPUT, singleOutput);
 
 			CurrentDisplay = single;
+            Globals.tabControl = tabControl;
 		}
 
 		/// <summary>
@@ -169,6 +170,7 @@ namespace VisiBoole.Controllers
 				return false;
 			}
 		}
+
 
 		/// <summary>
 		/// Creates a new tab on the TabControl
