@@ -187,7 +187,8 @@ namespace VisiBoole.ParsingEngine
 
 					// check for a variable list statement
 					match = VariableListStmt.Pattern.Match(nextLine);
-					if (match.Success)
+                    Match match2 = VariableListStmt.Pattern2.Match(nextLine);
+					if (match.Success || match2.Success || nextLine.Contains("*"))
 					{
 						stmtList.Add(new VariableListStmt(postLnNum, nextLine));
 						flag = true;
