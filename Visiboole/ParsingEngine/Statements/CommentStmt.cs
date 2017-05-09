@@ -12,7 +12,7 @@ namespace VisiBoole.ParsingEngine.Statements
 	    /// <summary>
 	    /// The identifying pattern that can be used to identify and extract this statement from raw text
 	    /// </summary>
-        public static Regex Pattern { get; } = new Regex(@"^//.*$");
+        public static Regex Pattern { get; } = new Regex(@"^"".*""$");
 
         /// <summary>
         /// Constructs an instance of CommentStmt
