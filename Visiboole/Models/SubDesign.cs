@@ -78,15 +78,33 @@ namespace VisiBoole.Models
 	        this.ForeColor = Color.FromArgb(34, 226, 85);
         }
 
-		/// <summary>
-		/// Sets the dirty flag when the contents of this SubDesign have changed
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void SubDesign_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Sets the dirty flag when the contents of this SubDesign have changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SubDesign_TextChanged(object sender, EventArgs e)
 		{
 			isDirty = true;
 		}
+
+        public void IncreaseFont()
+        {
+            Globals.FontSize += 5;
+
+            this.Font = new Font(DefaultFont.FontFamily, Globals.FontSize);
+        }
+
+        public void DecreaseFont()
+        {
+            if (Globals.FontSize > 5)
+            {
+                Globals.FontSize -= 5;
+
+            }
+
+            this.Font = new Font(DefaultFont.FontFamily, Globals.FontSize);
+        }
 
 		/// <summary>
 		/// Copies the file contents of this subdesign filesource to this Text property

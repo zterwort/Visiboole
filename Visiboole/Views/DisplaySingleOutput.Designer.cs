@@ -1,4 +1,6 @@
-﻿namespace VisiBoole.Views
+﻿using System.Windows.Forms;
+
+namespace VisiBoole.Views
 {
 	partial class DisplaySingleOutput
 	{

@@ -277,9 +277,20 @@ namespace VisiBoole.Views
 
 		#endregion
 
-		private void MainLayoutPanel_Paint(object sender, PaintEventArgs e)
-		{
+        private void increaseFontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach( var sub in Globals.SubDesigns)
+            {
+                sub.Value.IncreaseFont();
+            }
+        }
 
-		}
-	}
+        private void decreaseFontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var sub in Globals.SubDesigns)
+            {
+                sub.Value.DecreaseFont();
+            }
+        }
+    }
 }

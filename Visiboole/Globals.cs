@@ -35,5 +35,7 @@ namespace VisiBoole
 			Cursor.Current = Cursors.Default;
 			MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
+
+        public static float FontSize = 20;
 	}
 }
