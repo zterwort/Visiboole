@@ -41,7 +41,7 @@ namespace VisiBoole.ParsingEngine.Statements
 		#region IObjectCodeElement attributes
 
 		public bool? ObjCodeValue { get; set; } = false;
-		public string ObjCodeText { get { return Text.Trim().Substring(2); } set { } } 
+		public string ObjCodeText { get { return Text; } set { } } 
 
 		#endregion
 

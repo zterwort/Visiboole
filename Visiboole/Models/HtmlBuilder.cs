@@ -177,9 +177,13 @@ namespace VisiBoole.Models
                                 {
                                     currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
                                 }
-                                else //if variable is independent
+                                else if (varType == typeof(IndependentVariable))
                                 {
                                     currentLine += "<font color='green' style=\"cursor: hand;\" onclick=\"window.external.Variable_Click('" + variable + "')\" >" + variable + "</font>";
+                                }
+                                else
+                                {
+                                    currentLine += "<font color='black')\" >" + variable.Replace("\"", "") + "</font>";
                                 }
                                 currentLine += " ";
                             }
