@@ -1,5 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using VisiBoole.ParsingEngine.ObjectCode;
+using System;
+using System.Collections.Generic;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
@@ -12,7 +14,9 @@ namespace VisiBoole.ParsingEngine.Statements
         /// The identifying pattern that can be used to identify and extract this statement from raw text
         /// </summary>
         //public static Regex Pattern { get; } = new Regex(@"^((\*?\w{1,20}) ?)$");
-        public static Regex Pattern { get; } = new Regex(@"^(\w ?)*;$");
+        public static Regex Pattern { get; } = new Regex(@"^\0*?(\w ?)*;$");
+        public static Regex Pattern2 { get; } = new Regex(@"[a-zA-Z0-9_]+\[\d+\.\.\d\]", RegexOptions.None);
+        //string match = regex.Match(content).Value;
 
         /// <summary>
         /// Constructs an instance of VariableListStmt
@@ -34,39 +38,117 @@ namespace VisiBoole.ParsingEngine.Statements
 			Regex regex = new Regex(@"\*?\w{1,20}");
 			Match match = regex.Match(input);
 
-            //used to specify variables name and value
-            string variableName;
-            bool variableValue;
+            Regex regex2 = new Regex(@"[a-zA-Z0-9_]+\[\d+\.\.\d\]", RegexOptions.None);
+            Match match2 = regex.Match(input);
 
-            while (match.Success)
+            if(match2.Success && input.Contains("[") && input.Contains("]"))
             {
-                if (match.Value.Contains("*"))
+                List<int> valueList = new List<int>();
+                Regex full = new Regex(@"[a-zA-Z0-9_]+\[\d+\.\.\d\]", RegexOptions.None);
+                string fullMatch = full.Match(input).Value;
+                regex = new Regex(@"[a-zA-Z0-9_]+", RegexOptions.None);
+                string value = regex.Match(input).Value;
+                regex = new Regex(@"\d");
+                MatchCollection matches = regex.Matches(fullMatch);
+                int beg = Convert.ToInt32(matches[0].Value);
+                int end = Convert.ToInt32(matches[1].Value);
+
+                List<int> order = new List<int>();
+
+                if (beg < end)
                 {
-                    variableName = match.Value.Substring(1);
-                    variableValue = true;
+                    for (int i = beg; i <= end; i++)
+                    {
+                        order.Add(i);
+                    }
                 }
-                else
+                else // beg > end
                 {
-                    variableName = match.Value;
-                    variableValue = false;
+                    for (int i = beg; i >= end; i--)
+                    {
+                        order.Add(i);
+                    }
                 }
-                IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variableName) as IndependentVariable;
-                if(indVar != null)
+
+                // add each variable to our output list of object code
+                foreach (int i in order)
                 {
-                    Output.Add(indVar);
+                    string key = string.Concat(value, i);
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(key) as IndependentVariable;
+                    DependentVariable depVar = Database.TryGetVariable<DependentVariable>(key) as DependentVariable;
+                    if (indVar != null)
+                    {
+                        if (indVar.Value)
+                        {
+                            valueList.Add(1);
+                        }
+                        else
+                        {
+                            valueList.Add(0);
+                        }
+                        Output.Add(indVar);
+                    }
+                    else if (depVar != null)
+                    {
+                        if (depVar.Value)
+                        {
+                            valueList.Add(1);
+                        }
+                        else
+                        {
+                            valueList.Add(0);
+                        }
+                        Output.Add(depVar);
+                    }
+                    else
+                    {
+                        IndependentVariable newVar = new IndependentVariable(key, false);
+                        Database.AddVariable<IndependentVariable>(newVar);
+                        valueList.Add(0);
+                        Output.Add(newVar);
+                    }
                 }
-                else
-                {
-                    indVar = new IndependentVariable(variableName, variableValue);
-                    Database.AddVariable<IndependentVariable>(indVar);
-                    Output.Add(indVar);
-                }
-                match = match.NextMatch();
+                LineFeed lf = new LineFeed();
+                Output.Add(lf);
             }
-            LineFeed lf = new LineFeed();
-            Output.Add(lf);
+            else if (match.Success)
+            {
+                //used to specify variables name and value
+                string variableName;
+                bool variableValue;
 
+                while (match.Success)
+                {
+                    if (match.Value.Contains("*"))
+                    {
+                        variableName = match.Value.Substring(1);
+                        variableValue = true;
+                    }
+                    else
+                    {
+                        variableName = match.Value;
+                        variableValue = false;
+                    }
+                    IndependentVariable indVar = Database.TryGetVariable<IndependentVariable>(variableName) as IndependentVariable;
+                    if (indVar != null)
+                    {
+                        Output.Add(indVar);
+                    }
+                    else
+                    {
+                        indVar = new IndependentVariable(variableName, variableValue);
+                        Database.AddVariable<IndependentVariable>(indVar);
+                        Output.Add(indVar);
+                    }
+                    match = match.NextMatch();
+                }
+                LineFeed lf = new LineFeed();
+                Output.Add(lf);
+            }
+            else
+            {
 
+            }
 
             /*while (match.Success)
 			{
