@@ -7,6 +7,7 @@ using VisiBoole.ErrorHandling;
 using VisiBoole.Models;
 using VisiBoole.ParsingEngine.ObjectCode;
 using VisiBoole.ParsingEngine.Statements;
+using System.Reflection;
 
 namespace VisiBoole.ParsingEngine
 {
@@ -175,15 +176,40 @@ namespace VisiBoole.ParsingEngine
 
 
                     // check for a module declaration statement
-                    match = ModuleDeclarationStmt.Pattern.Match(nextLine);
-					if (flag == false && match.Success)
+                    //match = ModuleDeclarationStmt.Pattern.Match(nextLine);
+                    bool matching = false;
+                    string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    string[] filePaths = Directory.GetFiles(path, "*.vbi", SearchOption.TopDirectoryOnly);
+                    foreach(string fullFileName in filePaths)
+                    {
+                        string exactFileName = fullFileName.Substring(path.Length+1);
+                        exactFileName = exactFileName.Substring(0, exactFileName.Length - 4);
+                        if (nextLine.Contains(exactFileName))
+                        {
+                            stmtList.Add(new ModuleDeclarationStmt(postLnNum, nextLine));
+                            flag = true;
+                            preLnNum++;
+                            postLnNum++;
+                            matching = true;
+                            break;
+                        }
+                    }
+
+                    if(matching.Equals(true))
+                    {
+                        continue;
+                    }
+
+
+
+                    /*if (flag == false && match.Success)
 					{
 						stmtList.Add(new ModuleDeclarationStmt(postLnNum, nextLine));
 						flag = true;
 						preLnNum++;
 						postLnNum++;
 						continue;
-					}
+					}*/
 
 					// check for a boolean assignment statement
 					match = BooleanAssignmentStmt.Pattern.Match(nextLine);

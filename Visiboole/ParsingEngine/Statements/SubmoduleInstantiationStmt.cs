@@ -30,6 +30,14 @@ namespace VisiBoole.ParsingEngine.Statements
 	    /// </summary>
         public override void Parse()
 		{
+            //parse line to find the filename, parameters, inputs and outputs
+
+            //use filename to get submodule code and read it into the program
+
+            //now once this is done inject that code into the spot where the submodule is called(right under the submodule)
+
+            //now keep parsing with the newly included submodule
+
 			throw new NotImplementedException();
 		}
 	}

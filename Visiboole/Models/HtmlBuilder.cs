@@ -41,7 +41,7 @@ namespace VisiBoole.Models
                 }
 
                 string outermost = "";
-                if(fullLine.Contains("(") && fullLine.Contains(")"))
+                if(fullLine.Contains("(") && fullLine.Contains(")") && !fullLine.Contains(":"))
                 {
                     int startIndex = fullLine.IndexOf('(');
                     int endIndex = fullLine.IndexOf(')');
@@ -92,9 +92,14 @@ namespace VisiBoole.Models
                             currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
-                        else
+                        else if (token.ObjCodeValue == false)
                         {
                             currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += " ";
+                        }
+                        else
+                        {
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
                         continue;
@@ -107,9 +112,14 @@ namespace VisiBoole.Models
                             currentLine += "<font color='red' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
-                        else
+                        else if (token.ObjCodeValue == false)
                         {
                             currentLine += "<font color='green' style=\"cursor: no-drop;\" >" + variable + "</font>";
+                            currentLine += " ";
+                        }
+                        else
+                        {
+                            currentLine += "<font color='black' style=\"cursor: no-drop;\" >" + variable + "</font>";
                             currentLine += " ";
                         }
                         continue;

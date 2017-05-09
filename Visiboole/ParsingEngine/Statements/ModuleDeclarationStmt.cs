@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisiBoole.ParsingEngine.Statements
 {
@@ -25,13 +26,59 @@ namespace VisiBoole.ParsingEngine.Statements
 		{			
 		}
 
+        public bool getMatch(string line)
+        {
+            string[] docs = System.IO.Directory.GetFiles("../../Data/");
+            string all = "";
+            foreach(string s in docs)
+            {
+                all += s;
+            }
+            return false;
+        }
+
 	    /// <summary>
 	    /// Parses the Text of this statement into a list of discrete IObjectCodeElement elements
 	    /// to be used by the html parser to generate formatted output to be displayed in simulation mode.
 	    /// </summary>
         public override void Parse()
 		{
-			throw new NotImplementedException();
+            string fullExpression = Text;
+            Operator stmt = new Operator(fullExpression);
+            int index = fullExpression.IndexOf('(');
+            string fileName = fullExpression.Substring(0, index);
+            fullExpression = fullExpression.Substring(index+1);
+            fullExpression = fullExpression.Substring(0, fullExpression.Length - 2);
+            string[] parts = fullExpression.Split(':');
+            string paramaters = parts[0];
+            string inputs = parts[1];
+            string outputs = parts[2];
+            Output.Add(stmt);
+            LineFeed lf = new LineFeed();
+            Output.Add(lf);
 		}
-	}
+
+        private void MakeOrderedOutput(string fileName, string parameters, string inputs, string outputs)
+        {
+            Operator fn = new Operator(fileName);
+            Operator open = new Operator("(");
+            Operator p = new Operator(parameters);
+            Operator colon = new Operator(":");
+            Operator i = new Operator(inputs);
+            Operator o = new Operator(outputs);
+            Operator close = new Operator(")");
+            Output.Add(fn);
+            Output.Add(open);
+            Output.Add(p);
+            Output.Add(colon);
+            Output.Add(i);
+            Output.Add(colon);
+            Output.Add(o);
+            Output.Add(close);
+            return;
+        }
+
+        
+
+    }
 }
