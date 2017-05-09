@@ -56,7 +56,6 @@
             this.horizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.colorBlindModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.increaseFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.decreaseFontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
@@ -67,9 +66,6 @@
             this.menuStrip1.SuspendLayout();
             this.MainLayoutPanel.SuspendLayout();
             this.SuspendLayout();
-
-            this.KeyDown += MainWindow_KeyDown;
-            this.KeyPreview = true;
             // 
             // menuStrip1
             // 
@@ -259,7 +255,6 @@
             this.horizontalToolStripMenuItem,
             this.verticalToolStripMenuItem,
             this.toolStripSeparator5,
-            this.colorBlindModeToolStripMenuItem,
             this.increaseFontToolStripMenuItem,
             this.decreaseFontToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
@@ -291,14 +286,6 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(176, 6);
-            // 
-            // colorBlindModeToolStripMenuItem
-            // 
-            this.colorBlindModeToolStripMenuItem.Checked = true;
-            this.colorBlindModeToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.colorBlindModeToolStripMenuItem.Name = "colorBlindModeToolStripMenuItem";
-            this.colorBlindModeToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
-            this.colorBlindModeToolStripMenuItem.Text = "Color Blind Mode";
             // 
             // increaseFontToolStripMenuItem
             // 
@@ -389,6 +376,7 @@
             this.Controls.Add(this.MainLayoutPanel);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VisiBoole - Visualizing HDL";
@@ -447,7 +435,6 @@
 		private System.Windows.Forms.ToolStripMenuItem horizontalToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem verticalToolStripMenuItem;
 		private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-		private System.Windows.Forms.ToolStripMenuItem colorBlindModeToolStripMenuItem;
 		private System.Windows.Forms.TableLayoutPanel MainLayoutPanel;
 		private System.Windows.Forms.TreeView NavTree;
 		private System.Windows.Forms.LinkLabel OpenFileLinkLabel;

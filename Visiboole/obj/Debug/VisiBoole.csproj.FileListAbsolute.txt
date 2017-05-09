@@ -128,3 +128,4 @@ C:\Users\Terwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.Views.MainWindo
 C:\Users\Terwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csproj.GenerateResource.Cache
 C:\Users\Terwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.exe
 C:\Users\Terwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.pdb
+C:\Users\zterwort\Desktop\Visiboole\Visiboole\obj\Debug\VisiBoole.csprojResolveAssemblyReference.cache
