@@ -1,4 +1,6 @@
-﻿namespace VisiBoole.Views
+﻿using System.Windows.Forms;
+
+namespace VisiBoole.Views
 {
 	partial class MainWindow
 	{
@@ -411,8 +413,38 @@
             this.MainLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.KeyDown += MainWindow_KeyDown;
+            this.KeyPreview = true;
+            this.FormClosing += MainWindow_FormClosing;
 
-		}
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            foreach(var sub in Globals.SubDesigns)
+            {
+                if (sub.Value.isDirty)
+                {
+                    if (e.CloseReason == CloseReason.UserClosing)
+                    {
+                        DialogResult result = MessageBox.Show("You have unsaved files. Are you sure you want to exit?", "Dialog Title", MessageBoxButtons.YesNo);
+                        if (result == DialogResult.Yes)
+                        {
+                            Application.Exit();
+                        }
+                        else
+                        {
+                            e.Cancel = true;
+                        }
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                return;
+            }
+        }
 
         public void ChangeTheme(string theme)
         {
