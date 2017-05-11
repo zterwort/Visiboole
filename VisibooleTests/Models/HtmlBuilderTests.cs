@@ -3,6 +3,8 @@ using System.IO;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VisiBoole.Models;
+using VisiBoole.ParsingEngine;
+using VisiBoole.ParsingEngine.ObjectCode;
 
 namespace VisibooleTests.Models
 {
@@ -15,7 +17,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void HtmlBuilderTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -24,6 +26,14 @@ namespace VisibooleTests.Models
             inputParser.ParseInput(null);
 
             List<string> outputText = outputParser.GenerateOutput();
+
+            Parser p = new Parser();
+
+            List<IObjectCodeElement> output = p.Parse(subDesign, null, false);
+            Assert.IsNotNull(output);
+
+            HtmlBuilder html = new HtmlBuilder(output);
+            Assert.IsNotNull(html);
 
         }
 
@@ -33,7 +43,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void GetHTMLTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -41,18 +51,23 @@ namespace VisibooleTests.Models
 
             inputParser.ParseInput(null);
 
-            List<string> outputText = outputParser.GenerateOutput();
+            Parser p = new Parser();
+
+            List<IObjectCodeElement> output = p.Parse(subDesign, null, false);
+            Assert.IsNotNull(output);
+
+            HtmlBuilder html = new HtmlBuilder(output);
+            Assert.IsNotNull(html.GetHTML());
 
         }
 
         /// <summary>
         /// Tests the DisplayHtml Method inside of /Models/HtmlBuilder.cs
-        /// For some odd reason, it fails when hitting "Run all tests" But passes when you step through a debug.
         /// </summary>
         [TestMethod()]
         public void DisplayHtmlTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -61,7 +76,15 @@ namespace VisibooleTests.Models
 
             inputParser.ParseInput(null);
 
-            List<string> outputText = outputParser.GenerateOutput();
+            Parser p = new Parser();
+
+            List<IObjectCodeElement> output = p.Parse(subDesign, null, false);
+            Assert.IsNotNull(output);
+
+            HtmlBuilder html = new HtmlBuilder(output);
+            Assert.IsNotNull(html.GetHTML());
+
+            html.DisplayHtml(html.GetHTML(), browser);
         }
     }
 }

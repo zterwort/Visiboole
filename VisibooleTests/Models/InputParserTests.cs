@@ -8,29 +8,17 @@ namespace VisibooleTests.Models
     public class InputParserTests
     {
         /// <summary>
-        /// Tests the InputParser Method inside of /Models/InputParser.cs
-        /// </summary>
-        [TestMethod()]
-        public void InputParserTest()
-        {
-
-        }
-
-        /// <summary>
         /// Tests the ParseInput Method inside of /Models/InputParser.cs
         /// </summary>
         [TestMethod()]
         public void ParseInputTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
 
             inputParser.ParseInput(null);
-            inputParser.ParseInput("A3");
-            inputParser.ParseInput("B0");
-
         }
 
         /// <summary>
@@ -39,7 +27,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void ContainsVariableTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -66,7 +54,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void SolveExpressionTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -86,7 +74,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void NegateTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -103,7 +91,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void BinaryToDecimalTest()
         {
-            string filename = "newFile1.vbi";
+            string filename = "TheTestFileForTestingVisiboole.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
