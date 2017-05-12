@@ -83,6 +83,11 @@ namespace VisiBoole.Models
                 bool nextLineOverBarForParentheses = false;
                 List<int> overBarList = new List<int>();
 
+                if(line.Count == 0)
+                {
+                    currentLine += "<br>>";
+                }
+
                 foreach (IObjectCodeElement token in line)
                 {
                     string variable = token.ObjCodeText;

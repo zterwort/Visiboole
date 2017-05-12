@@ -185,8 +185,19 @@ namespace VisiBoole.ParsingEngine
 						continue;
 					}
 
-					// check for a variable list statement
-					match = VariableListStmt.Pattern.Match(nextLine);
+                    // check for a format specifier statement
+                    bool success = FormatSpecifierStmt.Pattern1.Match(nextLine).Success || FormatSpecifierStmt.Pattern2.Match(nextLine).Success;
+                    if (success)
+                    {
+                        stmtList.Add(new FormatSpecifierStmt(postLnNum, nextLine));
+                        flag = true;
+                        preLnNum++;
+                        postLnNum++;
+                        continue;
+                    }
+
+                    // check for a variable list statement
+                    match = VariableListStmt.Pattern.Match(nextLine);
                     Match match2 = VariableListStmt.Pattern2.Match(nextLine);
 					if (match.Success || match2.Success || nextLine.Contains("*"))
 					{
@@ -202,17 +213,6 @@ namespace VisiBoole.ParsingEngine
 					if (match.Success)
 					{
 						stmtList.Add(new SubmoduleInstantiationStmt(postLnNum, nextLine));
-						flag = true;
-						preLnNum++;
-						postLnNum++;
-						continue;
-					}
-
-					// check for a format specifier statement
-					bool success = FormatSpecifierStmt.Pattern1.Match(nextLine).Success || FormatSpecifierStmt.Pattern2.Match(nextLine).Success;
-					if (success)
-					{
-						stmtList.Add(new FormatSpecifierStmt(postLnNum, nextLine));
 						flag = true;
 						preLnNum++;
 						postLnNum++;
