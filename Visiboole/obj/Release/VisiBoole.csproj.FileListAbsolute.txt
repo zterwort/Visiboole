@@ -1,0 +1,13 @@
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Release\VisiBoole.exe.config
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Release\VisiBoole.exe
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Release\VisiBoole.pdb
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\bin\Release\RicherTextBox.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.Properties.Resources.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.Views.DisplayHorizontal.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.Views.DisplaySingle.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.Views.DisplaySingleOutput.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.Views.DisplayVertical.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.Views.MainWindow.resources
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.csproj.GenerateResource.Cache
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.exe
+C:\Users\zcleary1\Documents\GitHub\Visiboole\Visiboole\obj\Release\VisiBoole.pdb

@@ -1,0 +1,10 @@
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\VisibooleTests.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\VisibooleTests.pdb
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\VisiBoole.exe
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\RicherTextBox.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\VisiBoole.pdb
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\obj\Release\VisibooleTests.csprojResolveAssemblyReference.cache
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\obj\Release\VisibooleTests.dll
+C:\Users\zcleary1\Documents\GitHub\Visiboole\VisibooleTests\obj\Release\VisibooleTests.pdb

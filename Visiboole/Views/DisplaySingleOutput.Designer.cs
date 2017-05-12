@@ -32,11 +32,9 @@ namespace VisiBoole.Views
 		{
             this.pnlMain = new System.Windows.Forms.TableLayoutPanel();
             this.pnlOutputControls = new System.Windows.Forms.Panel();
-            this.updTickCount = new System.Windows.Forms.NumericUpDown();
             this.btnTick = new System.Windows.Forms.Button();
             this.pnlMain.SuspendLayout();
             this.pnlOutputControls.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -58,21 +56,12 @@ namespace VisiBoole.Views
             // 
             // pnlOutputControls
             // 
-            this.pnlOutputControls.Controls.Add(this.updTickCount);
             this.pnlOutputControls.Controls.Add(this.btnTick);
             this.pnlOutputControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlOutputControls.Location = new System.Drawing.Point(3, 567);
             this.pnlOutputControls.Name = "pnlOutputControls";
             this.pnlOutputControls.Size = new System.Drawing.Size(794, 30);
             this.pnlOutputControls.TabIndex = 0;
-            // 
-            // updTickCount
-            // 
-            this.updTickCount.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.updTickCount.Location = new System.Drawing.Point(658, 7);
-            this.updTickCount.Name = "updTickCount";
-            this.updTickCount.Size = new System.Drawing.Size(52, 20);
-            this.updTickCount.TabIndex = 1;
             // 
             // btnTick
             // 
@@ -94,7 +83,6 @@ namespace VisiBoole.Views
             this.Size = new System.Drawing.Size(800, 600);
             this.pnlMain.ResumeLayout(false);
             this.pnlOutputControls.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.updTickCount)).EndInit();
             this.ResumeLayout(false);
 
 		}
@@ -103,7 +91,6 @@ namespace VisiBoole.Views
 
 		private System.Windows.Forms.TableLayoutPanel pnlMain;
 		private System.Windows.Forms.Panel pnlOutputControls;
-		private System.Windows.Forms.NumericUpDown updTickCount;
 		private System.Windows.Forms.Button btnTick;
 	}
 }

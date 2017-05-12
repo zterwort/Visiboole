@@ -65,7 +65,6 @@ namespace VisiBoole.Models
             }
 
             SaveFileToText();
-			isDirty = false;
 
 			this.TextChanged += SubDesign_TextChanged;
 
@@ -85,6 +84,7 @@ namespace VisiBoole.Models
                 this.ForeColor = Color.FromArgb(34, 226, 85);
             }
 
+            isDirty = false;
         }
 
         public void Change_Theme(string theme)
