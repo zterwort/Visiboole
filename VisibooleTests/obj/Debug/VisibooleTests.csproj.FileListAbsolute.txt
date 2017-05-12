@@ -20,3 +20,13 @@ C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\bin\Debug\Microsoft.VisualStu
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.dll
 C:\Users\zterwort\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.csprojResolveAssemblyReference.cache
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.dll
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\obj\Debug\VisibooleTests.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\VisibooleTests.dll
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\VisibooleTests.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\VisiBoole.exe
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\RicherTextBox.dll
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\VisiBoole.pdb
+C:\Users\mjsegraves11\Desktop\Visiboole\VisibooleTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml

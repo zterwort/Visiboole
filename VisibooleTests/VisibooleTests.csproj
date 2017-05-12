@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="Models\HtmlBuilderTests.cs" />
     <Compile Include="Models\InputParserTests.cs" />
-    <Compile Include="Models\OutputParserTests.cs" />
+    <Compile Include="ParsingEngine\ParsingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,15 +8,6 @@ namespace VisibooleTests.Models
     public class InputParserTests
     {
         /// <summary>
-        /// Tests the InputParser Method inside of /Models/InputParser.cs
-        /// </summary>
-        [TestMethod()]
-        public void InputParserTest()
-        {
-
-        }
-
-        /// <summary>
         /// Tests the ParseInput Method inside of /Models/InputParser.cs
         /// </summary>
         [TestMethod()]
@@ -28,9 +19,6 @@ namespace VisibooleTests.Models
             InputParser inputParser = new InputParser(subDesign);
 
             inputParser.ParseInput(null);
-            inputParser.ParseInput("A3");
-            inputParser.ParseInput("B0");
-
         }
 
         /// <summary>
