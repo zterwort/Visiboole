@@ -17,7 +17,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void HtmlBuilderTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -43,7 +43,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void GetHTMLTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -59,32 +59,6 @@ namespace VisibooleTests.Models
             HtmlBuilder html = new HtmlBuilder(output);
             Assert.IsNotNull(html.GetHTML());
 
-        }
-
-        /// <summary>
-        /// Tests the DisplayHtml Method inside of /Models/HtmlBuilder.cs
-        /// </summary>
-        [TestMethod()]
-        public void DisplayHtmlTest()
-        {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
-            SubDesign subDesign = new SubDesign(filename);
-            FileInfo file = new FileInfo(filename);
-            InputParser inputParser = new InputParser(subDesign);
-            OutputParser outputParser = new OutputParser();
-            WebBrowser browser = new WebBrowser();
-
-            inputParser.ParseInput(null);
-
-            Parser p = new Parser();
-
-            List<IObjectCodeElement> output = p.Parse(subDesign, null, false);
-            Assert.IsNotNull(output);
-
-            HtmlBuilder html = new HtmlBuilder(output);
-            Assert.IsNotNull(html.GetHTML());
-
-            html.DisplayHtml(html.GetHTML(), browser);
         }
     }
 }

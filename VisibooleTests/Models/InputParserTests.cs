@@ -13,7 +13,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void ParseInputTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -27,7 +27,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void ContainsVariableTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -54,7 +54,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void SolveExpressionTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -74,7 +74,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void NegateTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
@@ -91,7 +91,7 @@ namespace VisibooleTests.Models
         [TestMethod()]
         public void BinaryToDecimalTest()
         {
-            string filename = "TheTestFileForTestingVisiboole.vbi";
+            string filename = "newFile1.vbi";
             SubDesign subDesign = new SubDesign(filename);
             FileInfo file = new FileInfo(filename);
             InputParser inputParser = new InputParser(subDesign);
